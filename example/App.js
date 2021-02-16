@@ -18,23 +18,21 @@ export default class App extends Component<{}> {
     message: '--'
   };
   componentDidMount() {
-    /*NfcCardModule.sampleMethod('Testing', 123, (message) => {
-      this.setState({
-        status: 'native callback received',
-        message
-      });
-    });*/
   }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>☆NfcCardModule example☆</Text>
-        <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
-        <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
-        <Text style={styles.instructions}>{this.state.message}</Text>
         <View>
               <Button onPress={() => NfcCardModule.getRemainingPinTries()
             .then((result) => alert("Remainig Pin tries : " + result)).catch((e) => alert(e.message))} title="getRemainingPinTries"/>
+        </View>
+        <View>
+              <Button onPress={() => NfcCardModule.getAllSerialNumbers()
+            .then((result) => alert("getAllSerialNumbers : " + result)).catch((e) => alert(e.message))} title="getAllSerialNumbers"/>
+        </View>
+        <View>
+              <Button onPress={() => NfcCardModule.getKeyChainInfo()
+            .then((result) => alert("getKeyChainInfo : " + result)).catch((e) => alert(e.message))} title="getKeyChainInfo"/>
         </View>
       </View>
     );
