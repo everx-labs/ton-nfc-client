@@ -59,7 +59,7 @@ Also you must go through the following steps to make NFC working for you.
 
 - Also there is possibility that you have to link libswiftCoreNFC library manually. For this go **Target->Application -> Build Phases -> Link Binary With Libraries" and add **libswiftCoreNFC.tbd**.
 
-- Go to **Project -> Application -> Build Settings -> Search Paths -> Library Search Paths** and check that you have at least $swift-5.2$ everywhere.
+- Go to **Project -> Application -> Build Settings -> Search Paths -> Library Search Paths** and check that you have at least **swift-5.2** everywhere.
 
 _Note_ : you can not work with NFC using simulator, you must run it on iPhone, so you also should set development team.
 
