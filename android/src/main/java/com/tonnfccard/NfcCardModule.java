@@ -5,11 +5,23 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 
-public class NfcCardModuleModule extends ReactContextBaseJavaModule {
+import com.tonnfccard.api.CardActivationApi;
+import com.tonnfccard.api.CardCoinManagerApi;
+import com.tonnfccard.api.CardCryptoApi;
+import com.tonnfccard.api.CardKeyChainApi;
+import com.tonnfccard.api.RecoveryDataApi;
+
+public class NfcCardModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
-    public NfcCardModuleModule(ReactApplicationContext reactContext) {
+    private CardCoinManagerApi cardCoinManagerNfcApi;
+    private CardActivationApi cardActivationNfcApi;
+    private CardCryptoApi cardCryptoNfcApi;
+    private CardKeyChainApi cardKeyChainNfcApi;
+    private RecoveryDataApi recoveryDataApi;
+
+    public NfcCardModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
     }
