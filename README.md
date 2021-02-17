@@ -43,7 +43,9 @@ For this to work you must have an appropriate nfc_tech_filter.xml file in your x
 
 Run `pod install` from **ios** subdirectory of your React native app.
 
-Also you must go through the following steps to make NFC working for you. Open .workspace file of your project in Xcode.
+Also you must go through the following steps to make NFC working for you. 
+
+- Open .workspace file of your project in Xcode.
 
 - Go to Signing & Capabilities tab and add capability **Near Field Communication Tag Reading**.
 
@@ -52,6 +54,12 @@ Also you must go through the following steps to make NFC working for you. Open .
 - Add into info.plist the point **ISO7816 application identifiers for NFC Tag Reader Session** and add for it the following items: 313132323333343435353636, A000000151000000.
 
 - Add into info.plist the point **com.apple.developer.nfc.readersession.formats** and add for it string item **TAG**.
+
+- Check that everywhere you have iOS11+ deployment version. Otherwise, pod installation will complain about it.
+
+- Also there is possibility that you have to link libswiftCoreNFC library manually. For this go **Target->Application -> Build Phases -> Link Binary With Libraries" and add **libswiftCoreNFC.tbd**.
+
+- Go to **Project -> Application -> Build Settings -> Search Paths -> Library Search Paths** and check that you have at least $swift-5.2$ everywhere.
 
 _Note_ : you can not work with NFC using simulator, you must run it on iPhone, so you also should set development team.
 
