@@ -4,7 +4,7 @@ This React native library is developed to handle communication of Android smartp
 
 For the case of iPhone you must have iOS version >= 13 and iPhone model >= 7.
 
-## Installation (Android)
+## Installation 
 
 `$ npm install ton-nfc-client --save`
 
@@ -13,6 +13,8 @@ Or take it from GitHub.
 `$ npm install git+https://github.com/tonlabs/ton-nfc-client`
 
 `$ react-native link ton-nfc-client`
+
+### Additional steps for Android
 
 Also you need to add NFC related stuff into AndroidManifest.xml of your React native app.
 
@@ -37,10 +39,21 @@ For this to work you must have an appropriate nfc_tech_filter.xml file in your x
   	</tech-list>
 </resources>
 ```
+### Additional steps for iOS
 
-## Installation (iOS)
+Run `pod install` from **ios** subdirectory of your React native app.
 
-### Mostly automatic installation
+Also you must go through the following steps to make NFC working for you. Open .workspace file of your project in Xcode.
+
+- Go to Signing & Capabilities tab and add capability **Near Field Communication Tag Reading**.
+
+- Add into info.plist the point **Privacy - NFC Scan Usage Description** and value for it **Test NFC**.
+
+- Add into info.plist the point **ISO7816 application identifiers for NFC Tag Reader Session** and add for it the following items: 313132323333343435353636, A000000151000000.
+
+- Add into info.plist the point **com.apple.developer.nfc.readersession.formats** and add for it string item **TAG**.
+
+_Note_ : you can not work with NFC using simulator, you must run it on iPhone, so you also should set development team.
 
 
 
