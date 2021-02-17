@@ -33,8 +33,8 @@ For this to work you must have an appropriate nfc_tech_filter.xml file in your x
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 	<tech-list>
 		<tech>android.nfc.tech.IsoDep</tech>
-    <tech>android.nfc.tech.NfcA</tech>
-  </tech-list>
+	    	<tech>android.nfc.tech.NfcA</tech>
+  	</tech-list>
 </resources>
 ```
 
