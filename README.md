@@ -12,8 +12,6 @@ Or take it from GitHub.
 
 `$ npm install git+https://github.com/tonlabs/ton-nfc-client`
 
-`$ react-native link ton-nfc-client`
-
 ### Additional steps for Android
 
 Also you need to add NFC related stuff into AndroidManifest.xml of your React native app.
