@@ -19,7 +19,7 @@ jobs:
 
       - name: ReactNative
         run: npm publish --access public
-        working-directory: ./packages/lib-react-native
+        working-directory: ./
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
