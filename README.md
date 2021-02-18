@@ -2,7 +2,9 @@
 
 This React native library is developed to handle communication of Android smartphones/iPhones with NFC TON Labs Security cards. It provides a useful API to work with all functionality (i.e. APDU commands) supported by NFC TON Labs Security card.
 
-For the case of iPhone you must have iOS version >= 13 and iPhone model >= 7.
+For the case of iPhone you must have iOS version >= 13 and iPhone model >= 7. For the case of Android you should also check whether it supports NFC feature.
+
+Android native code of ton-nfc-client uses [TonNfcClientAndroid library](https://github.com/tonlabs/TonNfcClientAndroid) to handle all NFC stuff., and iOS native code of ton-nfc-client respectively uses [TonNfcClientSwift library](https://github.com/tonlabs/TonNfcClientSwift).
 
 ## Installation 
 
@@ -75,68 +77,9 @@ catch (e) {
 }
 ```
 
-## More about responses format
+## More about responses format and errors
 
-### Case of successful operation
+To get more information about responses formats and errors please visit this pages: [Android error list](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/ErrorrList.md), [iOS error list](https://github.com/tonlabs/TonNfcClientSwift/blob/master/docs/ErrorrList.md), [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md).
 
-In the case of successful operation with the card any function of ton-nfc-client library always creates json string with two fields "message" and "status". "status" will contain "ok". In the field "message" you will find an expected payload. So jsons may look like this.
 
-	{"message":"done","status":"ok"}
-	{"message":"generated","status":"ok"}
-	{"message":"HMac key to sign APDU data is generated","status":"ok"}
-	{"message":"980133A56A59F3A59F174FD457EB97BE0E3BAD59E271E291C1859C74C795A83368FD8C7405BC37E1C4146F4D175CF36421BF6AD2AFF4329F5A6C6D772247ED03","status":"ok"}
-	etc.
-
-### Case of error
-
-If some error happened then functions of ton-nfc-client library produce error messages wrapped into json strings of special format. The structure of json depends on the  error class. There are two main classes of errors.
-
-#### Applet (card) errors
-
-It is the case when applet (installed on the card) threw some error status word (SW). So native code just catches it and throws away. The exemplary error json looks like this.
-
-	{
-		"message":"Incorrect PIN (from Ton wallet applet).",
-		"status":"fail",
-		"errorCode":"6F07",
-		"errorTypeId":0,
-		"errorType":"Applet fail: card operation error",
-		"cardInstruction":"VERIFY_PIN",
-		"apdu":"B0 A2 00 00 44 35353538EA579CD62F072B82DA55E9C780FCD0610F88F3FA1DD0858FEC1BB55D01A884738A94113A2D8852AB7B18FFCB9424B66F952A665BF737BEB79F216EEFC3A2EE37 FFFFFFFF "
-	}
-	
-Here:
-+ *errorCode* — error status word (SW) produced by the card (applet)
-
-+ *cardInstruction* — title of APDU command that failed
-
-+ *errorTypeId* — id of error type ( it will always be zero here)
-
-+ *errorType* — description of error type 
-
-+ *message* — contains error message corresponding to errorCode thrown by the card.
-
-+ *apdu* — full text of failed APDU command in hex format
-
-#### Native code errors
-
-It is the case when error happened in native code itself. The basic examples: troubles with NFC connection or incorrect format of input data passed into ton-nfc-client library from the outside world. The exemplary error json looks like this.
-
-	{
-		"errorType": "Native code fail: incorrect format of input data",
-		"errorTypeId": "3",
-		"errorCode": "30006",
-		"message": "Pin must be a numeric string of length 4.",
-		"status": "fail"
-	}
-	
-In this [document](https://github.com/tonlabs/ton-nfc-client/blob/master/docs/ErrorList.md) you may find the full list of json error messages (and their full classification) that can be thrown by the library.
-
-### String format
-
-The majority of input data passed into ton-nfc-client library is represented by hex strings of even length > 0. These hex strings are naturally converted into byte arrays inside the library, like: "0A0A" → [10, 10] as [UInt8]. 
-
-And also the payload produced by the card and wrapped into json responses is usually represented by hex strings of even length > 0.  For example, this is a response from getPublicKey function  returning ed25519 public key.
-
-	{"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
