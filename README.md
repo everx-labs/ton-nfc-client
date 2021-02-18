@@ -61,14 +61,19 @@ Also you must go through the following steps to make NFC working for you.
 
 _Note_ : you can not work with NFC using simulator, you must run it on iPhone, so you also should set development team.
 
-
-
-## Usage
+## Simple example
 ```javascript
 import NfcCardModule from 'ton-nfc-client';
 
-// TODO: What to do with the module?
-NfcCardModule;
+try {
+	let pin = "5555"
+	let result = await NfcCardModule.verifyPin(pin);
+        console.log(result)
+        alert("verifyPin result: " + result)
+}
+catch (e) {
+        alert(e.message)
+}
 ```
 
 ## More about responses format
