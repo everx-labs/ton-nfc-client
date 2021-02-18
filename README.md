@@ -116,3 +116,10 @@ catch (e) {
 }
 ```
 
+This code must work without any problems for Android. You connect NFC card only once, then run this code via pressing some button for example. And it doуы all operations for you. However, it is more complicated for iOS. Each time when we call NfcCardModule.someFunction() iPhone establishes new NFC session. You must reconnect the card each time. So in the above code snippet we need to reconnect the card 6 times. More over the above code will not work as it is. After finishing one NFC session iPhone need 5-10 seconds to be ready to establish new NFC session. So for example the following piece may produce error "System resources unavailable" for iPhone.
+
+```javascript
+	let hashOfCommonSecret = JSON.parse( await NfcHandler.NfcCardModule.getHashOfCommonSecret()).message;
+	let hashOfEncryptedPassword = JSON.parse( await NfcHandler.NfcCardModule.getHashOfEncryptedPassword()).message;
+```
+
