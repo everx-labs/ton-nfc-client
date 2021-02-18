@@ -66,10 +66,9 @@ _Note_ : you can not work with NFC using simulator, you must run it on iPhone, s
 import NfcCardModule from 'ton-nfc-client';
 
 try {
-	let pin = "5555"
-	let result = await NfcCardModule.verifyPin(pin);
-        console.log(result)
-        alert("verifyPin result: " + result)
+	let hdInd = "1"            
+	let result = await NfcCardModule.getPublicKey(hdInd);
+  	alert("Public key: " + result)
 }
 catch (e) {
         alert(e.message)
