@@ -81,5 +81,38 @@ catch (e) {
 
 To get more information about responses formats and errors please visit this pages: [Android error list](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/ErrorrList.md), [iOS error list](https://github.com/tonlabs/TonNfcClientSwift/blob/master/docs/ErrorList.md), [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md).
 
+## Card activation
 
+Detailed information about card activation is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md), [card activation doc](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/CardActivation.md).
+
+Here we just give exemplary code for React native app.
+
+```javascript
+try {
+	let seedStatus = JSON.parse( await NfcCardModule.getRootKeyStatus().message;
+	let pin = "5555"	
+	if (seedStatus == "not generated") {
+		await NfcCardModule.generateSeed(pin)
+	}
+           
+	let state = JSON.parse( await NfcCardModule.getTonAppletState()).message;
+	if (state !== "TonWalletApplet waits two-factor authorization.") {
+		throw "Incorret applet state!"
+	}
+
+	let hashOfCommonSecret = JSON.parse( await NfcCardModule.getHashOfCommonSecret()).message;
+	// check that hashOfCommonSecret is correct based on the data from smartcontract
+
+	let hashOfEncryptedPassword = JSON.parse( await NfcCardModule.getHashOfEncryptedPassword()).message;
+	// check that hashOfEncryptedPassword is correct based on the data from smartcontract
+	
+	let newPin = "7777";
+	// prepare authenticationPassword, commonSecret, initialVector based on the data from smartcontract
+
+	await NfcCardModule.turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector);
+}
+catch (e) {
+  console.log(e.message)
+}
+```
 
