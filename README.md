@@ -158,7 +158,7 @@ try {
 	var aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5))
   	var encryptedBytes = aesCtr.encrypt(recoveryDataBytes)
 	var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes)
-	var addRes = await NfcHandler.NfcCardModule.addRecoveryData(encryptedHex)
+	var addRes = await NfcCardModule.addRecoveryData(encryptedHex)
   	console.log("add Recovery data into card result  = " + addRes)
 }
 catch (e) {
@@ -173,7 +173,7 @@ var aesjs = require('aes-js')
 try {
 	// get aesKeyHexString from somewhere
 	var aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString)
-  	var encryptedRecoveryDataFromSecurityCard = await NfcHandler.NfcCardModule.getRecoveryData()
+  	var encryptedRecoveryDataFromSecurityCard = await NfcCardModule.getRecoveryData()
 	var encryptedRecoveryDataFromSecurityCardBytes =  aesjs.utils.hex.toBytes(encryptedRecoveryDataFromSecurityCard)
 	var aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5))
   	var decryptedBytes = aesCtr.decrypt(encryptedRecoveryDataFromSecurityCardBytes)
@@ -223,9 +223,9 @@ static hexStringToByteArray(hexStr) {
 try {
 	let msg = "0000" //Some hex string of even length 
 	let pin = "5555"
-	var signature = await NfcHandler.NfcCardModule.signForDefaultHdPath(msg, pin)
+	var signature = await NfcCardModule.signForDefaultHdPath(msg, pin)
   	await new Promise(r => setTimeout(r, 10000))
-  	var pk = await NfcHandler.NfcCardModule.getPublicKeyForDefaultPath()
+  	var pk = await NfcCardModule.getPublicKeyForDefaultPath()
 	let msgBytes = HexHelper.hexStringToByteArray(msg)
   	let signatureBytes = HexHelper.hexStringToByteArray(signature)
   	let pkBytes = HexHelper.hexStringToByteArray(pubKey)
@@ -250,20 +250,20 @@ try {
 	let keyLen = 8192
   	let key = HexHelper.genHexString(2*keyLen)
 	await new Promise(r => setTimeout(r, 5000))
-  	let keyHmac = await NfcHandler.NfcCardModule.addKeyIntoKeyChain(key)
+  	let keyHmac = await NfcCardModule.addKeyIntoKeyChain(key)
 	await new Promise(r => setTimeout(r, 5000))
-	let keyFromCard = await NfcHandler.NfcCardModule.getKeyFromKeyChain(keyHmac)
+	let keyFromCard = await NfcCardModule.getKeyFromKeyChain(keyHmac)
   	//assertTrue(key === keyFromCard)
 	let newKey = HexHelper.genHexString(2*keyLen)
   	await new Promise(r => setTimeout(r, 5000))
-	var newKeyHmac = await NfcHandler.NfcCardModule.changeKey(newKey, keyHmac)
+	var newKeyHmac = await NfcCardModule.changeKey(newKey, keyHmac)
 	await new Promise(r => setTimeout(r, 5000))
-	let num1 = await NativeModules.NfcCardModule.getNumberOfKeys()
+	let num1 = await NfcCardModule.getNumberOfKeys()
   	console.log("Number of keys = " + result)
 	await new Promise(r => setTimeout(r, 5000))
-  	await NativeModules.NfcCardModule.deleteKeyFromKeyChain(newKeyHmac)	
+  	await NfcCardModule.deleteKeyFromKeyChain(newKeyHmac)	
 	await new Promise(r => setTimeout(r, 5000))
-	let num2 = await NativeModules.NfcCardModule.getNumberOfKeys()
+	let num2 = await NfcCardModule.getNumberOfKeys()
 	console.log("Number of keys = " + result)
 	//assertTrue(num2 === num1 - 1)
 }
