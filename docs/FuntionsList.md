@@ -1,6 +1,6 @@
 # Full functions list (ton-nfc-client)
 
-Library ton-nfc-client provides native module NfcCardModule both for Android and iOS. So all functions are available via NfcCardModule. They are all async and put result into Promises. So you should work with them as follows.
+Library ton-nfc-client provides native module NfcCardModule both for Android and iOS. So all functions are available via NfcCardModule. They are all async and put results into Promises. So you should work with them as follows.
 
 ```javascript
 import NfcCardModule from 'ton-nfc-client';
