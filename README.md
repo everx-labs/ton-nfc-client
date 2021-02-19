@@ -189,7 +189,9 @@ The secret key for HMAC SHA256 is produced based on card activation data (see ab
 
 Another situation is possible. Let's suppose you activated the card earlier. After that you reinstalled the app working with NFC TON Labs security card or you started using new  device. Then Android keystore/iOS keycain does not have the key to sign APDU commands. You must create it.
 
-     NfcCardModule.createKeyForHmacAndGetJson(authenticationPassword, commonSecret, serialNumber);
+```javascript
+ NfcCardModule.createKeyForHmacAndGetJson(authenticationPassword, commonSecret, serialNumber);
+```
      
 You may work with multiple NFC TON Labs security cards. In this case in your  Android keystore/iOS keycain there is a bunch of keys. Each key is marked by corresponding SN. And you can get the list of serial numbers for which you have the key in keystore
 
@@ -197,3 +199,40 @@ The list of operations protected by HMAC SHA256:
 
 - verifyPin, signForDefaultHdPath, sign (see below sections)
 - all functions related to card keychain
+
+## Request ED25519 signature
+
+The basic functionality provided by NFC TON Labs security card is Ed25519 signature. You may request public key and request the signature for some message.
+
+```javascript
+import nacl from "tweetnacl";
+
+static hexStringToByteArray(hexStr) {
+  	var bytes = [];
+  	while (hexStr.length >= 2) {
+     		bytes.push(parseInt(hexStr.substring(0, 2), 16));
+     		hexStr = hexStr.substring(2, hexStr.length);
+  	}
+  	return new Uint8Array(bytes);
+}
+
+try {
+	let msg = "0000"; //Some hex string of even length 
+	let pin = "5555";
+	var signature = await NfcHandler.NfcCardModule.signForDefaultHdPath(msg, pin);
+  	await new Promise(r => setTimeout(r, 10000))
+  	var pk = await NfcHandler.NfcCardModule.getPublicKeyForDefaultPath();
+	let msgBytes = HexHelper.hexStringToByteArray(msg);
+  	let signatureBytes = HexHelper.hexStringToByteArray(signature);
+  	let pkBytes = HexHelper.hexStringToByteArray(pubKey);
+  	let sigVerificationRes = nacl.sign.detached.verify(msgBytes, signatureBytes, pkBytes);
+  	if (sigVerificationRes == false) {
+       		throw new Error("Signature is not correct.");
+  	}
+}
+catch (e) {
+  console.log(e.message)
+}
+```
+
+_Note:_ Functions signForDefaultHdPath, sign are protected by HMAC SHA256 signature (see previous section). But also there is an additional protection for them by PIN code. You have 10 attempts to enter PIN, after 10th fail you will not be able to use existing seed (keys for ed25519) . The only way to unblock these functions is to reset the seed (see resetWallet function) and generate new seed (see generateSeed). After resetting the seed PIN will be also reset to default value 5555.
