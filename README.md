@@ -4,7 +4,7 @@ This React native library is developed to handle communication of Android smartp
 
 For the case of iPhone you must have iOS version >= 13 and iPhone model >= 7. For the case of Android you should also check whether it supports NFC feature.
 
-Android native code of ton-nfc-client uses [TonNfcClientAndroid library](https://github.com/tonlabs/TonNfcClientAndroid) to handle all NFC stuff., and iOS native code of ton-nfc-client respectively uses [TonNfcClientSwift library](https://github.com/tonlabs/TonNfcClientSwift).
+Android native code of ton-nfc-client uses [TonNfcClientAndroid library](https://github.com/tonlabs/TonNfcClientAndroid) to handle all NFC stuff, and iOS native code of ton-nfc-client respectively uses [TonNfcClientSwift library](https://github.com/tonlabs/TonNfcClientSwift).
 
 ## Installation 
 
