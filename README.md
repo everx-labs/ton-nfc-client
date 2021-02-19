@@ -63,6 +63,7 @@ Also you must go through the following steps to make NFC working for you.
 _Note_ : you can not work with NFC using simulator, you must run it on iPhone, so you also should set development team.
 
 ## Simple example
+
 ```javascript
 import NfcCardModule from 'ton-nfc-client';
 
@@ -74,6 +75,14 @@ try {
 catch (e) {
         alert(e.message)
 }
+```
+
+Another way to use ton-nfc-client functions looks as follows.
+
+```javascript
+NfcCardModule.getPublicKey(hdIndex)
+   .then((result) => consolw.log("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
+   .catch((e) => console.log(e.message))
 ```
 
 ## More about responses format and errors
