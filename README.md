@@ -126,7 +126,7 @@ This code must work without any problems for Android. You connect NFC card only 
 
 ```javascript
 let hashOfCommonSecret = JSON.parse( await NfcCardModule.getHashOfCommonSecret()).message
-let hashOfEncryptedPassword = JSON.parse( await NfcHandler.NfcCardModule.getHashOfEncryptedPassword()).message
+let hashOfEncryptedPassword = JSON.parse( await NfcCardModule.getHashOfEncryptedPassword()).message
 ```
 
 You may fix it in the following way.
