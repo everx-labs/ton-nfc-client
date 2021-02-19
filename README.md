@@ -194,7 +194,7 @@ The secret key for HMAC SHA256 is produced based on card activation data (see ab
 Another situation is possible. Let's suppose you activated the card earlier. After that you reinstalled the app working with NFC TON Labs security card or you started using new  device. Then Android keystore/iOS keychain does not have the key to sign APDU commands. You must create it.
 
 ```javascript
- NfcCardModule.createKeyForHmacAndGetJson(authenticationPassword, commonSecret, serialNumber)
+ NfcCardModule.createKeyForHmac(authenticationPassword, commonSecret, serialNumber)
 ```
      
 You may work with multiple NFC TON Labs security cards. In this case in your  Android keystore/iOS keychain there is a bunch of keys. Each key is marked by corresponding SN. And you can get the list of serial numbers for which you have the key in keystore/keychain.
