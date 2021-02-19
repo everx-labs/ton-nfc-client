@@ -276,6 +276,8 @@ catch (e) {
 }
 ```
 
+_Note:_  await new Promise(r => setTimeout(r, 5000)) is necessary for running app on iPhone since multiple successive NFC sessions establishing may cause a trouble with system recourses. We need to make a pause between finishing one NFC session and starting a new NFC session. For Android it is not necessary.
+
 ## Full functions list 
 
 The full list of functions provided by the library to communicate with the card you will find [here](https://github.com/tonlabs/ton-nfc-client/blob/master/docs/FuntionsList.md)
