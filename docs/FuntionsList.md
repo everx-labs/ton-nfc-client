@@ -1,6 +1,28 @@
-# Full functions list (TonNfcClientSwift API)
+# Full functions list (ton-nfc-client)
 
-There is full functions list provided by TonNfcClientSwift API to make different requests to NFC TON Labs Security cards. All these functions work via callbacks. The last two arguments of each function are _resolve : @escaping NfcResolver, reject : @escaping NfcRejecter_ (we omit them below for short). In the case of success wrapped card response is put into _resolve_. In the case of exception error message and error object are put into _reject_.
+ton-nfc-client provides Native module NfcCardModule both for Android and iOS. So all functions are available via NfcCardModule. They are all async and put result into Promises. So you should work with them as follows.
+
+```javascript
+import NfcCardModule from 'ton-nfc-client';
+
+try {
+	let hdInd = "1"            
+	let result = await NfcCardModule.getPublicKey(hdInd)
+  	alert("Public key: " + result)
+}
+catch (e) {
+        alert(e.message)
+}
+```
+
+```javascript
+NfcCardModule.getPublicKey(hdIndex)
+   .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
+   .catch((e) => alert(e.message))
+```
+
+Below there is full functions list provided by ton-nfc-client to make different requests to NFC TON Labs Security cards. 
+
 
 ## NFC related functions
 
@@ -8,19 +30,37 @@ Here there are functions to check/change the state of your NFC hardware.  In Ton
 
 - **checkIfNfcSupported()**
 
-    Check if your Android device has NFC hardware. 
+    Check if your Android/iPhone device has NFC hardware. 
 
     *Responses:*
 
         {"message":"true","status":"ok"}
         {"message":"false","status":"ok"}
 
+- **checkIfNfcEnabled()**
+
+    Works only forAndroid. Check if NFC option is turned on for your Android device.
+
+    *Responses:*
+
+    {"message":"true","status":"ok"}
+
+    {"message":"false","status":"ok"}
+
+- **openNfcSettings()**
+
+     Works only forAndroid. Open "Settings" panel to mantain NFC option.
+
+    *Response:*
+
+    {"message":"done","status":"ok"}
+
     
-## CoinManager functions (CardCoinManagerApi)
+## CoinManager functions 
 
-Here there are functions to call APDU commands of CoinManager. CoinManager is an additional software integrated into NFC TON Labs Security card. It is responsible for maintaining ed25519 seed, related PIN and it provides some auxiliary operations.  In TonNfcClientSwift library there is a class CardCoinManagerApi providing all CoinManager functions.
+Here there are functions to call APDU commands of CoinManager. CoinManager is an additional software integrated into NFC TON Labs Security card. It is responsible for maintaining ed25519 seed, related PIN and it provides some auxiliary operations. 
 
-- **setDeviceLabel(deviceLabel: String)**
+- **setDeviceLabel(deviceLabel)**
 
     This function is used to set the device label. Now we do not use this device label stored in Coin Manager.
 
@@ -115,7 +155,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
     _Note:_ Here 313132323333343435353636 is AID of our TON Labs wallet applet
 
-- **generateSeed(pin: String)**
+- **generateSeed(pin)**
 
     This function is used to generate the seed for ed25519 with RNG.
 
@@ -131,7 +171,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         If seed already exists and you call generateSeed then it will throw a error.
 
 
-- **changePin(oldPin: String, newPin: String)**
+- **changePin(oldPin, newPin)**
 
     This function is used to change PIN.
 
@@ -149,11 +189,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 TON Labs wallet applet is software developed by TON Labs team and integrated into NFC TON Labs Security card. It provides main card functionality. It takes seed for ed25519 signature from CoinManager entity.
 
-The functions are naturally divided into four groups. And there are respectively four classes in TonNfcClientSwift library providing an API: CardActivationApi,  CardCryptoApi,  CardKeyChainApi, RecoveryDataApi. And there is a superclass TonWalletApi containing some common functions and functions to maintain keys for HMAC SHA256 signature (see section Protection against MITM).
-
-### TonWalletApi functions
-
-#### 1) Common functions
+### Common functions
 
 - **getTonAppletState()**
 
@@ -180,11 +216,11 @@ The functions are naturally divided into four groups. And there are respectively
 
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
-#### 2) Functions to mantain keys for HMAC SHA256 
+### Functions to mantain keys for HMAC SHA256 
 
-- **selectKeyForHmac(serialNumber : String)**
+- **selectKeyForHmac(serialNumber)**
 
-    Manually select new active card (it selects the serial number and correspondingly choose the appropriate key HMAC SHA256 from iOS keychain).
+    Manually select new active card (it selects the serial number and correspondingly choose the appropriate key HMAC SHA256 from Android keystore/iOS keychain).
 
     *Arguments requirements:*
 
@@ -194,9 +230,9 @@ The functions are naturally divided into four groups. And there are respectively
 
         {"message":"done","status":"ok"}
 
-- **createKeyForHmac(authenticationPassword : String, commonSecret : String, serialNumber : String)**
+- **createKeyForHmac(authenticationPassword, commonSecret, serialNumber)**
 
-    If you reinstalled app and lost HMAC SHA256 symmetric key for the card from your iOS keychain, then create the key for your card using this function.
+    If you reinstalled app and lost HMAC SHA256 symmetric key for the card from your Android keystore/iOS keychain, then create the key for your card using this function.
 
     *Arguments requirements:*
 
@@ -223,15 +259,15 @@ The functions are naturally divided into four groups. And there are respectively
 
 - **getAllSerialNumbers()**
 
-    Get the list of card serial numbers for which we have keys in Android keystore.
+    Get the list of card serial numbers for which we have keys in Android keystore/iOS keychain.
 
     *Exemplary response:*
 
     {"serial_number_field":["504394802433901126813236", "455324585319848551839771"],"status":"ok"}
 
-- **isKeyForHmacExist(serialNumber : String)**
+- **isKeyForHmacExist(serialNumber)**
 
-    Check if key for given serialNumber exists in iOS keychain.
+    Check if key for given serialNumber exists in Android keystore/iOS keychain.
 
     *Arguments requirements:*
 
@@ -241,9 +277,9 @@ The functions are naturally divided into four groups. And there are respectively
 
         {"message":"true","status":"ok"}
 
-- **deleteKeyForHmac(serialNumber : String)**
+- **deleteKeyForHmac(serialNumber)**
 
-    Delete key for given serialNumber from iOS keychain.
+    Delete key for given serialNumber from Android keystore/iOS keychain.
 
     *Arguments requirements:*
 
@@ -253,13 +289,11 @@ The functions are naturally divided into four groups. And there are respectively
 
         {"message":"done","status":"ok"}
 
-### CardActivationApi functions
+### Functions related to card activation
 
-When user gets NFC TON Labs security card  at the first time, the applet on the card is in a special state. It waits for user authentication. And the main functionality of applet is blocked for now. At this point you may call all functions from previous subsections. 
+When user gets NFC TON Labs security card  at the first time, the applet on the card is in a special state. It waits for user authentication. And the main functionality of applet is blocked for now. At this point you may call all functions from previous subsections. And also some special functions are available to complete card activation. 
 
-And also some special functions are available in CardActivationApi. They are necessary to complete card activation (see Card activation section in README). 
-
-- **turnOnWallet(newPin : String, authenticationPassword : String, commonSecret : String, initialVector : String)**
+- **turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector)**
 
     This function makes TON Labs wallet applet activation. After its succesfull call applet will be in working personalized state (so getTonAppletState() will return {"message":"TonWalletApplet is personalized.","status":"ok"}).
 
@@ -296,7 +330,7 @@ And also some special functions are available in CardActivationApi. They are nec
 
         {"message":"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3","status":"ok"}
 
-### CardCryptoApi functions
+### Functions related to ed25519
 
 Here there are functions related to ed25519 signature.
 
@@ -308,7 +342,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
-- **verifyPin(pin: String)**
+- **verifyPin(pin)**
 
     Make pin verification.
 
@@ -320,7 +354,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-- **signForDefaultHdPath(data: String)**
+- **signForDefaultHdPath(data)**
 
     Make data signing by key for HD path m/44'/396'/0'/0'/0'. Prior to call this function you must call verifyPin.
 
@@ -335,7 +369,7 @@ Here there are functions related to ed25519 signature.
           "status":"ok"
          }
 
-- **sign(data: String, hdIndex: String)**
+- **sign(data, hdIndex)**
 
     Make data signing by key for HD path m/44'/396'/0'/0'/hdIndex'. Prior to call this function you must call verifyPin.
 
@@ -352,7 +386,7 @@ Here there are functions related to ed25519 signature.
          "status":"ok"
         }
 
-- **getPublicKey(hdIndex: String)**
+- **getPublicKey(hdIndex)**
 
     Return public key for HD path m/44'/396'/0'/0'/hdIndex'.
 
@@ -364,7 +398,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
-- **verifyPinAndSignForDefaultHdPath(data: String, pin: String)**
+- **verifyPinAndSignForDefaultHdPath(data, pin)**
 
     Make  pin verification data signing by key for HD path m/44'/396'/0'/0'/0'.
 
@@ -381,7 +415,7 @@ Here there are functions related to ed25519 signature.
          "status":"ok"
         }
 
-- **verifyPinAndSign(data: String, hdIndex: String, pin: String)**
+- **verifyPinAndSign(data, hdIndex, pin)**
 
     Make pin verification and data signing by key for HD path m/44'/396'/0'/0'/hdIndex'.
 
@@ -400,7 +434,7 @@ Here there are functions related to ed25519 signature.
          "status":"ok"
         }
 
-### RecoveryDataApi functions
+### Functions related to card recovery module
 
 - **getRecoveryDataLen()**
 
@@ -426,7 +460,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"00112233445566","status":"ok"}
 
-- **addRecoveryData(String recoveryData)**
+- **addRecoveryData(recoveryData)**
 
     Save recovery data into TON Labs Wallet applet. 
 
@@ -455,7 +489,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-### CardKeyChainApi functions
+### Functions related to card keychain
 
 - **resetKeyChain()**
 
@@ -512,7 +546,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"32767","status":"ok"}
 
-- **getKeyFromKeyChain(keyHmac : String)**
+- **getKeyFromKeyChain(keyHmac)**
 
     Read key from card keychain based on its hmac.
 
@@ -524,7 +558,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"001122334455","status":"ok"}
 
-- **addKeyIntoKeyChain(newKey : String)**
+- **addKeyIntoKeyChain(newKey)**
 
     Save new key into card keychain.
 
@@ -538,7 +572,7 @@ Here there are functions related to ed25519 signature.
 
     where "message" contains hmac of newKey.
 
-- **deleteKeyFromKeyChain(keyHmac : String)**
+- **deleteKeyFromKeyChain(keyHmac)**
 
     Delete key from card keychain based on its hmac.
 
@@ -562,7 +596,7 @@ Here there are functions related to ed25519 signature.
 
     where "message" field contains the number of remaining keys
 
-- **changeKeyInKeyChain(newKey : String, oldKeyHmac : String)**
+- **changeKeyInKeyChain(newKey, oldKeyHmac)**
 
     Replace existing key by new key. The length of new key must be equal to length of old key.
 
@@ -578,7 +612,7 @@ Here there are functions related to ed25519 signature.
 
     where "message" contains hmac of newKey.
 
-- **getIndexAndLenOfKeyInKeyChain(keyHmac : String)**
+- **getIndexAndLenOfKeyInKeyChain(keyHmac)**
 
     Read index (inside internal applet storage) and length of key by its hmac.
 
@@ -590,7 +624,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"{\"index\":1,\"length\":3}","status":"ok"}
 
-- **checkAvailableVolForNewKey(keySize : String)**
+- **checkAvailableVolForNewKey(keySize)**
 
     Check if there is enough free volume in card keychain to add new key of length = keySize. If there is no enough space then it throws an exception
 
@@ -602,7 +636,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-- **checkKeyHmacConsistency(keyHmac : String)**
+- **checkKeyHmacConsistency(keyHmac)**
 
     Checks if card's keychain stores a key with such keyHmac and if this hmac really corresponds to the key.
 
@@ -610,7 +644,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-- **getHmac(index : String )**
+- **getHmac(index)**
 
     Get hmac of key in card keychain by its index. 
 
