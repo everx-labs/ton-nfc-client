@@ -69,7 +69,7 @@ import NfcCardModule from 'ton-nfc-client';
 
 try {
 	let hdInd = "1"            
-	let result = await NfcCardModule.getPublicKey(hdInd);
+	let result = await NfcCardModule.getPublicKey(hdInd)
   	alert("Public key: " + result)
 }
 catch (e) {
@@ -95,27 +95,27 @@ Detailed information about card activation is available here [Android readme](ht
 
 ```javascript
 try {
-	let seedStatus = JSON.parse( await NfcCardModule.getRootKeyStatus()).message;
+	let seedStatus = JSON.parse( await NfcCardModule.getRootKeyStatus()).message
 	let pin = "5555"	
 	if (seedStatus == "not generated") {
 		await NfcCardModule.generateSeed(pin)
 	}
            
-	let state = JSON.parse( await NfcCardModule.getTonAppletState()).message;
+	let state = JSON.parse( await NfcCardModule.getTonAppletState()).message
 	if (state !== "TonWalletApplet waits two-factor authorization.") {
 		throw "Incorret applet state!"
 	}
 
-	let hashOfCommonSecret = JSON.parse( await NfcCardModule.getHashOfCommonSecret()).message;
+	let hashOfCommonSecret = JSON.parse( await NfcCardModule.getHashOfCommonSecret()).message
 	// check that hashOfCommonSecret is correct based on the data from smartcontract
 
-	let hashOfEncryptedPassword = JSON.parse( await NfcCardModule.getHashOfEncryptedPassword()).message;
+	let hashOfEncryptedPassword = JSON.parse( await NfcCardModule.getHashOfEncryptedPassword()).message
 	// check that hashOfEncryptedPassword is correct based on the data from smartcontract
 	
-	let newPin = "7777";
+	let newPin = "7777"
 	// prepare authenticationPassword, commonSecret, initialVector based on the data from smartcontract
 
-	await NfcCardModule.turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector);
+	await NfcCardModule.turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector)
 }
 catch (e) {
   console.log(e.message)
@@ -125,16 +125,16 @@ catch (e) {
 This code must work without any problems for Android. You connect NFC card only once, then run this code via pressing some button for example. And it does all operations for you. However, it is more complicated for iOS. Each time when we call NfcCardModule.someFunction() iPhone establishes new NFC session. You must reconnect the card each time. So in the above code snippet we need to reconnect the card 6 times. More over the above code will not work as it is. After finishing one NFC session iPhone need 5-10 seconds to be ready to establish new NFC session. So the following code may produce error "System resources unavailable" for iPhone.
 
 ```javascript
-let hashOfCommonSecret = JSON.parse( await NfcHandler.NfcCardModule.getHashOfCommonSecret()).message;
-let hashOfEncryptedPassword = JSON.parse( await NfcHandler.NfcCardModule.getHashOfEncryptedPassword()).message;
+let hashOfCommonSecret = JSON.parse( await NfcHandler.NfcCardModule.getHashOfCommonSecret()).message
+let hashOfEncryptedPassword = JSON.parse( await NfcHandler.NfcCardModule.getHashOfEncryptedPassword()).message
 ```
 
 You may fix it in the following way.
 
 ```javascript
-let hashOfCommonSecret = JSON.parse( await NfcHandler.NfcCardModule.getHashOfCommonSecret()).message;
-await new Promise(r => setTimeout(r, 10000));
-let hashOfEncryptedPassword = JSON.parse( await NfcHandler.NfcCardModule.getHashOfEncryptedPassword()).message;
+let hashOfCommonSecret = JSON.parse( await NfcHandler.NfcCardModule.getHashOfCommonSecret()).message
+await new Promise(r => setTimeout(r, 10000))
+let hashOfEncryptedPassword = JSON.parse( await NfcHandler.NfcCardModule.getHashOfEncryptedPassword()).message
 ```
 If you do some time consuming actions between calls of getHashOfCommonSecret and getHashOfEncryptedPassword, then additional delay is not required.
 
@@ -146,20 +146,20 @@ Detailed information about recovery functionality is available here [Android rea
 var aesjs = require('aes-js')
 try {
 	// get aesKeyHexString and testData from TON Labs service
-	var aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString);
+	var aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString)
 	//prepare json string containing recovery data, get
 	var recoveryDataJson = JSON.stringify( {
             surfPublicKey:  testData.multisig.keyPair.public,
             multisigAddress:  testData.multisig.address,
             p1: testData.cards[0].P1, // authenticationPassword
             cs: testData.cards[0].CS // commonSecret
-        });
-	var recoveryDataBytes = aesjs.utils.utf8.toBytes(recoveryDataJson);
-	var aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5));
-  	var encryptedBytes = aesCtr.encrypt(recoveryDataBytes);
-	var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
-	var addRes = await NfcHandler.NfcCardModule.addRecoveryData(encryptedHex);
-  	console.log("add Recovery data into card result  = " + addRes);
+        })
+	var recoveryDataBytes = aesjs.utils.utf8.toBytes(recoveryDataJson)
+	var aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5))
+  	var encryptedBytes = aesCtr.encrypt(recoveryDataBytes)
+	var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes)
+	var addRes = await NfcHandler.NfcCardModule.addRecoveryData(encryptedHex)
+  	console.log("add Recovery data into card result  = " + addRes)
 }
 catch (e) {
   	console.log(e.message)
@@ -172,13 +172,11 @@ There is an exemplary snippet demonstrating how to get recovery data from TON La
 var aesjs = require('aes-js')
 try {
 	// get aesKeyHexString from somewhere
-	var aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString);
+	var aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString)
   	var encryptedRecoveryDataFromSecurityCard = await NfcHandler.NfcCardModule.getRecoveryData()
 	var encryptedRecoveryDataFromSecurityCardBytes =  aesjs.utils.hex.toBytes(encryptedRecoveryDataFromSecurityCard)
 	var aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5))
   	var decryptedBytes = aesCtr.decrypt(encryptedRecoveryDataFromSecurityCardBytes)
- 
-  	// To print or store the binary data, you may convert it to hex
   	var decryptedRcoveryDataJson = aesjs.utils.utf8.fromBytes(decryptedBytes)
   	console.log("Decrypted recovery data : " + decryptedRcoveryDataJson)
 }
@@ -196,7 +194,7 @@ The secret key for HMAC SHA256 is produced based on card activation data (see ab
 Another situation is possible. Let's suppose you activated the card earlier. After that you reinstalled the app working with NFC TON Labs security card or you started using new  device. Then Android keystore/iOS keycain does not have the key to sign APDU commands. You must create it.
 
 ```javascript
- NfcCardModule.createKeyForHmacAndGetJson(authenticationPassword, commonSecret, serialNumber);
+ NfcCardModule.createKeyForHmacAndGetJson(authenticationPassword, commonSecret, serialNumber)
 ```
      
 You may work with multiple NFC TON Labs security cards. In this case in your  Android keystore/iOS keycain there is a bunch of keys. Each key is marked by corresponding SN. And you can get the list of serial numbers for which you have the key in keystore
@@ -214,26 +212,26 @@ The basic functionality provided by NFC TON Labs security card is Ed25519 signat
 import nacl from "tweetnacl";
 
 static hexStringToByteArray(hexStr) {
-  	var bytes = [];
+  	var bytes = []
   	while (hexStr.length >= 2) {
-     		bytes.push(parseInt(hexStr.substring(0, 2), 16));
-     		hexStr = hexStr.substring(2, hexStr.length);
+     		bytes.push(parseInt(hexStr.substring(0, 2), 16))
+     		hexStr = hexStr.substring(2, hexStr.length)
   	}
-  	return new Uint8Array(bytes);
+  	return new Uint8Array(bytes)
 }
 
 try {
-	let msg = "0000"; //Some hex string of even length 
-	let pin = "5555";
-	var signature = await NfcHandler.NfcCardModule.signForDefaultHdPath(msg, pin);
+	let msg = "0000" //Some hex string of even length 
+	let pin = "5555"
+	var signature = await NfcHandler.NfcCardModule.signForDefaultHdPath(msg, pin)
   	await new Promise(r => setTimeout(r, 10000))
-  	var pk = await NfcHandler.NfcCardModule.getPublicKeyForDefaultPath();
-	let msgBytes = HexHelper.hexStringToByteArray(msg);
-  	let signatureBytes = HexHelper.hexStringToByteArray(signature);
-  	let pkBytes = HexHelper.hexStringToByteArray(pubKey);
-  	let sigVerificationRes = nacl.sign.detached.verify(msgBytes, signatureBytes, pkBytes);
+  	var pk = await NfcHandler.NfcCardModule.getPublicKeyForDefaultPath()
+	let msgBytes = HexHelper.hexStringToByteArray(msg)
+  	let signatureBytes = HexHelper.hexStringToByteArray(signature)
+  	let pkBytes = HexHelper.hexStringToByteArray(pubKey)
+  	let sigVerificationRes = nacl.sign.detached.verify(msgBytes, signatureBytes, pkBytes)
   	if (sigVerificationRes == false) {
-       		throw new Error("Signature is not correct.");
+       		throw new Error("Signature is not correct.")
   	}
 }
 catch (e) {
@@ -249,24 +247,24 @@ Detailed information about card keychain is available here [Android readme](http
 
 ```javascript
 try {
-	let keyLen = 8192;
-  	let key = HexHelper.genHexString(2*keyLen);
-	await new Promise(r => setTimeout(r, 5000));
-  	let keyHmac = await NfcHandler.NfcCardModule.addKeyIntoKeyChain(key);
-	await new Promise(r => setTimeout(r, 5000));
-	let keyFromCard = await NfcHandler.NfcCardModule.getKeyFromKeyChain(keyHmac);
+	let keyLen = 8192
+  	let key = HexHelper.genHexString(2*keyLen)
+	await new Promise(r => setTimeout(r, 5000))
+  	let keyHmac = await NfcHandler.NfcCardModule.addKeyIntoKeyChain(key)
+	await new Promise(r => setTimeout(r, 5000))
+	let keyFromCard = await NfcHandler.NfcCardModule.getKeyFromKeyChain(keyHmac)
   	//assertTrue(key === keyFromCard)
-	let newKey = HexHelper.genHexString(2*keyLen);
-  	await new Promise(r => setTimeout(r, 5000));
-	var newKeyHmac = await NfcHandler.NfcCardModule.changeKey(newKey, keyHmac);
-	await new Promise(r => setTimeout(r, 5000));
-	let num1 = await NativeModules.NfcCardModule.getNumberOfKeys();
-  	console.log("Number of keys = " + result);
+	let newKey = HexHelper.genHexString(2*keyLen)
+  	await new Promise(r => setTimeout(r, 5000))
+	var newKeyHmac = await NfcHandler.NfcCardModule.changeKey(newKey, keyHmac)
 	await new Promise(r => setTimeout(r, 5000))
-  	await NativeModules.NfcCardModule.deleteKeyFromKeyChain(newKeyHmac);	
+	let num1 = await NativeModules.NfcCardModule.getNumberOfKeys()
+  	console.log("Number of keys = " + result)
 	await new Promise(r => setTimeout(r, 5000))
-	let num2 = await NativeModules.NfcCardModule.getNumberOfKeys();
-	console.log("Number of keys = " + result);
+  	await NativeModules.NfcCardModule.deleteKeyFromKeyChain(newKeyHmac)	
+	await new Promise(r => setTimeout(r, 5000))
+	let num2 = await NativeModules.NfcCardModule.getNumberOfKeys()
+	console.log("Number of keys = " + result)
 	//assertTrue(num2 === num1 - 1)
 }
 catch (e) {
