@@ -191,7 +191,7 @@ Another situation is possible. Let's suppose you activated the card earlier. Aft
 
      NfcCardModule.createKeyForHmacAndGetJson(authenticationPassword, commonSecret, serialNumber);
      
-You may work with multiple NFC TON Labs security cards. In this case in your  Android keystore/iOS keycain there is a bunch of keys. Each keys is marked by corresponding SN. And you can get the list of serial numbers for which you have the key in keystore
+You may work with multiple NFC TON Labs security cards. In this case in your  Android keystore/iOS keycain there is a bunch of keys. Each key is marked by corresponding SN. And you can get the list of serial numbers for which you have the key in keystore
 
 The list of operations protected by HMAC SHA256:
 
