@@ -26,7 +26,7 @@ Below there is full functions list provided by ton-nfc-client to make different 
 
 ## NFC related functions
 
-Here there are functions to check/change the state of your NFC hardware.  In TonNfcClientSwift library there is a class NfcApi for this.
+Here there are functions to check/change the state of your NFC hardware.  
 
 - **checkIfNfcSupported()**
 
