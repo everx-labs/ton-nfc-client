@@ -247,7 +247,7 @@ _Note:_ Functions signForDefaultHdPath, sign are protected by HMAC SHA256 signat
 
 ## Card keychain
 
-Detailed information about card keychain is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give exemplary code for React native app. The below snippet demonstrates the work with keychain. We add one key, then retrieve it from the card. Then we replace it by a new key. At the end we delete the key.
+Detailed information about card keychain is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give exemplary code for React native app. The below snippet demonstrates the work with keychain. We add one key and then retrieve it from the card. Then we replace it by a new key. At the end we delete the key.
 
 ```javascript
 try {
