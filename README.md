@@ -236,3 +236,36 @@ catch (e) {
 ```
 
 _Note:_ Functions signForDefaultHdPath, sign are protected by HMAC SHA256 signature (see previous section). But also there is an additional protection for them by PIN code. You have 10 attempts to enter PIN, after 10th fail you will not be able to use existing seed (keys for ed25519) . The only way to unblock these functions is to reset the seed (see resetWallet function) and generate new seed (see generateSeed). After resetting the seed PIN will be also reset to default value 5555.
+
+## Card keychain
+
+Detailed information about card keychain is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give exemplary code for React native app.
+
+The below snippet demonstrates the work with keychain. We add one key, then retrieve it from the card. Then we replace it by a new key. At the end we delete the key.
+
+```javascript
+try {
+	let keyLen = 8192;
+  	let key = HexHelper.genHexString(2*keyLen);
+	await new Promise(r => setTimeout(r, 5000));
+  	let keyHmac = await NfcHandler.NfcCardModule.addKeyIntoKeyChain(key);
+	await new Promise(r => setTimeout(r, 5000));
+	let keyFromCard = await NfcHandler.NfcCardModule.getKeyFromKeyChain(keyHmac);
+  	//assertTrue(key === keyFromCard)
+	let newKey = HexHelper.genHexString(2*keyLen);
+  	await new Promise(r => setTimeout(r, 5000));
+	var newKeyHmac = await NfcHandler.NfcCardModule.changeKey(newKey, keyHmac);
+	await new Promise(r => setTimeout(r, 5000));
+	let num1 = await NativeModules.NfcCardModule.getNumberOfKeys();
+  	console.log("Number of keys = " + result);
+	await new Promise(r => setTimeout(r, 5000))
+  	await NativeModules.NfcCardModule.deleteKeyFromKeyChain(newKeyHmac);	
+	await new Promise(r => setTimeout(r, 5000))
+	let num2 = await NativeModules.NfcCardModule.getNumberOfKeys();
+	console.log("Number of keys = " + result);
+	//assertTrue(num2 === num1 - 1)
+}
+catch (e) {
+  console.log(e.message)
+}
+```
