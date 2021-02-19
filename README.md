@@ -191,7 +191,7 @@ We protect the most critical card operations (APDU commands) against MITM attack
 
 The secret key for HMAC SHA256 is produced based on card activation data (see above section). This key is saved into Android keystore or iOS keychain and then is used by the app to sign APDU commands data fields. Usually after correct card activation in the app (call of NfcCardModule.turnOnWallet) this key is produced and saved. So no extra code is required.
 
-Another situation is possible. Let's suppose you activated the card earlier. After that you reinstalled the app working with NFC TON Labs security card or you started using new  device. Then Android keystore/iOS keycain does not have the key to sign APDU commands. You must create it.
+Another situation is possible. Let's suppose you activated the card earlier. After that you reinstalled the app working with NFC TON Labs security card or you started using new  device. Then Android keystore/iOS keychain does not have the key to sign APDU commands. You must create it.
 
 ```javascript
  NfcCardModule.createKeyForHmacAndGetJson(authenticationPassword, commonSecret, serialNumber)
