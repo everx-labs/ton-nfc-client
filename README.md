@@ -95,7 +95,7 @@ Detailed information about card activation is available here [Android readme](ht
 
 ```javascript
 try {
-	let seedStatus = JSON.parse( await NfcCardModule.getRootKeyStatus().message;
+	let seedStatus = JSON.parse( await NfcCardModule.getRootKeyStatus()).message;
 	let pin = "5555"	
 	if (seedStatus == "not generated") {
 		await NfcCardModule.generateSeed(pin)
