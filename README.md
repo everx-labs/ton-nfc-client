@@ -1,10 +1,9 @@
 # ton-nfc-client
 
-This React native library is developed to handle communication of Android smartphones/iPhones with NFC TON Labs Security cards. It provides a useful API to work with all functionality (i.e. APDU commands) supported by NFC TON Labs Security card.
+This React native library is developed to handle communication of Android smartphones/iPhones with NFC TON Labs Security cards. It provides a useful API to work with all functionality (i.e. APDU commands) supported by NFC TON Labs Security card. The technical specification of TON Labs Security card can be found here https://ton.surf/scard.
 
-For the case of iPhone you must have iOS version >= 13 and iPhone model >= 7. For the case of Android you should also check whether it supports NFC feature.
-
-Android native code of ton-nfc-client uses [TonNfcClientAndroid library](https://github.com/tonlabs/TonNfcClientAndroid) to handle all NFC stuff, and iOS native code of ton-nfc-client respectively uses [TonNfcClientSwift library](https://github.com/tonlabs/TonNfcClientSwift).
++ For the case of iPhone you must have iOS version >= 13 and iPhone model >= 7. For the case of Android you should also check whether it supports NFC feature.
++ Android native code of ton-nfc-client uses [TonNfcClientAndroid library](https://github.com/tonlabs/TonNfcClientAndroid) to handle all NFC stuff, and iOS native code  respectively uses [TonNfcClientSwift library](https://github.com/tonlabs/TonNfcClientSwift).
 
 ## Installation 
 
