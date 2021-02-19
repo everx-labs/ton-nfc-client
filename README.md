@@ -87,7 +87,7 @@ NfcCardModule.getPublicKey(hdIndex)
 
 ## More about responses format and errors
 
-To get more information about responses formats and errors please visit this pages: [Android error list](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/ErrorrList.md), [iOS error list](https://github.com/tonlabs/TonNfcClientSwift/blob/master/docs/ErrorList.md), [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md).
+To get more information about responses formats and errors please visit this pages: [Android error list](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/ErrorList.md), [iOS error list](https://github.com/tonlabs/TonNfcClientSwift/blob/master/docs/ErrorList.md), [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md).
 
 ## Card activation
 
