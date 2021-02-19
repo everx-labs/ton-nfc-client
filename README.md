@@ -81,8 +81,8 @@ Another way to use ton-nfc-client functions looks as follows.
 
 ```javascript
 NfcCardModule.getPublicKey(hdIndex)
-   .then((result) => consolw.log("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
-   .catch((e) => console.log(e.message))
+   .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
+   .catch((e) => alert(e.message))
 ```
 
 ## More about responses format and errors
