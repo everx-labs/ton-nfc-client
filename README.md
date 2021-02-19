@@ -91,9 +91,7 @@ To get more information about responses formats and errors please visit this pag
 
 ## Card activation
 
-Detailed information about card activation is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md), [card activation doc](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/CardActivation.md).
-
-Here we just give exemplary code for React native app.
+Detailed information about card activation is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md), [card activation doc](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/CardActivation.md). Here we just give exemplary code for React native app.
 
 ```javascript
 try {
