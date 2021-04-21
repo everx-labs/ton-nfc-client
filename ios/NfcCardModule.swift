@@ -146,10 +146,25 @@ class NfcCardModule: NSObject {
     func turnOnWallet(_ newPin: String, password: String, commonSecret : String, initialVector : String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
         cardActivationNfcApi.turnOnWallet(newPin: newPin, authenticationPassword: password, commonSecret: commonSecret, initialVector: initialVector, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
+	
+	@objc
+    func turnOnWallet(_ password: String, commonSecret : String, initialVector : String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardActivationNfcApi.turnOnWallet(authenticationPassword: password, commonSecret: commonSecret, initialVector: initialVector, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
     
     @objc
     func verifyPassword(_ password: String, initialVector: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
         cardActivationNfcApi.verifyPassword(password: password, initialVector: initialVector, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
+	
+	@objc
+    func getHashes(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardActivationNfcApi.getHashes(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
+	
+	@objc
+    func getHashOfEncryptedCommonSecret(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardActivationNfcApi.getHashOfEncryptedCommonSecret(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
     
     @objc

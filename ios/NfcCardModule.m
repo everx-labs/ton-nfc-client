@@ -122,11 +122,22 @@ RCT_EXTERN_METHOD(
                   rejecter:(RCTPromiseRejectBlock)reject
                   )
 RCT_EXTERN_METHOD(
+                  turnOnWallet: (NSString *) password
+                  commonSecret: (NSString *) commonSecret
+                  initialVector: (NSString *)initialVector
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+                  )				  
+RCT_EXTERN_METHOD(
                   verifyPassword: (NSString *)password
                   initialVector: (NSString *)initialVector
                   resolve:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject
                   )
+RCT_EXTERN_METHOD(
+                  getHashes: (RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject
+                  )				  
 RCT_EXTERN_METHOD(
                   getHashOfEncryptedCommonSecret: (RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject
