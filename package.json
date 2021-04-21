@@ -1,9 +1,40 @@
 {
-  "name": "ton-nfc-client",
-  "title": "Ton Nfc Client",
-  "version": "1.0.0",
+  "_from": "git+https://github.com/tonlabs/ton-nfc-client.git",
+  "_id": "ton-nfc-client@1.0.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/ton-nfc-client",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "ton-nfc-client@git+https://github.com/tonlabs/ton-nfc-client.git",
+    "name": "ton-nfc-client",
+    "escapedName": "ton-nfc-client",
+    "rawSpec": "git+https://github.com/tonlabs/ton-nfc-client.git",
+    "saveSpec": "git+https://github.com/tonlabs/ton-nfc-client.git",
+    "fetchSpec": "https://github.com/tonlabs/ton-nfc-client.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://github.com/tonlabs/ton-nfc-client.git#53cf2078776405bca74f6e219d601ff28575c4bd",
+  "_spec": "ton-nfc-client@git+https://github.com/tonlabs/ton-nfc-client.git",
+  "_where": "C:\\TonApril2021\\TonNfcCardReactNativeTest",
+  "author": {
+    "name": "alinaT95",
+    "email": "alina.t@tonlabs.io"
+  },
+  "bugs": {
+    "url": "https://github.com/tonlabs/ton-nfc-client/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "TODO",
-  "main": "index.js",
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5"
+  },
   "files": [
     "README.md",
     "android",
@@ -11,30 +42,29 @@
     "ios",
     "ton-nfc-client.podspec"
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "homepage": "https://github.com/tonlabs/ton-nfc-client#readme",
+  "keywords": [
+    "react-native",
+    "ios",
+    "android",
+    "nfc"
+  ],
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "main": "src/index.js",
+  "name": "ton-nfc-client",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tonlabs/ton-nfc-client.git",
     "baseUrl": "https://github.com/tonlabs/ton-nfc-client"
   },
-  "keywords": [
-    "react-native"
-  ],
-  "author": {
-    "name": "alinaT95",
-    "email": "alina.t@tonlabs.io"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "MIT",
-  "licenseFilename": "LICENSE",
-  "readmeFilename": "README.md",
-  "peerDependencies": {
-    "react": "^16.8.1",
-    "react-native": ">=0.60.0-rc.0 <1.0.x"
-  },
-  "devDependencies": {
-    "react": "^16.9.0",
-    "react-native": "^0.61.5"
-  }
+  "title": "Ton Nfc Client",
+  "version": "1.0.0"
 }
