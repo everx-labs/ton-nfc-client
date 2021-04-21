@@ -162,11 +162,6 @@ class NfcCardModule: NSObject {
         cardActivationNfcApi.getHashes(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
 	
-	@objc
-    func getHashOfEncryptedCommonSecret(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-        cardActivationNfcApi.getHashOfEncryptedCommonSecret(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
-    }
-    
     @objc
     func getHashOfEncryptedCommonSecret(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
         cardActivationNfcApi.getHashOfEncryptedCommonSecret(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
