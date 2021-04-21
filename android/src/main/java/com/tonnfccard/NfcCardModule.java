@@ -24,12 +24,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 
 import com.facebook.react.bridge.WritableMap;
-import com.tonnfccard.api.CardActivationApi;
-import com.tonnfccard.api.CardCoinManagerApi;
-import com.tonnfccard.api.CardCryptoApi;
-import com.tonnfccard.api.CardKeyChainApi;
-import com.tonnfccard.api.RecoveryDataApi;
-import com.tonnfccard.api.nfc.NfcApduRunner;
+import com.tonnfccard.nfc.NfcApduRunner;
+
 
 import static com.tonnfccard.CallbackHelper.createNfcCallback;
 
@@ -46,21 +42,6 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     private CardCryptoApi cardCryptoNfcApi;
     private CardKeyChainApi cardKeyChainNfcApi;
     private RecoveryDataApi recoveryDataApi;
-
-    private static String[][] TECHLISTS;
-    private static IntentFilter[] TAGFILTERS;
-
-    static {
-        try {
-            TECHLISTS = new String[][]{{IsoDep.class.getName()},
-                    {NfcA.class.getName()},};
-
-            TAGFILTERS = new IntentFilter[]{new IntentFilter(
-                    NfcAdapter.ACTION_TECH_DISCOVERED, "*/*")};
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public NfcCardModule(ReactApplicationContext reactContext) throws Exception {
         super(reactContext);
@@ -140,7 +121,6 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
             nfcAdapter = NfcAdapter.getDefaultAdapter(this.reactContext);
             setupForegroundDispatch(getCurrentActivity(), nfcAdapter);
         }
-        nfcApduRunner.setNfcAdapter(nfcAdapter);
     }
 
     @Override
@@ -169,8 +149,6 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-
         final PendingIntent pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
         if (adapter != null && adapter.isEnabled()) {
             adapter.enableForegroundDispatch(activity, pendingIntent, null, null);
@@ -329,6 +307,16 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     @ReactMethod
     public void turnOnWallet(String newPin, String password, String commonSecret, String initialVector, final Promise promise){
         cardActivationNfcApi.turnOnWallet(newPin, password, commonSecret, initialVector, createNfcCallback(promise));
+    }
+
+    @ReactMethod
+    public void turnOnWallet(String password, String commonSecret, String initialVector, final Promise promise){
+        cardActivationNfcApi.turnOnWallet(password, commonSecret, initialVector, createNfcCallback(promise));
+    }
+
+    @ReactMethod
+    public void getHashes(final Promise promise) {
+        cardActivationNfcApi.getHashes(createNfcCallback(promise));
     }
 
     @ReactMethod
