@@ -39,8 +39,8 @@
     "README.md",
     "android",
     "index.js",
-	"NfcEventsEmitterWrapper.js",
-	"NfcCardModuleWrapper.js"
+	  "NfcEventsEmitterWrapper.js",
+	  "NfcCardModuleWrapper.js",
     "ios",
     "ton-nfc-client.podspec"
   ],
