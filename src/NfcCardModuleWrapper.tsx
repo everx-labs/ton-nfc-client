@@ -6,73 +6,73 @@ export default class NfcCardModuleWrapper {
 
   /* Coin manager functions */
 
-  static async getMaxPinTries() {
+  async getMaxPinTries() : Promise<object>  {
     let response = await NfcCardModule.getMaxPinTries();
     let json = JSON.parse(response);
     return json;
   }
-
-  static async getSeVersion() {
+ 
+  async getSeVersion() : Promise<object> {
     let response = await NfcCardModule.getSeVersion();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getCsn(){
+  async getCsn() : Promise<object> {
     let response = await NfcCardModule.getCsn();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getDeviceLabel(){
+  async getDeviceLabel() : Promise<object> {
     let response = await NfcCardModule.getDeviceLabel();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async setDeviceLabel(label){
+  async setDeviceLabel(label : string) : Promise<object> {
     let response = await NfcCardModule.setDeviceLabel(label);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getRemainingPinTries(){
+  async getRemainingPinTries(): Promise<object> {
     let response = await NfcCardModule.getRemainingPinTries();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getRootKeyStatus(){
+  async getRootKeyStatus(){
     let response = await NfcCardModule.getRootKeyStatus();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getAvailableMemory(){
+  async getAvailableMemory(): Promise<object> {
     let response = await NfcCardModule.getAvailableMemory();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getAppsList(){
+  async getAppsList(): Promise<object> {
     let response = await NfcCardModule.getAppsList();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async generateSeed(pin){
+  async generateSeed(pin : string) : Promise<object> {
     let response = await NfcCardModule.generateSeed(pin);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async resetWallet(){
+  async resetWallet() : Promise<object> {
     let response = await NfcCardModule.resetWallet();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async changePin(oldPin, newPin){
+  async changePin(oldPin : string, newPin : string) : Promise<object> {
     let response = await NfcCardModule.changePin(oldPin, newPin);
     let json = JSON.parse(response);
     return json;
@@ -80,69 +80,70 @@ export default class NfcCardModuleWrapper {
 
   /* Commands to maintain keys for hmac */
 
-  static async selectKeyForHmac(serialNumber){
+  async selectKeyForHmac(serialNumber : string) : Promise<object> {
     let response = await NfcCardModule.selectKeyForHmac(serialNumber);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async createKeyForHmac(authenticationPassword, commonSecret, serialNumber){
+  async createKeyForHmac(authenticationPassword : string, commonSecret : string, serialNumber : string) : Promise<object> {
     let response = await NfcCardModule.createKeyForHmac(authenticationPassword, commonSecret, serialNumber);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getCurrentSerialNumber(){
+  async getCurrentSerialNumber() : Promise<object> {
     let response = await NfcCardModule.getCurrentSerialNumber();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getAllSerialNumbers(){
+  async getAllSerialNumbers() : Promise<object> {
     let response = await NfcCardModule.getAllSerialNumbers();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async isKeyForHmacExist(serialNumber){
+  async isKeyForHmacExist(serialNumber : string) : Promise<object> {
     let response = await NfcCardModule.isKeyForHmacExist(serialNumber);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async deleteKeyForHmac(serialNumber){
+  async deleteKeyForHmac(serialNumber : string) : Promise<object> {
     let response = await NfcCardModule.deleteKeyForHmac(serialNumber);
     let json = JSON.parse(response);
     return json;
   }
 
   /* Card activation commands (TonWalletApplet) */
+  
 
-  static async turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector){
+  async turnOnWalletWithPin(newPin : string, authenticationPassword : string, commonSecret : string, initialVector : string) : Promise<object> {
     let response = await NfcCardModule.turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async turnOnWallet(authenticationPassword, commonSecret, initialVector){
+  async turnOnWallet(authenticationPassword : string, commonSecret : string, initialVector : string) : Promise<object> {
     let response = await NfcCardModule.turnOnWallet(authenticationPassword, commonSecret, initialVector);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getHashes(){
+  async getHashes() : Promise<object> {
     let response = await NfcCardModule.getHashes();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getHashOfEncryptedPassword(){
+  async getHashOfEncryptedPassword() : Promise<object> {
     let response = await NfcCardModule.getHashOfEncryptedPassword();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getHashOfEncryptedCommonSecret(){
+  async getHashOfEncryptedCommonSecret(): Promise<object> {
     let response = await NfcCardModule.getHashOfEncryptedCommonSecret();
     let json = JSON.parse(response);
     return json;
@@ -150,51 +151,52 @@ export default class NfcCardModuleWrapper {
 
   /* Common stuff (TonWalletApplet)  */
 
-  static async getTonAppletState(){
+  async getTonAppletState(): Promise<object> {
     let response = await NfcCardModule.getTonAppletState();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getSerialNumber(){
+  async getSerialNumber(): Promise<object> {
     let response = await NfcCardModule.getSerialNumber();
     let json = JSON.parse(response);
     return json;
   }
 
   /* Recovery data stuff (TonWalletApplet)  */
+  
 
-  static async addRecoveryData(recoveryData){
+  async addRecoveryData(recoveryData : string) : Promise<object> {
     let response = await NfcCardModule.addRecoveryData(recoveryData);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getRecoveryData(){
+  async getRecoveryData(): Promise<object> {
     let response = await NfcCardModule.getRecoveryData();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getRecoveryDataHash(){
+  async getRecoveryDataHash(){
     let response = await NfcCardModule.getRecoveryDataHash();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getRecoveryDataLen(){
+  async getRecoveryDataLen(): Promise<object> {
     let response = await NfcCardModule.getRecoveryDataLen();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async isRecoveryDataSet(){
+  async isRecoveryDataSet(): Promise<object> {
     let response = await NfcCardModule.isRecoveryDataSet();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async resetRecoveryData(){
+  async resetRecoveryData(): Promise<object> {
     let response = await NfcCardModule.resetRecoveryData();
     let json = JSON.parse(response);
     return json;
@@ -202,129 +204,130 @@ export default class NfcCardModuleWrapper {
 
   /* Ed25519 stuff (TonWalletApplet)  */
 
-  static async verifyPin(pin){
+  async verifyPin(pin : string) : Promise<object> {
     let response = await NfcCardModule.verifyPin(pin);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getPublicKey(hdIndex){
+  async getPublicKey(hdIndex : string) : Promise<object> {
     let response = await NfcCardModule.getPublicKey(hdIndex);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async signForDefaultHdPath(dataForSigning){
+  async signForDefaultHdPath(dataForSigning :  string) : Promise<object> {
     let response = await NfcCardModule.verifyPinAndSignForDefaultHdPath(dataForSigning);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async verifyPinAndSignForDefaultHdPath(dataForSigning, pin){
+  async verifyPinAndSignForDefaultHdPath(dataForSigning:  string, pin:  string) : Promise<object>  {
     let response = await NfcCardModule.verifyPinAndSignForDefaultHdPath(dataForSigning, pin);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async sign(dataForSigning, hdIndex){
+  async sign(dataForSigning:  string, hdIndex:  string): Promise<object> {
     let response = await NfcCardModule.verifyPinAndSign(dataForSigning, hdIndex);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async verifyPinAndSign(dataForSigning, hdIndex, pin){
+  async verifyPinAndSign(dataForSigning:  string, hdIndex:  string, pin:  string): Promise<object> {
     let response = await NfcCardModule.verifyPinAndSign(dataForSigning, hdIndex, pin);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getPublicKeyForDefaultPath(){
+  async getPublicKeyForDefaultPath(): Promise<object> {
     let response = await NfcCardModule.getPublicKeyForDefaultPath();
     let json = JSON.parse(response);
     return json;
   }
 
   /* Keychain commands */
+  
 
-  static async resetKeyChain(){
+  async resetKeyChain(): Promise<object>{
     let response = await NfcCardModule.resetKeyChain();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getKeyChainDataAboutAllKeys(){
+  async getKeyChainDataAboutAllKeys(): Promise<object>{
     let response = await NfcCardModule.getKeyChainDataAboutAllKeys();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getKeyChainInfo(){
+  async getKeyChainInfo(): Promise<object>{
     let response = await NfcCardModule.getKeyChainInfo();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getNumberOfKeys(){
+  async getNumberOfKeys(): Promise<object>{
     let response = await NfcCardModule.getNumberOfKeys();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getOccupiedStorageSize(){
+  async getOccupiedStorageSize(): Promise<object>{
     let response = await NfcCardModule.getOccupiedStorageSize();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getFreeStorageSize(){
+  async getFreeStorageSize(): Promise<object>{
     let response = await NfcCardModule.getFreeStorageSize();
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getKeyFromKeyChain(keyHmac){
+  async getKeyFromKeyChain(keyHmac : string) : Promise<object>{
     let response = await NfcCardModule.getKeyFromKeyChain(keyHmac);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async addKeyIntoKeyChain(newKey){
+  async addKeyIntoKeyChain(newKey : string): Promise<object>{
     let response = await NfcCardModule.addKeyIntoKeyChain(newKey);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async deleteKeyFromKeyChain(keyHmac){
+  async deleteKeyFromKeyChain(keyHmac : string): Promise<object>{
     let response = await NfcCardModule.deleteKeyFromKeyChain(keyHmac);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async finishDeleteKeyFromKeyChainAfterInterruption(keyHmac){
+  async finishDeleteKeyFromKeyChainAfterInterruption(keyHmac : string): Promise<object>{
     let response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption(keyHmac);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async changeKeyInKeyChain(newKey, oldKeyHmac){
+  async changeKeyInKeyChain(newKey: string, oldKeyHmac: string): Promise<object>{
     let response = await NfcCardModule.changeKeyInKeyChain(newKey, oldKeyHmac);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async getIndexAndLenOfKeyInKeyChain(keyHmac){
+  async getIndexAndLenOfKeyInKeyChain(keyHmac : string) : Promise<object>{
     let response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async checkAvailableVolForNewKey(keySize){
+  async checkAvailableVolForNewKey(keySize : number) : Promise<object>{
     let response = await NfcCardModule.checkAvailableVolForNewKey(keySize);
     let json = JSON.parse(response);
     return json;
   }
 
-  static async checkKeyHmacConsistency(keyHmac){
+  async checkKeyHmacConsistency(keyHmac : string): Promise<object>{
     let response = await NfcCardModule.checkKeyHmacConsistency(keyHmac);
     let json = JSON.parse(response);
     return json;
