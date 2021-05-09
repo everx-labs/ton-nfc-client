@@ -10,7 +10,9 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import NfcCardModule from 'ton-nfc-client';
+import {NfcCardModuleWrapper} from 'ton-nfc-client';
+
+const nfcCardWrapper = new NfcCardModuleWrapper();
 
 export default class App extends Component<{}> {
   state = {
@@ -23,15 +25,15 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <View>
-              <Button onPress={() => NfcCardModule.getRemainingPinTries()
-            .then((result) => alert("Remainig Pin tries : " + result)).catch((e) => alert(e.message))} title="getRemainingPinTries"/>
+              <Button onPress={() => nfcCardWrapper.getMaxPinTries()
+            .then((result) => alert("Remainig Pin tries : " + result)).catch((e) => alert(e.message))} title="getMaxPinTries"/>
         </View>
         <View>
-              <Button onPress={() => NfcCardModule.getAllSerialNumbers()
+              <Button onPress={() => nfcCardWrapper.getAllSerialNumbers()
             .then((result) => alert("getAllSerialNumbers : " + result)).catch((e) => alert(e.message))} title="getAllSerialNumbers"/>
         </View>
         <View>
-              <Button onPress={() => NfcCardModule.getKeyChainInfo()
+              <Button onPress={() => nfcCardWrapper.getKeyChainInfo()
             .then((result) => alert("getKeyChainInfo : " + result)).catch((e) => alert(e.message))} title="getKeyChainInfo"/>
         </View>
       </View>
