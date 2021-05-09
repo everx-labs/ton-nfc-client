@@ -169,6 +169,7 @@ export default class NfcCardModuleWrapper {
   async addRecoveryData(recoveryData: string): Promise<object> {
     let response = await NfcCardModule.addRecoveryData(recoveryData);
     let json = JSON.parse(response);
+
     return json;
   }
 
