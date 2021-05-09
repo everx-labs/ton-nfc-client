@@ -48,8 +48,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     private CardCryptoApi cardCryptoNfcApi;
     private CardKeyChainApi cardKeyChainNfcApi;
     private RecoveryDataApi recoveryDataApi;
-
-    private View mRootView = null;
+    
 
     public NfcCardModule(ReactApplicationContext reactContext) throws Exception {
         super(reactContext);
