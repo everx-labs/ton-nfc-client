@@ -10,7 +10,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import {NfcCardModuleWrapper} from 'ton-nfc-client';
+import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError} from 'ton-nfc-client';
 
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
@@ -25,8 +25,22 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <View>
-              <Button onPress={() => nfcCardModuleWrapper.getRemainingPinTries()
-            .then((result) => alert("Remainig Pin tries : " + result.message)).catch((e) => alert(e.message))} title="getRemainingPinTries"/>
+              <Button onPress={() => {
+                let p = nfcCardModuleWrapper.getRemainingPinTries();
+           
+                p.then((result) => {
+                  console.log(result instanceof CardResponse)
+                  alert("Remainig Pin tries : " + result.message)
+                })
+                .catch((e) => {
+                  console.log(e instanceof CardError)
+                  console.log(e instanceof NfcNativeModuleError)
+                  console.log(e.status)
+                  console.log(e.errorCode)
+                  console.log(e.message)
+                  alert(e.message)
+                });
+            }} title="getRemainingPinTries"/>
         </View>
         <View>
               <Button onPress={() => nfcCardModuleWrapper.getAllSerialNumbers()

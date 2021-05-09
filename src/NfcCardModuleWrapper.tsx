@@ -1,336 +1,574 @@
 
 import {NativeModules} from 'react-native';
+import { CardResponse, CardError, NfcNativeModuleError } from 'ton-nfc-client';
 const {NfcCardModule} = NativeModules;
 
 export default class NfcCardModuleWrapper {
 
+  private prepareCardResponse(response: string) : CardResponse {
+    let json = JSON.parse(response);
+    if (!json.hasOwnProperty('message')) throw new Error("Json must have 'message' field!");
+    if (!json.hasOwnProperty('status')) throw new Error("Json must have status' field!");
+    return new CardResponse(json.message, json.status);
+  }
+
+
+  private throwError(errorMessage: string) : Error {
+    var json = {};
+    try {
+      json = JSON.parse(errorMessage);
+    } catch (e) {
+        throw new Error(errorMessage);
+    }
+    if (!json.hasOwnProperty('message')) throw new Error("Json must have 'message' field!");
+    if (!json.hasOwnProperty('status')) throw new Error("Json must have 'status' field!");
+    if (!json.hasOwnProperty('errorCode')) throw new Error("Json must have 'errorCode' field!");
+    if (!json.hasOwnProperty('errorType')) throw new Error("Json must have 'errorType' field!");
+    if (!json.hasOwnProperty('errorTypeId')) throw new Error("Json must have 'errorTypeId' field!");
+    if (!json.hasOwnProperty('cardInstruction')) {
+      throw new NfcNativeModuleError(json.message, json.status, json.errorCode, json.errorTypeId, json.errorType);
+    }
+    else if (!json.hasOwnProperty('apdu')) {
+      throw new Error("Json must have 'apdu' field!");
+    }
+    throw new CardError(json.message, json.status, json.errorCode, json.errorTypeId, json.errorType, json.cardInstruction, json.apdu);
+  }
+
+
   /* Coin manager functions */
 
-  async getMaxPinTries(): Promise<object>  {
-    let response = await NfcCardModule.getMaxPinTries();
-    let json = JSON.parse(response);
-    return json;
+  async getMaxPinTries(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getMaxPinTries();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
  
-  async getSeVersion(): Promise<object> {
-    let response = await NfcCardModule.getSeVersion();
-    let json = JSON.parse(response);
-    return json;
+  async getSeVersion(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getSeVersion();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getCsn(): Promise<object> {
-    let response = await NfcCardModule.getCsn();
-    let json = JSON.parse(response);
-    return json;
+  async getCsn(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getCsn();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getDeviceLabel(): Promise<object> {
-    let response = await NfcCardModule.getDeviceLabel();
-    let json = JSON.parse(response);
-    return json;
+  async getDeviceLabel(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getDeviceLabel();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async setDeviceLabel(label: string): Promise<object> {
-    let response = await NfcCardModule.setDeviceLabel(label);
-    let json = JSON.parse(response);
-    return json;
+  async setDeviceLabel(label: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.setDeviceLabel(label);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getRemainingPinTries(): Promise<object> {
-    let response = await NfcCardModule.getRemainingPinTries();
-    let json = JSON.parse(response);
-    return json;
+  async getRemainingPinTries(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getRemainingPinTries();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getRootKeyStatus(){
-    let response = await NfcCardModule.getRootKeyStatus();
-    let json = JSON.parse(response);
-    return json;
+  async getRootKeyStatus(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getRootKeyStatus();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getAvailableMemory(): Promise<object> {
-    let response = await NfcCardModule.getAvailableMemory();
-    let json = JSON.parse(response);
-    return json;
+  async getAvailableMemory(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getAvailableMemory();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getAppsList(): Promise<object> {
-    let response = await NfcCardModule.getAppsList();
-    let json = JSON.parse(response);
-    return json;
+  async getAppsList(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getAppsList();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async generateSeed(pin: string): Promise<object> {
-    let response = await NfcCardModule.generateSeed(pin);
-    let json = JSON.parse(response);
-    return json;
+  async generateSeed(pin: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.generateSeed(pin);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async resetWallet(): Promise<object> {
-    let response = await NfcCardModule.resetWallet();
-    let json = JSON.parse(response);
-    return json;
+  async resetWallet(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.resetWallet();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async changePin(oldPin: string, newPin: string): Promise<object> {
-    let response = await NfcCardModule.changePin(oldPin, newPin);
-    let json = JSON.parse(response);
-    return json;
+  async changePin(oldPin: string, newPin: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.changePin(oldPin, newPin);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
   /* Commands to maintain keys for hmac */
 
-  async selectKeyForHmac(serialNumber: string) : Promise<object> {
-    let response = await NfcCardModule.selectKeyForHmac(serialNumber);
-    let json = JSON.parse(response);
-    return json;
+  async selectKeyForHmac(serialNumber: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.selectKeyForHmac(serialNumber);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async createKeyForHmac(authenticationPassword: string, commonSecret: string, serialNumber: string): Promise<object> {
-    let response = await NfcCardModule.createKeyForHmac(authenticationPassword, commonSecret, serialNumber);
-    let json = JSON.parse(response);
-    return json;
+  async createKeyForHmac(authenticationPassword: string, commonSecret: string, serialNumber: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.createKeyForHmac(authenticationPassword, commonSecret, serialNumber);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getCurrentSerialNumber(): Promise<object> {
-    let response = await NfcCardModule.getCurrentSerialNumber();
-    let json = JSON.parse(response);
-    return json;
+  async getCurrentSerialNumber(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getCurrentSerialNumber();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getAllSerialNumbers(): Promise<object> {
-    let response = await NfcCardModule.getAllSerialNumbers();
-    let json = JSON.parse(response);
-    return json;
+  async getAllSerialNumbers(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getAllSerialNumbers();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async isKeyForHmacExist(serialNumber: string): Promise<object> {
-    let response = await NfcCardModule.isKeyForHmacExist(serialNumber);
-    let json = JSON.parse(response);
-    return json;
+  async isKeyForHmacExist(serialNumber: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.isKeyForHmacExist(serialNumber);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async deleteKeyForHmac(serialNumber: string): Promise<object> {
-    let response = await NfcCardModule.deleteKeyForHmac(serialNumber);
-    let json = JSON.parse(response);
-    return json;
+  async deleteKeyForHmac(serialNumber: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.deleteKeyForHmac(serialNumber);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
   /* Card activation commands (TonWalletApplet) */
   
 
-  async turnOnWalletWithPin(newPin: string, authenticationPassword: string, commonSecret: string, initialVector: string) : Promise<object> {
-    let response = await NfcCardModule.turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector);
-    let json = JSON.parse(response);
-    return json;
+  async turnOnWalletWithPin(newPin: string, authenticationPassword: string, commonSecret: string, initialVector: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async turnOnWallet(authenticationPassword: string, commonSecret: string, initialVector: string) : Promise<object> {
-    let response = await NfcCardModule.turnOnWallet(authenticationPassword, commonSecret, initialVector);
-    let json = JSON.parse(response);
-    return json;
+  async turnOnWallet(authenticationPassword: string, commonSecret: string, initialVector: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.turnOnWallet(authenticationPassword, commonSecret, initialVector);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getHashes(): Promise<object> {
-    let response = await NfcCardModule.getHashes();
-    let json = JSON.parse(response);
-    return json;
+  async getHashes(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getHashes();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getHashOfEncryptedPassword(): Promise<object> {
-    let response = await NfcCardModule.getHashOfEncryptedPassword();
-    let json = JSON.parse(response);
-    return json;
+  async getHashOfEncryptedPassword(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getHashOfEncryptedPassword();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getHashOfEncryptedCommonSecret(): Promise<object> {
-    let response = await NfcCardModule.getHashOfEncryptedCommonSecret();
-    let json = JSON.parse(response);
-    return json;
+  async getHashOfEncryptedCommonSecret(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getHashOfEncryptedCommonSecret();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
   /* Common stuff (TonWalletApplet)  */
 
-  async getTonAppletState(): Promise<object> {
-    let response = await NfcCardModule.getTonAppletState();
-    let json = JSON.parse(response);
-    return json;
+  async getTonAppletState(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getTonAppletState();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getSerialNumber(): Promise<object> {
-    let response = await NfcCardModule.getSerialNumber();
-    let json = JSON.parse(response);
-    return json;
+  async getSerialNumber(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getSerialNumber();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
   /* Recovery data stuff (TonWalletApplet)  */
   
 
-  async addRecoveryData(recoveryData: string): Promise<object> {
-    let response = await NfcCardModule.addRecoveryData(recoveryData);
-    let json = JSON.parse(response);
-
-    return json;
+  async addRecoveryData(recoveryData: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.addRecoveryData(recoveryData);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getRecoveryData(): Promise<object> {
-    let response = await NfcCardModule.getRecoveryData();
-    let json = JSON.parse(response);
-    return json;
+  async getRecoveryData(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getRecoveryData();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getRecoveryDataHash(){
-    let response = await NfcCardModule.getRecoveryDataHash();
-    let json = JSON.parse(response);
-    return json;
+  async getRecoveryDataHash(): Promise<CardResponse>{
+    try{
+      let response = await NfcCardModule.getRecoveryDataHash();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getRecoveryDataLen(): Promise<object> {
-    let response = await NfcCardModule.getRecoveryDataLen();
-    let json = JSON.parse(response);
-    return json;
+  async getRecoveryDataLen(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getRecoveryDataLen();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async isRecoveryDataSet(): Promise<object> {
-    let response = await NfcCardModule.isRecoveryDataSet();
-    let json = JSON.parse(response);
-    return json;
+  async isRecoveryDataSet(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.isRecoveryDataSet();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async resetRecoveryData(): Promise<object> {
-    let response = await NfcCardModule.resetRecoveryData();
-    let json = JSON.parse(response);
-    return json;
+  async resetRecoveryData(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.resetRecoveryData();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
   /* Ed25519 stuff (TonWalletApplet)  */
 
-  async verifyPin(pin: string): Promise<object> {
-    let response = await NfcCardModule.verifyPin(pin);
-    let json = JSON.parse(response);
-    return json;
+  async verifyPin(pin: string): Promise<CardResponse>{
+    try{
+      let response = await NfcCardModule.verifyPin(pin);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getPublicKey(hdIndex: string): Promise<object> {
-    let response = await NfcCardModule.getPublicKey(hdIndex);
-    let json = JSON.parse(response);
-    return json;
+  async getPublicKey(hdIndex: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getPublicKey(hdIndex);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async signForDefaultHdPath(dataForSigning:  string): Promise<object> {
-    let response = await NfcCardModule.verifyPinAndSignForDefaultHdPath(dataForSigning);
-    let json = JSON.parse(response);
-    return json;
+  async signForDefaultHdPath(dataForSigning:  string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.signForDefaultHdPath(dataForSigning);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async verifyPinAndSignForDefaultHdPath(dataForSigning:  string, pin:  string): Promise<object>  {
-    let response = await NfcCardModule.verifyPinAndSignForDefaultHdPath(dataForSigning, pin);
-    let json = JSON.parse(response);
-    return json;
+  async verifyPinAndSignForDefaultHdPath(dataForSigning:  string, pin:  string): Promise<CardResponse>  {
+    try{
+      let response = await NfcCardModule.verifyPinAndSignForDefaultHdPath(dataForSigning, pin);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async sign(dataForSigning:  string, hdIndex:  string): Promise<object> {
-    let response = await NfcCardModule.verifyPinAndSign(dataForSigning, hdIndex);
-    let json = JSON.parse(response);
-    return json;
+  async sign(dataForSigning:  string, hdIndex:  string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.sign(dataForSigning, hdIndex);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async verifyPinAndSign(dataForSigning:  string, hdIndex:  string, pin:  string): Promise<object> {
-    let response = await NfcCardModule.verifyPinAndSign(dataForSigning, hdIndex, pin);
-    let json = JSON.parse(response);
-    return json;
+  async verifyPinAndSign(dataForSigning:  string, hdIndex:  string, pin:  string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.verifyPinAndSign(dataForSigning, hdIndex, pin);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getPublicKeyForDefaultPath(): Promise<object> {
-    let response = await NfcCardModule.getPublicKeyForDefaultPath();
-    let json = JSON.parse(response);
-    return json;
+  async getPublicKeyForDefaultPath(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getPublicKeyForDefaultPath();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
   /* Keychain commands */
   
 
-  async resetKeyChain(): Promise<object>{
-    let response = await NfcCardModule.resetKeyChain();
-    let json = JSON.parse(response);
-    return json;
+  async resetKeyChain(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.resetKeyChain();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getKeyChainDataAboutAllKeys(): Promise<object>{
-    let response = await NfcCardModule.getKeyChainDataAboutAllKeys();
-    let json = JSON.parse(response);
-    return json;
+  async getKeyChainDataAboutAllKeys(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getKeyChainDataAboutAllKeys();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getKeyChainInfo(): Promise<object>{
-    let response = await NfcCardModule.getKeyChainInfo();
-    let json = JSON.parse(response);
-    return json;
+  async getKeyChainInfo(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getKeyChainInfo();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getNumberOfKeys(): Promise<object>{
-    let response = await NfcCardModule.getNumberOfKeys();
-    let json = JSON.parse(response);
-    return json;
+  async getNumberOfKeys(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getNumberOfKeys();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getOccupiedStorageSize(): Promise<object>{
-    let response = await NfcCardModule.getOccupiedStorageSize();
-    let json = JSON.parse(response);
-    return json;
+  async getOccupiedStorageSize(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getOccupiedStorageSize();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getFreeStorageSize(): Promise<object>{
-    let response = await NfcCardModule.getFreeStorageSize();
-    let json = JSON.parse(response);
-    return json;
+  async getFreeStorageSize(): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getFreeStorageSize();
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getKeyFromKeyChain(keyHmac: string): Promise<object>{
-    let response = await NfcCardModule.getKeyFromKeyChain(keyHmac);
-    let json = JSON.parse(response);
-    return json;
+  async getKeyFromKeyChain(keyHmac: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getKeyFromKeyChain(keyHmac);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async addKeyIntoKeyChain(newKey: string): Promise<object>{
-    let response = await NfcCardModule.addKeyIntoKeyChain(newKey);
-    let json = JSON.parse(response);
-    return json;
+  async addKeyIntoKeyChain(newKey: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.addKeyIntoKeyChain(newKey);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async deleteKeyFromKeyChain(keyHmac: string): Promise<object>{
-    let response = await NfcCardModule.deleteKeyFromKeyChain(keyHmac);
-    let json = JSON.parse(response);
-    return json;
+  async deleteKeyFromKeyChain(keyHmac: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.deleteKeyFromKeyChain(keyHmac);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async finishDeleteKeyFromKeyChainAfterInterruption(keyHmac: string): Promise<object>{
-    let response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption(keyHmac);
-    let json = JSON.parse(response);
-    return json;
+  async finishDeleteKeyFromKeyChainAfterInterruption(keyHmac: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption(keyHmac);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async changeKeyInKeyChain(newKey: string, oldKeyHmac: string): Promise<object>{
-    let response = await NfcCardModule.changeKeyInKeyChain(newKey, oldKeyHmac);
-    let json = JSON.parse(response);
-    return json;
+  async changeKeyInKeyChain(newKey: string, oldKeyHmac: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.changeKeyInKeyChain(newKey, oldKeyHmac);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async getIndexAndLenOfKeyInKeyChain(keyHmac: string): Promise<object>{
-    let response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac);
-    let json = JSON.parse(response);
-    return json;
+  async getIndexAndLenOfKeyInKeyChain(keyHmac: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async checkAvailableVolForNewKey(keySize: number): Promise<object>{
-    let response = await NfcCardModule.checkAvailableVolForNewKey(keySize);
-    let json = JSON.parse(response);
-    return json;
+  async checkAvailableVolForNewKey(keySize: number): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.checkAvailableVolForNewKey(keySize);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 
-  async checkKeyHmacConsistency(keyHmac: string): Promise<object>{
-    let response = await NfcCardModule.checkKeyHmacConsistency(keyHmac);
-    let json = JSON.parse(response);
-    return json;
+  async checkKeyHmacConsistency(keyHmac: string): Promise<CardResponse> {
+    try{
+      let response = await NfcCardModule.checkKeyHmacConsistency(keyHmac);
+      return this.prepareCardResponse(response);
+    }
+    catch(e) {
+      throw this.throwError(e.message);
+    }
   }
 }
