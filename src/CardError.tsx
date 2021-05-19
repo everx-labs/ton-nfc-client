@@ -4,9 +4,9 @@ export default class CardError extends NfcNativeModuleError  {
     public cardInstruction: string;
     public apdu: string;
   
-    constructor(public message: string, public theStatus: string, public theErrorCode: string, public theErrorTypeId: string, public theErrorType: string, 
-        public theCardInstruction: string, public theApdu: string) {
-        super(message, theStatus, theErrorCode, theErrorTypeId, theErrorType);
+    constructor(message: string, status: string, errorCode: string, errorTypeId: string, errorType: string, 
+        theCardInstruction: string, theApdu: string) {
+        super(message, status, errorCode, errorTypeId, errorType);
         this.cardInstruction = theCardInstruction;
         this.apdu = theApdu;        
     }

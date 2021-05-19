@@ -6,7 +6,7 @@ const {NfcCardModule} = NativeModules;
 export default class NfcCardModuleWrapper {
 
   private prepareCardResponse(response: string) : CardResponse {
-    let json = JSON.parse(response);
+    const json = JSON.parse(response);
     if (!json.hasOwnProperty('message')) throw new Error("Json must have 'message' field!");
     if (!json.hasOwnProperty('status')) throw new Error("Json must have status' field!");
     return new CardResponse(json.message, json.status);
@@ -14,12 +14,13 @@ export default class NfcCardModuleWrapper {
 
 
   private throwError(errorMessage: string) : Error {
-    var json = {};
+    let json = {};
     try {
       json = JSON.parse(errorMessage);
     } catch (e) {
         throw new Error(errorMessage);
     }
+    
     if (!json.hasOwnProperty('message')) throw new Error("Json must have 'message' field!");
     if (!json.hasOwnProperty('status')) throw new Error("Json must have 'status' field!");
     if (!json.hasOwnProperty('errorCode')) throw new Error("Json must have 'errorCode' field!");
@@ -39,7 +40,7 @@ export default class NfcCardModuleWrapper {
 
   async getMaxPinTries(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getMaxPinTries();
+      const response = await NfcCardModule.getMaxPinTries();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -49,7 +50,7 @@ export default class NfcCardModuleWrapper {
  
   async getSeVersion(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getSeVersion();
+      const response = await NfcCardModule.getSeVersion();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -59,7 +60,7 @@ export default class NfcCardModuleWrapper {
 
   async getCsn(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getCsn();
+      const response = await NfcCardModule.getCsn();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -69,7 +70,7 @@ export default class NfcCardModuleWrapper {
 
   async getDeviceLabel(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getDeviceLabel();
+      const response = await NfcCardModule.getDeviceLabel();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -79,7 +80,7 @@ export default class NfcCardModuleWrapper {
 
   async setDeviceLabel(label: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.setDeviceLabel(label);
+      const response = await NfcCardModule.setDeviceLabel(label);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -89,7 +90,7 @@ export default class NfcCardModuleWrapper {
 
   async getRemainingPinTries(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getRemainingPinTries();
+      const response = await NfcCardModule.getRemainingPinTries();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -99,7 +100,7 @@ export default class NfcCardModuleWrapper {
 
   async getRootKeyStatus(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getRootKeyStatus();
+      const response = await NfcCardModule.getRootKeyStatus();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -109,7 +110,7 @@ export default class NfcCardModuleWrapper {
 
   async getAvailableMemory(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getAvailableMemory();
+      const response = await NfcCardModule.getAvailableMemory();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -119,7 +120,7 @@ export default class NfcCardModuleWrapper {
 
   async getAppsList(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getAppsList();
+      const response = await NfcCardModule.getAppsList();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -129,7 +130,7 @@ export default class NfcCardModuleWrapper {
 
   async generateSeed(pin: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.generateSeed(pin);
+      const response = await NfcCardModule.generateSeed(pin);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -139,7 +140,7 @@ export default class NfcCardModuleWrapper {
 
   async resetWallet(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.resetWallet();
+      const response = await NfcCardModule.resetWallet();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -149,7 +150,7 @@ export default class NfcCardModuleWrapper {
 
   async changePin(oldPin: string, newPin: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.changePin(oldPin, newPin);
+      const response = await NfcCardModule.changePin(oldPin, newPin);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -161,7 +162,7 @@ export default class NfcCardModuleWrapper {
 
   async selectKeyForHmac(serialNumber: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.selectKeyForHmac(serialNumber);
+      const response = await NfcCardModule.selectKeyForHmac(serialNumber);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -171,7 +172,7 @@ export default class NfcCardModuleWrapper {
 
   async createKeyForHmac(authenticationPassword: string, commonSecret: string, serialNumber: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.createKeyForHmac(authenticationPassword, commonSecret, serialNumber);
+      const response = await NfcCardModule.createKeyForHmac(authenticationPassword, commonSecret, serialNumber);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -181,7 +182,7 @@ export default class NfcCardModuleWrapper {
 
   async getCurrentSerialNumber(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getCurrentSerialNumber();
+      const response = await NfcCardModule.getCurrentSerialNumber();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -191,7 +192,7 @@ export default class NfcCardModuleWrapper {
 
   async getAllSerialNumbers(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getAllSerialNumbers();
+      const response = await NfcCardModule.getAllSerialNumbers();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -201,7 +202,7 @@ export default class NfcCardModuleWrapper {
 
   async isKeyForHmacExist(serialNumber: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.isKeyForHmacExist(serialNumber);
+      const response = await NfcCardModule.isKeyForHmacExist(serialNumber);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -211,7 +212,7 @@ export default class NfcCardModuleWrapper {
 
   async deleteKeyForHmac(serialNumber: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.deleteKeyForHmac(serialNumber);
+      const response = await NfcCardModule.deleteKeyForHmac(serialNumber);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -224,7 +225,7 @@ export default class NfcCardModuleWrapper {
 
   async turnOnWalletWithPin(newPin: string, authenticationPassword: string, commonSecret: string, initialVector: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector);
+      const response = await NfcCardModule.turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -234,7 +235,7 @@ export default class NfcCardModuleWrapper {
 
   async turnOnWallet(authenticationPassword: string, commonSecret: string, initialVector: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.turnOnWallet(authenticationPassword, commonSecret, initialVector);
+      const response = await NfcCardModule.turnOnWallet(authenticationPassword, commonSecret, initialVector);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -244,7 +245,7 @@ export default class NfcCardModuleWrapper {
 
   async getHashes(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getHashes();
+      const response = await NfcCardModule.getHashes();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -254,7 +255,7 @@ export default class NfcCardModuleWrapper {
 
   async getHashOfEncryptedPassword(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getHashOfEncryptedPassword();
+      const response = await NfcCardModule.getHashOfEncryptedPassword();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -264,7 +265,7 @@ export default class NfcCardModuleWrapper {
 
   async getHashOfEncryptedCommonSecret(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getHashOfEncryptedCommonSecret();
+      const response = await NfcCardModule.getHashOfEncryptedCommonSecret();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -276,7 +277,7 @@ export default class NfcCardModuleWrapper {
 
   async getTonAppletState(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getTonAppletState();
+      const response = await NfcCardModule.getTonAppletState();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -286,7 +287,7 @@ export default class NfcCardModuleWrapper {
 
   async getSerialNumber(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getSerialNumber();
+      const response = await NfcCardModule.getSerialNumber();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -299,7 +300,7 @@ export default class NfcCardModuleWrapper {
 
   async addRecoveryData(recoveryData: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.addRecoveryData(recoveryData);
+      const response = await NfcCardModule.addRecoveryData(recoveryData);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -309,7 +310,7 @@ export default class NfcCardModuleWrapper {
 
   async getRecoveryData(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getRecoveryData();
+      const response = await NfcCardModule.getRecoveryData();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -319,7 +320,7 @@ export default class NfcCardModuleWrapper {
 
   async getRecoveryDataHash(): Promise<CardResponse>{
     try{
-      let response = await NfcCardModule.getRecoveryDataHash();
+      const response = await NfcCardModule.getRecoveryDataHash();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -329,7 +330,7 @@ export default class NfcCardModuleWrapper {
 
   async getRecoveryDataLen(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getRecoveryDataLen();
+      const response = await NfcCardModule.getRecoveryDataLen();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -339,7 +340,7 @@ export default class NfcCardModuleWrapper {
 
   async isRecoveryDataSet(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.isRecoveryDataSet();
+      const response = await NfcCardModule.isRecoveryDataSet();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -349,7 +350,7 @@ export default class NfcCardModuleWrapper {
 
   async resetRecoveryData(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.resetRecoveryData();
+      const response = await NfcCardModule.resetRecoveryData();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -361,7 +362,7 @@ export default class NfcCardModuleWrapper {
 
   async verifyPin(pin: string): Promise<CardResponse>{
     try{
-      let response = await NfcCardModule.verifyPin(pin);
+      const response = await NfcCardModule.verifyPin(pin);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -371,7 +372,7 @@ export default class NfcCardModuleWrapper {
 
   async getPublicKey(hdIndex: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getPublicKey(hdIndex);
+      const response = await NfcCardModule.getPublicKey(hdIndex);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -381,7 +382,7 @@ export default class NfcCardModuleWrapper {
 
   async signForDefaultHdPath(dataForSigning:  string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.signForDefaultHdPath(dataForSigning);
+      const response = await NfcCardModule.signForDefaultHdPath(dataForSigning);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -391,7 +392,7 @@ export default class NfcCardModuleWrapper {
 
   async verifyPinAndSignForDefaultHdPath(dataForSigning:  string, pin:  string): Promise<CardResponse>  {
     try{
-      let response = await NfcCardModule.verifyPinAndSignForDefaultHdPath(dataForSigning, pin);
+      const response = await NfcCardModule.verifyPinAndSignForDefaultHdPath(dataForSigning, pin);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -401,7 +402,7 @@ export default class NfcCardModuleWrapper {
 
   async sign(dataForSigning:  string, hdIndex:  string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.sign(dataForSigning, hdIndex);
+      const response = await NfcCardModule.sign(dataForSigning, hdIndex);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -411,7 +412,7 @@ export default class NfcCardModuleWrapper {
 
   async verifyPinAndSign(dataForSigning:  string, hdIndex:  string, pin:  string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.verifyPinAndSign(dataForSigning, hdIndex, pin);
+      const response = await NfcCardModule.verifyPinAndSign(dataForSigning, hdIndex, pin);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -421,7 +422,7 @@ export default class NfcCardModuleWrapper {
 
   async getPublicKeyForDefaultPath(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getPublicKeyForDefaultPath();
+      const response = await NfcCardModule.getPublicKeyForDefaultPath();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -434,7 +435,7 @@ export default class NfcCardModuleWrapper {
 
   async resetKeyChain(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.resetKeyChain();
+      const response = await NfcCardModule.resetKeyChain();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -444,7 +445,7 @@ export default class NfcCardModuleWrapper {
 
   async getKeyChainDataAboutAllKeys(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getKeyChainDataAboutAllKeys();
+      const response = await NfcCardModule.getKeyChainDataAboutAllKeys();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -454,7 +455,7 @@ export default class NfcCardModuleWrapper {
 
   async getKeyChainInfo(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getKeyChainInfo();
+      const response = await NfcCardModule.getKeyChainInfo();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -464,7 +465,7 @@ export default class NfcCardModuleWrapper {
 
   async getNumberOfKeys(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getNumberOfKeys();
+      const response = await NfcCardModule.getNumberOfKeys();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -474,7 +475,7 @@ export default class NfcCardModuleWrapper {
 
   async getOccupiedStorageSize(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getOccupiedStorageSize();
+      const response = await NfcCardModule.getOccupiedStorageSize();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -484,7 +485,7 @@ export default class NfcCardModuleWrapper {
 
   async getFreeStorageSize(): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getFreeStorageSize();
+      const response = await NfcCardModule.getFreeStorageSize();
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -494,7 +495,7 @@ export default class NfcCardModuleWrapper {
 
   async getKeyFromKeyChain(keyHmac: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getKeyFromKeyChain(keyHmac);
+      const response = await NfcCardModule.getKeyFromKeyChain(keyHmac);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -504,7 +505,7 @@ export default class NfcCardModuleWrapper {
 
   async addKeyIntoKeyChain(newKey: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.addKeyIntoKeyChain(newKey);
+      const response = await NfcCardModule.addKeyIntoKeyChain(newKey);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -514,7 +515,7 @@ export default class NfcCardModuleWrapper {
 
   async deleteKeyFromKeyChain(keyHmac: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.deleteKeyFromKeyChain(keyHmac);
+      const response = await NfcCardModule.deleteKeyFromKeyChain(keyHmac);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -524,7 +525,7 @@ export default class NfcCardModuleWrapper {
 
   async finishDeleteKeyFromKeyChainAfterInterruption(keyHmac: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption(keyHmac);
+      const response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption(keyHmac);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -534,7 +535,7 @@ export default class NfcCardModuleWrapper {
 
   async changeKeyInKeyChain(newKey: string, oldKeyHmac: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.changeKeyInKeyChain(newKey, oldKeyHmac);
+      const response = await NfcCardModule.changeKeyInKeyChain(newKey, oldKeyHmac);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -544,7 +545,7 @@ export default class NfcCardModuleWrapper {
 
   async getIndexAndLenOfKeyInKeyChain(keyHmac: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac);
+      const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -554,7 +555,7 @@ export default class NfcCardModuleWrapper {
 
   async checkAvailableVolForNewKey(keySize: number): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.checkAvailableVolForNewKey(keySize);
+      const response = await NfcCardModule.checkAvailableVolForNewKey(keySize);
       return this.prepareCardResponse(response);
     }
     catch(e) {
@@ -564,7 +565,7 @@ export default class NfcCardModuleWrapper {
 
   async checkKeyHmacConsistency(keyHmac: string): Promise<CardResponse> {
     try{
-      let response = await NfcCardModule.checkKeyHmacConsistency(keyHmac);
+      const response = await NfcCardModule.checkKeyHmacConsistency(keyHmac);
       return this.prepareCardResponse(response);
     }
     catch(e) {

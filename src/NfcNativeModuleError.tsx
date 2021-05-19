@@ -4,12 +4,12 @@ export default class NfcNativeModuleError extends Error {
     public errorTypeId: string;
     public errorType: string;
   
-    constructor(public message: string, public theStatus: string, public theErrorCode: string, public theErrorTypeId: string, public theErrorType: string) {
+    constructor(public message: string, status: string, errorCode: string, errorTypeId: string, errorType: string) {
         super(message);
-        this.status = theStatus;
-        this.errorCode = theErrorCode;        
-        this.errorType = theErrorType;
-        this.errorTypeId = theErrorTypeId;
+        this.status = status;
+        this.errorCode = errorCode;        
+        this.errorType = errorType;
+        this.errorTypeId = errorTypeId;
     }
   }
   
