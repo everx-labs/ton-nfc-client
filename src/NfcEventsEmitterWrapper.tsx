@@ -1,9 +1,14 @@
-import {Alert, DeviceEventEmitter, NativeEventEmitter, NativeModules} from 'react-native';
+import {
+    Alert,
+    DeviceEventEmitter,
+    NativeEventEmitter,
+    NativeModules,
+} from 'react-native'
 
 const nfcEvents = new NativeEventEmitter(NativeModules.NfcEventEmitter)
 
 export default class NfcEventsEmitterWrapper {
-  /*supscription = null;
+    /*supscription = null;
 
   static addAndroidListeners = () => {
     DeviceEventEmitter.addListener("nfcTagIsConnected", () => Alert.alert("NFC hardware touched."))
