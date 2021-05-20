@@ -10,7 +10,9 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import NfcCardModule from 'ton-nfc-client';
+import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError} from 'ton-nfc-client';
+
+let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
 export default class App extends Component<{}> {
   state = {
@@ -23,16 +25,30 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <View>
-              <Button onPress={() => NfcCardModule.getRemainingPinTries()
-            .then((result) => alert("Remainig Pin tries : " + result)).catch((e) => alert(e.message))} title="getRemainingPinTries"/>
+              <Button onPress={() => {
+                let p = nfcCardModuleWrapper.getRemainingPinTries();
+           
+                p.then((result) => {
+                  console.log(result instanceof CardResponse)
+                  alert("Remainig Pin tries : " + result.message)
+                })
+                .catch((e) => {
+                  console.log(e instanceof CardError)
+                  console.log(e instanceof NfcNativeModuleError)
+                  console.log(e.status)
+                  console.log(e.errorCode)
+                  console.log(e.message)
+                  alert(e.message)
+                });
+            }} title="getRemainingPinTries"/>
         </View>
         <View>
-              <Button onPress={() => NfcCardModule.getAllSerialNumbers()
-            .then((result) => alert("getAllSerialNumbers : " + result)).catch((e) => alert(e.message))} title="getAllSerialNumbers"/>
+              <Button onPress={() => nfcCardModuleWrapper.getAllSerialNumbers()
+            .then((result) => alert("getAllSerialNumbers : " + result.message)).catch((e) => alert(e.message))} title="getAllSerialNumbers"/>
         </View>
         <View>
-              <Button onPress={() => NfcCardModule.getKeyChainInfo()
-            .then((result) => alert("getKeyChainInfo : " + result)).catch((e) => alert(e.message))} title="getKeyChainInfo"/>
+              <Button onPress={() => nfcCardModuleWrapper.getKeyChainInfo()
+            .then((result) => alert("getKeyChainInfo : " + result.message)).catch((e) => alert(e.message))} title="getKeyChainInfo"/>
         </View>
       </View>
     );
