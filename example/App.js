@@ -43,14 +43,46 @@ export default class App extends Component<{}> {
             }} title="getRemainingPinTries"/>
         </View>
         <View>
-              <Button onPress={() => nfcCardModuleWrapper.getAllSerialNumbers()
-            .then((result) => alert("getAllSerialNumbers : " + result.message)).catch((e) => alert(e.message))} title="getAllSerialNumbers"/>
+              <Button onPress={() => {
+                nfcCardModuleWrapper.getAllSerialNumbers()
+            .then((result) => alert("getAllSerialNumbers : " + result.message)).catch((e) => alert(e.message))
+            }} title="getAllSerialNumbers"/>
         </View>
         <View>
               <Button onPress={() => nfcCardModuleWrapper.getKeyChainInfo()
             .then((result) => alert("getKeyChainInfo : " + result.message)).catch((e) => alert(e.message))} title="getKeyChainInfo"/>
         </View>
+        <View>
+              <Button onPress={() => nfcCardModuleWrapper.getPublicKeyForDefaultPath()
+            .then((result) => alert("getPublicKeyForDefaultPath : " + result.message)).catch((e) => alert(e.message))} title="getPublicKeyForDefaultPath"/>
+        </View>
+        <View>
+              <Button onPress={async () => {
+
+                let result = await nfcCardModuleWrapper.getSerialNumber();
+                alert("getSerialNumber 1 : " + result.message);
+                await new Promise(r => setTimeout(r, 7000))
+
+                result = await nfcCardModuleWrapper.getSerialNumber();
+                alert("getSerialNumber 2 : " + result.message);
+
+                await new Promise(r => setTimeout(r, 7000))
+
+                result = await nfcCardModuleWrapper.getSerialNumber();
+                alert("getSerialNumber 3 : " + result.message);
+
+                await new Promise(r => setTimeout(r, 7000))
+
+                result = await nfcCardModuleWrapper.getSault();
+                alert("getSault : " + result.message);
+                
+                
+                //nfcCardModuleWrapper.getSerialNumber()
+           // .then((result) => alert("getSerialNumber : " + result.message)).catch((e) => alert(e.message))
+            }} title="getSerialNumber"/>
+        </View>
       </View>
+      
     );
   }
 }

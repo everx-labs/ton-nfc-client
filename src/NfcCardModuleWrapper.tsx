@@ -24,7 +24,7 @@ export default class NfcCardModuleWrapper {
             throw new Error("Json must have 'message' field!")
         if (!json.hasOwnProperty('status'))
             throw new Error("Json must have 'status' field!")
-        if (!json.hasOwnProperty('errorCode'))
+        if (!json.hasOwnProperty('code'))
             throw new Error("Json must have 'errorCode' field!")
         if (!json.hasOwnProperty('errorType'))
             throw new Error("Json must have 'errorType' field!")
@@ -306,6 +306,15 @@ export default class NfcCardModuleWrapper {
     async getSerialNumber(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getSerialNumber()
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            throw this.throwError(e.message)
+        }
+    }
+
+    async getSault(): Promise<CardResponse> {
+        try {
+            const response = await NfcCardModule.getSault()
             return this.prepareCardResponse(response)
         } catch (e) {
             throw this.throwError(e.message)
