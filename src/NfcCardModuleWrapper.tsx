@@ -8,8 +8,35 @@ export default class NfcCardModuleWrapper {
         if (!json.hasOwnProperty('message'))
             throw new Error("Json must have 'message' field!")
         if (!json.hasOwnProperty('status'))
-            throw new Error("Json must have status' field!")
-        return new CardResponse(json.message, json.status)
+            throw new Error("Json must have 'status' field!")
+        return new CardResponse(json.message, json.status, "", "", "", "", "", "", "")
+    }
+
+    private prepareCardResponseFromGetHashes(response: string): CardResponse {
+        const json = JSON.parse(response)
+        if (!json.hasOwnProperty('ecsHash') || !json.hasOwnProperty('epHash'))
+            throw new Error("Json must have 'ecsHash' and 'epHash' fields!")
+        if (!json.hasOwnProperty('status'))
+            throw new Error("Json must have 'status' field!")
+        return new CardResponse("", json.status, json.ecsHash, json.epHash, "", "", "", "", "")
+    }
+
+    private prepareCardResponseFromGetKeyChainInfo(response: string): CardResponse {
+        const json = JSON.parse(response)
+        if (!json.hasOwnProperty('occupiedSize') || !json.hasOwnProperty('freeSize') && !json.hasOwnProperty('numberOfKeys'))
+            throw new Error("Json must have 'occupiedSize', 'freeSize' and 'numberOfKeys' fields!")
+        if (!json.hasOwnProperty('status'))
+            throw new Error("Json must have 'status' field!")
+        return new CardResponse("", json.status, "", "", json.numberOfKeys, json.occupiedSize, json.freeSize, "", "")
+    }
+
+    private prepareCardResponseFromGetHmac(response: string): CardResponse {
+        const json = JSON.parse(response)
+        if (!json.hasOwnProperty('hmac') || !json.hasOwnProperty('length'))
+            throw new Error("Json must have 'hmac' and 'length' fields!")
+        if (!json.hasOwnProperty('status'))
+            throw new Error("Json must have 'status' field!")
+        return new CardResponse("", json.status, "", "", "", "", "", json.hmac, json.length)
     }
 
     private throwError(errorMessage: string): Error {
@@ -453,7 +480,7 @@ export default class NfcCardModuleWrapper {
     async getHashes(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getHashes()
-            return this.prepareCardResponse(response)
+            return this.prepareCardResponseFromGetHashes(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
@@ -463,7 +490,7 @@ export default class NfcCardModuleWrapper {
         if(Platform.OS === 'android'){
             try {
                 const response = await NfcCardModule.getHashesWithoutDialog()
-                return this.prepareCardResponse(response)
+                return this.prepareCardResponseFromGetHashes(response)
             } catch (e) {
                 throw this.throwError(e.message)
             }
@@ -933,7 +960,7 @@ export default class NfcCardModuleWrapper {
     async getKeyChainInfo(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getKeyChainInfo()
-            return this.prepareCardResponse(response)
+            return this.prepareCardResponseFromGetKeyChainInfo(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
@@ -943,7 +970,7 @@ export default class NfcCardModuleWrapper {
         if(Platform.OS === 'android'){
             try {
                 const response = await NfcCardModule.getKeyChainInfoWithoutDialog()
-                return this.prepareCardResponse(response)
+                return this.prepareCardResponseFromGetKeyChainInfo(response)
             } catch (e) {
                 throw this.throwError(e.message)
             }
@@ -1192,4 +1219,27 @@ export default class NfcCardModuleWrapper {
         }
         throw new Error("This function is available only for Android OS!");
     }
+
+    async getHmac(index: string): Promise<CardResponse> {
+        try {
+            const response = await NfcCardModule.getHmac(index)
+            return this.prepareCardResponseFromGetHmac(response)
+        } catch (e) {
+            throw this.throwError(e.message)
+        }
+    }
+
+    async getHmacWithoutDialog(index: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getHmacWithoutDialog(index)
+                return this.prepareCardResponseFromGetHmac(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
+
 }
