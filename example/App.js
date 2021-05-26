@@ -81,6 +81,11 @@ export default class App extends Component<{}> {
            // .then((result) => alert("getSerialNumber : " + result.message)).catch((e) => alert(e.message))
             }} title="getSerialNumber"/>
         </View>
+        <View>
+              <Button onPress={() => nfcCardModuleWrapper.getMaxPinTriesWithoutDialog()
+            .then((result) => alert("getMaxPinTries : " + result.message)).catch((e) => alert(e.message))} title="getMaxPinTries"/>
+        </View>    
+      
       </View>
       
     );

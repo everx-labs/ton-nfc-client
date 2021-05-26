@@ -25,7 +25,7 @@ export default class NfcCardModuleWrapper {
         if (!json.hasOwnProperty('status'))
             throw new Error("Json must have 'status' field!")
         if (!json.hasOwnProperty('code'))
-            throw new Error("Json must have 'errorCode' field!")
+            throw new Error("Json must have 'сode' field!")
         if (!json.hasOwnProperty('errorType'))
             throw new Error("Json must have 'errorType' field!")
         if (!json.hasOwnProperty('errorTypeId'))
@@ -34,7 +34,7 @@ export default class NfcCardModuleWrapper {
             throw new NfcNativeModuleError(
                 json.message,
                 json.status,
-                json.errorCode,
+                json.сode,
                 json.errorTypeId,
                 json.errorType
             )
@@ -44,7 +44,7 @@ export default class NfcCardModuleWrapper {
         throw new CardError(
             json.message,
             json.status,
-            json.errorCode,
+            json.сode,
             json.errorTypeId,
             json.errorType,
             json.cardInstruction,
@@ -63,6 +63,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getMaxPinTriesWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getMaxPinTriesWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!"); 
+    }
+
     async getSeVersion(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getSeVersion()
@@ -70,6 +82,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getSeVersionWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getSeVersionWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getCsn(): Promise<CardResponse> {
@@ -81,6 +105,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getCsnWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getCsnWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getDeviceLabel(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getDeviceLabel()
@@ -88,6 +124,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getDeviceLabelWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getDeviceLabelWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async setDeviceLabel(label: string): Promise<CardResponse> {
@@ -99,6 +147,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async setDeviceLabelWithoutDialog(label: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.setDeviceLabelWithoutDialog(label)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getRemainingPinTries(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getRemainingPinTries()
@@ -106,6 +166,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getRemainingPinTriesWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getRemainingPinTriesWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getRootKeyStatus(): Promise<CardResponse> {
@@ -117,6 +189,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getRootKeyStatusWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getRootKeyStatusWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getAvailableMemory(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getAvailableMemory()
@@ -124,6 +208,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getAvailableMemoryWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getAvailableMemoryWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getAppsList(): Promise<CardResponse> {
@@ -135,6 +231,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getAppsListWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getAppsListWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async generateSeed(pin: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.generateSeed(pin)
@@ -142,6 +250,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async generateSeedWithoutDialog(pin: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.generateSeedWithoutDialog(pin)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async resetWallet(): Promise<CardResponse> {
@@ -153,6 +273,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async resetWalletWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.resetWalletWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async changePin(oldPin: string, newPin: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.changePin(oldPin, newPin)
@@ -160,6 +292,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async changePinWithoutDialog(oldPin: string, newPin: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.changePinWithoutDialog(oldPin, newPin)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     /* Commands to maintain keys for hmac */
@@ -247,6 +391,28 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async turnOnWalletWithPinWithoutDialog(
+        newPin: string,
+        authenticationPassword: string,
+        commonSecret: string,
+        initialVector: string
+    ): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.turnOnWalletWithoutDialog(
+                    newPin,
+                    authenticationPassword,
+                    commonSecret,
+                    initialVector 
+                )
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async turnOnWallet(
         authenticationPassword: string,
         commonSecret: string,
@@ -264,6 +430,26 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async turnOnWalletWithPinWithoutDialog(
+        authenticationPassword: string,
+        commonSecret: string,
+        initialVector: string
+    ): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.turnOnWalletWithoutDialog(
+                    authenticationPassword,
+                    commonSecret,
+                    initialVector 
+                )
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getHashes(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getHashes()
@@ -271,6 +457,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getHashesWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getHashesWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getHashOfEncryptedPassword(): Promise<CardResponse> {
@@ -282,6 +480,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getHashOfEncryptedPasswordWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getHashOfEncryptedPasswordWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getHashOfEncryptedCommonSecret(): Promise<CardResponse> {
         try {
             const response =
@@ -290,6 +500,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getHashOfEncryptedCommonSecretWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getHashOfEncryptedCommonSecretWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     /* Common stuff (TonWalletApplet)  */
@@ -303,6 +525,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getTonAppletStateWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getTonAppletStateWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getSerialNumber(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getSerialNumber()
@@ -310,6 +544,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getSerialNumberWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getSerialNumberWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getSault(): Promise<CardResponse> {
@@ -320,6 +566,20 @@ export default class NfcCardModuleWrapper {
             throw this.throwError(e.message)
         }
     }
+
+    async getSaultWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getSaultWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
+    
 
     /* Recovery data stuff (TonWalletApplet)  */
 
@@ -332,6 +592,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async addRecoveryDataWithoutDialog(recoveryData: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.addRecoveryDataWithoutDialog(recoveryData)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getRecoveryData(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getRecoveryData()
@@ -339,6 +611,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getRecoveryDataWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getRecoveryDataWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getRecoveryDataHash(): Promise<CardResponse> {
@@ -350,6 +634,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getRecoveryDataHashWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getRecoveryDataHashWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getRecoveryDataLen(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getRecoveryDataLen()
@@ -357,6 +653,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getRecoveryDataLenWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getRecoveryDataLenWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async isRecoveryDataSet(): Promise<CardResponse> {
@@ -368,6 +676,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async isRecoveryDataSetWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.isRecoveryDataSetWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async resetRecoveryData(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.resetRecoveryData()
@@ -375,6 +695,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async resetRecoveryDataWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.resetRecoveryDataWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     /* Ed25519 stuff (TonWalletApplet)  */
@@ -388,6 +720,19 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async verifyPinWithoutDialog(pin: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.verifyPinWithoutDialog(pin)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
+
     async getPublicKey(hdIndex: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getPublicKey(hdIndex)
@@ -395,6 +740,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getPublicKeyWithoutDialog(hdIndex: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getPublicKeyWithoutDialog(hdIndex)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async signForDefaultHdPath(dataForSigning: string): Promise<CardResponse> {
@@ -406,6 +763,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async signForDefaultHdPathWithoutDialog(dataForSigning: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.signForDefaultHdPathWithoutDialog(dataForSigning)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async verifyPinAndSignForDefaultHdPath(
@@ -424,6 +793,21 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async verifyPinAndSignForDefaultHdPathWithoutDialog(
+        dataForSigning: string,
+        pin: string
+    ): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.verifyPinAndSignForDefaultHdPathWithoutDialog(dataForSigning, pin)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async sign(dataForSigning: string, hdIndex: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.sign(dataForSigning, hdIndex)
@@ -431,6 +815,21 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async signWithoutDialog(
+        dataForSigning: string,
+        hdIndex: string
+    ): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.signWithoutDialog(dataForSigning, hdIndex)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async verifyPinAndSign(
@@ -450,6 +849,22 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async verifyPinAndSignPathWithoutDialog(
+        dataForSigning: string,
+        hdIndex: string,
+        pin: string
+    ): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.verifyPinAndSignPathWithoutDialog(dataForSigning, hdIndex, pin)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getPublicKeyForDefaultPath(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getPublicKeyForDefaultPath()
@@ -457,6 +872,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getPublicKeyForDefaultPathWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getPublicKeyForDefaultPathWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     /* Keychain commands */
@@ -470,6 +897,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async resetKeyChainWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.resetKeyChainWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getKeyChainDataAboutAllKeys(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getKeyChainDataAboutAllKeys()
@@ -477,6 +916,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getKeyChainDataAboutAllKeysWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getKeyChainDataAboutAllKeysWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getKeyChainInfo(): Promise<CardResponse> {
@@ -488,6 +939,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getKeyChainInfoWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getKeyChainInfoWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getNumberOfKeys(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getNumberOfKeys()
@@ -495,6 +958,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getNumberOfKeysWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getNumberOfKeysWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getOccupiedStorageSize(): Promise<CardResponse> {
@@ -506,6 +981,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getOccupiedStorageSizeWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getOccupiedStorageSizeWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getFreeStorageSize(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getFreeStorageSize()
@@ -513,6 +1000,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getFreeStorageSizeSizeWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getFreeStorageSizeWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async getKeyFromKeyChain(keyHmac: string): Promise<CardResponse> {
@@ -524,6 +1023,18 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async getKeyFromKeyChainWithoutDialog(keyHmac: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getKeyFromKeyChainWithoutDialog(keyHmac)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async addKeyIntoKeyChain(newKey: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.addKeyIntoKeyChain(newKey)
@@ -531,6 +1042,18 @@ export default class NfcCardModuleWrapper {
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async addKeyIntoKeyChainWithoutDialog(newKey: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.addKeyIntoKeyChainWithoutDialog(newKey)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async deleteKeyFromKeyChain(keyHmac: string): Promise<CardResponse> {
@@ -542,18 +1065,37 @@ export default class NfcCardModuleWrapper {
         }
     }
 
-    async finishDeleteKeyFromKeyChainAfterInterruption(
-        keyHmac: string
-    ): Promise<CardResponse> {
+    async deleteKeyFromKeyChainWithoutDialog(keyHmac: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.deleteKeyFromKeyChainWithoutDialog(keyHmac)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
+    async finishDeleteKeyFromKeyChainAfterInterruption(): Promise<CardResponse> {
         try {
-            const response =
-                await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption(
-                    keyHmac
-                )
+            const response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption()
             return this.prepareCardResponse(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog(): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async changeKeyInKeyChain(
@@ -571,38 +1113,83 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async changeKeyInKeyChainWithoutDialog(
+        newKey: string,
+        oldKeyHmac: string
+    ): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.changeKeyInKeyChainWithoutDialog(newKey, oldKeyHmac)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async getIndexAndLenOfKeyInKeyChain(
         keyHmac: string
     ): Promise<CardResponse> {
         try {
-            const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(
-                keyHmac
-            )
+            const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac)
             return this.prepareCardResponse(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async getIndexAndLenOfKeyInKeyChainWithoutDialog(keyHmac: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChainWithoutDialog(keyHmac)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 
     async checkAvailableVolForNewKey(keySize: number): Promise<CardResponse> {
         try {
-            const response = await NfcCardModule.checkAvailableVolForNewKey(
-                keySize
-            )
+            const response = await NfcCardModule.checkAvailableVolForNewKey(keySize)
             return this.prepareCardResponse(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
     }
 
+    async checkAvailableVolForNewKeyWithoutDialog(keySize: number): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.checkAvailableVolForNewKeyWithoutDialog(keySize)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async checkKeyHmacConsistency(keyHmac: string): Promise<CardResponse> {
         try {
-            const response = await NfcCardModule.checkKeyHmacConsistency(
-                keyHmac
-            )
+            const response = await NfcCardModule.checkKeyHmacConsistency(keyHmac)
             return this.prepareCardResponse(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
+    }
+
+    async checkKeyHmacConsistencyWithoutDialog(keyHmac: string): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.checkKeyHmacConsistencyWithoutDialog(keyHmac)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
     }
 }
