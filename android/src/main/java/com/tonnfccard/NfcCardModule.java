@@ -257,6 +257,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void setDeviceLabelWithoutDialog(String deviceLabel, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.setDeviceLabel(deviceLabel, createNfcCallback(promise));
     }
 
@@ -268,6 +269,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getDeviceLabelWithoutDialog(final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.getDeviceLabel(createNfcCallback(promise));
     }
 
@@ -279,6 +281,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getSeVersionWithoutDialog(final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.getSeVersion(createNfcCallback(promise));
     }
 
@@ -290,6 +293,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getCsnWithoutDialog(final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.getCsn(createNfcCallback(promise));
     }
 
@@ -301,6 +305,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getMaxPinTriesWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.getMaxPinTries(createNfcCallback(promise));
     }
 
@@ -312,6 +317,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getRemainingPinTriesWithoutDialog(final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.getRemainingPinTries(createNfcCallback(promise));
     }
 
@@ -323,6 +329,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getRootKeyStatusWithoutDialog(final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.getRootKeyStatus(createNfcCallback(promise));
     }
 
@@ -334,6 +341,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void resetWalletWithoutDialog(final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.resetWallet(createNfcCallback(promise));
     }
 
@@ -345,6 +353,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getAvailableMemoryWithoutDialog(final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.getAvailableMemory(createNfcCallback(promise));
     }
 
@@ -356,6 +365,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getAppsListWithoutDialog(final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.getAppsList(createNfcCallback(promise));
     }
 
@@ -367,6 +377,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void generateSeedWithoutDialog(String pin, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.generateSeed(pin, createNfcCallback(promise));
     }
 
@@ -378,6 +389,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void changePinWithoutDialog(String oldPin, String newPin, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCoinManagerNfcApi.changePin(oldPin, newPin, createNfcCallback(promise));
     }
 
@@ -391,6 +403,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void turnOnWalletWithoutDialog(String newPin, String password, String commonSecret, String initialVector, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.turnOnWallet(newPin, password, commonSecret, initialVector, createNfcCallback(promise));
     }
 
@@ -402,6 +415,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void turnOnWalletWithoutDialog(String password, String commonSecret, String initialVector, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.turnOnWallet(password, commonSecret, initialVector, createNfcCallback(promise));
     }
 
@@ -413,6 +427,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getHashesWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.getHashes(createNfcCallback(promise));
     }
 
@@ -424,6 +439,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getHashOfEncryptedCommonSecretWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.getHashOfEncryptedCommonSecret(createNfcCallback(promise));
     }
 
@@ -435,6 +451,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getHashOfEncryptedPasswordWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.getHashOfEncryptedPassword(createNfcCallback(promise));
     }
 
@@ -448,6 +465,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getTonAppletStateWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.getTonAppletState(createNfcCallback(promise));
     }
 
@@ -459,6 +477,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getSerialNumberWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.getSerialNumber(createNfcCallback(promise));
     }
 
@@ -470,6 +489,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getSaultWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.getSault(createNfcCallback(promise));
     }
 
@@ -484,6 +504,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getRecoveryDataHashWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         recoveryDataApi.getRecoveryDataHash(createNfcCallback(promise));
     }
 
@@ -495,6 +516,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getRecoveryDataLenWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         recoveryDataApi.getRecoveryDataLen(createNfcCallback(promise));
     }
 
@@ -506,6 +528,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getRecoveryDataWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         recoveryDataApi.getRecoveryData(createNfcCallback(promise));
     }
 
@@ -517,6 +540,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void addRecoveryDataWithoutDialog(final String recoveryData, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         recoveryDataApi.addRecoveryData(recoveryData, createNfcCallback(promise));
     }
 
@@ -528,6 +552,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void resetRecoveryDataWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         recoveryDataApi.resetRecoveryData(createNfcCallback(promise));
     }
 
@@ -539,6 +564,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void isRecoveryDataSetWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         recoveryDataApi.isRecoveryDataSet(createNfcCallback(promise));
     }
 
@@ -552,6 +578,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void verifyPinWithoutDialog(String pin, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.verifyPin(pin, createNfcCallback(promise));
     }
 
@@ -563,6 +590,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getPublicKeyForDefaultPathWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.getPublicKeyForDefaultPath(createNfcCallback(promise));
     }
 
@@ -574,6 +602,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getPublicKeyWithoutDialog(String index, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.getPublicKey(index, createNfcCallback(promise));
     }
 
@@ -585,6 +614,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void signForDefaultHdPathWithoutDialog(String dataForSigning, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.signForDefaultHdPath(dataForSigning, createNfcCallback(promise));
     }
 
@@ -596,6 +626,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void signWithoutDialog(String dataForSigning, String index, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.sign(dataForSigning, index, createNfcCallback(promise));
     }
 
@@ -607,6 +638,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void verifyPinAndSignForDefaultHdPathWithoutDialog(String dataForSigning, String pin, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.verifyPinAndSignForDefaultHdPath(dataForSigning, pin, createNfcCallback(promise));
     }
 
@@ -618,6 +650,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void verifyPinAndSignWithoutDialog(String dataForSigning, String index, String pin, final Promise promise){
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardCryptoNfcApi.verifyPinAndSign(dataForSigning, index, pin, createNfcCallback(promise));
     }
 
@@ -631,6 +664,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void resetKeyChainWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.resetKeyChain(createNfcCallback(promise));
     }
 
@@ -642,6 +676,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getKeyChainInfoWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getKeyChainInfo(createNfcCallback(promise));
     }
 
@@ -653,6 +688,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getNumberOfKeysWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getNumberOfKeys(createNfcCallback(promise));
     }
 
@@ -664,6 +700,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void checkKeyHmacConsistencyWithoutDialog(String keyHmac, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.checkKeyHmacConsistency(keyHmac, createNfcCallback(promise));
     }
 
@@ -675,6 +712,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void checkAvailableVolForNewKeyWithoutDialog(Short keySize, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.checkAvailableVolForNewKey(keySize, createNfcCallback(promise));
     }
 
@@ -686,6 +724,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getIndexAndLenOfKeyInKeyChainWithoutDialog(String keyHmac, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getIndexAndLenOfKeyInKeyChain(keyHmac, createNfcCallback(promise));
     }
 
@@ -697,6 +736,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void deleteKeyFromKeyChainWithoutDialog(String keyHmac, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.deleteKeyFromKeyChain(keyHmac, createNfcCallback(promise));
     }
 
@@ -709,6 +749,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getHmacWithoutDialog(String index, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getHmac(index, createNfcCallback(promise));
     }
 
@@ -720,6 +761,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.finishDeleteKeyFromKeyChainAfterInterruption(createNfcCallback(promise));
     }
 
@@ -731,6 +773,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getDeleteKeyChunkNumOfPacketsWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getDeleteKeyChunkNumOfPackets(createNfcCallback(promise));
     }
 
@@ -742,6 +785,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getDeleteKeyRecordNumOfPacketsWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getDeleteKeyRecordNumOfPackets(createNfcCallback(promise));
     }
 
@@ -753,6 +797,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getOccupiedStorageSizeWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getOccupiedStorageSize(createNfcCallback(promise));
     }
 
@@ -764,6 +809,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getFreeStorageSizeWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getFreeStorageSize(createNfcCallback(promise));
     }
 
@@ -775,6 +821,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getKeyFromKeyChainWithoutDialog(String keyHmac, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getKeyFromKeyChain(keyHmac, createNfcCallback(promise));
     }
 
@@ -786,6 +833,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void addKeyIntoKeyChainWithoutDialog(String newKey, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.addKeyIntoKeyChain(newKey, createNfcCallback(promise));
     }
 
@@ -797,6 +845,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void changeKeyInKeyChainWithoutDialog(String newKey, String oldKeyHMac, final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.changeKeyInKeyChain(newKey, oldKeyHMac, createNfcCallback(promise));
     }
 
@@ -808,6 +857,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getKeyChainDataAboutAllKeysWithoutDialog(final Promise promise) {
+        if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardKeyChainNfcApi.getKeyChainDataAboutAllKeys(createNfcCallback(promise));
     }
 }
