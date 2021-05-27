@@ -876,14 +876,14 @@ export default class NfcCardModuleWrapper {
         }
     }
 
-    async verifyPinAndSignPathWithoutDialog(
+    async verifyPinAndSignWithoutDialog(
         dataForSigning: string,
         hdIndex: string,
         pin: string
     ): Promise<CardResponse> {
         if(Platform.OS === 'android'){
             try {
-                const response = await NfcCardModule.verifyPinAndSignPathWithoutDialog(dataForSigning, hdIndex, pin)
+                const response = await NfcCardModule.verifyPinAndSignWithoutDialog(dataForSigning, hdIndex, pin)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
