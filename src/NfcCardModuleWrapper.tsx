@@ -450,6 +450,28 @@ export default class NfcCardModuleWrapper {
         }
     }
 
+    async turnOnWalletWithPinWithoutDialog(
+        newPin: string,
+        authenticationPassword: string,
+        commonSecret: string,
+        initialVector: string
+    ): Promise<CardResponse> {
+        if(Platform.OS === 'android'){
+            try {
+                const response = await NfcCardModule.turnOnWalletWithoutDialog(
+                    newPin,
+                    authenticationPassword,
+                    commonSecret,
+                    initialVector
+                )
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error("This function is available only for Android OS!");
+    }
+
     async turnOnWallet(
         authenticationPassword: string,
         commonSecret: string,
