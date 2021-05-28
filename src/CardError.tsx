@@ -10,11 +10,11 @@ export default class CardError extends NfcNativeModuleError {
         errorCode: string,
         errorTypeId: string,
         errorType: string,
-        сardInstruction: string,
+        cardInstruction: string,
         apdu: string
     ) {
         super(message, status, errorCode, errorTypeId, errorType)
-        this.cardInstruction = сardInstruction
+        this.cardInstruction = cardInstruction
         this.apdu = apdu
     }
 }
