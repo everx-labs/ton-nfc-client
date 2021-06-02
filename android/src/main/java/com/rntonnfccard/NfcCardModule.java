@@ -1,4 +1,4 @@
-package com.tonnfccard;
+package com.rntonnfccard;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
-import android.nfc.tech.IsoDep;
-import android.nfc.tech.NfcA;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,13 +19,15 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
 import com.facebook.react.bridge.WritableMap;
+import com.tonnfccard.CardActivationApi;
+import com.tonnfccard.CardCoinManagerApi;
+import com.tonnfccard.CardCryptoApi;
+import com.tonnfccard.CardKeyChainApi;
+import com.tonnfccard.RecoveryDataApi;
+import com.tonnfccard.TonWalletApi;
 import com.tonnfccard.nfc.NfcApduRunner;
-
-
-import static com.tonnfccard.CallbackHelper.createNfcCallback;
 
 public class NfcCardModule extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
 
@@ -187,32 +187,32 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void deleteKeyForHmac(String serialNumber, final Promise promise) {
-        cardCryptoNfcApi.deleteKeyForHmac(serialNumber, createNfcCallback(promise));
+        cardCryptoNfcApi.deleteKeyForHmac(serialNumber, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void selectKeyForHmac(String serialNumber, final Promise promise) {
-        cardCryptoNfcApi.selectKeyForHmac(serialNumber, createNfcCallback(promise));
+        cardCryptoNfcApi.selectKeyForHmac(serialNumber, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void isKeyForHmacExist(String serialNumber, final Promise promise) {
-        cardCryptoNfcApi.isKeyForHmacExist(serialNumber, createNfcCallback(promise));
+        cardCryptoNfcApi.isKeyForHmacExist(serialNumber, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getAllSerialNumbers(final Promise promise) {
-        cardCryptoNfcApi.getAllSerialNumbers(createNfcCallback(promise));
+        cardCryptoNfcApi.getAllSerialNumbers(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void createKeyForHmac(String password, String commonSecret, String serialNumber, final Promise promise) {
-        cardCryptoNfcApi.createKeyForHmac(password, commonSecret, serialNumber, createNfcCallback(promise));
+        cardCryptoNfcApi.createKeyForHmac(password, commonSecret, serialNumber, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getCurrentSerialNumber(final Promise promise) {
-        cardCryptoNfcApi.getCurrentSerialNumber(createNfcCallback(promise));
+        cardCryptoNfcApi.getCurrentSerialNumber(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
@@ -244,7 +244,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void disconnectCard(final Promise promise) {
-        cardCryptoNfcApi.disconnectCard(createNfcCallback(promise));
+        cardCryptoNfcApi.disconnectCard(CallbackHelper.createNfcCallback(promise));
     }
 
     /** CoinManager commands **/
@@ -252,145 +252,145 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     @ReactMethod
     public void setDeviceLabel(String deviceLabel, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.setDeviceLabel(deviceLabel, createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.setDeviceLabel(deviceLabel, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void setDeviceLabelWithoutDialog(String deviceLabel, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.setDeviceLabel(deviceLabel, createNfcCallback(promise));
+        cardCoinManagerNfcApi.setDeviceLabel(deviceLabel, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getDeviceLabel(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getDeviceLabel(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.getDeviceLabel(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getDeviceLabelWithoutDialog(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getDeviceLabel(createNfcCallback(promise));
+        cardCoinManagerNfcApi.getDeviceLabel(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getSeVersion(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getSeVersion(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.getSeVersion(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getSeVersionWithoutDialog(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getSeVersion(createNfcCallback(promise));
+        cardCoinManagerNfcApi.getSeVersion(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getCsn(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getCsn(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.getCsn(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getCsnWithoutDialog(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getCsn(createNfcCallback(promise));
+        cardCoinManagerNfcApi.getCsn(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getMaxPinTries(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getMaxPinTries(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.getMaxPinTries(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getMaxPinTriesWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getMaxPinTries(createNfcCallback(promise));
+        cardCoinManagerNfcApi.getMaxPinTries(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getRemainingPinTries(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getRemainingPinTries(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.getRemainingPinTries(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getRemainingPinTriesWithoutDialog(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getRemainingPinTries(createNfcCallback(promise));
+        cardCoinManagerNfcApi.getRemainingPinTries(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getRootKeyStatus(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getRootKeyStatus(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.getRootKeyStatus(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getRootKeyStatusWithoutDialog(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getRootKeyStatus(createNfcCallback(promise));
+        cardCoinManagerNfcApi.getRootKeyStatus(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void resetWallet(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.resetWallet(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.resetWallet(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void resetWalletWithoutDialog(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.resetWallet(createNfcCallback(promise));
+        cardCoinManagerNfcApi.resetWallet(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getAvailableMemory(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getAvailableMemory(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.getAvailableMemory(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getAvailableMemoryWithoutDialog(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getAvailableMemory(createNfcCallback(promise));
+        cardCoinManagerNfcApi.getAvailableMemory(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getAppsList(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getAppsList(createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.getAppsList(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getAppsListWithoutDialog(final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.getAppsList(createNfcCallback(promise));
+        cardCoinManagerNfcApi.getAppsList(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void generateSeed(String pin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.generateSeed(pin, createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.generateSeed(pin, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void generateSeedWithoutDialog(String pin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.generateSeed(pin, createNfcCallback(promise));
+        cardCoinManagerNfcApi.generateSeed(pin, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void changePin(String oldPin, String newPin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.changePin(oldPin, newPin, createNfcCallback(promise), true);
+        cardCoinManagerNfcApi.changePin(oldPin, newPin, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void changePinWithoutDialog(String oldPin, String newPin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCoinManagerNfcApi.changePin(oldPin, newPin, createNfcCallback(promise));
+        cardCoinManagerNfcApi.changePin(oldPin, newPin, CallbackHelper.createNfcCallback(promise));
     }
 
     /** TonWalletApplet card activation related stuff **/
@@ -398,61 +398,61 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     @ReactMethod
     public void turnOnWalletWithPin(String newPin, String password, String commonSecret, String initialVector, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.turnOnWallet(newPin, password, commonSecret, initialVector, createNfcCallback(promise), true);
+        cardActivationNfcApi.turnOnWallet(newPin, password, commonSecret, initialVector, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void turnOnWalletWithPinWithoutDialog(String newPin, String password, String commonSecret, String initialVector, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.turnOnWallet(newPin, password, commonSecret, initialVector, createNfcCallback(promise));
+        cardActivationNfcApi.turnOnWallet(newPin, password, commonSecret, initialVector, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void turnOnWallet(String password, String commonSecret, String initialVector, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.turnOnWallet(password, commonSecret, initialVector, createNfcCallback(promise), true);
+        cardActivationNfcApi.turnOnWallet(password, commonSecret, initialVector, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void turnOnWalletWithoutDialog(String password, String commonSecret, String initialVector, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.turnOnWallet(password, commonSecret, initialVector, createNfcCallback(promise));
+        cardActivationNfcApi.turnOnWallet(password, commonSecret, initialVector, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getHashes(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getHashes(createNfcCallback(promise), true);
+        cardActivationNfcApi.getHashes(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getHashesWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getHashes(createNfcCallback(promise));
+        cardActivationNfcApi.getHashes(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getHashOfEncryptedCommonSecret(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getHashOfEncryptedCommonSecret(createNfcCallback(promise), true);
+        cardActivationNfcApi.getHashOfEncryptedCommonSecret(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getHashOfEncryptedCommonSecretWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getHashOfEncryptedCommonSecret(createNfcCallback(promise));
+        cardActivationNfcApi.getHashOfEncryptedCommonSecret(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getHashOfEncryptedPassword(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getHashOfEncryptedPassword(createNfcCallback(promise), true);
+        cardActivationNfcApi.getHashOfEncryptedPassword(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getHashOfEncryptedPasswordWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getHashOfEncryptedPassword(createNfcCallback(promise));
+        cardActivationNfcApi.getHashOfEncryptedPassword(CallbackHelper.createNfcCallback(promise));
     }
 
     /** TonWalletApplet common commands **/
@@ -460,37 +460,37 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     @ReactMethod
     public void getTonAppletState(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.getTonAppletState(createNfcCallback(promise), true);
+        cardCryptoNfcApi.getTonAppletState(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getTonAppletStateWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.getTonAppletState(createNfcCallback(promise));
+        cardCryptoNfcApi.getTonAppletState(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getSerialNumber(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getSerialNumber(createNfcCallback(promise), true);
+        cardActivationNfcApi.getSerialNumber(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getSerialNumberWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getSerialNumber(createNfcCallback(promise));
+        cardActivationNfcApi.getSerialNumber(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getSault(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.getSault(createNfcCallback(promise), true);
+        cardCryptoNfcApi.getSault(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getSaultWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.getSault(createNfcCallback(promise));
+        cardCryptoNfcApi.getSault(CallbackHelper.createNfcCallback(promise));
     }
 
 
@@ -499,73 +499,73 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     @ReactMethod
     public void getRecoveryDataHash(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.getRecoveryDataHash(createNfcCallback(promise), true);
+        recoveryDataApi.getRecoveryDataHash(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getRecoveryDataHashWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.getRecoveryDataHash(createNfcCallback(promise));
+        recoveryDataApi.getRecoveryDataHash(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getRecoveryDataLen(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.getRecoveryDataLen(createNfcCallback(promise), true);
+        recoveryDataApi.getRecoveryDataLen(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getRecoveryDataLenWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.getRecoveryDataLen(createNfcCallback(promise));
+        recoveryDataApi.getRecoveryDataLen(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getRecoveryData(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.getRecoveryData(createNfcCallback(promise), true);
+        recoveryDataApi.getRecoveryData(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getRecoveryDataWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.getRecoveryData(createNfcCallback(promise));
+        recoveryDataApi.getRecoveryData(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void addRecoveryData(final String recoveryData, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.addRecoveryData(recoveryData, createNfcCallback(promise), true);
+        recoveryDataApi.addRecoveryData(recoveryData, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void addRecoveryDataWithoutDialog(final String recoveryData, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.addRecoveryData(recoveryData, createNfcCallback(promise));
+        recoveryDataApi.addRecoveryData(recoveryData, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void resetRecoveryData(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.resetRecoveryData(createNfcCallback(promise), true);
+        recoveryDataApi.resetRecoveryData(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void resetRecoveryDataWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.resetRecoveryData(createNfcCallback(promise));
+        recoveryDataApi.resetRecoveryData(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void isRecoveryDataSet(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.isRecoveryDataSet(createNfcCallback(promise), true);
+        recoveryDataApi.isRecoveryDataSet(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void isRecoveryDataSetWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        recoveryDataApi.isRecoveryDataSet(createNfcCallback(promise));
+        recoveryDataApi.isRecoveryDataSet(CallbackHelper.createNfcCallback(promise));
     }
 
     /** TonWalletApplet Ed25519 related commands **/
@@ -573,85 +573,85 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     @ReactMethod
     public void verifyPin(String pin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.verifyPin(pin, createNfcCallback(promise), true);
+        cardCryptoNfcApi.verifyPin(pin, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void verifyPinWithoutDialog(String pin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.verifyPin(pin, createNfcCallback(promise));
+        cardCryptoNfcApi.verifyPin(pin, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getPublicKeyForDefaultPath(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.getPublicKeyForDefaultPath(createNfcCallback(promise), true);
+        cardCryptoNfcApi.getPublicKeyForDefaultPath(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getPublicKeyForDefaultPathWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.getPublicKeyForDefaultPath(createNfcCallback(promise));
+        cardCryptoNfcApi.getPublicKeyForDefaultPath(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getPublicKey(String index, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.getPublicKey(index, createNfcCallback(promise), true);
+        cardCryptoNfcApi.getPublicKey(index, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getPublicKeyWithoutDialog(String index, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.getPublicKey(index, createNfcCallback(promise));
+        cardCryptoNfcApi.getPublicKey(index, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void signForDefaultHdPath(String dataForSigning, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.signForDefaultHdPath(dataForSigning, createNfcCallback(promise), true);
+        cardCryptoNfcApi.signForDefaultHdPath(dataForSigning, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void signForDefaultHdPathWithoutDialog(String dataForSigning, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.signForDefaultHdPath(dataForSigning, createNfcCallback(promise));
+        cardCryptoNfcApi.signForDefaultHdPath(dataForSigning, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void sign(String dataForSigning, String index, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.sign(dataForSigning, index, createNfcCallback(promise), true);
+        cardCryptoNfcApi.sign(dataForSigning, index, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void signWithoutDialog(String dataForSigning, String index, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.sign(dataForSigning, index, createNfcCallback(promise));
+        cardCryptoNfcApi.sign(dataForSigning, index, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void verifyPinAndSignForDefaultHdPath(String dataForSigning, String pin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.verifyPinAndSignForDefaultHdPath(dataForSigning, pin, createNfcCallback(promise), true);
+        cardCryptoNfcApi.verifyPinAndSignForDefaultHdPath(dataForSigning, pin, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void verifyPinAndSignForDefaultHdPathWithoutDialog(String dataForSigning, String pin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.verifyPinAndSignForDefaultHdPath(dataForSigning, pin, createNfcCallback(promise));
+        cardCryptoNfcApi.verifyPinAndSignForDefaultHdPath(dataForSigning, pin, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void verifyPinAndSign(String dataForSigning, String index, String pin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.verifyPinAndSign(dataForSigning, index, pin, createNfcCallback(promise), true);
+        cardCryptoNfcApi.verifyPinAndSign(dataForSigning, index, pin, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void verifyPinAndSignWithoutDialog(String dataForSigning, String index, String pin, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardCryptoNfcApi.verifyPinAndSign(dataForSigning, index, pin, createNfcCallback(promise));
+        cardCryptoNfcApi.verifyPinAndSign(dataForSigning, index, pin, CallbackHelper.createNfcCallback(promise));
     }
 
     /** TonWalletApplet card keychain related commands **/
@@ -659,205 +659,205 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     @ReactMethod
     public void resetKeyChain(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.resetKeyChain(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.resetKeyChain(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void resetKeyChainWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.resetKeyChain(createNfcCallback(promise));
+        cardKeyChainNfcApi.resetKeyChain(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getKeyChainInfo(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getKeyChainInfo(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getKeyChainInfo(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getKeyChainInfoWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getKeyChainInfo(createNfcCallback(promise));
+        cardKeyChainNfcApi.getKeyChainInfo(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getNumberOfKeys(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getNumberOfKeys(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getNumberOfKeys(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getNumberOfKeysWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getNumberOfKeys(createNfcCallback(promise));
+        cardKeyChainNfcApi.getNumberOfKeys(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void checkKeyHmacConsistency(String keyHmac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.checkKeyHmacConsistency(keyHmac, createNfcCallback(promise), true);
+        cardKeyChainNfcApi.checkKeyHmacConsistency(keyHmac, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void checkKeyHmacConsistencyWithoutDialog(String keyHmac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.checkKeyHmacConsistency(keyHmac, createNfcCallback(promise));
+        cardKeyChainNfcApi.checkKeyHmacConsistency(keyHmac, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void checkAvailableVolForNewKey(Short keySize, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.checkAvailableVolForNewKey(keySize, createNfcCallback(promise), true);
+        cardKeyChainNfcApi.checkAvailableVolForNewKey(keySize, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void checkAvailableVolForNewKeyWithoutDialog(Short keySize, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.checkAvailableVolForNewKey(keySize, createNfcCallback(promise));
+        cardKeyChainNfcApi.checkAvailableVolForNewKey(keySize, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getIndexAndLenOfKeyInKeyChain(String keyHmac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getIndexAndLenOfKeyInKeyChain(keyHmac, createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getIndexAndLenOfKeyInKeyChain(keyHmac, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getIndexAndLenOfKeyInKeyChainWithoutDialog(String keyHmac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getIndexAndLenOfKeyInKeyChain(keyHmac, createNfcCallback(promise));
+        cardKeyChainNfcApi.getIndexAndLenOfKeyInKeyChain(keyHmac, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void deleteKeyFromKeyChain(String keyHmac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.deleteKeyFromKeyChain(keyHmac, createNfcCallback(promise), true);
+        cardKeyChainNfcApi.deleteKeyFromKeyChain(keyHmac, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void deleteKeyFromKeyChainWithoutDialog(String keyHmac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.deleteKeyFromKeyChain(keyHmac, createNfcCallback(promise));
+        cardKeyChainNfcApi.deleteKeyFromKeyChain(keyHmac, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getHmac(String index, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getHmac(index, createNfcCallback(promise),true);
+        cardKeyChainNfcApi.getHmac(index, CallbackHelper.createNfcCallback(promise),true);
     }
 
 
     @ReactMethod
     public void getHmacWithoutDialog(String index, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getHmac(index, createNfcCallback(promise));
+        cardKeyChainNfcApi.getHmac(index, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void finishDeleteKeyFromKeyChainAfterInterruption(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.finishDeleteKeyFromKeyChainAfterInterruption(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.finishDeleteKeyFromKeyChainAfterInterruption(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.finishDeleteKeyFromKeyChainAfterInterruption(createNfcCallback(promise));
+        cardKeyChainNfcApi.finishDeleteKeyFromKeyChainAfterInterruption(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getDeleteKeyChunkNumOfPackets(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getDeleteKeyChunkNumOfPackets(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getDeleteKeyChunkNumOfPackets(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getDeleteKeyChunkNumOfPacketsWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getDeleteKeyChunkNumOfPackets(createNfcCallback(promise));
+        cardKeyChainNfcApi.getDeleteKeyChunkNumOfPackets(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getDeleteKeyRecordNumOfPackets(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getDeleteKeyRecordNumOfPackets(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getDeleteKeyRecordNumOfPackets(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getDeleteKeyRecordNumOfPacketsWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getDeleteKeyRecordNumOfPackets(createNfcCallback(promise));
+        cardKeyChainNfcApi.getDeleteKeyRecordNumOfPackets(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getOccupiedStorageSize(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getOccupiedStorageSize(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getOccupiedStorageSize(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getOccupiedStorageSizeWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getOccupiedStorageSize(createNfcCallback(promise));
+        cardKeyChainNfcApi.getOccupiedStorageSize(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getFreeStorageSize(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getFreeStorageSize(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getFreeStorageSize(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getFreeStorageSizeWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getFreeStorageSize(createNfcCallback(promise));
+        cardKeyChainNfcApi.getFreeStorageSize(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getKeyFromKeyChain(String keyHmac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getKeyFromKeyChain(keyHmac, createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getKeyFromKeyChain(keyHmac, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getKeyFromKeyChainWithoutDialog(String keyHmac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getKeyFromKeyChain(keyHmac, createNfcCallback(promise));
+        cardKeyChainNfcApi.getKeyFromKeyChain(keyHmac, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void addKeyIntoKeyChain(String newKey, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.addKeyIntoKeyChain(newKey, createNfcCallback(promise), true);
+        cardKeyChainNfcApi.addKeyIntoKeyChain(newKey, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void addKeyIntoKeyChainWithoutDialog(String newKey, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.addKeyIntoKeyChain(newKey, createNfcCallback(promise));
+        cardKeyChainNfcApi.addKeyIntoKeyChain(newKey, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void changeKeyInKeyChain(String newKey, String oldKeyHMac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.changeKeyInKeyChain(newKey, oldKeyHMac, createNfcCallback(promise), true);
+        cardKeyChainNfcApi.changeKeyInKeyChain(newKey, oldKeyHMac, CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void changeKeyInKeyChainWithoutDialog(String newKey, String oldKeyHMac, final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.changeKeyInKeyChain(newKey, oldKeyHMac, createNfcCallback(promise));
+        cardKeyChainNfcApi.changeKeyInKeyChain(newKey, oldKeyHMac, CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void getKeyChainDataAboutAllKeys(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getKeyChainDataAboutAllKeys(createNfcCallback(promise), true);
+        cardKeyChainNfcApi.getKeyChainDataAboutAllKeys(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getKeyChainDataAboutAllKeysWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardKeyChainNfcApi.getKeyChainDataAboutAllKeys(createNfcCallback(promise));
+        cardKeyChainNfcApi.getKeyChainDataAboutAllKeys(CallbackHelper.createNfcCallback(promise));
     }
 }

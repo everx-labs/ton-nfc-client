@@ -1,4 +1,4 @@
-package com.tonnfccard;
+package com.rntonnfccard;
 
 import com.facebook.react.bridge.Promise;
 import com.tonnfccard.callback.NfcCallback;
