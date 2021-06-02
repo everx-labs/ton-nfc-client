@@ -14,7 +14,7 @@ import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError} fro
 
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
-export default class App extends Component<{}> {
+export default class App extends Component{
   state = {
     status: 'starting',
     message: '--'
