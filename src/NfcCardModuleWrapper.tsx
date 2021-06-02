@@ -438,7 +438,7 @@ export default class NfcCardModuleWrapper {
         initialVector: string,
     ): Promise<CardResponse> {
         try {
-            const response = await NfcCardModule.turnOnWallet(
+            const response = await NfcCardModule.turnOnWalletWithPin(
                 newPin,
                 authenticationPassword,
                 commonSecret,
@@ -458,7 +458,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if(Platform.OS === 'android'){
             try {
-                const response = await NfcCardModule.turnOnWalletWithoutDialog(
+                const response = await NfcCardModule.turnOnWalletWithPinWithoutDialog(
                     newPin,
                     authenticationPassword,
                     commonSecret,

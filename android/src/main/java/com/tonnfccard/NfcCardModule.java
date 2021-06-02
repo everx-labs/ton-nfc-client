@@ -396,13 +396,13 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     /** TonWalletApplet card activation related stuff **/
 
     @ReactMethod
-    public void turnOnWallet(String newPin, String password, String commonSecret, String initialVector, final Promise promise){
+    public void turnOnWalletWithPin(String newPin, String password, String commonSecret, String initialVector, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.turnOnWallet(newPin, password, commonSecret, initialVector, createNfcCallback(promise), true);
     }
 
     @ReactMethod
-    public void turnOnWalletWithoutDialog(String newPin, String password, String commonSecret, String initialVector, final Promise promise){
+    public void turnOnWalletWithPinWithoutDialog(String newPin, String password, String commonSecret, String initialVector, final Promise promise){
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.turnOnWallet(newPin, password, commonSecret, initialVector, createNfcCallback(promise));
     }
