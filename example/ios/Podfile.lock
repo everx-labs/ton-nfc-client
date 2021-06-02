@@ -19,14 +19,14 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - PromiseKit (6.13.1):
-    - PromiseKit/CorePromise (= 6.13.1)
-    - PromiseKit/Foundation (= 6.13.1)
-    - PromiseKit/UIKit (= 6.13.1)
-  - PromiseKit/CorePromise (6.13.1)
-  - PromiseKit/Foundation (6.13.1):
+  - PromiseKit (6.15.3):
+    - PromiseKit/CorePromise (= 6.15.3)
+    - PromiseKit/Foundation (= 6.15.3)
+    - PromiseKit/UIKit (= 6.15.3)
+  - PromiseKit/CorePromise (6.15.3)
+  - PromiseKit/Foundation (6.15.3):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.13.1):
+  - PromiseKit/UIKit (6.15.3):
     - PromiseKit/CorePromise
   - RCTRequired (0.63.4)
   - RCTTypeSafety (0.63.4):
@@ -256,8 +256,8 @@ PODS:
     - React-jsi (= 0.63.4)
   - ton-nfc-client (1.0.0):
     - React
-    - TonNfcClientSwift (~> 0.0.3)
-  - TonNfcClientSwift (0.0.3):
+    - TonNfcClientSwift (~> 0.1.0)
+  - TonNfcClientSwift (0.1.0):
     - PromiseKit (~> 6.8)
   - Yoga (1.14.0)
 
@@ -361,7 +361,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
+  PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
   React: b0a957a2c44da4113b0c4c9853d8387f8e64e615
@@ -382,8 +382,8 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  ton-nfc-client: 98e47f48463a1ede4187c4334c21df4dba7f032a
-  TonNfcClientSwift: c5c69a1d025dd7d045d7ca341917a912151fece7
+  ton-nfc-client: b7928e82e3912e218053f23561ed14cde92c0174
+  TonNfcClientSwift: 7193bb455cd08777767a711b15fac0d13b9d3f6a
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: 579f438ef5cda6141cc5db59ab3292bf9519d8f1

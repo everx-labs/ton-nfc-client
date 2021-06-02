@@ -143,7 +143,7 @@ class NfcCardModule: NSObject {
     
 
     @objc
-    func turnOnWallet(_ newPin: String, password: String, commonSecret : String, initialVector : String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    func turnOnWalletWithPin(_ newPin: String, password: String, commonSecret : String, initialVector : String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
         cardActivationNfcApi.turnOnWallet(newPin: newPin, authenticationPassword: password, commonSecret: commonSecret, initialVector: initialVector, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
 	
