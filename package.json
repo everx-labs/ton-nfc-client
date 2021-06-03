@@ -63,6 +63,10 @@
     "react": "^16.8.1",
     "react-native": ">=0.60.0-rc.0 <1.0.x"
   },
+  "dependencies": {
+    "@tonclient/core": "^1.9.0",
+    "@tonclient/lib-node": "^1.9.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tonlabs/ton-nfc-client.git",

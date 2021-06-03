@@ -10,9 +10,11 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError} from 'ton-nfc-client';
+import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError, NfcCardSigningBox} from 'ton-nfc-client';
 
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
+
+let signingBox  = new NfcCardSigningBox();
 
 export default class App extends Component{
   state = {
@@ -41,6 +43,18 @@ export default class App extends Component{
                   alert(e.message)
                 });
             }} title="getRemainingPinTries"/>
+        </View>
+        <View>
+              <Button onPress={() => {
+                signingBox.sign({unsigned: "1100"})
+            .then((result) => alert("getSignatureFromSigningBox : " + result.signature)).catch((e) => alert(e.message))
+            }} title="getSignatureFromSigningBox"/>
+        </View>
+        <View>
+              <Button onPress={() => {
+                signingBox.get_public_key()
+            .then((result) => alert("getPublicKeyFromSigningBox : " + result.public_key)).catch((e) => alert(e.message))
+            }} title="getPublicKeyFromSigningBox"/>
         </View>
         <View>
               <Button onPress={() => {
