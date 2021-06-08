@@ -100,34 +100,34 @@ import {NfcCardModuleWrapper} from 'ton-nfc-client';
 const nfcWrapper = new NfcCardModuleWrapper();
 try {
 	let result = await nfcWrapper.getRootKeyStatus();
-	const seedStatus = result.message
-	const pin = "5555"	
+	const seedStatus = result.message;
+	const pin = "5555";	
 	if (seedStatus == "not generated") {
-		await nfcWrapper.generateSeed(pin)
+		await nfcWrapper.generateSeed(pin);
 	}
            
-	result = await nfcWrapper.getTonAppletState()
-	const state = result.message
+	result = await nfcWrapper.getTonAppletState();
+	const state = result.message;
 	if (state !== "TonWalletApplet waits two-factor authentication.") {
-		throw "Incorret applet state!"
+		throw "Incorret applet state!";
 	}
 
-	result = await nfcWrapper.getHashes()
-	const hashOfCommonSecret = result.ecsHash
+	result = await nfcWrapper.getHashes();
+	const hashOfCommonSecret = result.ecsHash;
 	// check that hashOfCommonSecret is correct based on the data from smartcontract
 
-	const hashOfEncryptedPassword = result.epHash
+	const hashOfEncryptedPassword = result.epHash;
 	// check that hashOfEncryptedPassword is correct based on the data from smartcontract
 	
-	const newPin = "7777"
+	const newPin = "7777";
 	// prepare authenticationPassword, commonSecret, initialVector based on the data from smartcontract
 
-	await nfcWrapper.turnOnWallet(authenticationPassword, commonSecret, initialVector)
+	await nfcWrapper.turnOnWallet(authenticationPassword, commonSecret, initialVector);
 	//await nfcWrapper.turnOnWalletWithPin(newPin, authenticationPassword, commonSecret, initialVector)
 
 }
 catch (e) {
-  console.log(e.message)
+  console.log(e.message);
 }
 ```
 
