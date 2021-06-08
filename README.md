@@ -60,8 +60,6 @@ Also you must go through the following steps to make NFC working for you.
 
 - Go to **Project -> Application -> Build Settings -> Search Paths -> Library Search Paths** and check that you have at least **swift-5.2** everywhere.
 
-_Note_ : you can not work with NFC using simulator, you must run it on iPhone, so you also should set development team.
-
 ## Simple example
 
 ```javascript
@@ -84,6 +82,8 @@ NfcCardModule.getPublicKey(hdIndex)
    .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
    .catch((e) => alert(e.message))
 ```
+
+_Note_ : you can not work with NFC using simulator, you must run it on smartphone/iPhone. So for iPhone you should set development team.
 
 ## More about responses format and errors
 
