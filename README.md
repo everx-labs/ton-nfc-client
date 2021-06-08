@@ -131,19 +131,19 @@ catch (e) {
 }
 ```
 
-This code must work without any problems for Android. You connect NFC card only once, then run this code via pressing some button for example. And it does all operations for you. However, it is more complicated for iOS. Each time when we call NfcCardModule.someFunction() iPhone establishes new NFC session. You must reconnect the card each time. So in the above code snippet we need to reconnect the card 6 times. More over the above code will not work as it is. After finishing one NFC session iPhone need 5-10 seconds to be ready to establish new NFC session. So the following code may produce error "System resources unavailable" for iPhone.
+This code must work without any problems for Android. You connect NFC card only once, then run this code via pressing some button for example. And it does all operations for you. However, it is more complicated for iOS. Each time when we call _nfcWrapper.someFunction()_ iPhone establishes new NFC session. You must reconnect the card each time. So in the above code snippet we need to reconnect the card 4-5 times. More over the above code will not work as it is. After finishing one NFC session iPhone need 5-10 seconds to be ready to establish new NFC session. So the following code may produce error "System resources unavailable" for iPhone.
 
 ```javascript
-let hashOfCommonSecret = JSON.parse( await NfcCardModule.getHashOfCommonSecret()).message
-let hashOfEncryptedPassword = JSON.parse( await NfcCardModule.getHashOfEncryptedPassword()).message
+await nfcWrapper.getHashes();
+await nfcWrapper.turnOnWallet(authenticationPassword, commonSecret, initialVector);
 ```
 
 You may fix it in the following way.
 
 ```javascript
-let hashOfCommonSecret = JSON.parse( await NfcCardModule.getHashOfCommonSecret()).message
-await new Promise(r => setTimeout(r, 10000))
-let hashOfEncryptedPassword = JSON.parse( await NfcCardModule.getHashOfEncryptedPassword()).message
+await nfcWrapper.getHashes();
+await new Promise(r => setTimeout(r, 5000))
+await nfcWrapper.turnOnWallet(authenticationPassword, commonSecret, initialVector);
 ```
 If you do some time consuming actions between calls of getHashOfCommonSecret and getHashOfEncryptedPassword, then additional delay is not required.
 
