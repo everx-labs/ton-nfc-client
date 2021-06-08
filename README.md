@@ -56,7 +56,7 @@ Also you must go through the following steps to make NFC working for you.
 
 - Check that everywhere you have iOS11+ deployment version. Otherwise, pod installation will complain about it.
 
-- Also there is possibility that you have to link libswiftCoreNFC library manually. For this go to **Target->Application -> Build Phases -> Link Binary With Librarie** and add **libswiftCoreNFC.tbd**.
+- Also there is possibility that you have to link libswiftCoreNFC library manually. For this go to **Target->Application -> Build Phases -> Link Binary With Libraries** and add **libswiftCoreNFC.tbd**.
 
 - Go to **Project -> Application -> Build Settings -> Search Paths -> Library Search Paths** and check that you have at least **swift-5.2** everywhere.
 
