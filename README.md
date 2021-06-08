@@ -83,7 +83,7 @@ NfcCardModule.getPublicKey(hdIndex)
    .catch((e) => alert(e.message))
 ```
 
-_Note_ : you can not work with NFC using simulator, you must run it on smartphone/iPhone. So for iPhone you should set development team.
+_Note_: You can not work with NFC using simulator. You must run it on smartphone/iPhone. So for iPhone you should set the development team.
 
 ## More about responses format and errors
 
