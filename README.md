@@ -63,11 +63,12 @@ Also you must go through the following steps to make NFC working for you.
 ## Simple example
 
 ```javascript
-import NfcCardModule from 'ton-nfc-client';
+import {NfcCardModuleWrapper} from 'ton-nfc-client';
 
+const nfcWrapper = new NfcCardModuleWrapper();
 try {
-	let hdInd = "1"            
-	let result = await NfcCardModule.getPublicKey(hdInd)
+	let hdIndex = "1"            
+	let result = await nfcWrapper.getPublicKey(hdIndex)
   	alert("Public key: " + result)
 }
 catch (e) {
@@ -78,7 +79,7 @@ catch (e) {
 Another way to use ton-nfc-client functions looks as follows.
 
 ```javascript
-NfcCardModule.getPublicKey(hdIndex)
+nfcWrapper.getPublicKey(hdIndex)
    .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
    .catch((e) => alert(e.message))
 ```
