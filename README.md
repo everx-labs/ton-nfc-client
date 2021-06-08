@@ -67,12 +67,12 @@ import {NfcCardModuleWrapper} from 'ton-nfc-client';
 
 const nfcWrapper = new NfcCardModuleWrapper();
 try {
-	let hdIndex = "1"            
-	let result = await nfcWrapper.getPublicKey(hdIndex)
-  	alert("Public key: " + result)
+	let hdIndex = "1";            
+	let result = await nfcWrapper.getPublicKey(hdIndex);
+  	alert("Public key: " + result);
 }
 catch (e) {
-        alert(e.message)
+        alert(e.message);
 }
 ```
 
@@ -81,7 +81,7 @@ Another way to use ton-nfc-client functions looks as follows.
 ```javascript
 nfcWrapper.getPublicKey(hdIndex)
    .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
-   .catch((e) => alert(e.message))
+   .catch((e) => alert(e.message));
 ```
 
 _Note_: You can not work with NFC using simulator. You must run it on smartphone/iPhone. So for iPhone you should set the development team.
