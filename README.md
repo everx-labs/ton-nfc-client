@@ -154,14 +154,17 @@ Detailed information about recovery functionality is available in [Android readm
 ```javascript
 let aesjs = require('aes-js');
 try {
-	// get aesKeyHexString and testData from TON Labs service
+	// get aesKeyHexString from TON Labs service
 	const aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString);
-	//prepare json string containing recovery data, get
+	const surfPublicKey = "B81F0E0E07416DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A";
+	const multisigAddr = "A11F0E0E07416DAB6C320ECC6BF3DBA48A70121C5251CC31B1D8F8A1B36E0F2F";
+	const authenticationPassword = "F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE";
+	const commonSecret = "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4";
 	const recoveryDataJson = JSON.stringify( {
-            surfPublicKey:  testData.multisig.keyPair.public,
-            multisigAddress:  testData.multisig.address,
-            p1: testData.cards[0].P1, // authenticationPassword
-            cs: testData.cards[0].CS // commonSecret
+            surfPublicKey:  surfPublicKey,
+            multisigAddress:  multisigAddr,
+            p1: authenticationPassword, 
+            cs: commonSecret 
         });
 	const recoveryDataBytes = aesjs.utils.utf8.toBytes(recoveryDataJson);
 	const aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5));
