@@ -239,7 +239,7 @@ try {
 	const pin = "5555";
 	let result = await nfcWrapper.verifyPinAndSignForDefaultHdPath(msg, pin);
 	const signature = result.message;
-  	await new Promise(r => setTimeout(r, 5000)) // for iOS
+  	await new Promise(r => setTimeout(r, 5000)); // for iOS
 	result = await nfcWrapper.getPublicKeyForDefaultPath();
   	const pubKey = result.message;
 	const msgBytes = hexStringToByteArray(msg);
