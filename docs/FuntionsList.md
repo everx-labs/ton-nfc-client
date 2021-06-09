@@ -78,8 +78,6 @@ export default class CardError extends NfcNativeModuleError {
 ```
 
 NfcNativeModuleError corresponds to error happened in Android/iOS code itself. Whereas CardError corresponds to error happened in applet. For more details see section _More about responses format_ in readmes [TonNfcClientAndroid](https://github.com/tonlabs/TonNfcClientAndroid), [TonNfcClientSwift](https://github.com/tonlabs/TonNfcClientSwift).
-
-
 	
 ## NFC related functions
 
@@ -116,7 +114,7 @@ Here there are functions to check/change the state of your NFC hardware.
 
 Here there are functions to call APDU commands of CoinManager. CoinManager is an additional software integrated into NFC TON Labs Security card. It is responsible for maintaining ed25519 seed, related PIN and it provides some auxiliary operations. 
 
-- **setDeviceLabel(deviceLabel)**
+- **async setDeviceLabel(label: string): Promise< CardResponse >**
 
     This function is used to set the device label. Now we do not use this device label stored in Coin Manager.
 
@@ -130,7 +128,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"done","status":"ok"}
 
 
-- **getDeviceLabel()**
+- **async getDeviceLabel(): Promise< CardResponse >**
 
     This function is used to get device label. Now we do not use this device label stored in Coin Manager.
 
@@ -138,7 +136,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
         {"message":"005815A3942073A6ADC70C035780FDD09DF09AFEEA4173B92FE559C34DCA0550","status":"ok"}
 
-- **getSeVersion()**
+- **async getSeVersion(): Promise< CardResponse >**
 
     This function is used to get SE (secure element) version. 
 
@@ -147,7 +145,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"1008","status":"ok"}
 
 
-- **getCsn()**
+- **async getCsn(): Promise< CardResponse >**
 
     This function is used to get CSN (SEID).
 
@@ -156,7 +154,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"11223344556677881122334455667788","status":"ok"}
 
 
-- **getMaxPinTries()**
+- **async getMaxPinTries(): Promise< CardResponse >**
 
     This function is used to get retry maximum times of PIN. 
 
@@ -164,7 +162,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
         {"message":"10","status":"ok"}
 
-- **getRemainingPinTries()**
+- **async getRemainingPinTries(): Promise< CardResponse >**
 
     This function is used to get remaining retry times of PIN.
 
@@ -173,7 +171,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"10","status":"ok"}
 
 
-- **getRootKeyStatus()**
+- **async getRootKeyStatus(): Promise< CardResponse >**
 
     This function is used to get the status of seed for ed25519: is it generated or not.
 
@@ -183,7 +181,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         b) If seed is not present: {"message":"not generated","status":"ok"}
 
 
-- **resetWallet()**
+- **async resetWallet(): Promise< CardResponse >**
 
     This function is used to reset the wallet state to the initial state. After resetting the wallet, the default PIN value would be 5555. The remaining number of retry for PIN will be reset to MAX (default is 10). The seed for ed25519 will be erased. And after its calling any card operation (except of CoinManager stuff) will fail with 6F02 error. TON Labs wallet applet does not work without seed at all.
 
@@ -192,7 +190,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"done","status":"ok"}
 
 
-- **getAvailableMemory()**
+- **async getAvailableMemory(): Promise< CardResponse >**
 
     This function is used to obtain the amount of memory of the specified type that is available to the applet. Note that implementation-dependent memory overhead structures may also use the same memory pool.
         
@@ -201,7 +199,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         will be added soon
 
 
-- **getAppsList()**
+- **async getAppsList(): Promise< CardResponse >**
 
     This function is used to get application list. It returns list of applets AIDs that were installed onto card.
 
@@ -211,7 +209,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
     _Note:_ Here 313132323333343435353636 is AID of our TON Labs wallet applet
 
-- **generateSeed(pin)**
+- **async generateSeed(pin: string): Promise< CardResponse >**
 
     This function is used to generate the seed for ed25519 with RNG.
 
@@ -227,7 +225,7 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         If seed already exists and you call generateSeed then it will throw a error.
 
 
-- **changePin(oldPin, newPin)**
+- **async changePin(oldPin: string, newPin: string): Promise< CardResponse >**
 
     This function is used to change PIN.
 
