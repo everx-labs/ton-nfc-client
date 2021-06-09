@@ -41,7 +41,9 @@ export default class class CardResponse {
 ```
 
 _CardResponse_ contains all possible fields that can be met in responses from the card. But they are not all used at the same time. Each card response has _status_ field obligatory. And the most common typical response from the card has _message_ field containing payload. In this case other fields in _CardResponse_ are empty and contains just an empty string. But for some rare functions _message_ field will be empty and payload is put into another fields. In below functions list you may find all necessary details.
-	
+
+_Note_: Below we specify how CardResponse looks like for each API function. And for simplicity of representation we omit empty fields of CardResponse everywhere.
+
 All API functions can throw two main type of errors.	
 
 ```javascript
@@ -76,6 +78,8 @@ export default class CardError extends NfcNativeModuleError {
 ```
 
 NfcNativeModuleError corresponds to error happened in Android/iOS code itself. Whereas CardError corresponds to error happened in applet. For more details see section _More about responses format_ in readmes [TonNfcClientAndroid](https://github.com/tonlabs/TonNfcClientAndroid), [TonNfcClientSwift](https://github.com/tonlabs/TonNfcClientSwift).
+
+
 	
 ## NFC related functions
 
