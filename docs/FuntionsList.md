@@ -1,6 +1,6 @@
 # Full functions list (ton-nfc-client)
 
-Library ton-nfc-client provides class NfcCardModuleWrapper exporting all API to work with NFC TON Labs Security cards. All functions in this API are async and put results into Promises. So you should work with them as follows.
+Library ton-nfc-client provides a class NfcCardModuleWrapper exporting all API to work with NFC TON Labs Security cards. All functions in this API are async and put results into Promises. So you should work with them as follows.
 
 ```javascript
 import {NfcCardModuleWrapper} from 'ton-nfc-client';
