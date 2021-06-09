@@ -542,7 +542,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"00112233445566","status":"ok"}
 
-- **async addRecoveryData(recoveryData: string): Promise< CardResponse > **
+- **async addRecoveryData(recoveryData: string): Promise< CardResponse >**
 
     Save recovery data into TON Labs Wallet applet. 
 
