@@ -117,7 +117,7 @@ Here there are functions to check/change the state of your NFC hardware.
 Here there are functions to call APDU commands of CoinManager. CoinManager is an additional software integrated into NFC TON Labs Security card. It is responsible for maintaining ed25519 seed, related PIN and it provides some auxiliary operations. 
 
 - **async setDeviceLabel(label: string): Promise< CardResponse >**<br/>
-  **async setDeviceLabelWithoutDialog(label: string): Promise< CardResponse >**
+  **async setDeviceLabelWithoutDialog(label: string): Promise< CardResponse >** _(available only for Android)_
 
     This function is used to set the device label. Now we do not use this device label stored in Coin Manager.
 
