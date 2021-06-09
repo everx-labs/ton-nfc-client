@@ -473,7 +473,7 @@ export default class NfcCardModuleWrapper {
         newPin: string,
         authenticationPassword: string,
         commonSecret: string,
-        initialVector: string,
+        initialVector: string
     ): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.turnOnWalletWithPin(
@@ -513,7 +513,7 @@ export default class NfcCardModuleWrapper {
     async turnOnWallet(
         authenticationPassword: string,
         commonSecret: string,
-        initialVector: string,
+        initialVector: string
     ): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.turnOnWallet(
@@ -530,7 +530,7 @@ export default class NfcCardModuleWrapper {
     async turnOnWalletWithoutDialog(
         authenticationPassword: string,
         commonSecret: string,
-        initialVector: string,
+        initialVector: string
     ): Promise<CardResponse> {
         if (Platform.OS === 'android') {
             try {
@@ -875,7 +875,7 @@ export default class NfcCardModuleWrapper {
 
     async verifyPinAndSignForDefaultHdPath(
         dataForSigning: string,
-        pin: string,
+        pin: string
     ): Promise<CardResponse> {
         try {
             const response =
@@ -891,7 +891,7 @@ export default class NfcCardModuleWrapper {
 
     async verifyPinAndSignForDefaultHdPathWithoutDialog(
         dataForSigning: string,
-        pin: string,
+        pin: string
     ): Promise<CardResponse> {
         if (Platform.OS === 'android') {
             try {
@@ -915,7 +915,7 @@ export default class NfcCardModuleWrapper {
 
     async signWithoutDialog(
         dataForSigning: string,
-        hdIndex: string,
+        hdIndex: string
     ): Promise<CardResponse> {
         if (Platform.OS === 'android') {
             try {
@@ -931,7 +931,7 @@ export default class NfcCardModuleWrapper {
     async verifyPinAndSign(
         dataForSigning: string,
         hdIndex: string,
-        pin: string,
+        pin: string
     ): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.verifyPinAndSign(
@@ -948,7 +948,7 @@ export default class NfcCardModuleWrapper {
     async verifyPinAndSignWithoutDialog(
         dataForSigning: string,
         hdIndex: string,
-        pin: string,
+        pin: string
     ): Promise<CardResponse> {
         if (Platform.OS === 'android') {
             try {
@@ -1196,7 +1196,7 @@ export default class NfcCardModuleWrapper {
 
     async changeKeyInKeyChain(
         newKey: string,
-        oldKeyHmac: string,
+        oldKeyHmac: string
     ): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.changeKeyInKeyChain(
@@ -1211,7 +1211,7 @@ export default class NfcCardModuleWrapper {
 
     async changeKeyInKeyChainWithoutDialog(
         newKey: string,
-        oldKeyHmac: string,
+        oldKeyHmac: string
     ): Promise<CardResponse> {
         if (Platform.OS === 'android') {
             try {
@@ -1225,7 +1225,7 @@ export default class NfcCardModuleWrapper {
     }
 
     async getIndexAndLenOfKeyInKeyChain(
-        keyHmac: string,
+        keyHmac: string
     ): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac)
@@ -1303,6 +1303,48 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getHmacWithoutDialog(index)
                 return this.prepareCardResponseFromGetHmac(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error('This function is available only for Android OS!')
+    }
+
+    async getDeleteKeyRecordNumOfPackets(): Promise<CardResponse> {
+        try {
+            const response = await NfcCardModule.getDeleteKeyRecordNumOfPackets()
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            throw this.throwError(e.message)
+        }
+    }
+
+    async getDeleteKeyRecordNumOfPacketsWithoutDialog(): Promise<CardResponse> {
+        if (Platform.OS === 'android') {
+            try {
+                const response = await NfcCardModule.getDeleteKeyRecordNumOfPacketsWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error('This function is available only for Android OS!')
+    }
+
+    async getDeleteKeyChunkNumOfPackets(): Promise<CardResponse> {
+        try {
+            const response = await NfcCardModule.getDeleteKeyChunkNumOfPackets()
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            throw this.throwError(e.message)
+        }
+    }
+
+    async getDeleteKeyChunkNumOfPacketsWithoutDialog(): Promise<CardResponse> {
+        if (Platform.OS === 'android') {
+            try {
+                const response = await NfcCardModule.getDeleteKeyChunkNumOfPacketsWithoutDialog()
+                return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
             }
