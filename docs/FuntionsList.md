@@ -85,7 +85,7 @@ NfcNativeModuleError corresponds to error happened in Android/iOS code itself. W
 
 Here there are functions to check/change the state of your NFC hardware.  
 
-- **checkIfNfcSupported()**
+- **async checkIfNfcSupported(): Promise<CardResponse>**
 
     Check if your Android/iPhone device has NFC hardware. 
 
@@ -94,23 +94,22 @@ Here there are functions to check/change the state of your NFC hardware.
         {"message":"true","status":"ok"}
         {"message":"false","status":"ok"}
 
-- **checkIfNfcEnabled()**
+- **async checkIfNfcEnabled(): Promise<CardResponse>**
 
-    Works only forAndroid. Check if NFC option is turned on for your Android device.
+    Works only for Android. Check if NFC option is turned on for your Android device.
 
     *Responses:*
 
-    {"message":"true","status":"ok"}
+    	{"message":"true","status":"ok"}
+    	{"message":"false","status":"ok"}
 
-    {"message":"false","status":"ok"}
-
-- **openNfcSettings()**
+- **async openNfcSettings(): Promise<CardResponse>**
 
      Works only forAndroid. Open "Settings" panel to mantain NFC option.
 
     *Response:*
 
-    {"message":"done","status":"ok"}
+    	{"message":"done","status":"ok"}
 
     
 ## CoinManager functions 
