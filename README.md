@@ -149,7 +149,7 @@ If you do some time consuming actions between calls of two card operations, then
 
 ## Recovery module
 
-Detailed information about recovery functionality is available in [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give exemplary code for React native app. There is a snippet demonstrating the structure of recovery data and the way of adding it into TON Labs wallet applet.
+Detailed information about recovery functionality is available in [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give the exemplary code for React native app. There is a snippet demonstrating the structure of recovery data and the way of adding it into TON Labs wallet applet.
 
 ```javascript
 let aesjs = require('aes-js');
