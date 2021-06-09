@@ -78,6 +78,8 @@ export default class CardError extends NfcNativeModuleError {
 ```
 
 NfcNativeModuleError corresponds to error happened in Android/iOS code itself. Whereas CardError corresponds to error happened in applet. For more details see section _More about responses format_ in readmes [TonNfcClientAndroid](https://github.com/tonlabs/TonNfcClientAndroid), [TonNfcClientSwift](https://github.com/tonlabs/TonNfcClientSwift).
+
+For Android for the majority of card operations there is a pair of functions. The first function shows to user an invitation dialog to connect NFC card. For example, _getPublicKey_ will show you an invitation dialog. And the second function does the same work. But it does not show any dialog. Here an exemplary function is _getPublicKeyWithoutDialog_. So here user must first establish the connection and then call the function. More details you may find in [readme](https://github.com/tonlabs/TonNfcClientAndroid) in section _Test work with the card_. For iOS the second function in pair (having ending "WithoutDialog" in title) does not work. Because for iOS we always have invitation dialogs by defaut. More details in [here](https://github.com/tonlabs/TonNfcClientSwift).
 	
 ## NFC related functions
 
