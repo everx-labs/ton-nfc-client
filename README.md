@@ -215,8 +215,8 @@ You may work with multiple NFC TON Labs security cards. In this case in your  An
 
 The list of operations protected by HMAC SHA256:
 
-- verifyPin, signForDefaultHdPath, sign (see below sections)
-- all functions related to card keychain
+- verifyPin, signForDefaultHdPath, sign, verifyPinAndSign, verifyPinAndSignForDefaultHdPath (see below sections);
+- all functions related to card keychain.
 
 ## Request ED25519 signature
 
