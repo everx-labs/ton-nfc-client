@@ -142,7 +142,7 @@ You may fix it in the following way.
 
 ```javascript
 await nfcWrapper.getHashes();
-await new Promise(r => setTimeout(r, 5000))
+await new Promise(r => setTimeout(r, 5000));
 await nfcWrapper.turnOnWallet(authenticationPassword, commonSecret, initialVector);
 ```
 If you do some time consuming actions between calls of two card operations, then additional delay is not required.
