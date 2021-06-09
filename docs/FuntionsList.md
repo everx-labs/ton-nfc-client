@@ -7,9 +7,10 @@ import {NfcCardModuleWrapper} from 'ton-nfc-client';
 
 const nfcWrapper = new NfcCardModuleWrapper();
 try {
-	let hdIndex = "1";            
-	let result = await nfcWrapper.getPublicKey(hdIndex);
-  	alert("Public key: " + result);
+	const hdIndex = "1";   
+	const result = await nfcWrapper.getPublicKey(hdIndex);
+	const publicKey = result.message;
+  	alert("Public key: " + publicKey);
 }
 catch (e) {
         alert(e.message);
@@ -18,13 +19,64 @@ catch (e) {
 
 ```javascript
 nfcWrapper.getPublicKey(hdIndex)
-   .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
+   .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result.message))
    .catch((e) => alert(e.message));
 ```
 
-Below there is full functions list provided by ton-nfc-client to make different requests to NFC TON Labs Security cards. 
+Each API function returns _Promise<CardResponse>_, where _CardResponse_ is defined as follows.
+	
+```javascript
+export default class class CardResponse {
+    public message: string
+    public status: string
+    public ecsHash: string
+    public epHash: string
+    public numberOfKeys: string
+    public occupiedSize: string
+    public freeSize: string
+    public hmac: string
+    public length: string
+	...
+}
+```
 
+_CardResponse_ contains all possible fields that can be met in responses from the card. But they are not all used at the same time. Each card response has _status_ field obligatory. And the most common typical response from the card has _message_ field containing payload. In this case other fields in _CardResponse_ are empty and contains just an empty string. But for some rare functions _message_ field will be empty and payload is put into another fields. In below functions list you may find all necessary details.
+	
+All API functions can throw two main type of errors.	
 
+```javascript
+export default class NfcNativeModuleError extends Error {
+    public status: string
+    public errorCode: string
+    public errorTypeId: string
+    public errorType: string
+
+    constructor(
+        public message: string,
+        status: string,
+        errorCode: string,
+        errorTypeId: string,
+        errorType: string
+    ) {
+        super(message)
+        this.status = status
+        this.errorCode = errorCode
+        this.errorType = errorType
+        this.errorTypeId = errorTypeId
+    }
+}	
+```
+
+```javascript
+export default class CardError extends NfcNativeModuleError {
+    public cardInstruction: string
+    public apdu: string
+	...
+}
+```
+
+NfcNativeModuleError corresponds to error happened in Android/iOS code itself. Whereas CardError corresponds to error happened in applet. For more details see section _More about responses format_ in readmes [TonNfcClientAndroid](https://github.com/tonlabs/TonNfcClientAndroid), [TonNfcClientSwift](https://github.com/tonlabs/TonNfcClientSwift).
+	
 ## NFC related functions
 
 Here there are functions to check/change the state of your NFC hardware.  
