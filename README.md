@@ -191,8 +191,8 @@ try {
 	const encryptedRecoveryDataFromSecurityCardBytes =  aesjs.utils.hex.toBytes(encryptedRecoveryDataFromSecurityCard);
 	const aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5));
   	const decryptedBytes = aesCtr.decrypt(encryptedRecoveryDataFromSecurityCardBytes);
-  	const decryptedRcoveryDataJson = aesjs.utils.utf8.fromBytes(decryptedBytes);
-  	console.log("Decrypted recovery data : " + decryptedRcoveryDataJson);
+  	const decryptedRecoveryDataJson = aesjs.utils.utf8.fromBytes(decryptedBytes);
+  	console.log("Decrypted recovery data : " + decryptedRecoveryDataJson);
 }
 catch (e) {
   console.log(e.message);
