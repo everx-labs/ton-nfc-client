@@ -44,7 +44,7 @@ _CardResponse_ contains all possible fields that can be met in responses from th
 
 _Note_: Below we specify how CardResponse looks like for each API function. And for simplicity of representation we omit empty fields of CardResponse everywhere.
 
-All API functions can throw two main type of errors.	
+All API functions can throw two main types of errors.	
 
 ```javascript
 export default class NfcNativeModuleError extends Error {
