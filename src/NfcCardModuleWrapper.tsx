@@ -417,7 +417,7 @@ export default class NfcCardModuleWrapper {
     async createKeyForHmac(
         authenticationPassword: string,
         commonSecret: string,
-        serialNumber: string,
+        serialNumber: string
     ): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.createKeyForHmac(
