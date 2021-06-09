@@ -25,9 +25,13 @@ import com.tonnfccard.CardActivationApi;
 import com.tonnfccard.CardCoinManagerApi;
 import com.tonnfccard.CardCryptoApi;
 import com.tonnfccard.CardKeyChainApi;
+import com.tonnfccard.NfcApi;
 import com.tonnfccard.RecoveryDataApi;
 import com.tonnfccard.TonWalletApi;
 import com.tonnfccard.nfc.NfcApduRunner;
+
+import static com.tonnfccard.TonWalletConstants.FALSE_MSG;
+import static com.tonnfccard.TonWalletConstants.TRUE_MSG;
 
 public class NfcCardModule extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
 
@@ -42,6 +46,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     private CardCryptoApi cardCryptoNfcApi;
     private CardKeyChainApi cardKeyChainNfcApi;
     private RecoveryDataApi recoveryDataApi;
+    private NfcApi nfcApi;
 
     public NfcCardModule(ReactApplicationContext reactContext) throws Exception {
         super(reactContext);
@@ -71,6 +76,10 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
             if (recoveryDataApi == null) {
                 recoveryDataApi = new RecoveryDataApi(nfcApduRunner);
+            }
+
+            if (nfcApi == null) {
+                nfcApi = new NfcApi(getReactApplicationContext());
             }
 
             this.eventEmitter = new EventEmitter(reactContext);
@@ -216,30 +225,21 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     }
 
     @ReactMethod
-    public void isNfcSupported(final Promise promise) {
-        Activity currentActivity = getCurrentActivity();
-        if (currentActivity != null) {
-            boolean res = currentActivity.getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC);
-            promise.resolve(Boolean.valueOf(res).toString());
-        } else {
-            promise.resolve("false");
-        }
+    public void checkIfNfcSupported(final Promise promise) {
+        nfcApi.setActivity(getCurrentActivity());
+        nfcApi.checkIfNfcSupported(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
-    public void isNfcEnabled(final Promise promise) {
-        if (nfcAdapter != null) {
-            promise.resolve(Boolean.valueOf(nfcAdapter.isEnabled()).toString());
-        } else {
-            promise.resolve("false");
-        }
+    public void checkIfNfcEnabled(final Promise promise) {
+        nfcApi.setActivity(getCurrentActivity());
+        nfcApi.checkIfNfcEnabled(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
     public void openNfcSettings(final Promise promise) {
-        Activity currentActivity = getCurrentActivity();
-        currentActivity.startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
-        promise.resolve(true);
+        nfcApi.setActivity(getCurrentActivity());
+        nfcApi.openNfcSettings(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
