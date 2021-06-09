@@ -1,24 +1,25 @@
 # Full functions list (ton-nfc-client)
 
-Library ton-nfc-client provides native module NfcCardModule both for Android and iOS. So all functions are available via NfcCardModule. They are all async and put results into Promises. So you should work with them as follows.
+Library ton-nfc-client provides class NfcCardModuleWrapper exporting all API to work with NFC TON Labs Security cards. All functions in this API are async and put results into Promises. So you should work with them as follows.
 
 ```javascript
-import NfcCardModule from 'ton-nfc-client';
+import {NfcCardModuleWrapper} from 'ton-nfc-client';
 
+const nfcWrapper = new NfcCardModuleWrapper();
 try {
-	let hdInd = "1"            
-	let result = await NfcCardModule.getPublicKey(hdInd)
-  	alert("Public key: " + result)
+	let hdIndex = "1";            
+	let result = await nfcWrapper.getPublicKey(hdIndex);
+  	alert("Public key: " + result);
 }
 catch (e) {
-        alert(e.message)
+        alert(e.message);
 }
 ```
 
 ```javascript
-NfcCardModule.getPublicKey(hdIndex)
+nfcWrapper.getPublicKey(hdIndex)
    .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
-   .catch((e) => alert(e.message))
+   .catch((e) => alert(e.message));
 ```
 
 Below there is full functions list provided by ton-nfc-client to make different requests to NFC TON Labs Security cards. 
