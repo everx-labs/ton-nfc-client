@@ -67,9 +67,10 @@ import {NfcCardModuleWrapper} from 'ton-nfc-client';
 
 const nfcWrapper = new NfcCardModuleWrapper();
 try {
-	let hdIndex = "1";            
-	let result = await nfcWrapper.getPublicKey(hdIndex);
-  	alert("Public key: " + result);
+	let hdIndex = "1";     
+	let result = await nfcWrapper..getPublicKey(hdIndex);
+	const publicKey = result.message;
+  	alert("Public key: " + publicKey);
 }
 catch (e) {
         alert(e.message);
@@ -80,7 +81,7 @@ Another way to use ton-nfc-client functions looks as follows.
 
 ```javascript
 nfcWrapper.getPublicKey(hdIndex)
-   .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result))
+   .then((result) => alert("Public key for HD path m/44'/396'/0'/0'/" + hdIndex + "' : " + result.message))
    .catch((e) => alert(e.message));
 ```
 
