@@ -131,7 +131,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"done","status":"ok"}
 
 
-- **async getDeviceLabel(): Promise< CardResponse >**
+- **async getDeviceLabel(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getDeviceLabelWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get device label. Now we do not use this device label stored in Coin Manager.
 
@@ -139,7 +140,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
         {"message":"005815A3942073A6ADC70C035780FDD09DF09AFEEA4173B92FE559C34DCA0550","status":"ok"}
 
-- **async getSeVersion(): Promise< CardResponse >**
+- **async getSeVersion(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getSeVersionWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get SE (secure element) version. 
 
@@ -148,7 +150,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"1008","status":"ok"}
 
 
-- **async getCsn(): Promise< CardResponse >**
+- **async getCsn(): Promise< CardResponse >**  _(available for Android and iOS)_<br/>
+  **async getCsnWithoutDialog(): Promise< CardResponse >**  _(available for Android)_
 
     This function is used to get CSN (SEID).
 
@@ -157,7 +160,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"11223344556677881122334455667788","status":"ok"}
 
 
-- **async getMaxPinTries(): Promise< CardResponse >**
+- **async getMaxPinTries(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getMaxPinTriesWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get retry maximum times of PIN. 
 
@@ -165,7 +169,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
         {"message":"10","status":"ok"}
 
-- **async getRemainingPinTries(): Promise< CardResponse >**
+- **async getRemainingPinTries(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getRemainingPinTriesWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get remaining retry times of PIN.
 
@@ -174,7 +179,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"10","status":"ok"}
 
 
-- **async getRootKeyStatus(): Promise< CardResponse >**
+- **async getRootKeyStatus(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getRootKeyStatusWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get the status of seed for ed25519: is it generated or not.
 
@@ -184,7 +190,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         b) If seed is not present: {"message":"not generated","status":"ok"}
 
 
-- **async resetWallet(): Promise< CardResponse >**
+- **async resetWallet(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async resetWalletWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to reset the wallet state to the initial state. After resetting the wallet, the default PIN value would be 5555. The remaining number of retry for PIN will be reset to MAX (default is 10). The seed for ed25519 will be erased. And after its calling any card operation (except of CoinManager stuff) will fail with 6F02 error. TON Labs wallet applet does not work without seed at all.
 
@@ -193,7 +200,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"done","status":"ok"}
 
 
-- **async getAvailableMemory(): Promise< CardResponse >**
+- **async getAvailableMemory(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getAvailableMemoryWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to obtain the amount of memory of the specified type that is available to the applet. Note that implementation-dependent memory overhead structures may also use the same memory pool.
         
@@ -202,7 +210,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         will be added soon
 
 
-- **async getAppsList(): Promise< CardResponse >**
+- **async getAppsList(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getAppsListWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get application list. It returns list of applets AIDs that were installed onto card.
 
@@ -212,7 +221,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
     _Note:_ Here 313132323333343435353636 is AID of our TON Labs wallet applet
 
-- **async generateSeed(pin: string): Promise< CardResponse >**
+- **async generateSeed(pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async generateSeedWithoutDialog(pin: string): Promise< CardResponse >** _(available for Android)_
 
     This function is used to generate the seed for ed25519 with RNG.
 
@@ -228,7 +238,8 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         If seed already exists and you call generateSeed then it will throw a error.
 
 
-- **async changePin(oldPin: string, newPin: string): Promise< CardResponse >**
+- **async changePin(oldPin: string, newPin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async changePinWithoutDialog(oldPin: string, newPin: string): Promise< CardResponse >** _(available for Android)_
 
     This function is used to change PIN.
 
@@ -248,7 +259,8 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
 
 ### Common functions
 
-- **async getTonAppletState(): Promise< CardResponse >**
+- **async getTonAppletState(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getTonAppletStateWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function returns state of TON Labs wallet applet.
 
@@ -257,7 +269,8 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
         {"message":"TonWalletApplet waits two-factor authentication.","status":"ok"}
         {"message":"TonWalletApplet is personalized.","status":"ok"}
 
-- **async getSerialNumber(): Promise< CardResponse >**
+- **async getSerialNumber(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async getSerialNumberWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function returns serial number (SN). It must be identical to SN printed on the card.
 
