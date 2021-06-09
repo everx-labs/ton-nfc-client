@@ -347,7 +347,7 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
 
 When user gets NFC TON Labs security card  at the first time, the applet on the card is in a special state. It waits for user authentication. And the main functionality of applet is blocked for now. At this point you may call all functions from previous subsections. And also some special functions are available to complete card activation. 
 
-- **turnOnWallet(newPin, authenticationPassword, commonSecret, initialVector)**
+- **async turnOnWalletWithPin(newPin: string, authenticationPassword: string, commonSecret: string, initialVector: string): Promise< CardResponse >**
 
     This function makes TON Labs wallet applet activation. After its succesfull call applet will be in working personalized state (so getTonAppletState() will return {"message":"TonWalletApplet is personalized.","status":"ok"}).
 
@@ -368,7 +368,7 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
 
         {"message":"TonWalletApplet is personalized.","status":"ok"}
 	
-- **turnOnWallet(authenticationPassword, commonSecret, initialVector)**
+- **async turnOnWallet(authenticationPassword: string, commonSecret: string, initialVector: string): Promise< CardResponse >**
 
     This function makes TON Labs wallet applet activation. After its succesfull call applet will be in working personalized state (so getTonAppletState() will return {"message":"TonWalletApplet is personalized.","status":"ok"}). It uses default PIN '5555'.
 
@@ -387,7 +387,7 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
 
         {"message":"TonWalletApplet is personalized.","status":"ok"}
 
-- **getHashOfEncryptedCommonSecret()**
+- **async getHashOfEncryptedCommonSecret(): Promise< CardResponse >**
 
     Return SHA256 hash of encrypted common secret.
 
@@ -395,7 +395,7 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
 
         {"message":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","status":"ok"}
 
-- **getHashOfEncryptedPassword()**
+- **async getHashOfEncryptedPassword(): Promise< CardResponse >**
 
     Return SHA256 hash of encrypted password.
 
@@ -403,7 +403,7 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
 
         {"message":"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3","status":"ok"}
 	
-- **getHashes()**
+- **async getHashes(): Promise< CardResponse >**
 
     Return SHA256 hashes of encrypted password and encrypted common secret.
 
@@ -416,7 +416,7 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
 
 Here there are functions related to ed25519 signature.
 
-- **getPublicKeyForDefaultPath()**
+- **async getPublicKeyForDefaultPath(): Promise< CardResponse >**
 
     Return public key for HD path m/44'/396'/0'/0'/0'
 
@@ -424,7 +424,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
-- **verifyPin(pin)**
+- **async verifyPin(pin: string): Promise< CardResponse >**
 
     Make pin verification.
 
@@ -436,7 +436,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-- **signForDefaultHdPath(data)**
+- **async signForDefaultHdPath(dataForSigning: string): Promise< CardResponse >**
 
     Make data signing by key for HD path m/44'/396'/0'/0'/0'. Prior to call this function you must call verifyPin.
 
@@ -451,7 +451,7 @@ Here there are functions related to ed25519 signature.
           "status":"ok"
          }
 
-- **sign(data, hdIndex)**
+- **async sign(dataForSigning: string, hdIndex: string): Promise< CardResponse >**
 
     Make data signing by key for HD path m/44'/396'/0'/0'/hdIndex'. Prior to call this function you must call verifyPin.
 
@@ -468,7 +468,7 @@ Here there are functions related to ed25519 signature.
          "status":"ok"
         }
 
-- **getPublicKey(hdIndex)**
+- **async getPublicKey(hdIndex: string): Promise< CardResponse >**
 
     Return public key for HD path m/44'/396'/0'/0'/hdIndex'.
 
@@ -480,9 +480,9 @@ Here there are functions related to ed25519 signature.
 
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
-- **verifyPinAndSignForDefaultHdPath(data, pin)**
+- **async verifyPinAndSignForDefaultHdPath(dataForSigning: string, pin: string): Promise< CardResponse >**
 
-    Make  pin verification data signing by key for HD path m/44'/396'/0'/0'/0'.
+    Make pin verification data signing by key for HD path m/44'/396'/0'/0'/0'.
 
     *Arguments requirements:*
 
@@ -497,7 +497,7 @@ Here there are functions related to ed25519 signature.
          "status":"ok"
         }
 
-- **verifyPinAndSign(data, hdIndex, pin)**
+- **async verifyPinAndSign(dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >**
 
     Make pin verification and data signing by key for HD path m/44'/396'/0'/0'/hdIndex'.
 
@@ -518,7 +518,7 @@ Here there are functions related to ed25519 signature.
 
 ### Functions related to card recovery module
 
-- **getRecoveryDataLen()**
+- **async getRecoveryDataLen(): Promise< CardResponse >**
 
     Read actual recovery data length.
 
@@ -526,7 +526,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"7","status":"ok"}
 
-- **getRecoveryDataHash()**
+- **async getRecoveryDataHash(): Promise< CardResponse >**
 
     Read recovery data SHA256 hash.
 
@@ -534,7 +534,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
-- **getRecoveryData()**
+- **async getRecoveryData(): Promise< CardResponse >**
 
     Read recovery data from TON Labs Wallet applet.
 
@@ -542,7 +542,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"00112233445566","status":"ok"}
 
-- **addRecoveryData(recoveryData)**
+- **async addRecoveryData(recoveryData: string): Promise< CardResponse > **
 
     Save recovery data into TON Labs Wallet applet. 
 
@@ -554,7 +554,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-- **isRecoveryDataSet()**
+- **async isRecoveryDataSet(): Promise< CardResponse >**
 
     Return 'true'/'false' if recovery data exists/does not exist.
 
@@ -563,7 +563,7 @@ Here there are functions related to ed25519 signature.
         1) If we added recovery data, then: {"message":"true","status":"ok"}
         2) If we did not add recovery data, then: {"message":"false","status":"ok"}
 
-- **resetRecoveryData()**
+- **async resetRecoveryData(): Promise< CardResponse >**
 
     Clear recovery data.
 
@@ -573,7 +573,7 @@ Here there are functions related to ed25519 signature.
 
 ### Functions related to card keychain
 
-- **resetKeyChain()**
+- **async resetKeyChain(): Promise< CardResponse >**
 
     Clear keychain, i.e. remove all stored keys.
 
@@ -581,14 +581,14 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-- **getKeyChainDataAboutAllKeys()**
+- **async getKeyChainDataAboutAllKeys(): Promise< CardResponse >**
 
     Return list of pairs (keyHmac, keyLength)  in json format.
 
     *Exemplary response:*
 
         {
-            "keysData":
+            "message":
                 [
                     {"hmac":"D7E0DFB66A2F72AAD7D66D897C805D307EE1F1CB8077D3B8CF1A942D6A5AC2FF","length":"6"},           
                     {"hmac":"D31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C0","length":"3"}
@@ -596,7 +596,7 @@ Here there are functions related to ed25519 signature.
             "status":"ok"
          }
 
-- **getKeyChainInfo()**
+- **async getKeyChainInfo(): Promise< CardResponse >**
 
     Return json characterizing the state of keychain. 
 
@@ -604,7 +604,7 @@ Here there are functions related to ed25519 signature.
 
         {"numberOfKeys":0,"occupiedSize":0,"freeSize":32767,"status":"ok"}
 
-- **getNumberOfKeys()**
+- **async getNumberOfKeys(): Promise< CardResponse >**
 
     Return number of keys in card keychain.
 
@@ -612,7 +612,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"1","status":"ok"}
 
-- **getOccupiedStorageSize()**
+- **async getOccupiedStorageSize(): Promise< CardResponse >**
 
     Return the volume of occupied size in card keychain (in bytes).
 
@@ -620,7 +620,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"0","status":"ok"}
 
-- **getFreeStorageSize()**
+- **async getFreeStorageSize(): Promise< CardResponse >**
 
     Return the volume of free size in card keychain (in bytes).
 
@@ -628,7 +628,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"32767","status":"ok"}
 
-- **getKeyFromKeyChain(keyHmac)**
+- **async getKeyFromKeyChain(keyHmac: string): Promise< CardResponse >**
 
     Read key from card keychain based on its hmac.
 
@@ -640,7 +640,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"001122334455","status":"ok"}
 
-- **addKeyIntoKeyChain(newKey)**
+- **async addKeyIntoKeyChain(newKey: string): Promise< CardResponse >**
 
     Save new key into card keychain.
 
@@ -654,7 +654,7 @@ Here there are functions related to ed25519 signature.
 
     where "message" contains hmac of newKey.
 
-- **deleteKeyFromKeyChain(keyHmac)**
+- **async deleteKeyFromKeyChain(keyHmac: string): Promise< CardResponse >**
 
     Delete key from card keychain based on its hmac.
 
@@ -668,7 +668,7 @@ Here there are functions related to ed25519 signature.
 
     where "message" field contains the number of remaining keys
 
-- **finishDeleteKeyFromKeyChainAfterInterruption()**
+- **async finishDeleteKeyFromKeyChainAfterInterruption(): Promise< CardResponse >**
 
     Finish the process of deleting key from card keychain. It may be necessary if previous DELETE operation was occassionally interrupted (like card disconnection).
 
@@ -678,7 +678,7 @@ Here there are functions related to ed25519 signature.
 
     where "message" field contains the number of remaining keys
 
-- **changeKeyInKeyChain(newKey, oldKeyHmac)**
+- **async changeKeyInKeyChain(newKey: string, oldKeyHmac: string): Promise< CardResponse >**
 
     Replace existing key by new key. The length of new key must be equal to length of old key.
 
@@ -694,7 +694,7 @@ Here there are functions related to ed25519 signature.
 
     where "message" contains hmac of newKey.
 
-- **getIndexAndLenOfKeyInKeyChain(keyHmac)**
+- **async getIndexAndLenOfKeyInKeyChain(keyHmac: string): Promise< CardResponse >**
 
     Read index (inside internal applet storage) and length of key by its hmac.
 
@@ -706,7 +706,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"{\"index\":1,\"length\":3}","status":"ok"}
 
-- **checkAvailableVolForNewKey(keySize)**
+- **async checkAvailableVolForNewKey(keySize: number): Promise< CardResponse >**
 
     Check if there is enough free volume in card keychain to add new key of length = keySize. If there is no enough space then it throws an exception
 
@@ -718,7 +718,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-- **checkKeyHmacConsistency(keyHmac)**
+- **async checkKeyHmacConsistency(keyHmac: string): Promise< CardResponse >**
 
     Checks if card's keychain stores a key with such keyHmac and if this hmac really corresponds to the key.
 
@@ -726,7 +726,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"done","status":"ok"}
 
-- **getHmac(index)**
+- **async getHmac(index: string): Promise< CardResponse >**
 
     Get hmac of key in card keychain by its index. 
 
@@ -738,7 +738,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","status":"ok"}
 
-- **getDeleteKeyRecordNumOfPackets()**
+- **async getDeleteKeyRecordNumOfPackets(): Promise< CardResponse >**
 
     Returns the number of keys records packets that must be deleted to finish deleting of key.
 
@@ -746,7 +746,7 @@ Here there are functions related to ed25519 signature.
 
         {"message":"2","status":"ok"}
 
-- **getDeleteKeyChunkNumOfPackets()**
+- **async getDeleteKeyChunkNumOfPackets(): Promise< CardResponse >**
 
     Returns the number of keys chunks packets that must be deleted to finish deleting of key.
 
