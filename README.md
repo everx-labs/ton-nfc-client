@@ -259,29 +259,30 @@ _Note:_ Functions _verifyPinAndSignForDefaultHdPath_, _verifyPinAndSign_ are pro
 
 ## Card keychain
 
-Detailed information about card keychain is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give exemplary code for React native app. The below snippet demonstrates the work with keychain. We add one key and then retrieve it from the card. Then we replace it by new key and in the end we delete the key.
+The detailed information about card keychain is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give the exemplary code for React native app. The below snippet demonstrates the work with keychain. We add one key and then retrieve it from the card. Then we replace it by new key and in the end we delete the key.
 
 ```javascript
 try {
-	let keyLen = 8192
-  	let key = HexHelper.genHexString(2*keyLen)
+  	const key = "B81F0E0E07416DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A";
+  	let result = await nfcWrapper.addKeyIntoKeyChain(key);
+	const keyHmac = result.message;
+	await new Promise(r => setTimeout(r, 5000));
+	result = await nfcWrapper.getKeyFromKeyChain(keyHmac);
+	const keyFromCard = result.message;
+	const newKey = "AA1F0E0E07416DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F25";
+  	await new Promise(r => setTimeout(r, 5000));
+	result = await nfcWrapper.changeKey(newKey, keyHmac);
+	const newKeyHmac = result.message;
+	await new Promise(r => setTimeout(r, 5000));
+	result = await nfcWrapper.getNumberOfKeys();
+	let numberOfKeys = result.message;
+  	console.log("Number of keys = " + numberOfKeys);
+	await new Promise(r => setTimeout(r, 5000));
+  	await nfcWrapper.deleteKeyFromKeyChain(newKeyHmac);	
 	await new Promise(r => setTimeout(r, 5000))
-  	let keyHmac = await NfcCardModule.addKeyIntoKeyChain(key)
-	await new Promise(r => setTimeout(r, 5000))
-	let keyFromCard = await NfcCardModule.getKeyFromKeyChain(keyHmac)
-  	//assertTrue(key === keyFromCard)
-	let newKey = HexHelper.genHexString(2*keyLen)
-  	await new Promise(r => setTimeout(r, 5000))
-	var newKeyHmac = await NfcCardModule.changeKey(newKey, keyHmac)
-	await new Promise(r => setTimeout(r, 5000))
-	let num1 = await NfcCardModule.getNumberOfKeys()
-  	console.log("Number of keys = " + result)
-	await new Promise(r => setTimeout(r, 5000))
-  	await NfcCardModule.deleteKeyFromKeyChain(newKeyHmac)	
-	await new Promise(r => setTimeout(r, 5000))
-	let num2 = await NfcCardModule.getNumberOfKeys()
-	console.log("Number of keys = " + result)
-	//assertTrue(num2 === num1 - 1)
+	result = await nfcWrapper.getNumberOfKeys();
+	numberOfKeys = result.message;
+	console.log("Number of keys = " + numberOfKeys);
 }
 catch (e) {
   console.log(e.message)
