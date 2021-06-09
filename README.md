@@ -152,45 +152,46 @@ If you do some time consuming actions between calls of two card operations, then
 Detailed information about recovery functionality is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give exemplary code for React native app. There is a snippet demonstrating the structure of recovery data and the way of adding it into TON Labs wallet applet.
 
 ```javascript
-var aesjs = require('aes-js')
+let aesjs = require('aes-js');
 try {
 	// get aesKeyHexString and testData from TON Labs service
-	var aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString)
+	const aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString);
 	//prepare json string containing recovery data, get
-	var recoveryDataJson = JSON.stringify( {
+	const recoveryDataJson = JSON.stringify( {
             surfPublicKey:  testData.multisig.keyPair.public,
             multisigAddress:  testData.multisig.address,
             p1: testData.cards[0].P1, // authenticationPassword
             cs: testData.cards[0].CS // commonSecret
-        })
-	var recoveryDataBytes = aesjs.utils.utf8.toBytes(recoveryDataJson)
-	var aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5))
-  	var encryptedBytes = aesCtr.encrypt(recoveryDataBytes)
-	var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes)
-	var addRes = await NfcCardModule.addRecoveryData(encryptedHex)
-  	console.log("add Recovery data into card result  = " + addRes)
+        });
+	const recoveryDataBytes = aesjs.utils.utf8.toBytes(recoveryDataJson);
+	const aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5));
+  	const encryptedBytes = aesCtr.encrypt(recoveryDataBytes);
+	const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+	const result = await nfcWrapper.addRecoveryData(encryptedHex);
+	const addRes = result.message;
+  	console.log("Add recovery data into card result  = " + addRes);
 }
 catch (e) {
-  	console.log(e.message)
+  	console.log(e.message);
 }
 ```
 
 There is an exemplary snippet demonstrating how to get recovery data from TON Labs wallet applet.
 
 ```javascript
-var aesjs = require('aes-js')
 try {
 	// get aesKeyHexString from somewhere
-	var aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString)
-  	var encryptedRecoveryDataFromSecurityCard = await NfcCardModule.getRecoveryData()
-	var encryptedRecoveryDataFromSecurityCardBytes =  aesjs.utils.hex.toBytes(encryptedRecoveryDataFromSecurityCard)
-	var aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5))
-  	var decryptedBytes = aesCtr.decrypt(encryptedRecoveryDataFromSecurityCardBytes)
-  	var decryptedRcoveryDataJson = aesjs.utils.utf8.fromBytes(decryptedBytes)
-  	console.log("Decrypted recovery data : " + decryptedRcoveryDataJson)
+	const aesKeyBytes = aesjs.utils.hex.toBytes(aesKeyHexString);
+	const result = await nfcWrapper.getRecoveryData();
+  	const encryptedRecoveryDataFromSecurityCard = result.message;
+	const encryptedRecoveryDataFromSecurityCardBytes =  aesjs.utils.hex.toBytes(encryptedRecoveryDataFromSecurityCard);
+	const aesCtr = new aesjs.ModeOfOperation.ctr(aesKeyBytes, new aesjs.Counter(5));
+  	const decryptedBytes = aesCtr.decrypt(encryptedRecoveryDataFromSecurityCardBytes);
+  	const decryptedRcoveryDataJson = aesjs.utils.utf8.fromBytes(decryptedBytes);
+  	console.log("Decrypted recovery data : " + decryptedRcoveryDataJson);
 }
 catch (e) {
-  console.log(e.message)
+  console.log(e.message);
 }
 ```
 
