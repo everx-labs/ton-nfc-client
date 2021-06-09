@@ -180,7 +180,7 @@ catch (e) {
 }
 ```
 
-There is an exemplary snippet demonstrating how to get recovery data from TON Labs wallet applet.
+There is an exemplary snippet demonstrating how to get the recovery data from TON Labs wallet applet.
 
 ```javascript
 try {
