@@ -23,7 +23,7 @@ nfcWrapper.getPublicKey(hdIndex)
    .catch((e) => alert(e.message));
 ```
 
-Each API function returns _Promise<CardResponse>_, where _CardResponse_ is defined as follows.
+Each API function returns _Promise< CardResponse >_, where _CardResponse_ is defined as follows.
 	
 ```javascript
 export default class class CardResponse {
