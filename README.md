@@ -289,7 +289,7 @@ catch (e) {
 }
 ```
 
-_Note:_  await new Promise(r => setTimeout(r, 5000)) is necessary for running app on iPhone since multiple successive NFC sessions establishing may cause a trouble with system recourses. We need to make a pause between finishing one NFC session and starting a new NFC session. For Android it is not necessary.
+_Note:_  await new Promise(r => setTimeout(r, 5000)) is necessary for running app on iPhone since multiple successive NFC sessions establishing may cause a trouble with system resourses. We need to make a pause between finishing one NFC session and starting a new NFC session. For Android it's not necessary.
 
 ## Full functions list 
 
