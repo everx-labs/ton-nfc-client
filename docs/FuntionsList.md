@@ -85,7 +85,7 @@ For Android for the majority of card operations there is a pair of functions. Th
 
 Here there are functions to check/change the state of your NFC hardware.  
 
-- **async checkIfNfcSupported(): Promise< CardResponse >**
+- **async checkIfNfcSupported(): Promise< CardResponse >**  _(available for Android and iOS)_
 
     Check if your Android/iPhone device has NFC hardware. 
 
@@ -94,18 +94,18 @@ Here there are functions to check/change the state of your NFC hardware.
         {"message":"true","status":"ok"}
         {"message":"false","status":"ok"}
 
-- **async checkIfNfcEnabled(): Promise< CardResponse >**
+- **async checkIfNfcEnabled(): Promise< CardResponse >** _(available for Android)_
 
-    Works only for Android. Check if NFC option is turned on for your Android device.
+    Check if NFC option is turned on for your Android device.
 
     *Responses:*
 
     	{"message":"true","status":"ok"}
     	{"message":"false","status":"ok"}
 
-- **async openNfcSettings(): Promise< CardResponse >**
+- **async openNfcSettings(): Promise< CardResponse >** _(available for Android)_
 
-     Works only for Android. Open "Settings" panel to mantain NFC option.
+     Open "Settings" panel to mantain NFC option.
 
     *Response:*
 
@@ -116,8 +116,8 @@ Here there are functions to check/change the state of your NFC hardware.
 
 Here there are functions to call APDU commands of CoinManager. CoinManager is an additional software integrated into NFC TON Labs Security card. It is responsible for maintaining ed25519 seed, related PIN and it provides some auxiliary operations. 
 
-- **async setDeviceLabel(label: string): Promise< CardResponse >**<br/>
-  **async setDeviceLabelWithoutDialog(label: string): Promise< CardResponse >** _(available only for Android)_
+- **async setDeviceLabel(label: string): Promise< CardResponse >** _(available for Android and iOS)_<br/> 
+  **async setDeviceLabelWithoutDialog(label: string): Promise< CardResponse >** _(available for Android)_
 
     This function is used to set the device label. Now we do not use this device label stored in Coin Manager.
 
