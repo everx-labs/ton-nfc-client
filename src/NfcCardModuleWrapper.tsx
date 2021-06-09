@@ -111,6 +111,44 @@ export default class NfcCardModuleWrapper {
         )
     }
 
+    /* NFC related functions */
+
+    async checkIfNfcSupported(): Promise<CardResponse> {
+        if (Platform.OS === 'android') {
+            try {
+                const response = await NfcCardModule.checkIfNfcSupported()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error('This function is available only for Android OS!')
+    }
+
+    async checkIfNfcEnabled(): Promise<CardResponse> {
+        if (Platform.OS === 'android') {
+            try {
+                const response = await NfcCardModule.checkIfNfcEnabled()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error('This function is available only for Android OS!')
+    }
+
+    async openNfcSettings(): Promise<CardResponse> {
+        if (Platform.OS === 'android') {
+            try {
+                const response = await NfcCardModule.openNfcSettings()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error('This function is available only for Android OS!')
+    }
+
     /* Coin manager functions */
 
     async getMaxPinTries(): Promise<CardResponse> {

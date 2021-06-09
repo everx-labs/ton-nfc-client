@@ -12,6 +12,15 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError, NfcCardSigningBox} from 'ton-nfc-client';
 
+const { 
+  TonClient, 
+  messageSourceEncoded, 
+  messageSourceEncodingParams, 
+  signerSigningBox, 
+  abiContract, 
+  signerNone 
+} = require("@tonclient/core");
+
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
 let signingBox  = new NfcCardSigningBox();
