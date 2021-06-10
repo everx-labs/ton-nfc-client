@@ -10,7 +10,8 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError, NfcCardSigningBox} from 'ton-nfc-client';
+import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError, NfcCardSigningBox,
+DONE_MSG, FALSE_MSG} from 'ton-nfc-client';
 
 const { 
   TonClient, 
@@ -141,7 +142,10 @@ export default class App extends Component{
                 "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4",
                 "504394802433901126813236"
               )
-            .then((result) => alert("createKeyForHmac : " + result.message)).catch((e) => alert(e.message))} title="createKeyForHmac"/>
+            .then((result) => {
+              alert("createKeyForHmac : " + result.message)
+              console.log(result.message === DONE_MSG)
+            }).catch((e) => alert(e.message))} title="createKeyForHmac"/>
         </View>
 
         <View>
