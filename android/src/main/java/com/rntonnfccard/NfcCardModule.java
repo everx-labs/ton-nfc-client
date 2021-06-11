@@ -82,7 +82,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
                 nfcApi = new NfcApi(getReactApplicationContext());
             }
 
-            this.eventEmitter = new EventEmitter(reactContext);
+            eventEmitter = new EventEmitter(reactContext);
 
             IntentFilter filter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
             this.reactContext.registerReceiver(mReceiver, filter);

@@ -65,9 +65,10 @@
   },
   "dependencies": {
     "@tonclient/core": "1.15.0",
-    "@tonclient/lib-node": "1.15.0",
-    "@tonclient/lib-react-native": "1.15.0",
-    "@tonclient/lib-web": "1.15.0"
+        "@tonclient/lib-node": "1.15.0",
+        "@tonclient/lib-react-native": "1.15.0",
+        "@tonclient/lib-web": "1.15.0"
+
   },
   "repository": {
     "type": "git",
