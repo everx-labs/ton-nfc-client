@@ -11,7 +11,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError, NfcCardSigningBox,
-DONE_MSG, FALSE_MSG} from 'ton-nfc-client';
+DONE_MSG, FALSE_MSG, WAITE_AUTHENTICATION_MSG} from 'ton-nfc-client';
 
 const { 
   TonClient, 
@@ -134,7 +134,18 @@ export default class App extends Component{
         <View>
               <Button onPress={() => nfcCardModuleWrapper.getMaxPinTriesWithoutDialog()
             .then((result) => alert("getMaxPinTries : " + result.message)).catch((e) => alert(e.message))} title="getMaxPinTries"/>
-        </View>   
+        </View>  
+
+
+        <View>
+              <Button onPress={() => nfcCardModuleWrapper.getTonAppletState()
+            .then((result) => {
+              alert("state: " + result.message)
+              console.log(result.message === WAITE_AUTHENTICATION_MSG)
+            }).catch((e) => alert(e.message))} title="getTonAppletState"/>
+        </View>
+
+
 
         <View>
               <Button onPress={() => nfcCardModuleWrapper.createKeyForHmac(
