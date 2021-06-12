@@ -42,6 +42,24 @@ export default class class CardResponse {
 
 _CardResponse_ contains all possible fields that can be met in responses from the card. But they are not all used at the same time. Each card response has _status_ field obligatory. And the most common typical response from the card has _message_ field containing payload. In this case other fields in _CardResponse_ are empty and contains just an empty string. But for some rare functions _message_ field will be empty and payload is put into another fields. In below functions list you may find all necessary details.
 
+Below there are constants that represents the most common _message_ field values that you can meet in responses from the card. You can use it in your app.
+
+```javascript
+const SUCCESS_STATUS = "ok";
+const FAIL_STATUS = "fail";
+const DONE_MSG = "done";
+const FALSE_MSG = "false";
+const TRUE_MSG = "true";
+const GENERATED_MSG = "generated";
+const NOT_GENERATED_MSG = "not generated";
+const HMAC_KEYS_ARE_NOT_FOUND_MSG = "HMAC-SHA256 keys are not found.";
+const INSTALLED_STATE_MSG =  "TonWalletApplet is invalid (is not personalized)";
+const PERSONALIZED_STATE_MSG = "TonWalletApplet is personalized.";
+const WAITE_AUTHENTICATION_MSG =  "TonWalletApplet waits two-factor authentication.";
+const DELETE_KEY_FROM_KEYCHAIN_MSG = "TonWalletApplet is personalized and waits finishing key deleting from keychain.";
+const BLOCKED_MSG = "TonWalletApplet is blocked.";
+```
+
 _Note_: Below we specify how CardResponse looks like for each API function. And for simplicity of representation we omit empty fields of CardResponse everywhere.
 
 All API functions can throw two main types of errors.	
