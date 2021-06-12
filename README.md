@@ -96,20 +96,20 @@ To get more information about responses formats and errors please visit this pag
 Detailed information about card activation is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md), [card activation doc](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/CardActivation.md). Here we just give exemplary code for React native app.
 
 ```javascript
-import {NfcCardModuleWrapper} from 'ton-nfc-client';
+import {NfcCardModuleWrapper, WAITE_AUTHENTICATION_MSG, NOT_GENERATED_MSG} from 'ton-nfc-client';
 
 const nfcWrapper = new NfcCardModuleWrapper();
 try {
 	let result = await nfcWrapper.getRootKeyStatus();
 	const seedStatus = result.message;
 	const pin = "5555";	
-	if (seedStatus == "not generated") {
+	if (seedStatus == NOT_GENERATED_MSG) {
 		await nfcWrapper.generateSeed(pin);
 	}
            
 	result = await nfcWrapper.getTonAppletState();
 	const state = result.message;
-	if (state !== "TonWalletApplet waits two-factor authentication.") {
+	if (state !== WAITE_AUTHENTICATION_MSG) {
 		throw "Incorret applet state!";
 	}
 
