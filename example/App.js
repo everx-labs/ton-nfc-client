@@ -10,21 +10,21 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError, NfcCardSigningBox,
+import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError, /* NfcCardSigningBox,*/
 DONE_MSG, FALSE_MSG, WAITE_AUTHENTICATION_MSG} from 'ton-nfc-client';
 
-const { 
+/*const { 
   TonClient, 
   messageSourceEncoded, 
   messageSourceEncodingParams, 
   signerSigningBox, 
   abiContract, 
   signerNone 
-} = require("@tonclient/core");
+} = require("@tonclient/core");*/
 
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
-let signingBox  = new NfcCardSigningBox();
+//let signingBox  = new NfcCardSigningBox();
 
 export default class App extends Component{
   state = {
@@ -105,26 +105,41 @@ export default class App extends Component{
         <View>
               <Button onPress={async () => {
 
+
+
                 let result = await nfcCardModuleWrapper.getSerialNumber();
                 alert("getSerialNumber 1 : " + result.message);
-                await new Promise(r => setTimeout(r, 7000))
 
+                try{
+                  result = await nfcCardModuleWrapper.getSault();
+                  alert("getSault : " + result.message);
+                }
+                catch(e) {
+                  console.log("fail is here44775")
+                  console.log(e.message)
+                }
+                //await new Promise(r => setTimeout(r, 4000))
+                console.log("fail is here44445")
+                
                 result = await nfcCardModuleWrapper.getSerialNumber();
+                console.log("fail is here2")
                 alert("getSerialNumber 2 : " + result.message);
-
-                await new Promise(r => setTimeout(r, 7000))
 
                 result = await nfcCardModuleWrapper.getSerialNumber();
                 alert("getSerialNumber 3 : " + result.message);
 
-                await new Promise(r => setTimeout(r, 7000))
+                try{
+                  result = await nfcCardModuleWrapper.getSault();
+                  alert("getSault 2: " + result.message);
+                }
+                catch(e) {
+                  console.log("fail 2 is here")
+                  console.log(e.message)
+                }
 
-                result = await nfcCardModuleWrapper.getSault();
-                alert("getSault : " + result.message);
+                result = await nfcCardModuleWrapper.getSerialNumber();
+                alert("getSerialNumber 3 : " + result.message);
                 
-                
-                //nfcCardModuleWrapper.getSerialNumber()
-           // .then((result) => alert("getSerialNumber : " + result.message)).catch((e) => alert(e.message))
             }} title="getSerialNumber"/>
         </View>
         <View>
@@ -138,11 +153,18 @@ export default class App extends Component{
 
 
         <View>
-              <Button onPress={() => nfcCardModuleWrapper.getTonAppletState()
-            .then((result) => {
-              alert("state: " + result.message)
-              console.log(result.message === WAITE_AUTHENTICATION_MSG)
-            }).catch((e) => alert(e.message))} title="getTonAppletState"/>
+              <Button onPress={async () => {
+                try {
+                  let result = await nfcCardModuleWrapper.getTonAppletState();
+                  console.log("state: " + result.message);
+                 // await new Promise(r => setTimeout(r, 5000));
+                  result = await nfcCardModuleWrapper.getTonAppletState();
+                  console.log("state: " + result.message);
+                }
+                catch(e){
+                  console.log(e.message)
+                }
+              }} title="getTonAppletState5"/>
         </View>
 
 
@@ -163,7 +185,7 @@ export default class App extends Component{
               <Button onPress={() => nfcCardModuleWrapper.turnOnWallet("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
               "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4",
               "1A550F4B413D0E971C28293F9183EA8A")
-            .then((result) => alert("turnOnWallet : " + result.message)).catch((e) => alert(e.message))} title="turnOnWallet"/>
+            .then((result) => alert("turnOnWallet : " + result.message)).catch((e) => alert(e.errorCode))} title="turnOnWallet"/>
         </View>
 
         <View>
