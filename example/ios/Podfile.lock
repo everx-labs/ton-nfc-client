@@ -256,8 +256,8 @@ PODS:
     - React-jsi (= 0.63.4)
   - ton-nfc-client (1.0.0):
     - React
-    - TonNfcClientSwift (~> 1.0.0)
-  - TonNfcClientSwift (1.0.0):
+    - TonNfcClientSwift (~> 1.0.1)
+  - TonNfcClientSwift (1.0.1):
     - PromiseKit (~> 6.8)
   - Yoga (1.14.0)
 
@@ -382,8 +382,8 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  ton-nfc-client: 1f687c129a6affec2b0f7c287e782d972357573d
-  TonNfcClientSwift: 0203f0879c5ae53aa7758ea7a9bcb3968ae68c9e
+  ton-nfc-client: f9c51e0291ea55eae4ac2610d4c61c9fb105178d
+  TonNfcClientSwift: 415471b0f20c40d77ac3711f593bbbb69d6cb4d7
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: 579f438ef5cda6141cc5db59ab3292bf9519d8f1
