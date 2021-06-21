@@ -11,7 +11,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError, /* NfcCardSigningBox,*/
-DONE_MSG, FALSE_MSG, WAITE_AUTHENTICATION_MSG} from 'ton-nfc-client';
+  CardResponseMessage, CardStates, CardResponseStatus} from 'ton-nfc-client';
 
 /*const { 
   TonClient, 
@@ -159,12 +159,13 @@ export default class App extends Component{
                   console.log("state: " + result.message);
                  // await new Promise(r => setTimeout(r, 5000));
                   result = await nfcCardModuleWrapper.getTonAppletState();
+                  console.log(result.message === CardStates.WaiteAuthentication)
                   console.log("state: " + result.message);
                 }
                 catch(e){
                   console.log(e.message)
                 }
-              }} title="getTonAppletState5"/>
+              }} title="getTonAppletState"/>
         </View>
 
 
@@ -177,7 +178,7 @@ export default class App extends Component{
               )
             .then((result) => {
               alert("createKeyForHmac : " + result.message)
-              console.log(result.message === DONE_MSG)
+              console.log(result.message === CardResponseMessage.Done)
             }).catch((e) => alert(e.message))} title="createKeyForHmac"/>
         </View>
 

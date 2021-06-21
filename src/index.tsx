@@ -5,20 +5,27 @@ import NfcNativeModuleError from './NfcNativeModuleError'
 import CardError from './CardError'
 import NfcCardSigningBox from './NfcCardSigningBox'
 
-const SUCCESS_STATUS = "ok";
-const FAIL_STATUS = "fail";
-const DONE_MSG = "done";
-const FALSE_MSG = "false";
-const TRUE_MSG = "true";
-const GENERATED_MSG = "generated";
-const NOT_GENERATED_MSG = "not generated";
-const HMAC_KEYS_ARE_NOT_FOUND_MSG = "HMAC-SHA256 keys are not found.";
+enum CardStates {
+    Installed  = 'TonWalletApplet is invalid (is not personalized)',
+    Personalized = 'TonWalletApplet is personalized.',
+    WaiteAuthentication = 'TonWalletApplet waits two-factor authentication.',
+    DeleteKeyFromKeychain = 'TonWalletApplet is personalized and waits finishing key deleting from keychain.',
+    Blocked = 'TonWalletApplet is blocked.'
+}
 
-const INSTALLED_STATE_MSG =  "TonWalletApplet is invalid (is not personalized)";
-const PERSONALIZED_STATE_MSG = "TonWalletApplet is personalized.";
-const WAITE_AUTHENTICATION_MSG =  "TonWalletApplet waits two-factor authentication.";
-const DELETE_KEY_FROM_KEYCHAIN_MSG = "TonWalletApplet is personalized and waits finishing key deleting from keychain.";
-const BLOCKED_MSG = "TonWalletApplet is blocked.";
+enum CardResponseMessage {
+    Done = 'done',
+    False = 'false',
+    True = 'true',
+    Generated = 'generated',
+    NotGenerated = 'not generated',
+    HmacKeysNotFound = 'HMAC-SHA256 keys are not found'
+}
+
+enum CardResponseStatus {
+    Success = 'ok',
+    Fail = 'fail'
+}
 
 export {
     NfcCardModuleWrapper,
@@ -27,17 +34,7 @@ export {
     CardError,
     NfcNativeModuleError,
     NfcCardSigningBox,
-    SUCCESS_STATUS,
-    FAIL_STATUS,
-    DONE_MSG,
-    FALSE_MSG,
-    TRUE_MSG,
-    GENERATED_MSG,
-    NOT_GENERATED_MSG,
-    HMAC_KEYS_ARE_NOT_FOUND_MSG,
-    INSTALLED_STATE_MSG,
-    PERSONALIZED_STATE_MSG,
-    WAITE_AUTHENTICATION_MSG,
-    DELETE_KEY_FROM_KEYCHAIN_MSG,
-    BLOCKED_MSG
+    CardResponseMessage,
+    CardResponseStatus,
+    CardStates
 }
