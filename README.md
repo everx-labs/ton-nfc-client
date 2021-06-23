@@ -96,20 +96,20 @@ To get more information about responses formats and errors please visit this pag
 Detailed information about card activation is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md), [card activation doc](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/docs/CardActivation.md). Here we just give exemplary code for React native app.
 
 ```javascript
-import {NfcCardModuleWrapper, WAITE_AUTHENTICATION_MSG, NOT_GENERATED_MSG} from 'ton-nfc-client';
+import {NfcCardModuleWrapper, CardResponseMessage, CardStates, CardResponseStatus} from 'ton-nfc-client';
 
 const nfcWrapper = new NfcCardModuleWrapper();
 try {
 	let result = await nfcWrapper.getRootKeyStatus();
 	const seedStatus = result.message;
 	const pin = "5555";	
-	if (seedStatus == NOT_GENERATED_MSG) {
+	if (seedStatus == CardResponseMessage.NotGenerated) {
 		await nfcWrapper.generateSeed(pin);
 	}
            
 	result = await nfcWrapper.getTonAppletState();
 	const state = result.message;
-	if (state !== WAITE_AUTHENTICATION_MSG) {
+	if (state !== CardStates.WaiteAuthentication) {
 		throw "Incorret applet state!";
 	}
 
@@ -132,7 +132,7 @@ catch (e) {
 }
 ```
 
-This code must work without any problems for Android. You connect NFC card only once, then run this code via pressing some button for example. And it does all operations for you. However, it is more complicated for iOS. Each time when we call _nfcWrapper.someFunction()_ iPhone establishes new NFC session. You must reconnect the card each time. So in the above code snippet we need to reconnect the card 4-5 times. More over the above code will not work as it is. After finishing one NFC session iPhone need 5-10 seconds to be ready to establish new NFC session. So the following code may produce error "System resources unavailable" for iPhone.
+<!--This code must work without any problems for Android. You connect NFC card only once, then run this code via pressing some button for example. And it does all operations for you. However, it is more complicated for iOS. Each time when we call _nfcWrapper.someFunction()_ iPhone establishes new NFC session. You must reconnect the card each time. So in the above code snippet we need to reconnect the card 4-5 times. More over the above code will not work as it is. After finishing one NFC session iPhone need 5-10 seconds to be ready to establish new NFC session. So the following code may produce error "System resources unavailable" for iPhone.
 
 ```javascript
 await nfcWrapper.getHashes();
@@ -146,7 +146,7 @@ await nfcWrapper.getHashes();
 await new Promise(r => setTimeout(r, 5000));
 await nfcWrapper.turnOnWallet(authenticationPassword, commonSecret, initialVector);
 ```
-If you do some time consuming actions between calls of two card operations, then additional delay is not required.
+If you do some time consuming actions between calls of two card operations, then additional delay is not required.-->
 
 ## Recovery module
 
