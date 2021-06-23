@@ -240,7 +240,6 @@ try {
 	const pin = "5555";
 	let result = await nfcWrapper.verifyPinAndSignForDefaultHdPath(msg, pin);
 	const signature = result.message;
-  	await new Promise(r => setTimeout(r, 5000)); // for iOS
 	result = await nfcWrapper.getPublicKeyForDefaultPath();
   	const pubKey = result.message;
 	const msgBytes = hexStringToByteArray(msg);
@@ -260,27 +259,22 @@ _Note:_ Functions _verifyPinAndSignForDefaultHdPath_, _verifyPinAndSign_ are pro
 
 ## Card keychain
 
-The detailed information about card keychain is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give the exemplary code for React native app. The below snippet demonstrates the work with keychain. We add one key and then retrieve it from the card. Then we replace it by new key and in the end we delete the key.
+The detailed information about card keychain is available here [Android readme](https://github.com/tonlabs/TonNfcClientAndroid/blob/master/README.md), [iOS readme](https://github.com/tonlabs/TonNfcClientSwift/blob/master/README.md). Here we just give the exemplary code for React native app. The below snippet demonstrates the work with keychain. We add one key and then retrieve it from the card. Then we replace it by a new key of the same length. In the end we delete the key.
 
 ```javascript
 try {
   	const key = "B81F0E0E07416DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A";
   	let result = await nfcWrapper.addKeyIntoKeyChain(key);
 	const keyHmac = result.message;
-	await new Promise(r => setTimeout(r, 5000));
 	result = await nfcWrapper.getKeyFromKeyChain(keyHmac);
 	const keyFromCard = result.message;
 	const newKey = "AA1F0E0E07416DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F25";
-  	await new Promise(r => setTimeout(r, 5000));
 	result = await nfcWrapper.changeKey(newKey, keyHmac);
 	const newKeyHmac = result.message;
-	await new Promise(r => setTimeout(r, 5000));
 	result = await nfcWrapper.getNumberOfKeys();
 	let numberOfKeys = result.message;
   	console.log("Number of keys = " + numberOfKeys);
-	await new Promise(r => setTimeout(r, 5000));
   	await nfcWrapper.deleteKeyFromKeyChain(newKeyHmac);	
-	await new Promise(r => setTimeout(r, 5000))
 	result = await nfcWrapper.getNumberOfKeys();
 	numberOfKeys = result.message;
 	console.log("Number of keys = " + numberOfKeys);
@@ -290,7 +284,7 @@ catch (e) {
 }
 ```
 
-_Note:_  await new Promise(r => setTimeout(r, 5000)) is necessary for running app on iPhone since multiple successive NFC sessions establishing may cause a trouble with system resourses. We need to make a pause between finishing one NFC session and starting a new NFC session. For Android it's not necessary.
+<!--_Note:_  await new Promise(r => setTimeout(r, 5000)) is necessary for running app on iPhone since multiple successive NFC sessions establishing may cause a trouble with system resourses. We need to make a pause between finishing one NFC session and starting a new NFC session. For Android it's not necessary.-->
 
 ## Full functions list 
 
