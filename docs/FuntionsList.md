@@ -42,22 +42,37 @@ export default class class CardResponse {
 
 _CardResponse_ contains all possible fields that can be met in responses from the card. But they are not all used at the same time. Each card response has _status_ field obligatory. And the most common typical response from the card has _message_ field containing payload. In this case other fields in _CardResponse_ are empty and contains just an empty string. But for some rare functions _message_ field will be empty and payload is put into another fields. In below functions list you may find all necessary details.
 
-Below there are constants that represents the most common _message_ field values that you can meet in responses from the card. You can use it in your app.
+Below there is enum collecting constants that represent the most common _message_ field values that you can meet in responses from the card. You can use it in your app.
 
 ```javascript
-const SUCCESS_STATUS = "ok";
-const FAIL_STATUS = "fail";
-const DONE_MSG = "done";
-const FALSE_MSG = "false";
-const TRUE_MSG = "true";
-const GENERATED_MSG = "generated";
-const NOT_GENERATED_MSG = "not generated";
-const HMAC_KEYS_ARE_NOT_FOUND_MSG = "HMAC-SHA256 keys are not found.";
-const INSTALLED_STATE_MSG =  "TonWalletApplet is invalid (is not personalized)";
-const PERSONALIZED_STATE_MSG = "TonWalletApplet is personalized.";
-const WAITE_AUTHENTICATION_MSG =  "TonWalletApplet waits two-factor authentication.";
-const DELETE_KEY_FROM_KEYCHAIN_MSG = "TonWalletApplet is personalized and waits finishing key deleting from keychain.";
-const BLOCKED_MSG = "TonWalletApplet is blocked.";
+enum CardResponseMessage {
+    Done = 'done',
+    False = 'false',
+    True = 'true',
+    Generated = 'generated',
+    NotGenerated = 'not generated',
+    HmacKeysNotFound = 'HMAC-SHA256 keys are not found'
+}
+```
+There is the following enum collecting different string constants thta represent applet state.
+
+```javascript
+enum CardStates {
+    Installed  = 'TonWalletApplet is invalid (is not personalized)',
+    Personalized = 'TonWalletApplet is personalized.',
+    WaiteAuthentication = 'TonWalletApplet waits two-factor authentication.',
+    DeleteKeyFromKeychain = 'TonWalletApplet is personalized and waits finishing key deleting from keychain.',
+    Blocked = 'TonWalletApplet is blocked.'
+}
+```
+
+And finally There is enum collecting different card response statuses. 
+
+```javascript
+enum CardResponseStatus {
+    Success = 'ok',
+    Fail = 'fail'
+}
 ```
 
 _Note_: Below we specify how CardResponse looks like for each API function. And for simplicity of representation we omit empty fields of CardResponse everywhere.
@@ -97,7 +112,7 @@ export default class CardError extends NfcNativeModuleError {
 
 NfcNativeModuleError corresponds to error happened in Android/iOS code itself. Whereas CardError corresponds to error happened in applet. For more details see section _More about responses format_ in readmes [TonNfcClientAndroid](https://github.com/tonlabs/TonNfcClientAndroid), [TonNfcClientSwift](https://github.com/tonlabs/TonNfcClientSwift).
 
-For Android for the majority of card operations there is a pair of functions. The first function shows to user an invitation dialog to connect NFC card. For example, _getPublicKey_ will show you an invitation dialog. And the second function does the same work. But it does not show any dialog. Here an exemplary function is _getPublicKeyWithoutDialog_. So here user must first establish the connection and then call the function. More details you may find in [readme](https://github.com/tonlabs/TonNfcClientAndroid) in section _Test work with the card_. For iOS the second function in pair (having ending "WithoutDialog" in title) does not work. Because for iOS we always have invitation dialogs by defaut. More details in [here](https://github.com/tonlabs/TonNfcClientSwift).
+For Android for the majority of card operations there is a pair of functions. The first function shows to user an invitation dialog to connect NFC card. For example, _getPublicKey_ will show you an invitation dialog. And the second function does the same work. But it does not show any dialog. Here an exemplary function is _getPublicKeyWithoutDialog_. So here the user must first establish the connection and then call the function. More details you may find in [readme](https://github.com/tonlabs/TonNfcClientAndroid) in section _Test work with the card_. For iOS the second function in pair (having ending "WithoutDialog" in title) does not work. Because for iOS we always have invitation dialogs by defaut. More details in [here](https://github.com/tonlabs/TonNfcClientSwift).
 	
 ## NFC related functions
 
