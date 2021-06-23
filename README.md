@@ -68,7 +68,7 @@ import {NfcCardModuleWrapper} from 'ton-nfc-client';
 const nfcWrapper = new NfcCardModuleWrapper();
 try {
 	let hdIndex = "1";     
-	let result = await nfcWrapper..getPublicKey(hdIndex);
+	let result = await nfcWrapper.getPublicKey(hdIndex);
 	const publicKey = result.message;
   	alert("Public key: " + publicKey);
 }
