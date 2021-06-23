@@ -66,7 +66,7 @@ enum CardStates {
 }
 ```
 
-And finally There is enum collecting different card response statuses. 
+And finally there is enum collecting different card response statuses. 
 
 ```javascript
 enum CardResponseStatus {
