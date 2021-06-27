@@ -70,7 +70,7 @@ export default class App extends Component{
                   console.log(e.message)
                   alert(e.message)
                 });
-            }} title="getRemainingPinTries"/>
+            }} title="getRemainingPinTries1"/>
         </View>
         <View>
               <Button onPress={() => {

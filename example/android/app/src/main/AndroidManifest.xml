@@ -3,11 +3,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.NFC" />
+   <!-- <uses-permission android:name="android.permission.NFC" />-->
 
-    <uses-feature
-        android:name="android.hardware.nfc"
-        android:required="true" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -25,17 +23,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
+               <!-- <action android:name="android.nfc.action.TECH_DISCOVERED" />-->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
+           <!-- <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
-            </intent-filter>
+                
+            </intent-filter>-->
 
-            <meta-data
+          <!-- <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc_tech_filter" />
+                android:resource="@xml/nfc_tech_filter" />-->
         </activity>
     </application>
 
