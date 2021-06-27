@@ -17,13 +17,14 @@ Or take it from GitHub.
 
 Also you need to add NFC related stuff into AndroidManifest.xml of your React native app.
 
-```xml
+<!--
 <uses-permission android:name="android.permission.NFC" />
-<uses-feature android:name="android.hardware.nfc" android:required="true" />
+<action android:name="android.nfc.action.TAG_DISCOVERED" />
+-->
+
+```xml
 <intent-filter>
-	<action android:name="android.nfc.action.NDEF_DISCOVERED" />
     	<action android:name="android.nfc.action.TECH_DISCOVERED" />
-    	<action android:name="android.nfc.action.TAG_DISCOVERED" />
 </intent-filter>
 <meta-data android:name="android.nfc.action.TECH_DISCOVERED" android:resource="@xml/nfc_tech_filter" />
 ```
