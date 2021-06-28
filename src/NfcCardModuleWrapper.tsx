@@ -912,11 +912,32 @@ export default class NfcCardModuleWrapper {
         throw new Error(WRONG_PLATFORM_ERROR)
     }
 
+    async checkSerialNumberAndGetPublicKey(serialNumber: string, hdIndex: string): Promise<CardResponse> {
+        try {
+            const response = await NfcCardModule.checkSerialNumberAndGetPublicKey(serialNumber, hdIndex)
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            await this.makeDelay()
+            throw this.throwError(e.message)
+        }
+    }
+
+    async checkSerialNumberAndGetPublicKeyWithoutDialog(serialNumber: string, hdIndex: string): Promise<CardResponse> {
+        if (Platform.OS === ANDROID_PLATFORM) {
+            try {
+                const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyWithoutDialog(serialNumber, hdIndex)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error(WRONG_PLATFORM_ERROR)
+    }
+
+
     async signForDefaultHdPath(dataForSigning: string): Promise<CardResponse> {
         try {
-            const response = await NfcCardModule.signForDefaultHdPath(
-                dataForSigning,
-            )
+            const response = await NfcCardModule.signForDefaultHdPath(dataForSigning)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -928,6 +949,31 @@ export default class NfcCardModuleWrapper {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
                 const response = await NfcCardModule.signForDefaultHdPathWithoutDialog(dataForSigning)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error(WRONG_PLATFORM_ERROR)
+    }
+
+    async checkSerialNumberAndSignForDefaultHdPath(serialNumber: string, dataForSigning: string): Promise<CardResponse> {
+        try {
+            const response = await NfcCardModule.checkSerialNumberAndSignForDefaultHdPath(
+                serialNumber,
+                dataForSigning 
+            )
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            await this.makeDelay()
+            throw this.throwError(e.message)
+        }
+    }
+
+    async checkSerialNumberAndSignForDefaultHdPathWithoutDialog(serialNumber: string, dataForSigning: string): Promise<CardResponse> {
+        if (Platform.OS === ANDROID_PLATFORM) {
+            try {
+                const response = await NfcCardModule.checkSerialNumberAndSignForDefaultHdPathWithoutDialog(serialNumber, dataForSigning)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -968,6 +1014,41 @@ export default class NfcCardModuleWrapper {
         throw new Error(WRONG_PLATFORM_ERROR)
     }
 
+    async checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(
+        serialNumber: string,
+        dataForSigning: string,
+        pin: string
+    ): Promise<CardResponse> {
+        try {
+            const response =
+                await NfcCardModule.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(
+                    serialNumber,
+                    dataForSigning,
+                    pin,
+                )
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            await this.makeDelay()
+            throw this.throwError(e.message)
+        }
+    }
+
+    async checkSerialNumberAndVerifyPinAndSignForDefaultHdPathWithoutDialog(
+        serialNumber: string,
+        dataForSigning: string,
+        pin: string
+    ): Promise<CardResponse> {
+        if (Platform.OS === ANDROID_PLATFORM) {
+            try {
+                const response = await NfcCardModule.checkSerialNumberAndVerifyPinAndSignForDefaultHdPathWithoutDialog(serialNumber, dataForSigning, pin)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error(WRONG_PLATFORM_ERROR)
+    }
+
     async sign(dataForSigning: string, hdIndex: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.sign(dataForSigning, hdIndex)
@@ -985,6 +1066,32 @@ export default class NfcCardModuleWrapper {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
                 const response = await NfcCardModule.signWithoutDialog(dataForSigning, hdIndex)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error(WRONG_PLATFORM_ERROR)
+    }
+
+    async checkSerialNumberAndSign(serialNumber: string, dataForSigning: string, hdIndex: string): Promise<CardResponse> {
+        try {
+            const response = await NfcCardModule.checkSerialNumberAndSign(serialNumber, dataForSigning, hdIndex)
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            await this.makeDelay()
+            throw this.throwError(e.message)
+        }
+    }
+
+    async checkSerialNumberAndSignWithoutDialog(
+        serialNumber: string,
+        dataForSigning: string,
+        hdIndex: string
+    ): Promise<CardResponse> {
+        if (Platform.OS === ANDROID_PLATFORM) {
+            try {
+                const response = await NfcCardModule.checkSerialNumberAndSignWithoutDialog(serialNumber, dataForSigning, hdIndex)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1027,6 +1134,43 @@ export default class NfcCardModuleWrapper {
         throw new Error(WRONG_PLATFORM_ERROR)
     }
 
+    async checkSerialNumberAndVerifyPinAndSign(
+        serialNumber: string,
+        dataForSigning: string,
+        hdIndex: string,
+        pin: string
+    ): Promise<CardResponse> {
+        try {
+            const response = await NfcCardModule.checkSerialNumberAndVerifyPinAndSign(
+                serialNumber,
+                dataForSigning,
+                hdIndex,
+                pin
+            )
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            await this.makeDelay()
+            throw this.throwError(e.message)
+        }
+    }
+
+    async checkSerialNumberAndVerifyPinAndSignWithoutDialog(
+        serialNumber: string,
+        dataForSigning: string,
+        hdIndex: string,
+        pin: string
+    ): Promise<CardResponse> {
+        if (Platform.OS === ANDROID_PLATFORM) {
+            try {
+                const response = await NfcCardModule.checkSerialNumberAndVerifyPinAndSignWithoutDialog(serialNumber, dataForSigning, hdIndex, pin)
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error(WRONG_PLATFORM_ERROR)
+    }
+
     async getPublicKeyForDefaultPath(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getPublicKeyForDefaultPath()
@@ -1041,6 +1185,29 @@ export default class NfcCardModuleWrapper {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
                 const response = await NfcCardModule.getPublicKeyForDefaultPathWithoutDialog()
+                return this.prepareCardResponse(response)
+            } catch (e) {
+                throw this.throwError(e.message)
+            }
+        }
+        throw new Error(WRONG_PLATFORM_ERROR)
+    }
+
+    async checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber: string): Promise<CardResponse> {
+        try {
+            
+            const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber)
+            return this.prepareCardResponse(response)
+        } catch (e) {
+            await this.makeDelay()
+            throw this.throwError(e.message)
+        }
+    }
+
+    async checkSerialNumberAndGetPublicKeyForDefaultPathWithoutDialog(serialNumber: string): Promise<CardResponse> {
+        if (Platform.OS === ANDROID_PLATFORM) {
+            try {
+                const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyForDefaultPathWithoutDialog(serialNumber)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
