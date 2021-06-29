@@ -19,11 +19,11 @@ class NfcCardModule: NSObject {
     var cardActivationNfcApi: CardActivationNfcApi = CardActivationNfcApi()
     var cardKeyChainNfcApi: CardKeyChainNfcApi = CardKeyChainNfcApi()
     var recoveryDataApi: RecoveryDataApi = RecoveryDataApi()
-   // var nfcApi: NfcApi = NfcApi()
+    var nfcApi: NfcApi = NfcApi()
     
     @objc
-    func isNfcSupported(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-     //   resolve(NFCTagReaderSession.readingAvailable ? ResponsesConstants.TRUE_MSG : ResponsesConstants.FALSE_MSG);
+    func checkIfNfcSupported(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        nfcApi.checkIfNfcSupported(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
     
     /* Coinmanager stuff*/

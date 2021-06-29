@@ -7,8 +7,8 @@
 
 
 
-/*RCT_EXTERN_METHOD(
-                  isNfcSupported: (RCTPromiseResolveBlock)resolve
+RCT_EXTERN_METHOD(
+                  checkIfNfcSupported: (RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject
                   )
 
