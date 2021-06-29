@@ -18,13 +18,32 @@ type ResultOfAppSigningBoxSign = {
     signature: string;
 };
 
+const SERIAL_NUMBER_LENGTH = 24;
+const SERIAL_NUMBER_BAD_LENGTH_ERROR_MSG = "Serial number is a numeric string of length 24."
+const SERIAL_NUMBER_NOT_NUMERIC_ERROR_MSG = "Serial number is not a valid numeric string."
+
+function onlyDigits(s: string) {
+    for (let i = s.length - 1; i >= 0; i--) {
+      const d = s.charCodeAt(i);
+      if (d < 48 || d > 57) return false
+    }
+    return true
+}
+
 export default class NfcCardSigningBox implements SigningBox {
 
- 
+    serialNumber: string;
     publicKey: string;
     pin: string;
 
-    constructor() {
+    constructor(serialNumber: string) {
+        if (serialNumber.length != SERIAL_NUMBER_LENGTH) {
+            throw SERIAL_NUMBER_BAD_LENGTH_ERROR_MSG;
+        }
+        if (!onlyDigits(serialNumber)) {
+            throw SERIAL_NUMBER_NOT_NUMERIC_ERROR_MSG;    
+        }
+        this.serialNumber = serialNumber;
         this.publicKey = "";
         this.pin = "5555"
     }
@@ -41,7 +60,7 @@ export default class NfcCardSigningBox implements SigningBox {
             console.log('>>> Request public key')
             for (let n = 0; n < runRetries; n++) {
                 try {
-                    const cardResponse = await nfcCardModuleWrapper.getPublicKeyForDefaultPath();
+                    const cardResponse = await nfcCardModuleWrapper.checkSerialNumberAndGetPublicKeyForDefaultPath(this.serialNumber);
                     this.publicKey = cardResponse.message;
                     console.log('✓');
                     console.log("Signing box got public key from card = " + this.publicKey + ".");
@@ -72,7 +91,7 @@ export default class NfcCardSigningBox implements SigningBox {
         console.log('>>> Msg for signing:')
         console.log(dataForSigning)
         console.log('>>> Start signature requesting from the card')
-        const cardResponse = await nfcCardModuleWrapper.verifyPinAndSignForDefaultHdPath(dataForSigning, this.pin);
+        const cardResponse = await nfcCardModuleWrapper.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(this.serialNumber, dataForSigning, this.pin);
         const sig = cardResponse.message
         console.log('>>> Signature from card =  ' + sig)
         return {
