@@ -1075,6 +1075,11 @@
   dependencies:
     "type-detect" "4.0.8"
 
+"@tonclient/core@1.17.0":
+  "integrity" "sha512-x5S89e38pm9eSHhfFshOTs0YtnS/lW/WR2x4PpZyF0Jyvecq4oLHXyDBbLqRBKmHTfQGSOVncnfy+KJuoVz8Cw=="
+  "resolved" "https://registry.npmjs.org/@tonclient/core/-/core-1.17.0.tgz"
+  "version" "1.17.0"
+
 "@types/babel__core@^7.1.7":
   "integrity" "sha512-wMTHiiTiBAAPebqaPiPDLFA4LYPKr6Ph0Xq/6rq1Ur3v66HXyG+clfR9CNETkD7MQS8ZHvpQOtA53DLws5WAEQ=="
   "resolved" "https://registry.npmjs.org/@types/babel__core/-/babel__core-7.1.12.tgz"
@@ -6474,10 +6479,8 @@
   "resolved" "file:.."
   "version" "1.0.0"
   dependencies:
-    "@tonclient/core" "1.15.0"
-    "@tonclient/lib-node" "1.15.0"
-    "@tonclient/lib-react-native" "1.15.0"
-    "@tonclient/lib-web" "1.15.0"
+    "@tonclient/core" "1.17.0"
+    "react-native-qrcode-scanner" "1.4.1"
 
 "tough-cookie@^2.3.3":
   "integrity" "sha512-nlLsUzgm1kfLXSXfRZMc1KLAugd4hqJHDTvc2hDIwS3mZAfMEuMbc03SujMF+GEcpaX/qboeycw6iO8JwVv2+g=="

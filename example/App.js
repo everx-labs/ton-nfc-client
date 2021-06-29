@@ -10,7 +10,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError,  /*NfcCardSigningBox,*/
+import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError,  NfcCardSigningBox,
   CardResponseMessage, CardStates, CardResponseStatus} from 'ton-nfc-client';
 
 /*const { 
@@ -24,7 +24,7 @@ import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError,  /*
 
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
-//let signingBox  = new NfcCardSigningBox();
+let signingBox  = new NfcCardSigningBox("504394802433901126813236");
 
 export default class App extends Component{
   state = {
