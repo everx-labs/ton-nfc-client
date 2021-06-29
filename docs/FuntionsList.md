@@ -367,7 +367,7 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
 
     *Exemplary response:*
 
-    {"serial_number_field":["504394802433901126813236", "455324585319848551839771"],"status":"ok"}
+    {"message":["504394802433901126813236", "455324585319848551839771"],"status":"ok"}
 
 - **async isKeyForHmacExist(serialNumber: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
 
