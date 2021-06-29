@@ -47,14 +47,30 @@ export default class NfcCardModuleWrapper {
         }
     }
 
-    private async prepareCardResponse(response: string): Promise<CardResponse> {
-        await this.makeDelay()
+    private prepareCardResponseWithoutDelay(response: string): CardResponse {
         const json = JSON.parse(response)
         if (!json.hasOwnProperty(MESSAGE_FIELD))
             throw new Error('Json must have "' +  MESSAGE_FIELD + '" field!')
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
-        return new CardResponse(json.message, json.status, '', '', '', '', '', '', '')
+        return new CardResponse(json.message, json.status, '', '', '', '', '', '', '', [])
+    }
+
+    private async prepareCardResponse(response: string): Promise<CardResponse> {
+        await this.makeDelay()
+        return this.prepareCardResponseWithoutDelay(response)
+    }
+
+    private async prepareCardResponseFromGetAllSerialNumbers(response: string): Promise<CardResponse> {
+        const json = JSON.parse(response)
+        if (!json.hasOwnProperty(MESSAGE_FIELD))
+            throw new Error('Json must have "' +  MESSAGE_FIELD + '" field!')
+        if (!json.hasOwnProperty(STATUS_FIELD))
+            throw new Error('Json must have "' + STATUS_FIELD + '" field!')
+        if (typeof json.message === "string") {
+            return new CardResponse(json.message, json.status, '', '', '', '', '', '', '', [])
+        }
+        return new CardResponse('', json.status, '', '', '', '', '', '', '', json.message)    
     }
 
     private async prepareCardResponseFromGetHashes(response: string): Promise<CardResponse> {
@@ -64,7 +80,7 @@ export default class NfcCardModuleWrapper {
             throw new Error('Json must have "' + ECS_HASH_FIELD + '" and "' + EP_HASH_FIELD + '" fields!')
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
-        return new CardResponse('', json.status, json.ecsHash, json.epHash, '', '', '', '', '')
+        return new CardResponse('', json.status, json.ecsHash, json.epHash, '', '', '', '', '', [])
     }
 
     private async prepareCardResponseFromGetKeyChainInfo(response: string): Promise<CardResponse> {
@@ -74,7 +90,7 @@ export default class NfcCardModuleWrapper {
             throw new Error('Json must have "' + OCCUPIED_SIZE_FIELD + '", "' + FREE_SIZE_FIELD + '" and "' + NUMBER_OF_KEYS_FIELD + '" fields!')
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
-        return new CardResponse('', json.status, '', '', json.numberOfKeys, json.occupiedSize, json.freeSize, '', '')
+        return new CardResponse('', json.status, '', '', json.numberOfKeys, json.occupiedSize, json.freeSize, '', '', [])
     }
 
     private async prepareCardResponseFromGetHmac(response: string): Promise<CardResponse> {
@@ -84,7 +100,7 @@ export default class NfcCardModuleWrapper {
             throw new Error('Json must have "' + KEY_HMAC_FIELD + '" and "' + KEY_LENGTH_FIELD + '" fields!')
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
-        return new CardResponse('', json.status, '', '', '', '', '', json.hmac, json.length)
+        return new CardResponse('', json.status, '', '', '', '', '', json.hmac, json.length, [])
     }
 
     private throwError(errorMessage: string) {
@@ -454,7 +470,7 @@ export default class NfcCardModuleWrapper {
     async selectKeyForHmac(serialNumber: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.selectKeyForHmac(serialNumber)
-            return this.prepareCardResponse(response)
+            return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
@@ -471,7 +487,7 @@ export default class NfcCardModuleWrapper {
                 commonSecret,
                 serialNumber,
             )
-            return this.prepareCardResponse(response)
+            return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
@@ -480,7 +496,7 @@ export default class NfcCardModuleWrapper {
     async getCurrentSerialNumber(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getCurrentSerialNumber()
-            return this.prepareCardResponse(response)
+            return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
@@ -489,7 +505,7 @@ export default class NfcCardModuleWrapper {
     async getAllSerialNumbers(): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.getAllSerialNumbers()
-            return this.prepareCardResponse(response)
+            return this.prepareCardResponseFromGetAllSerialNumbers(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
@@ -498,7 +514,7 @@ export default class NfcCardModuleWrapper {
     async isKeyForHmacExist(serialNumber: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.isKeyForHmacExist(serialNumber)
-            return this.prepareCardResponse(response)
+            return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
         }
@@ -507,7 +523,7 @@ export default class NfcCardModuleWrapper {
     async deleteKeyForHmac(serialNumber: string): Promise<CardResponse> {
         try {
             const response = await NfcCardModule.deleteKeyForHmac(serialNumber)
-            return this.prepareCardResponse(response)
+            return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
         }

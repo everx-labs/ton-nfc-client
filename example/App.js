@@ -76,7 +76,7 @@ export default class App extends Component{
         <View>
               <Button onPress={() => {
                 nfcCardModuleWrapper.getAllSerialNumbers()
-            .then((result) => alert("getAllSerialNumbers : " + result.message)).catch((e) => alert(e.message))
+            .then((result) => alert("getAllSerialNumbers : " + result.serialNumbers.length)).catch((e) => alert(e.message))
             }} title="getAllSerialNumbers"/>
         </View>
         <View>
