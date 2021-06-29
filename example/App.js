@@ -36,24 +36,7 @@ export default class App extends Component{
   render() {
     return (
       <View style={styles.container}>
-        <View>
-              <Button onPress={() => {
-                nfcCardModuleWrapper.checkIfNfcSupported()
-            .then((result) => alert("checkIfNfcSupported : " + result.message)).catch((e) => alert(e.message))
-            }} title="checkIfNfcSupported"/>
-        </View>
-        <View>
-              <Button onPress={() => {
-                nfcCardModuleWrapper.checkIfNfcEnabled()
-            .then((result) => alert("checkIfNfcEnabled : " + result.message)).catch((e) => alert(e.message))
-            }} title="checkIfNfcEnabled"/>
-        </View>
-        <View>
-              <Button onPress={() => {
-                nfcCardModuleWrapper.openNfcSettings()
-            .then((result) => alert("openNfcSettings : " + result.message)).catch((e) => alert(e.message))
-            }} title="openNfcSettings"/>
-        </View>
+        
         <View>
               <Button onPress={() => {
                 let p = nfcCardModuleWrapper.getRemainingPinTries();
@@ -71,6 +54,12 @@ export default class App extends Component{
                   alert(e.message)
                 });
             }} title="getRemainingPinTries1"/>
+        </View>
+        <View>
+              <Button onPress={() => {
+                nfcCardModuleWrapper.checkIfNfcSupported()
+            .then((result) => alert("checkIfNfcSupported : " + result.message)).catch((e) => alert(e.message))
+            }} title="checkIfNfcSupported"/>
         </View>
         <View>
               <Button onPress={() => {

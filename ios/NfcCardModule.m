@@ -180,7 +180,20 @@ RCT_EXTERN_METHOD(
                   rejecter: (RCTPromiseRejectBlock)reject
                   )
 RCT_EXTERN_METHOD(
+                  checkSerialNumberAndGetPublicKeyForDefaultPath:
+                  (NSString *)serialNumber
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+                  )
+RCT_EXTERN_METHOD(
                   getPublicKey: (NSString *)hdIndex
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+                  )
+RCT_EXTERN_METHOD(
+                  checkSerialNumberAndGetPublicKey:
+                  (NSString *)serialNumber
+                  hdIndex: (NSString *)hdIndex
                   resolve:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject
                   )
@@ -196,7 +209,24 @@ RCT_EXTERN_METHOD(
                   rejecter:(RCTPromiseRejectBlock)reject
                   )
 RCT_EXTERN_METHOD(
+                  checkSerialNumberAndVerifyPinAndSignForDefaultHdPath:
+                  (NSString *)serialNumber
+                  data: (NSString *)data
+                  pin: (NSString *)pin
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+                  )
+RCT_EXTERN_METHOD(
                   verifyPinAndSign: (NSString *)data
+                  hdIndex:(NSString *)hdIndex
+                  pin: (NSString *)pin
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+                  )
+RCT_EXTERN_METHOD(
+                  checkSerialNumberAndVerifyPinAndSign:
+                  (NSString *)serialNumber
+                  data: (NSString *)data
                   hdIndex:(NSString *)hdIndex
                   pin: (NSString *)pin
                   resolve:(RCTPromiseResolveBlock)resolve
@@ -208,7 +238,22 @@ RCT_EXTERN_METHOD(
                   rejecter:(RCTPromiseRejectBlock)reject
                   )
 RCT_EXTERN_METHOD(
+                  checkSerialNumberAndSignForDefaultHdPath:
+                  (NSString *)serialNumber
+                  data: (NSString *)data
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+                  )
+RCT_EXTERN_METHOD(
                   sign: (NSString *)data
+                  hdIndex:(NSString *)hdIndex
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+                  )
+RCT_EXTERN_METHOD(
+                  checkSerialNumberAndSign:
+                  (NSString *)serialNumber
+                  data: (NSString *)data
                   hdIndex:(NSString *)hdIndex
                   resolve:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject

@@ -211,10 +211,20 @@ class NfcCardModule: NSObject {
         cardCryptoNfcApi.getPublicKeyForDefaultPath(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
     
+    @objc
+    func checkSerialNumberAndGetPublicKeyForDefaultPath(_ serialNumber: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardCryptoNfcApi.checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber: serialNumber, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
+    
     
     @objc
     func getPublicKey(_ hdIndex: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
         cardCryptoNfcApi.getPublicKey(hdIndex: hdIndex, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
+    
+    @objc
+    func checkSerialNumberAndGetPublicKey(_ serialNumber: String, hdIndex: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardCryptoNfcApi.checkSerialNumberAndGetPublicKey(serialNumber: serialNumber, hdIndex: hdIndex, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
     
     @objc
@@ -228,8 +238,18 @@ class NfcCardModule: NSObject {
     }
     
     @objc
+    func checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(_ serialNumber: String, data: String, pin : String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardCryptoNfcApi.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(serialNumber: serialNumber, data: data, pin: pin, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
+    
+    @objc
     func verifyPinAndSign(_ data: String, hdIndex: String, pin : String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
         cardCryptoNfcApi.verifyPinAndSign(data: data, hdIndex: hdIndex, pin: pin, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
+    
+    @objc
+    func checkSerialNumberAndVerifyPinAndSign(_ serialNumber: String, data: String, hdIndex: String, pin : String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardCryptoNfcApi.checkSerialNumberAndVerifyPinAndSign(serialNumber: serialNumber, data: data, hdIndex: hdIndex, pin: pin, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
     
     @objc
@@ -238,8 +258,18 @@ class NfcCardModule: NSObject {
     }
     
     @objc
+    func checkSerialNumberAndSignForDefaultHdPath(_ serialNumber: String, data: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardCryptoNfcApi.checkSerialNumberAndSignForDefaultHdPath(serialNumber: serialNumber, data: data, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
+    
+    @objc
     func sign(_ data: String, hdIndex: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
         cardCryptoNfcApi.sign(data: data, hdIndex: hdIndex, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+    }
+    
+    @objc
+    func checkSerialNumberAndSign(_ serialNumber: String, data: String, hdIndex: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        cardCryptoNfcApi.checkSerialNumberAndSign(serialNumber: serialNumber, data: data, hdIndex: hdIndex, resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
     
     /* Ton wallet applet keychain related stuff */
