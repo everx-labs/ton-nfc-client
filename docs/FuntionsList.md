@@ -474,11 +474,24 @@ Here there are functions related to ed25519 signature.
 - **async getPublicKeyForDefaultPath(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
   **async getPublicKeyForDefaultPathWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
-    Return public key for HD path m/44'/396'/0'/0'/0'
+    Return public key for HD path m/44'/396'/0'/0'/0'.
 
     *Exemplary response:*
 
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
+	
+- **async checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber: string): Promise<CardResponse>** _(available for Android and iOS)_<br/>
+  **async checkSerialNumberAndGetPublicKeyForDefaultPathWithoutDialog(serialNumber: string): Promise<CardResponse>** _(available for Android)_ 
+	
+    Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then return public key for HD path m/44'/396'/0'/0'/0'. Else reject the card.
+	
+	*Arguments requirements:*
+	
+		serialNumber — numeric string of length 24, example: "50439480243390112681323".
+	
+	*Exemplary response:*
+
+        	{"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
 - **async verifyPin(pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
   **async verifyPinWithoutDialog(pin: string): Promise< CardResponse >** _(available for Android)_
