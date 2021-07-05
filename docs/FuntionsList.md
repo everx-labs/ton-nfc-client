@@ -568,7 +568,7 @@ Here there are functions related to ed25519 signature.
 
         serialNumber — numeric string of length 24, example: "50439480243390112681323".
         
-        dataForSigning — hex string of even length ≥ 2 and ≤ 378.
+        dataForSigning — hex string of even length ≥ 2 and ≤ 356.
 	
 	
     *Exemplary response:*
