@@ -513,11 +513,28 @@ Here there are functions related to ed25519 signature.
 
     *Arguments requirements:*
 
-        data — hex string of even length ≥ 2 and ≤ 378.
+        dataForSigning — hex string of even length ≥ 2 and ≤ 378.
 
     *Exemplary response:*
 
          {"message":
+            "2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605",
+          "status":"ok"
+         }
+- **async checkSerialNumberAndSignForDefaultHdPath(serialNumber: string, dataForSigning: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async checkSerialNumberAndSignForDefaultHdPathWithoutDialog(serialNumber: string, dataForSigning: string): Promise< CardResponse >** _(available for Android)_ 
+	
+    Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then make data signing by key for HD path m/44'/396'/0'/0'/0'. Else reject the card. Prior to call this function you must call verifyPin.
+    
+    *Arguments requirements:*
+
+        serialNumber — numeric string of length 24, example: "50439480243390112681323".
+        
+        dataForSigning — hex string of even length ≥ 2 and ≤ 378.
+	
+    *Exemplary response:*
+
+        {"message":
             "2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605",
           "status":"ok"
          }
@@ -531,8 +548,29 @@ Here there are functions related to ed25519 signature.
 
         hdIndex — numeric string of length > 0 and ≤ 10.
 
-        data — hex string of even length ≥ 2 and ≤ 356.
+        dataForSigning — hex string of even length ≥ 2 and ≤ 356.
 
+    *Exemplary response:*
+
+        {"message":
+            "13FB836213B12BBD41209273F81BCDCF7C226947B18128F73E9A6E96C84B30C3288E51C622C045488981B6544D02D0940DE54D68A0A78BC2A5F9523B8757B904",
+         "status":"ok"
+        }
+
+- **async checkSerialNumberAndSign(serialNumber: string, dataForSigning: string, hdIndex: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async checkSerialNumberAndSignWithoutDialog(serialNumber: string, dataForSigning: string, hdIndex: string): Promise< CardResponse >** _(available for Android)_ 
+	
+    Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then make data signing by key for HD path m/44'/396'/0'/0'/hdIndex'. Else reject the card. Prior to call this function you must call verifyPin.
+    
+    *Arguments requirements:*
+    
+    	hdIndex — numeric string of length > 0 and ≤ 10.
+
+        serialNumber — numeric string of length 24, example: "50439480243390112681323".
+        
+        dataForSigning — hex string of even length ≥ 2 and ≤ 378.
+	
+	
     *Exemplary response:*
 
         {"message":
@@ -552,17 +590,51 @@ Here there are functions related to ed25519 signature.
     *Exemplary response:*
 
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
+	
+- **async checkSerialNumberAndGetPublicKey(serialNumber: string, hdIndex: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async checkSerialNumberAndGetPublicKeyWithoutDialog(serialNumber: string, hdIndex: string): Promise< CardResponse >** _(available for Android)_ 
+	
+    Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then return public key for HD path m/44'/396'/0'/0'/hdIndex'. Else reject the card.
+	
+    *Arguments requirements:*
+    
+    	hdIndex — numeric string of length > 0 and ≤ 10.
+
+        serialNumber — numeric string of length 24, example: "50439480243390112681323"
+	
+    *Exemplary response:*
+
+        {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
 - **async verifyPinAndSignForDefaultHdPath(dataForSigning: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
   **async verifyPinAndSignForDefaultHdPathWithoutDialog(dataForSigning: string, pin: string): Promise< CardResponse >** _(available for Android)_
 
-    Make pin verification data signing by key for HD path m/44'/396'/0'/0'/0'.
+    Make pin verification and data signing by key for HD path m/44'/396'/0'/0'/0'.
 
     *Arguments requirements:*
 
         pin — numeric string of length 4, example: '5555'
 
-        data — hex string of even length ≥ 2 and ≤ 378.
+        dataForSigning — hex string of even length ≥ 2 and ≤ 378.
+
+    *Exemplary response:*
+
+        {"message":
+            "2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605",   
+         "status":"ok"
+        }
+- **async checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(serialNumber: string, dataForSigning: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async checkSerialNumberAndVerifyPinAndSignForDefaultHdPathWithoutDialog(serialNumber: string, dataForSigning: string, pin: string): Promise< CardResponse >** _(available for Android)_ 
+	
+    Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then make pin verification and data signing by key for HD path m/44'/396'/0'/0'/0'. Else reject the card.
+    
+    *Arguments requirements:*
+    
+    	serialNumber — numeric string of length 24, example: "50439480243390112681323"
+
+        pin — numeric string of length 4, example: '5555'
+
+        dataForSigning — hex string of even length ≥ 2 and ≤ 378.
 
     *Exemplary response:*
 
@@ -571,12 +643,35 @@ Here there are functions related to ed25519 signature.
          "status":"ok"
         }
 
+
 - **async verifyPinAndSign(dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
   **async verifyPinAndSignWithoutDialog(dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android)_
 
     Make pin verification and data signing by key for HD path m/44'/396'/0'/0'/hdIndex'.
 
     *Arguments requirements:*
+
+        pin — numeric string of length 4, example: '5555'
+
+        hdIndex — numeric string of length > 0 and ≤ 10.
+
+        data — hex string of even length ≥ 2 and ≤ 356.
+
+    *Exemplary response:*
+
+        {"message":
+            "13FB836213B12BBD41209273F81BCDCF7C226947B18128F73E9A6E96C84B30C3288E51C622C045488981B6544D02D0940DE54D68A0A78BC2A5F9523B8757B904",
+         "status":"ok"
+        }
+	
+- **async checkSerialNumberAndVerifyPinAndSign(serialNumber: string, dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
+  **async checkSerialNumberAndVerifyPinAndSignWithoutDialog(serialNumber: string, dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android)_ 
+  
+   Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then make pin verification and data signing by key for HD path m/44'/396'/0'/0'/hdIndex'. Else reject the card.
+   
+   *Arguments requirements:*
+   
+   	serialNumber — numeric string of length 24, example: "50439480243390112681323"
 
         pin — numeric string of length 4, example: '5555'
 
