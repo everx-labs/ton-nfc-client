@@ -1,5 +1,5 @@
 import NfcCardModuleWrapper from './NfcCardModuleWrapper'
-//import NfcEventsEmitterWrapper from './NfcEventsEmitterWrapper'
+import NfcEventsEmitterWrapper from './NfcEventsEmitterWrapper'
 import CardResponse from './CardResponse'
 import NfcNativeModuleError from './NfcNativeModuleError'
 import CardError from './CardError'
@@ -29,7 +29,7 @@ enum CardResponseStatus {
 
 export {
     NfcCardModuleWrapper,
-    //NfcEventsEmitterWrapper,
+    NfcEventsEmitterWrapper,
     CardResponse,
     CardError,
     NfcNativeModuleError,

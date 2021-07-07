@@ -8,7 +8,7 @@
 import Foundation
 import PromiseKit
 import CryptoKit
-import  TonNfcClientSwift
+import TonNfcClientSwift
 
 @available(iOS 13.0, *)
 @objc(NfcCardModule)
@@ -20,6 +20,23 @@ class NfcCardModule: NSObject {
     var cardKeyChainNfcApi: CardKeyChainNfcApi = CardKeyChainNfcApi()
     var recoveryDataApi: RecoveryDataApi = RecoveryDataApi()
     var nfcApi: NfcApi = NfcApi()
+    
+    @objc
+    static func requiresMainQueueSetup() -> Bool {
+        return true
+    }
+    
+    @objc func catchNotification() {
+        print("Nfc connected!!!!!!!!!!***")
+        NfcEventEmitter.emitter.sendEvent(withName: ApduRunner.NFC_TAG_CONNECTED_EVENT, body: nil)
+    }
+    
+    @objc
+    func setNfcNotificator(/*_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock*/) {
+        print("setNfcNotificator")
+        ApduRunner.setNotificator(observer: self, notificationAction: #selector(self.catchNotification))
+        print("setNfcNotificator  done")
+    }
     
     @objc
     func checkIfNfcSupported(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
@@ -99,6 +116,7 @@ class NfcCardModule: NSObject {
     
     @objc
     func getSerialNumber(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        print("GETTTTYYYY")
         cardCryptoNfcApi.getSerialNumber(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
     

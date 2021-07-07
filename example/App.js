@@ -11,7 +11,9 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError,  NfcCardSigningBox,
-  CardResponseMessage, CardStates, CardResponseStatus} from 'ton-nfc-client';
+  CardResponseMessage, CardStates, CardResponseStatus, NfcEventsEmitterWrapper} from 'ton-nfc-client';
+import Toast from 'react-native-simple-toast';
+
 
 /*const { 
   TonClient, 
@@ -22,9 +24,15 @@ import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError,  Nf
   signerNone 
 } = require("@tonclient/core");*/
 
+NfcEventsEmitterWrapper.addListener((msg) => Toast.showWithGravity(msg, Toast.LONG, Toast.TOP));
+NfcEventsEmitterWrapper.addAndroidListeners();
+
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
+nfcCardModuleWrapper.setNfcNotificator();
 
 let signingBox  = new NfcCardSigningBox("504394802433901126813236");
+
+
 
 export default class App extends Component{
   state = {

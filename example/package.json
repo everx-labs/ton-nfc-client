@@ -13,6 +13,7 @@
     "@tonclient/core": "1.17.0",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-simple-toast": "^1.1.2",
     "ton-nfc-client": "file:../"
   },
   "devDependencies": {

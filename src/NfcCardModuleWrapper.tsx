@@ -164,6 +164,14 @@ export default class NfcCardModuleWrapper {
         )
     }
 
+    setNfcNotificator() {
+        try {
+            NfcCardModule.setNfcNotificator()
+        } catch (e) {
+            throw this.throwError(e.message)
+        }
+    }
+
     /* NFC related functions */
 
     async checkIfNfcSupported(): Promise<CardResponse> {
@@ -704,6 +712,7 @@ export default class NfcCardModuleWrapper {
 
     async getSerialNumber(): Promise<CardResponse> {
         try {
+            console.log("GETTT")
             const response = await NfcCardModule.getSerialNumber()
             return this.prepareCardResponse(response)
         } catch (e) {

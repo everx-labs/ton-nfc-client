@@ -6,6 +6,7 @@
 @interface RCT_EXTERN_MODULE(NfcCardModule, NSObject)
 
 
+RCT_EXTERN_METHOD(setNfcNotificator)
 
 RCT_EXTERN_METHOD(
                   checkIfNfcSupported: (RCTPromiseResolveBlock)resolve
