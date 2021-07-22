@@ -27,7 +27,7 @@ class NfcCardModule: NSObject {
     }
     
     @objc func catchNotification() {
-        print("Nfc connected!!!!!!!!!!***")
+        print("catchNotification ")
         NfcEventEmitter.emitter.sendEvent(withName: ApduRunner.NFC_TAG_CONNECTED_EVENT, body: nil)
     }
     
@@ -116,7 +116,6 @@ class NfcCardModule: NSObject {
     
     @objc
     func getSerialNumber(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-        print("GETTTTYYYY")
         cardCryptoNfcApi.getSerialNumber(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
     
@@ -177,7 +176,7 @@ class NfcCardModule: NSObject {
 	
 	@objc
     func getHashes(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-        cardActivationNfcApi.getHashes(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
+        cardActivationNfcApi.generateSeedAndGetHashes(resolve: { msg in resolve(msg as! String) }, reject: { (errMsg : String, err : NSError) in reject(String(err.code), err.localizedDescription, err) })
     }
 	
     @objc

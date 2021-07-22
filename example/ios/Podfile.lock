@@ -260,8 +260,8 @@ PODS:
   - Toast (4.0.0)
   - ton-nfc-client (1.0.0):
     - React
-    - TonNfcClientSwift (~> 1.1.3)
-  - TonNfcClientSwift (1.1.3):
+    - TonNfcClientSwift (~> 1.1.4)
+  - TonNfcClientSwift (1.1.5):
     - PromiseKit (~> 6.8)
   - Yoga (1.14.0)
 
@@ -380,7 +380,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-simple-toast: b986e6c1befdc211af3df1bae293278a44e32990
+  react-native-simple-toast: bf002828cf816775a6809f7a9ec3907509bce11f
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -392,8 +392,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
-  ton-nfc-client: ebfb93e1db9aa2e7454d126fb1236041e9946cf8
-  TonNfcClientSwift: 29dd878c6df19f18a09e41315ba50fad6518e36f
+  ton-nfc-client: 1f7fc78339a02f52afb039dafe483db76b708175
+  TonNfcClientSwift: 80bef78021ca59ce0f3fe2aeb05959c12a25c123
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: 579f438ef5cda6141cc5db59ab3292bf9519d8f1
