@@ -101,19 +101,6 @@ import {NfcCardModuleWrapper, CardResponseMessage, CardStates, CardResponseStatu
 
 const nfcWrapper = new NfcCardModuleWrapper();
 try {
-	let result = await nfcWrapper.getRootKeyStatus();
-	const seedStatus = result.message;
-	const pin = "5555";	
-	if (seedStatus == CardResponseMessage.NotGenerated) {
-		await nfcWrapper.generateSeed(pin);
-	}
-           
-	result = await nfcWrapper.getTonAppletState();
-	const state = result.message;
-	if (state !== CardStates.WaiteAuthentication) {
-		throw "Incorret applet state!";
-	}
-
 	result = await nfcWrapper.getHashes();
 	const hashOfCommonSecret = result.ecsHash;
 	// check that hashOfCommonSecret is correct based on the data from smartcontract
