@@ -114,6 +114,28 @@ export default class App extends Component{
         </View>
 
         <View>
+              <Button onPress={async () => {
+
+              try{
+                console.log("start : ");
+                let result = await nfcCardModuleWrapper.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath("504394802433901126813236", "1111", "5555");
+                alert("sign 1 : " + result.message);
+                console.log("sign 1 : " + result.message);
+
+
+                result = await nfcCardModuleWrapper.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath("504394802433901126813236", "1111", "5555")
+                alert("sign 2 : " + result.message);
+                console.log("sign 2 : " + result.message);
+              }
+              catch(e) {
+                console.log("ERRRRROR!!!:")
+                console.log(e.message)
+              }
+                
+            }} title="signTwice"/>
+        </View>
+
+        <View>
               <Button onPress={() => nfcCardModuleWrapper.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath("504394802433901126813236", "1111", "5555")
             .then((result) => alert("checkSerialNumberAndVerifyPinAndSignForDefaultHdPathWithoutDialog : " + result.message)).catch((e) => alert(e.message))} title="checkSerialNumberAndVerifyPinAndSignForDefaultHdPath"/>
         </View>

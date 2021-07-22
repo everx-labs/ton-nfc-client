@@ -81,7 +81,7 @@ dependencies {
     //noinspection GradleDynamicVersion
    // implementation 'com.facebook.react:react-native:+'  // From node_modules
     api 'com.facebook.react:react-native:+'
-    implementation 'com.github.tonlabs:TonNfcClientAndroid:3.4.0'
+    implementation 'com.github.tonlabs:TonNfcClientAndroid:3.4.1'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.22'
     androidTestImplementation 'org.mockito:mockito-android:2.7.22'
