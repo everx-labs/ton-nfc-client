@@ -422,13 +422,13 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     @ReactMethod
     public void getHashes(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getHashes(CallbackHelper.createNfcCallback(promise), true);
+        cardActivationNfcApi.generateSeedAndGetHashes(CallbackHelper.createNfcCallback(promise), true);
     }
 
     @ReactMethod
     public void getHashesWithoutDialog(final Promise promise) {
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
-        cardActivationNfcApi.getHashes(CallbackHelper.createNfcCallback(promise));
+        cardActivationNfcApi.generateSeedAndGetHashes(CallbackHelper.createNfcCallback(promise));
     }
 
     @ReactMethod
@@ -454,6 +454,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
         if (TonWalletApi.getActivity() == null) TonWalletApi.setActivity(getCurrentActivity());
         cardActivationNfcApi.getHashOfEncryptedPassword(CallbackHelper.createNfcCallback(promise));
     }
+
 
     /** TonWalletApplet common commands **/
 

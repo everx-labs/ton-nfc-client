@@ -28,7 +28,10 @@ NfcEventsEmitterWrapper.addListener((msg) => Toast.showWithGravity(msg, Toast.LO
 NfcEventsEmitterWrapper.addAndroidListeners();
 
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
-nfcCardModuleWrapper.setNfcNotificator();
+
+if (Platform.OS === "ios") {
+  nfcCardModuleWrapper.setNfcNotificator();
+}
 
 let signingBox  = new NfcCardSigningBox("504394802433901126813236");
 
