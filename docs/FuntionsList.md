@@ -422,7 +422,7 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
 - **async turnOnWallet(authenticationPassword: string, commonSecret: string, initialVector: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
   **async turnOnWalleWithoutDialog(authenticationPassword: string, commonSecret: string, initialVector: string): Promise< CardResponse >**  _(available for Android)_
 
-    This function makes TON Labs wallet applet activation. After its succesfull call applet will be in working personalized state (so getTonAppletState() will return {"message":"TonWalletApplet is personalized.","status":"ok"}). It uses default PIN '5555'.
+    This function makes TON Labs wallet applet activation. After its succesfull call applet will be in working personalized state (so getTonAppletState() will return {"message":"TonWalletApplet is personalized.","status":"ok"}). It uses default PIN '5555'. At the begining of its work it reset seed and pin and generate new seed.
 
     *Arguments requirements:*
 
