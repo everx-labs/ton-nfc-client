@@ -54,36 +54,18 @@ export default class NfcCardSigningBox implements SigningBox {
 
 
     public async get_public_key():  Promise<ResultOfAppSigningBoxGetPublicKey> {
-        console.log('>>> Before public key')
-        let runRetries = 5
+        console.log('>>> Before public key1')
         if (!this.publicKey) {
             console.log('>>> Request public key')
-            for (let n = 0; n < runRetries; n++) {
-                try {
-                    const cardResponse = await nfcCardModuleWrapper.checkSerialNumberAndGetPublicKeyForDefaultPath(this.serialNumber);
-                    this.publicKey = cardResponse.message;
-                    console.log('✓');
-                    console.log("Signing box got public key from card = " + this.publicKey + ".");
-                    await new Promise(r => setTimeout(r, 5000));
-                    break;
-                } catch (err) {
-                    console.log(err.message);
-                    if (n < runRetries - 1) {
-                        console.log(`Run next try request pub key #${n + 1}`);
-                        await new Promise(r => setTimeout(r, 10000));
-                    } else {
-                        throw err;
-                    }
-                }
-            }
-
-
+            const cardResponse = await nfcCardModuleWrapper.checkSerialNumberAndGetPublicKeyForDefaultPath(this.serialNumber);
+            this.publicKey = cardResponse.message;
+            console.log('✓');
+            console.log("Signing box got public key from card = " + this.publicKey + ".");
         }
         console.log('>>> Got public key', this.publicKey);
         return {
             public_key: this.publicKey
         };
-
     }
 
     public async sign(params: ParamsOfAppSigningBoxSign): Promise<ResultOfAppSigningBoxSign> {
