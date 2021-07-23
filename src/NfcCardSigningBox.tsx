@@ -1,8 +1,6 @@
-import { TonClient} from '@tonclient/core'
-
 import { AppSigningBox as SigningBox } from '@tonclient/core/dist';
 
-import {NfcCardModuleWrapper, NfcNativeModuleError, CardResponse, CardError} from 'ton-nfc-client';
+import { NfcCardModuleWrapper } from 'ton-nfc-client';
 
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
@@ -31,18 +29,18 @@ function onlyDigits(s: string) {
 }
 
 export default class NfcCardSigningBox implements SigningBox {
-
     serialNumber: string;
     publicKey: string;
     pin: string;
-
     constructor(serialNumber: string) {
         if (serialNumber.length != SERIAL_NUMBER_LENGTH) {
-            throw SERIAL_NUMBER_BAD_LENGTH_ERROR_MSG;
+            throw new Error(SERIAL_NUMBER_BAD_LENGTH_ERROR_MSG);
         }
+
         if (!onlyDigits(serialNumber)) {
-            throw SERIAL_NUMBER_NOT_NUMERIC_ERROR_MSG;    
+            throw new Error(SERIAL_NUMBER_NOT_NUMERIC_ERROR_MSG);    
         }
+
         this.serialNumber = serialNumber;
         this.publicKey = "";
         this.pin = "5555"
@@ -52,32 +50,55 @@ export default class NfcCardSigningBox implements SigningBox {
         this.pin = pin;
     }
 
-
     public async get_public_key():  Promise<ResultOfAppSigningBoxGetPublicKey> {
-        console.log('>>> Before public key1')
-        if (!this.publicKey) {
-            console.log('>>> Request public key')
-            const cardResponse = await nfcCardModuleWrapper.checkSerialNumberAndGetPublicKeyForDefaultPath(this.serialNumber);
-            this.publicKey = cardResponse.message;
-            console.log('✓');
-            console.log("Signing box got public key from card = " + this.publicKey + ".");
+        console.log('>>> Get the public key')
+
+        if (this.publicKey) {
+            console.log('✓ Got public key from the cache');
+            return {
+                public_key: this.publicKey
+            };
         }
-        console.log('>>> Got public key', this.publicKey);
-        return {
-            public_key: this.publicKey
-        };
+
+        console.log('>>> Request the public key if it\'s not loaded yet...')
+        try {
+            const cardResponse = await nfcCardModuleWrapper
+                .checkSerialNumberAndGetPublicKeyForDefaultPath(this.serialNumber);
+            this.publicKey = cardResponse.message;
+            console.log('Signing box got the public key from the card:', this.publicKey);
+
+            console.log('✓ Got public key from the card');
+            return {
+                public_key: this.publicKey
+            };
+        } catch (error) {
+            console.error('Failed to get the public key with error:', error);
+            throw error;
+        }
     }
 
     public async sign(params: ParamsOfAppSigningBoxSign): Promise<ResultOfAppSigningBoxSign> {
-        const dataForSigning = params.unsigned;
-        console.log('>>> Msg for signing:')
-        console.log(dataForSigning)
-        console.log('>>> Start signature requesting from the card')
-        const cardResponse = await nfcCardModuleWrapper.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(this.serialNumber, dataForSigning, this.pin);
-        const sig = cardResponse.message
-        console.log('>>> Signature from card =  ' + sig)
-        return {
-            signature: sig
-        };
+        console.log('>>> Sign the message');
+        
+        const dataForSigning = Buffer.from(params.unsigned, 'base64').toString('hex');
+        console.log('>>> Message to signing:', dataForSigning);
+
+        try {
+            console.log('>>> Sign the message with the card');
+            const cardResponse = await nfcCardModuleWrapper
+                .checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(
+                    this.serialNumber, 
+                    dataForSigning, 
+                    this.pin,
+                );
+
+            const signature = cardResponse.message
+            console.log('>>> Signature received from the card:', signature)
+
+            return { signature };
+        } catch (error) {
+            console.error('Failed to sign the message with error:', error);
+            throw error;
+        }
     }
 }
