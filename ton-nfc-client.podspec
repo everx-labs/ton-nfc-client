@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "TonNfcClientSwift", "~> 1.1.4"
+  s.dependency "TonNfcClientSwift", "~> 1.1.6"
   # ...
   # s.dependency "..."
 end
