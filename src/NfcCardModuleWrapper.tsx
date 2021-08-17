@@ -16,6 +16,7 @@ const  EP_HASH_FIELD = "epHash";
 const  KEY_INDEX_FIELD = "keyIndex";
 const  KEY_LENGTH_FIELD = "length";
 const  KEY_HMAC_FIELD = "hmac";
+const  SN_FIELD = "serialNumber";
 const  NUMBER_OF_KEYS_FIELD = "numberOfKeys";
 const  OCCUPIED_SIZE_FIELD = "occupiedSize";
 const  FREE_SIZE_FIELD = "freeSize";
@@ -53,7 +54,7 @@ export default class NfcCardModuleWrapper {
             throw new Error('Json must have "' +  MESSAGE_FIELD + '" field!')
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
-        return new CardResponse(json.message, json.status, '', '', '', '', '', '', '', [])
+        return new CardResponse(json.message, json.status, '', '', '', '', '', '', '', '', [])
     }
 
     private async prepareCardResponse(response: string): Promise<CardResponse> {
@@ -70,17 +71,17 @@ export default class NfcCardModuleWrapper {
         if (typeof json.message === "string") {
             return new CardResponse(json.message, json.status, '', '', '', '', '', '', '', [])
         }
-        return new CardResponse('', json.status, '', '', '', '', '', '', '', json.message)    
+        return new CardResponse('', json.status, '', '', '', '', '', '', '', '', json.message)    
     }
 
     private async prepareCardResponseFromGetHashes(response: string): Promise<CardResponse> {
         await this.makeDelay()
         const json = JSON.parse(response)
-        if (!json.hasOwnProperty(ECS_HASH_FIELD) || !json.hasOwnProperty(EP_HASH_FIELD))
-            throw new Error('Json must have "' + ECS_HASH_FIELD + '" and "' + EP_HASH_FIELD + '" fields!')
+        if (!json.hasOwnProperty(ECS_HASH_FIELD) || !json.hasOwnProperty(EP_HASH_FIELD) || !json.hasOwnProperty(SN_FIELD))
+            throw new Error('Json must have "' + ECS_HASH_FIELD + '", "' + EP_HASH_FIELD + '", "' + SN_FIELD + '" fields!')
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
-        return new CardResponse('', json.status, json.ecsHash, json.epHash, '', '', '', '', '', [])
+        return new CardResponse('', json.status, json.ecsHash, json.epHash, json.serialNumber, '', '', '', '', '', [])
     }
 
     private async prepareCardResponseFromGetKeyChainInfo(response: string): Promise<CardResponse> {
@@ -90,7 +91,7 @@ export default class NfcCardModuleWrapper {
             throw new Error('Json must have "' + OCCUPIED_SIZE_FIELD + '", "' + FREE_SIZE_FIELD + '" and "' + NUMBER_OF_KEYS_FIELD + '" fields!')
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
-        return new CardResponse('', json.status, '', '', json.numberOfKeys, json.occupiedSize, json.freeSize, '', '', [])
+        return new CardResponse('', json.status, '', '', '', json.numberOfKeys, json.occupiedSize, json.freeSize, '', '', [])
     }
 
     private async prepareCardResponseFromGetHmac(response: string): Promise<CardResponse> {
@@ -100,7 +101,7 @@ export default class NfcCardModuleWrapper {
             throw new Error('Json must have "' + KEY_HMAC_FIELD + '" and "' + KEY_LENGTH_FIELD + '" fields!')
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
-        return new CardResponse('', json.status, '', '', '', '', '', json.hmac, json.length, [])
+        return new CardResponse('', json.status, '', '', '', '', '', '', json.hmac, json.length, [])
     }
 
     private throwError(errorMessage: string) {

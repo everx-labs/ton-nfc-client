@@ -8,9 +8,10 @@ export default class CardResponse {
     public freeSize: string
     public hmac: string
     public length: string
+    public sn: string
     public serialNumbers: Array<string>
 
-    public constructor(message: string, status: string, ecsHash: string, epHash: string, numberOfKeys: string, occupiedSize: string, freeSize: string, hmac: string, length: string, serialNumbers: Array<string>) {
+    public constructor(message: string, status: string, ecsHash: string, epHash: string, sn: string, numberOfKeys: string, occupiedSize: string, freeSize: string, hmac: string, length: string, serialNumbers: Array<string>) {
         this.message = message
         this.status = status
         this.ecsHash = ecsHash
@@ -21,6 +22,7 @@ export default class CardResponse {
         this.hmac = hmac
         this.length = length
         this.serialNumbers = serialNumbers
+        this.sn = sn
     }
 
 }
