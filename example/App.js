@@ -24,14 +24,14 @@ import Toast from 'react-native-simple-toast';
   signerNone 
 } = require("@tonclient/core");*/
 
-NfcEventsEmitterWrapper.addListener((msg) => Toast.showWithGravity(msg, Toast.LONG, Toast.TOP));
-NfcEventsEmitterWrapper.addAndroidListeners();
+//NfcEventsEmitterWrapper.addListener((msg) => Toast.showWithGravity(msg, Toast.LONG, Toast.TOP));
+//NfcEventsEmitterWrapper.addAndroidListeners();
 
 let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
-if (Platform.OS === "ios") {
-  nfcCardModuleWrapper.setNfcNotificator();
-}
+//if (Platform.OS === "ios") {
+  //nfcCardModuleWrapper.setNfcNotificator();
+//}
 
 let signingBox  = new NfcCardSigningBox("504394802433901126813236");
 
@@ -194,7 +194,7 @@ export default class App extends Component{
         </View>
         <View>
               <Button onPress={() => nfcCardModuleWrapper.getHashes()
-            .then((result) => alert("getHashes : " + result.ecsHash)).catch((e) => alert(e.message))} title="getHashes"/>
+            .then((result) => alert("getHashes : " + result.sn)).catch((e) => alert(e.message))} title="getHashes"/>
         </View>
         <View>
               <Button onPress={() => nfcCardModuleWrapper.getMaxPinTriesWithoutDialog()
