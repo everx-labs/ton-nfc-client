@@ -282,4 +282,22 @@ The full list of functions provided by the library to communicate with the card 
 
 ## Catching NFC related events from ton-nfc-client
 
-Section will be added soon.
+For Android add into your app the following exemplary code:
+
+```javascript
+import {NfcEventsEmitterWrapper} from 'ton-nfc-client';
+import Toast from 'react-native-simple-toast';
+
+NfcEventsEmitterWrapper.addListener((msg) => {
+  Toast.showWithGravity(msg, Toast.LONG, Toast.TOP);
+  console.log(msg);
+});
+```
+
+For iOS you additionaly should add this.
+
+```javascript
+if (Platform.OS === "ios") {
+  nfcCardModuleWrapper.setNfcNotificator();
+}
+```
