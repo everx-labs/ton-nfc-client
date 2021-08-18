@@ -111,7 +111,7 @@ try {
 	const newPin = "7777";
 	// prepare authenticationPassword, commonSecret, initialVector based on the data from smartcontract
 	
-	const serialNumber = result.serialNumber;
+	const serialNumber = result.sn;
 
 	await nfcWrapper.turnOnWallet(authenticationPassword, commonSecret, initialVector);
 	//await nfcWrapper.turnOnWalletWithPin(newPin, authenticationPassword, commonSecret, initialVector)
