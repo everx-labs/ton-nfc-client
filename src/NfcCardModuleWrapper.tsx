@@ -69,7 +69,7 @@ export default class NfcCardModuleWrapper {
         if (!json.hasOwnProperty(STATUS_FIELD))
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')
         if (typeof json.message === "string") {
-            return new CardResponse(json.message, json.status, '', '', '', '', '', '', '', [])
+            return new CardResponse(json.message, json.status, '', '', '', '', '', '', '', '', [])
         }
         return new CardResponse('', json.status, '', '', '', '', '', '', '', '', json.message)    
     }
@@ -713,7 +713,6 @@ export default class NfcCardModuleWrapper {
 
     async getSerialNumber(): Promise<CardResponse> {
         try {
-            console.log("GETTT")
             const response = await NfcCardModule.getSerialNumber()
             return this.prepareCardResponse(response)
         } catch (e) {

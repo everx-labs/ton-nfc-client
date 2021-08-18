@@ -34,7 +34,8 @@ import static com.tonnfccard.TonWalletConstants.FALSE_MSG;
 import static com.tonnfccard.TonWalletConstants.TRUE_MSG;
 
 public class NfcCardModule extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
-
+    public static final String NFC_CONNECTED_EVENT = "nfcTagConnected";
+    public static final String NFC_ADAPTER_STATE_CHANGED_EVENT = "nfcAdapterStateChanged";
     private static final String TAG = "NfcCardModule";
     private ReactApplicationContext reactContext;
     private NfcApduRunner nfcApduRunner;
@@ -48,7 +49,7 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
     private RecoveryDataApi recoveryDataApi;
     private NfcApi nfcApi;
 
-    public NfcCardModule(ReactApplicationContext reactContext) throws Exception {
+    public NfcCardModule(ReactApplicationContext reactContext)  {
         super(reactContext);
         try {
 
@@ -120,8 +121,8 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
                 try {
                     WritableMap writableMap = Arguments.createMap();
                     writableMap.putString("state", stateStr);
-                    Toast.makeText(getCurrentActivity(), "NFC Adapter state: " + stateStr, Toast.LENGTH_SHORT).show();
-                    eventEmitter.emit("nfcAdapterStateChanged", writableMap);
+                   // Toast.makeText(getCurrentActivity(), "NFC Adapter state: " + stateStr, Toast.LENGTH_SHORT).show();
+                    eventEmitter.emit(NFC_ADAPTER_STATE_CHANGED_EVENT, writableMap);
                 } catch (Exception ex) {
                     Log.d("", "Nfc state change event fail: " + ex);
                 }
@@ -158,7 +159,8 @@ public class NfcCardModule extends ReactContextBaseJavaModule implements Activit
 
     private void handleIntent(Intent intent) throws Exception{
         if (nfcApduRunner.setCardTag(intent)) {
-            Toast.makeText(getCurrentActivity(), "NFC hardware touched!", Toast.LENGTH_SHORT).show();
+            eventEmitter.emit(NFC_CONNECTED_EVENT, null);
+            //Toast.makeText(getCurrentActivity(), "NFC hardware touched!", Toast.LENGTH_SHORT).show();
         }
     }
 

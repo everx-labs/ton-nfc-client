@@ -1,6 +1,4 @@
 import {
-  Alert,
-  DeviceEventEmitter,
   EmitterSubscription,
   NativeEventEmitter,
   NativeModules,
@@ -13,25 +11,20 @@ type Subscription = {
 }
 
 export default class NfcEventsEmitterWrapper {
-  static addAndroidListeners = () => {
-    DeviceEventEmitter.addListener("nfcTagIsConnected", () => Alert.alert("NFC hardware touched."))
-    DeviceEventEmitter.addListener("nfcAdapterStateChanged", (state) => Alert.alert("NFC adapter state is changed: " + state + "."))
-    DeviceEventEmitter.addListener("keyCardOnDisconnected", () => console.log("keycard disconnected"));
-    DeviceEventEmitter.addListener("keyCardOnNFCEnabled", () => console.log("nfc enabled"));
-    DeviceEventEmitter.addListener("keyCardOnNFCDisabled", () => console.log("nfc disabled"));
-  };
-
   static addListener = (callback: (status: string) => void): Subscription => {
-    // Create a subscription
-    const subscription: EmitterSubscription = nfcEvents.addListener(
+    const subscriptionNfcTagConnected: EmitterSubscription = nfcEvents.addListener(
       'nfcTagConnected',
-      res => callback("NFC hardware is touched! Data transfer is ongoing. Wait..."),
+      () => callback("NFC tag connected."),
+    );
+    const subscriptionNfcAdapterStateChanged: EmitterSubscription = nfcEvents.addListener(
+      'nfcAdapterStateChanged',
+      (res: any) => callback("NFC Adapter state: " + res.state),
     );
 
-    // Return the Subscription object to unsubscribe
     return {
       unsubscribe: () => {
-        subscription.remove();
+        subscriptionNfcTagConnected.remove();
+        subscriptionNfcAdapterStateChanged.remove();
       }
     }
   };

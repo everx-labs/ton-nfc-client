@@ -24,18 +24,18 @@ import Toast from 'react-native-simple-toast';
   signerNone 
 } = require("@tonclient/core");*/
 
-//NfcEventsEmitterWrapper.addListener((msg) => Toast.showWithGravity(msg, Toast.LONG, Toast.TOP));
-//NfcEventsEmitterWrapper.addAndroidListeners();
+NfcEventsEmitterWrapper.addListener((msg) => {
+  Toast.showWithGravity(msg, Toast.LONG, Toast.TOP);
+  console.log(msg);
+});
 
-let  nfcCardModuleWrapper = new NfcCardModuleWrapper();
+let nfcCardModuleWrapper = new NfcCardModuleWrapper();
 
-//if (Platform.OS === "ios") {
-  //nfcCardModuleWrapper.setNfcNotificator();
-//}
+if (Platform.OS === "ios") {
+  nfcCardModuleWrapper.setNfcNotificator();
+}
 
 let signingBox  = new NfcCardSigningBox("504394802433901126813236");
-
-
 
 export default class App extends Component{
   state = {
