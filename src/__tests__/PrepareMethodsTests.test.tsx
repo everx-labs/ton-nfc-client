@@ -30,7 +30,7 @@ test('Positive test prepareCardResponseWithoutDelay', () => {
     expect(cardRsponse.sn).toBe("");
     expect(cardRsponse.serialNumbers.length).toBe(0);
 });
-/*
+
 test('Test prepareCardResponseWithoutDelay throws error if message field is absent', () => {
   let json = "{\"message1\":\"22223\", \"status\":\"ok\"}";
   console.log(json);
@@ -79,7 +79,7 @@ test('Test prepareCardResponseWithoutDelay throws error if input arg is not json
 /**
  *  Test prepareCardResponse
  */
-/*
+
 test('Positive test prepareCardResponse', () => {
   let json = "{\"message\":\"22221\", \"status\":\"ok\"}";
   let nfcCardModuleWrapper = new NfcCardModuleWrapper();
@@ -143,7 +143,7 @@ test('Test prepareCardResponse throws error if input arg is not json', () => {
 /**
  * Test prepareCardResponseFromGetAllSerialNumbers
  */
-/*
+
 test('Positive test prepareCardResponseFromGetAllSerialNumbers', () => {
   let json = "{\"message\":\"HMAC-SHA256 keys are not found.\", \"status\":\"ok\"}";
   let nfcCardModuleWrapper = new NfcCardModuleWrapper();
@@ -227,7 +227,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if input arg 
 /**
  *  Test prepareCardResponseFromGetHashes
  */
-/*
+
 test('Positive test prepareCardResponseFromGetHashes', () => {
   let json = "{\"ecsHash\":\"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3\",\"epHash\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\", \"serialNumber\":\"929526125066377952749605\", \"status\":\"ok\"}";
   let nfcCardModuleWrapper = new NfcCardModuleWrapper();
@@ -322,7 +322,7 @@ test('Test prepareCardResponseFromGetHashes throws error if input arg is not jso
 /**
  * Test prepareCardResponseFromGetKeyChainInfo
  */
-/*
+
 test('Positive test prepareCardResponseFromGetKeyChainInfo', () => {
   let json = "{\"numberOfKeys\":1,\"occupiedSize\":1,\"freeSize\":32767,\"status\":\"ok\"}";
   let nfcCardModuleWrapper = new NfcCardModuleWrapper();
@@ -387,7 +387,7 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if input arg is n
  * Test prepareCardResponseFromGetHmac
  */
 
-/*
+
 test('Positive test prepareCardResponseFromGetHmac', () => {
   let json = "{\"hmac\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\",\"length\":32,\"status\":\"ok\"}";
   let nfcCardModuleWrapper = new NfcCardModuleWrapper();
@@ -467,7 +467,7 @@ test('Test prepareCardResponseFromGetHmac throws error if input arg is not json'
 /**
  * Test throwError
  */
-/*
+
 test('Test throwError throws error if input arg is not json', () => {
   let json = "aaa";
   console.log(json);
@@ -623,4 +623,4 @@ test('Positive Test throwError throws error if errorTypeId > 0', () => {
   }).toThrow(new NfcNativeModuleError("Pin must be a numeric string of length 4.", "fail", "30006", "3", "Native code fail: incorrect format of input data"));
 });
 
-*/
+

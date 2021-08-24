@@ -1370,7 +1370,7 @@ export default class NfcCardModuleWrapper {
         }
     }
 
-    async getFreeStorageSizeSizeWithoutDialog(): Promise<CardResponse> {
+    async getFreeStorageSizeWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
                 const response = await NativeModules.getFreeStorageSizeWithoutDialog()
