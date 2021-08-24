@@ -3,15 +3,15 @@ export default class CardResponse {
     public status: string
     public ecsHash: string
     public epHash: string
-    public numberOfKeys: string
-    public occupiedSize: string
-    public freeSize: string
+    public numberOfKeys: number
+    public occupiedSize: number
+    public freeSize: number
     public hmac: string
-    public length: string
+    public length: number
     public sn: string
     public serialNumbers: Array<string>
 
-    public constructor(message: string, status: string, ecsHash: string, epHash: string, sn: string, numberOfKeys: string, occupiedSize: string, freeSize: string, hmac: string, length: string, serialNumbers: Array<string>) {
+    public constructor(message: string, status: string, ecsHash: string, epHash: string, sn: string, numberOfKeys: number, occupiedSize: number, freeSize: number, hmac: string, length: number, serialNumbers: Array<string>) {
         this.message = message
         this.status = status
         this.ecsHash = ecsHash

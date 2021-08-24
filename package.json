@@ -36,9 +36,11 @@
     "@types/react": "17.0.4",
     "@types/react-native": "0.64.4",
     "@types/react-test-renderer": "17.0.1",
+    "babel-jest": "^27.0.6",
     "prettier": "2.3.0",
     "react": "16.9.0",
     "react-native": "^0.64.2",
+    "react-test-renderer": "^17.0.2",
     "typescript": "4.2.4"
   },
   "files": [
@@ -73,7 +75,14 @@
     "baseUrl": "https://github.com/tonlabs/ton-nfc-client"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   },
   "title": "Ton Nfc Client",
   "version": "1.0.0"

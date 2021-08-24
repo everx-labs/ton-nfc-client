@@ -167,7 +167,6 @@ export {
     CardResponseMessage,
     CardResponseStatus,
     CardStates,
-
     NfcNativeModuleErrorCodes,
     CardErrorCodes
 }
