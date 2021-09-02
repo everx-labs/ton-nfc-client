@@ -41,6 +41,9 @@ export interface CardErrorResponse {
     apdu?: string
 }
 
+const { NfcCardModule } = NativeModules
+
+
 export default class NfcCardModuleWrapper {
 
     public constructor(){
@@ -172,7 +175,7 @@ export default class NfcCardModuleWrapper {
 
     setNfcNotificator() {
         try {
-            NativeModules.setNfcNotificator()
+            NfcCardModule.setNfcNotificator()
         } catch (e) {
             throw this.throwError(e.message)
         }
@@ -182,7 +185,7 @@ export default class NfcCardModuleWrapper {
 
     async checkIfNfcSupported(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.checkIfNfcSupported()
+            const response = await NfcCardModule.checkIfNfcSupported()
             return this.prepareCardResponse(response)
         } catch (e) {
             throw this.throwError(e.message)
@@ -192,7 +195,7 @@ export default class NfcCardModuleWrapper {
     async checkIfNfcEnabled(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkIfNfcEnabled()
+                const response = await NfcCardModule.checkIfNfcEnabled()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -204,7 +207,7 @@ export default class NfcCardModuleWrapper {
     async openNfcSettings(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.openNfcSettings()
+                const response = await NfcCardModule.openNfcSettings()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -217,7 +220,7 @@ export default class NfcCardModuleWrapper {
 
     async getMaxPinTries(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getMaxPinTries()
+            const response = await NfcCardModule.getMaxPinTries()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -228,7 +231,7 @@ export default class NfcCardModuleWrapper {
     async getMaxPinTriesWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getMaxPinTriesWithoutDialog()
+                const response = await NfcCardModule.getMaxPinTriesWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -239,7 +242,7 @@ export default class NfcCardModuleWrapper {
 
     async getSeVersion(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getSeVersion()
+            const response = await NfcCardModule.getSeVersion()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -250,7 +253,7 @@ export default class NfcCardModuleWrapper {
     async getSeVersionWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getSeVersionWithoutDialog()
+                const response = await NfcCardModule.getSeVersionWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -261,7 +264,7 @@ export default class NfcCardModuleWrapper {
 
     async getCsn(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getCsn()
+            const response = await NfcCardModule.getCsn()
             console.log("RESS:" + response)
             return this.prepareCardResponse(response)
         } catch (e) {
@@ -274,7 +277,7 @@ export default class NfcCardModuleWrapper {
     async getCsnWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getCsnWithoutDialog()
+                const response = await NfcCardModule.getCsnWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -285,7 +288,7 @@ export default class NfcCardModuleWrapper {
 
     async getDeviceLabel(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getDeviceLabel()
+            const response = await NfcCardModule.getDeviceLabel()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -296,7 +299,7 @@ export default class NfcCardModuleWrapper {
     async getDeviceLabelWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getDeviceLabelWithoutDialog()
+                const response = await NfcCardModule.getDeviceLabelWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -307,7 +310,7 @@ export default class NfcCardModuleWrapper {
 
     async setDeviceLabel(label: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.setDeviceLabel(label)
+            const response = await NfcCardModule.setDeviceLabel(label)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -318,7 +321,7 @@ export default class NfcCardModuleWrapper {
     async setDeviceLabelWithoutDialog(label: string): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.setDeviceLabelWithoutDialog(label)
+                const response = await NfcCardModule.setDeviceLabelWithoutDialog(label)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -329,7 +332,7 @@ export default class NfcCardModuleWrapper {
 
     async getRemainingPinTries(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getRemainingPinTries()
+            const response = await NfcCardModule.getRemainingPinTries()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -340,7 +343,7 @@ export default class NfcCardModuleWrapper {
     async getRemainingPinTriesWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getRemainingPinTriesWithoutDialog()
+                const response = await NfcCardModule.getRemainingPinTriesWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -351,7 +354,7 @@ export default class NfcCardModuleWrapper {
 
     async getRootKeyStatus(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getRootKeyStatus()
+            const response = await NfcCardModule.getRootKeyStatus()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -362,7 +365,7 @@ export default class NfcCardModuleWrapper {
     async getRootKeyStatusWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getRootKeyStatusWithoutDialog()
+                const response = await NfcCardModule.getRootKeyStatusWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -373,7 +376,7 @@ export default class NfcCardModuleWrapper {
 
     async getAvailableMemory(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getAvailableMemory()
+            const response = await NfcCardModule.getAvailableMemory()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -384,7 +387,7 @@ export default class NfcCardModuleWrapper {
     async getAvailableMemoryWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getAvailableMemoryWithoutDialog()
+                const response = await NfcCardModule.getAvailableMemoryWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -395,7 +398,7 @@ export default class NfcCardModuleWrapper {
 
     async getAppsList(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getAppsList()
+            const response = await NfcCardModule.getAppsList()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -406,7 +409,7 @@ export default class NfcCardModuleWrapper {
     async getAppsListWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getAppsListWithoutDialog()
+                const response = await NfcCardModule.getAppsListWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -417,7 +420,7 @@ export default class NfcCardModuleWrapper {
 
     async generateSeed(pin: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.generateSeed(pin)
+            const response = await NfcCardModule.generateSeed(pin)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -428,7 +431,7 @@ export default class NfcCardModuleWrapper {
     async generateSeedWithoutDialog(pin: string): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.generateSeedWithoutDialog(pin)
+                const response = await NfcCardModule.generateSeedWithoutDialog(pin)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -439,7 +442,7 @@ export default class NfcCardModuleWrapper {
 
     async resetWallet(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.resetWallet()
+            const response = await NfcCardModule.resetWallet()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -450,7 +453,7 @@ export default class NfcCardModuleWrapper {
     async resetWalletWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.resetWalletWithoutDialog()
+                const response = await NfcCardModule.resetWalletWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -461,7 +464,7 @@ export default class NfcCardModuleWrapper {
 
     async changePin(oldPin: string, newPin: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.changePin(oldPin, newPin)
+            const response = await NfcCardModule.changePin(oldPin, newPin)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -472,7 +475,7 @@ export default class NfcCardModuleWrapper {
     async changePinWithoutDialog(oldPin: string, newPin: string): Promise<CardResponse> {
         if (Platform.OS ===  ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.changePinWithoutDialog(oldPin, newPin)
+                const response = await NfcCardModule.changePinWithoutDialog(oldPin, newPin)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -485,7 +488,7 @@ export default class NfcCardModuleWrapper {
 
     async selectKeyForHmac(serialNumber: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.selectKeyForHmac(serialNumber)
+            const response = await NfcCardModule.selectKeyForHmac(serialNumber)
             return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
@@ -498,7 +501,7 @@ export default class NfcCardModuleWrapper {
         serialNumber: string
     ): Promise<CardResponse> {
         try {
-            const response = await NativeModules.createKeyForHmac(
+            const response = await NfcCardModule.createKeyForHmac(
                 authenticationPassword,
                 commonSecret,
                 serialNumber,
@@ -511,7 +514,7 @@ export default class NfcCardModuleWrapper {
 
     async getCurrentSerialNumber(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getCurrentSerialNumber()
+            const response = await NfcCardModule.getCurrentSerialNumber()
             return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
@@ -520,7 +523,7 @@ export default class NfcCardModuleWrapper {
 
     async getAllSerialNumbers(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getAllSerialNumbers()
+            const response = await NfcCardModule.getAllSerialNumbers()
             return this.prepareCardResponseFromGetAllSerialNumbers(response)
         } catch (e) {
             throw this.throwError(e.message)
@@ -529,7 +532,7 @@ export default class NfcCardModuleWrapper {
 
     async isKeyForHmacExist(serialNumber: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.isKeyForHmacExist(serialNumber)
+            const response = await NfcCardModule.isKeyForHmacExist(serialNumber)
             return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
@@ -538,7 +541,7 @@ export default class NfcCardModuleWrapper {
 
     async deleteKeyForHmac(serialNumber: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.deleteKeyForHmac(serialNumber)
+            const response = await NfcCardModule.deleteKeyForHmac(serialNumber)
             return this.prepareCardResponseWithoutDelay(response)
         } catch (e) {
             throw this.throwError(e.message)
@@ -554,7 +557,7 @@ export default class NfcCardModuleWrapper {
         initialVector: string
     ): Promise<CardResponse> {
         try {
-            const response = await NativeModules.turnOnWalletWithPin(
+            const response = await NfcCardModule.turnOnWalletWithPin(
                 newPin,
                 authenticationPassword,
                 commonSecret,
@@ -575,7 +578,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if(Platform.OS === ANDROID_PLATFORM){
             try {
-                const response = await NativeModules.turnOnWalletWithPinWithoutDialog(
+                const response = await NfcCardModule.turnOnWalletWithPinWithoutDialog(
                     newPin,
                     authenticationPassword,
                     commonSecret,
@@ -595,7 +598,7 @@ export default class NfcCardModuleWrapper {
         initialVector: string
     ): Promise<CardResponse> {
         try {
-            const response = await NativeModules.turnOnWallet(
+            const response = await NfcCardModule.turnOnWallet(
                 authenticationPassword,
                 commonSecret,
                 initialVector,
@@ -614,7 +617,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.turnOnWalletWithoutDialog(
+                const response = await NfcCardModule.turnOnWalletWithoutDialog(
                     authenticationPassword,
                     commonSecret,
                     initialVector,
@@ -629,7 +632,7 @@ export default class NfcCardModuleWrapper {
 
     async getHashes(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getHashes()
+            const response = await NfcCardModule.getHashes()
             return this.prepareCardResponseFromGetHashes(response)
         } catch (e) {
             await this.makeDelay()
@@ -640,7 +643,7 @@ export default class NfcCardModuleWrapper {
     async getHashesWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getHashesWithoutDialog()
+                const response = await NfcCardModule.getHashesWithoutDialog()
                 return this.prepareCardResponseFromGetHashes(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -651,7 +654,7 @@ export default class NfcCardModuleWrapper {
 
     async getHashOfEncryptedPassword(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getHashOfEncryptedPassword()
+            const response = await NfcCardModule.getHashOfEncryptedPassword()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -662,7 +665,7 @@ export default class NfcCardModuleWrapper {
     async getHashOfEncryptedPasswordWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getHashOfEncryptedPasswordWithoutDialog()
+                const response = await NfcCardModule.getHashOfEncryptedPasswordWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -674,7 +677,7 @@ export default class NfcCardModuleWrapper {
     async getHashOfEncryptedCommonSecret(): Promise<CardResponse> {
         try {
             const response =
-                await NativeModules.getHashOfEncryptedCommonSecret()
+                await NfcCardModule.getHashOfEncryptedCommonSecret()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -685,7 +688,7 @@ export default class NfcCardModuleWrapper {
     async getHashOfEncryptedCommonSecretWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getHashOfEncryptedCommonSecretWithoutDialog()
+                const response = await NfcCardModule.getHashOfEncryptedCommonSecretWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -698,7 +701,7 @@ export default class NfcCardModuleWrapper {
 
     async getTonAppletState(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getTonAppletState()
+            const response = await NfcCardModule.getTonAppletState()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -709,7 +712,7 @@ export default class NfcCardModuleWrapper {
     async getTonAppletStateWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getTonAppletStateWithoutDialog()
+                const response = await NfcCardModule.getTonAppletStateWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -720,7 +723,7 @@ export default class NfcCardModuleWrapper {
 
     async getSerialNumber(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getSerialNumber()
+            const response = await NfcCardModule.getSerialNumber()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -731,7 +734,7 @@ export default class NfcCardModuleWrapper {
     async getSerialNumberWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getSerialNumberWithoutDialog()
+                const response = await NfcCardModule.getSerialNumberWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -742,7 +745,7 @@ export default class NfcCardModuleWrapper {
 
     async getSault(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getSault()
+            const response = await NfcCardModule.getSault()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -753,7 +756,7 @@ export default class NfcCardModuleWrapper {
     async getSaultWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getSaultWithoutDialog()
+                const response = await NfcCardModule.getSaultWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -767,7 +770,7 @@ export default class NfcCardModuleWrapper {
 
     async addRecoveryData(recoveryData: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.addRecoveryData(recoveryData)
+            const response = await NfcCardModule.addRecoveryData(recoveryData)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -778,7 +781,7 @@ export default class NfcCardModuleWrapper {
     async addRecoveryDataWithoutDialog(recoveryData: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.addRecoveryDataWithoutDialog(recoveryData)
+                const response = await NfcCardModule.addRecoveryDataWithoutDialog(recoveryData)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -789,7 +792,7 @@ export default class NfcCardModuleWrapper {
 
     async getRecoveryData(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getRecoveryData()
+            const response = await NfcCardModule.getRecoveryData()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -800,7 +803,7 @@ export default class NfcCardModuleWrapper {
     async getRecoveryDataWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getRecoveryDataWithoutDialog()
+                const response = await NfcCardModule.getRecoveryDataWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -811,7 +814,7 @@ export default class NfcCardModuleWrapper {
 
     async getRecoveryDataHash(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getRecoveryDataHash()
+            const response = await NfcCardModule.getRecoveryDataHash()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -822,7 +825,7 @@ export default class NfcCardModuleWrapper {
     async getRecoveryDataHashWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getRecoveryDataHashWithoutDialog()
+                const response = await NfcCardModule.getRecoveryDataHashWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -833,7 +836,7 @@ export default class NfcCardModuleWrapper {
 
     async getRecoveryDataLen(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getRecoveryDataLen()
+            const response = await NfcCardModule.getRecoveryDataLen()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -844,7 +847,7 @@ export default class NfcCardModuleWrapper {
     async getRecoveryDataLenWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getRecoveryDataLenWithoutDialog()
+                const response = await NfcCardModule.getRecoveryDataLenWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -855,7 +858,7 @@ export default class NfcCardModuleWrapper {
 
     async isRecoveryDataSet(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.isRecoveryDataSet()
+            const response = await NfcCardModule.isRecoveryDataSet()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -866,7 +869,7 @@ export default class NfcCardModuleWrapper {
     async isRecoveryDataSetWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.isRecoveryDataSetWithoutDialog()
+                const response = await NfcCardModule.isRecoveryDataSetWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -877,7 +880,7 @@ export default class NfcCardModuleWrapper {
 
     async resetRecoveryData(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.resetRecoveryData()
+            const response = await NfcCardModule.resetRecoveryData()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -888,7 +891,7 @@ export default class NfcCardModuleWrapper {
     async resetRecoveryDataWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.resetRecoveryDataWithoutDialog()
+                const response = await NfcCardModule.resetRecoveryDataWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -901,7 +904,7 @@ export default class NfcCardModuleWrapper {
 
     async verifyPin(pin: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.verifyPin(pin)
+            const response = await NfcCardModule.verifyPin(pin)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -912,7 +915,7 @@ export default class NfcCardModuleWrapper {
     async verifyPinWithoutDialog(pin: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.verifyPinWithoutDialog(pin)
+                const response = await NfcCardModule.verifyPinWithoutDialog(pin)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -924,7 +927,7 @@ export default class NfcCardModuleWrapper {
 
     async getPublicKey(hdIndex: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getPublicKey(hdIndex)
+            const response = await NfcCardModule.getPublicKey(hdIndex)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -935,7 +938,7 @@ export default class NfcCardModuleWrapper {
     async getPublicKeyWithoutDialog(hdIndex: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getPublicKeyWithoutDialog(hdIndex)
+                const response = await NfcCardModule.getPublicKeyWithoutDialog(hdIndex)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -946,7 +949,7 @@ export default class NfcCardModuleWrapper {
 
     async checkSerialNumberAndGetPublicKey(serialNumber: string, hdIndex: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.checkSerialNumberAndGetPublicKey(serialNumber, hdIndex)
+            const response = await NfcCardModule.checkSerialNumberAndGetPublicKey(serialNumber, hdIndex)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -957,7 +960,7 @@ export default class NfcCardModuleWrapper {
     async checkSerialNumberAndGetPublicKeyWithoutDialog(serialNumber: string, hdIndex: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkSerialNumberAndGetPublicKeyWithoutDialog(serialNumber, hdIndex)
+                const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyWithoutDialog(serialNumber, hdIndex)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -969,7 +972,7 @@ export default class NfcCardModuleWrapper {
 
     async signForDefaultHdPath(dataForSigning: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.signForDefaultHdPath(dataForSigning)
+            const response = await NfcCardModule.signForDefaultHdPath(dataForSigning)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -980,7 +983,7 @@ export default class NfcCardModuleWrapper {
     async signForDefaultHdPathWithoutDialog(dataForSigning: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.signForDefaultHdPathWithoutDialog(dataForSigning)
+                const response = await NfcCardModule.signForDefaultHdPathWithoutDialog(dataForSigning)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -991,7 +994,7 @@ export default class NfcCardModuleWrapper {
 
     async checkSerialNumberAndSignForDefaultHdPath(serialNumber: string, dataForSigning: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.checkSerialNumberAndSignForDefaultHdPath(
+            const response = await NfcCardModule.checkSerialNumberAndSignForDefaultHdPath(
                 serialNumber,
                 dataForSigning 
             )
@@ -1005,7 +1008,7 @@ export default class NfcCardModuleWrapper {
     async checkSerialNumberAndSignForDefaultHdPathWithoutDialog(serialNumber: string, dataForSigning: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkSerialNumberAndSignForDefaultHdPathWithoutDialog(serialNumber, dataForSigning)
+                const response = await NfcCardModule.checkSerialNumberAndSignForDefaultHdPathWithoutDialog(serialNumber, dataForSigning)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1020,7 +1023,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         try {
             const response =
-                await NativeModules.verifyPinAndSignForDefaultHdPath(
+                await NfcCardModule.verifyPinAndSignForDefaultHdPath(
                     dataForSigning,
                     pin,
                 )
@@ -1037,7 +1040,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.verifyPinAndSignForDefaultHdPathWithoutDialog(dataForSigning, pin)
+                const response = await NfcCardModule.verifyPinAndSignForDefaultHdPathWithoutDialog(dataForSigning, pin)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1053,7 +1056,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         try {
             const response =
-                await NativeModules.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(
+                await NfcCardModule.checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(
                     serialNumber,
                     dataForSigning,
                     pin,
@@ -1072,7 +1075,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkSerialNumberAndVerifyPinAndSignForDefaultHdPathWithoutDialog(serialNumber, dataForSigning, pin)
+                const response = await NfcCardModule.checkSerialNumberAndVerifyPinAndSignForDefaultHdPathWithoutDialog(serialNumber, dataForSigning, pin)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1083,7 +1086,7 @@ export default class NfcCardModuleWrapper {
 
     async sign(dataForSigning: string, hdIndex: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.sign(dataForSigning, hdIndex)
+            const response = await NfcCardModule.sign(dataForSigning, hdIndex)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1097,7 +1100,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.signWithoutDialog(dataForSigning, hdIndex)
+                const response = await NfcCardModule.signWithoutDialog(dataForSigning, hdIndex)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1108,7 +1111,7 @@ export default class NfcCardModuleWrapper {
 
     async checkSerialNumberAndSign(serialNumber: string, dataForSigning: string, hdIndex: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.checkSerialNumberAndSign(serialNumber, dataForSigning, hdIndex)
+            const response = await NfcCardModule.checkSerialNumberAndSign(serialNumber, dataForSigning, hdIndex)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1123,7 +1126,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkSerialNumberAndSignWithoutDialog(serialNumber, dataForSigning, hdIndex)
+                const response = await NfcCardModule.checkSerialNumberAndSignWithoutDialog(serialNumber, dataForSigning, hdIndex)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1138,7 +1141,7 @@ export default class NfcCardModuleWrapper {
         pin: string
     ): Promise<CardResponse> {
         try {
-            const response = await NativeModules.verifyPinAndSign(
+            const response = await NfcCardModule.verifyPinAndSign(
                 dataForSigning,
                 hdIndex,
                 pin,
@@ -1157,7 +1160,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.verifyPinAndSignWithoutDialog(dataForSigning, hdIndex, pin)
+                const response = await NfcCardModule.verifyPinAndSignWithoutDialog(dataForSigning, hdIndex, pin)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1173,7 +1176,7 @@ export default class NfcCardModuleWrapper {
         pin: string
     ): Promise<CardResponse> {
         try {
-            const response = await NativeModules.checkSerialNumberAndVerifyPinAndSign(
+            const response = await NfcCardModule.checkSerialNumberAndVerifyPinAndSign(
                 serialNumber,
                 dataForSigning,
                 hdIndex,
@@ -1194,7 +1197,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkSerialNumberAndVerifyPinAndSignWithoutDialog(serialNumber, dataForSigning, hdIndex, pin)
+                const response = await NfcCardModule.checkSerialNumberAndVerifyPinAndSignWithoutDialog(serialNumber, dataForSigning, hdIndex, pin)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1205,7 +1208,7 @@ export default class NfcCardModuleWrapper {
 
     async getPublicKeyForDefaultPath(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getPublicKeyForDefaultPath()
+            const response = await NfcCardModule.getPublicKeyForDefaultPath()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1216,7 +1219,7 @@ export default class NfcCardModuleWrapper {
     async getPublicKeyForDefaultPathWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getPublicKeyForDefaultPathWithoutDialog()
+                const response = await NfcCardModule.getPublicKeyForDefaultPathWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1228,7 +1231,7 @@ export default class NfcCardModuleWrapper {
     async checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber: string): Promise<CardResponse> {
         try {
             
-            const response = await NativeModules.checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber)
+            const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1239,7 +1242,7 @@ export default class NfcCardModuleWrapper {
     async checkSerialNumberAndGetPublicKeyForDefaultPathWithoutDialog(serialNumber: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkSerialNumberAndGetPublicKeyForDefaultPathWithoutDialog(serialNumber)
+                const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyForDefaultPathWithoutDialog(serialNumber)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1252,7 +1255,7 @@ export default class NfcCardModuleWrapper {
 
     async resetKeyChain(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.resetKeyChain()
+            const response = await NfcCardModule.resetKeyChain()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1263,7 +1266,7 @@ export default class NfcCardModuleWrapper {
     async resetKeyChainWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.resetKeyChainWithoutDialog()
+                const response = await NfcCardModule.resetKeyChainWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1274,7 +1277,7 @@ export default class NfcCardModuleWrapper {
 
     async getKeyChainDataAboutAllKeys(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getKeyChainDataAboutAllKeys()
+            const response = await NfcCardModule.getKeyChainDataAboutAllKeys()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1285,7 +1288,7 @@ export default class NfcCardModuleWrapper {
     async getKeyChainDataAboutAllKeysWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getKeyChainDataAboutAllKeysWithoutDialog()
+                const response = await NfcCardModule.getKeyChainDataAboutAllKeysWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1296,7 +1299,7 @@ export default class NfcCardModuleWrapper {
 
     async getKeyChainInfo(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getKeyChainInfo()
+            const response = await NfcCardModule.getKeyChainInfo()
             return this.prepareCardResponseFromGetKeyChainInfo(response)
         } catch (e) {
             await this.makeDelay()
@@ -1307,7 +1310,7 @@ export default class NfcCardModuleWrapper {
     async getKeyChainInfoWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getKeyChainInfoWithoutDialog()
+                const response = await NfcCardModule.getKeyChainInfoWithoutDialog()
                 return this.prepareCardResponseFromGetKeyChainInfo(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1318,7 +1321,7 @@ export default class NfcCardModuleWrapper {
 
     async getNumberOfKeys(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getNumberOfKeys()
+            const response = await NfcCardModule.getNumberOfKeys()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1329,7 +1332,7 @@ export default class NfcCardModuleWrapper {
     async getNumberOfKeysWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getNumberOfKeysWithoutDialog()
+                const response = await NfcCardModule.getNumberOfKeysWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1340,7 +1343,7 @@ export default class NfcCardModuleWrapper {
 
     async getOccupiedStorageSize(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getOccupiedStorageSize()
+            const response = await NfcCardModule.getOccupiedStorageSize()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1351,7 +1354,7 @@ export default class NfcCardModuleWrapper {
     async getOccupiedStorageSizeWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getOccupiedStorageSizeWithoutDialog()
+                const response = await NfcCardModule.getOccupiedStorageSizeWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1362,7 +1365,7 @@ export default class NfcCardModuleWrapper {
 
     async getFreeStorageSize(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getFreeStorageSize()
+            const response = await NfcCardModule.getFreeStorageSize()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1373,7 +1376,7 @@ export default class NfcCardModuleWrapper {
     async getFreeStorageSizeWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getFreeStorageSizeWithoutDialog()
+                const response = await NfcCardModule.getFreeStorageSizeWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1384,7 +1387,7 @@ export default class NfcCardModuleWrapper {
 
     async getKeyFromKeyChain(keyHmac: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getKeyFromKeyChain(keyHmac)
+            const response = await NfcCardModule.getKeyFromKeyChain(keyHmac)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1395,7 +1398,7 @@ export default class NfcCardModuleWrapper {
     async getKeyFromKeyChainWithoutDialog(keyHmac: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getKeyFromKeyChainWithoutDialog(keyHmac)
+                const response = await NfcCardModule.getKeyFromKeyChainWithoutDialog(keyHmac)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1406,7 +1409,7 @@ export default class NfcCardModuleWrapper {
 
     async addKeyIntoKeyChain(newKey: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.addKeyIntoKeyChain(newKey)
+            const response = await NfcCardModule.addKeyIntoKeyChain(newKey)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1417,7 +1420,7 @@ export default class NfcCardModuleWrapper {
     async addKeyIntoKeyChainWithoutDialog(newKey: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.addKeyIntoKeyChainWithoutDialog(newKey)
+                const response = await NfcCardModule.addKeyIntoKeyChainWithoutDialog(newKey)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1428,7 +1431,7 @@ export default class NfcCardModuleWrapper {
 
     async deleteKeyFromKeyChain(keyHmac: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.deleteKeyFromKeyChain(keyHmac)
+            const response = await NfcCardModule.deleteKeyFromKeyChain(keyHmac)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1439,7 +1442,7 @@ export default class NfcCardModuleWrapper {
     async deleteKeyFromKeyChainWithoutDialog(keyHmac: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.deleteKeyFromKeyChainWithoutDialog(keyHmac)
+                const response = await NfcCardModule.deleteKeyFromKeyChainWithoutDialog(keyHmac)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1450,7 +1453,7 @@ export default class NfcCardModuleWrapper {
 
     async finishDeleteKeyFromKeyChainAfterInterruption(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.finishDeleteKeyFromKeyChainAfterInterruption()
+            const response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1461,7 +1464,7 @@ export default class NfcCardModuleWrapper {
     async finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog()
+                const response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1475,7 +1478,7 @@ export default class NfcCardModuleWrapper {
         oldKeyHmac: string
     ): Promise<CardResponse> {
         try {
-            const response = await NativeModules.changeKeyInKeyChain(
+            const response = await NfcCardModule.changeKeyInKeyChain(
                 newKey,
                 oldKeyHmac,
             )
@@ -1492,7 +1495,7 @@ export default class NfcCardModuleWrapper {
     ): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.changeKeyInKeyChainWithoutDialog(newKey, oldKeyHmac)
+                const response = await NfcCardModule.changeKeyInKeyChainWithoutDialog(newKey, oldKeyHmac)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1505,7 +1508,7 @@ export default class NfcCardModuleWrapper {
         keyHmac: string
     ): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getIndexAndLenOfKeyInKeyChain(keyHmac)
+            const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1516,7 +1519,7 @@ export default class NfcCardModuleWrapper {
     async getIndexAndLenOfKeyInKeyChainWithoutDialog(keyHmac: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getIndexAndLenOfKeyInKeyChainWithoutDialog(keyHmac)
+                const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChainWithoutDialog(keyHmac)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1527,7 +1530,7 @@ export default class NfcCardModuleWrapper {
 
     async checkAvailableVolForNewKey(keySize: number): Promise<CardResponse> {
         try {
-            const response = await NativeModules.checkAvailableVolForNewKey(keySize)
+            const response = await NfcCardModule.checkAvailableVolForNewKey(keySize)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1538,7 +1541,7 @@ export default class NfcCardModuleWrapper {
     async checkAvailableVolForNewKeyWithoutDialog(keySize: number): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkAvailableVolForNewKeyWithoutDialog(keySize)
+                const response = await NfcCardModule.checkAvailableVolForNewKeyWithoutDialog(keySize)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1549,7 +1552,7 @@ export default class NfcCardModuleWrapper {
 
     async checkKeyHmacConsistency(keyHmac: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.checkKeyHmacConsistency(keyHmac)
+            const response = await NfcCardModule.checkKeyHmacConsistency(keyHmac)
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1560,7 +1563,7 @@ export default class NfcCardModuleWrapper {
     async checkKeyHmacConsistencyWithoutDialog(keyHmac: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.checkKeyHmacConsistencyWithoutDialog(keyHmac)
+                const response = await NfcCardModule.checkKeyHmacConsistencyWithoutDialog(keyHmac)
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1571,7 +1574,7 @@ export default class NfcCardModuleWrapper {
 
     async getHmac(index: string): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getHmac(index)
+            const response = await NfcCardModule.getHmac(index)
             return this.prepareCardResponseFromGetHmac(response)
         } catch (e) {
             await this.makeDelay()
@@ -1582,7 +1585,7 @@ export default class NfcCardModuleWrapper {
     async getHmacWithoutDialog(index: string): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getHmacWithoutDialog(index)
+                const response = await NfcCardModule.getHmacWithoutDialog(index)
                 return this.prepareCardResponseFromGetHmac(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1593,7 +1596,7 @@ export default class NfcCardModuleWrapper {
 
     async getDeleteKeyRecordNumOfPackets(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getDeleteKeyRecordNumOfPackets()
+            const response = await NfcCardModule.getDeleteKeyRecordNumOfPackets()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1604,7 +1607,7 @@ export default class NfcCardModuleWrapper {
     async getDeleteKeyRecordNumOfPacketsWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getDeleteKeyRecordNumOfPacketsWithoutDialog()
+                const response = await NfcCardModule.getDeleteKeyRecordNumOfPacketsWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
@@ -1615,7 +1618,7 @@ export default class NfcCardModuleWrapper {
 
     async getDeleteKeyChunkNumOfPackets(): Promise<CardResponse> {
         try {
-            const response = await NativeModules.getDeleteKeyChunkNumOfPackets()
+            const response = await NfcCardModule.getDeleteKeyChunkNumOfPackets()
             return this.prepareCardResponse(response)
         } catch (e) {
             await this.makeDelay()
@@ -1626,7 +1629,7 @@ export default class NfcCardModuleWrapper {
     async getDeleteKeyChunkNumOfPacketsWithoutDialog(): Promise<CardResponse> {
         if (Platform.OS === ANDROID_PLATFORM) {
             try {
-                const response = await NativeModules.getDeleteKeyChunkNumOfPacketsWithoutDialog()
+                const response = await NfcCardModule.getDeleteKeyChunkNumOfPacketsWithoutDialog()
                 return this.prepareCardResponse(response)
             } catch (e) {
                 throw this.throwError(e.message)
