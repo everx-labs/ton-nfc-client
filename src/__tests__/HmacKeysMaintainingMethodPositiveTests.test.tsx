@@ -8,45 +8,46 @@ import { NativeModules} from 'react-native'
 jest.mock('react-native', () => {
     return {
       NativeModules: {
-        selectKeyForHmac: jest.fn( (serialNumber: string) => {
-          return new Promise((resolve, reject) => {
-            resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-          })
-        }),
-        getCurrentSerialNumber: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"504394802433901126813236\", \"status\":\"ok\"}");
-            })
-        }),
-        createKeyForHmac: jest.fn( (authenticationPassword: string,
-            commonSecret: string,
-            serialNumber: string) => {
+        NfcCardModule: {
+          selectKeyForHmac: jest.fn( (serialNumber: string) => {
             return new Promise((resolve, reject) => {
               resolve("{\"message\":\"done\", \"status\":\"ok\"}");
             })
-        }),
-        deleteKeyForHmac: jest.fn( (serialNumber: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-            })
-        }),
-        isKeyForHmacExist: jest.fn( (serialNumber: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"true\", \"status\":\"ok\"}");
-            })
-        }),
-       /* getAllSerialNumbers: jest.fn( () => {
-            return new Promise((resolve, reject) => {
+          }),
+          getCurrentSerialNumber: jest.fn( () => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"504394802433901126813236\", \"status\":\"ok\"}");
+              })
+          }),
+          createKeyForHmac: jest.fn( (authenticationPassword: string,
+              commonSecret: string,
+              serialNumber: string) => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+              })
+          }),
+          deleteKeyForHmac: jest.fn( (serialNumber: string) => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+              })
+          }),
+          isKeyForHmacExist: jest.fn( (serialNumber: string) => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"true\", \"status\":\"ok\"}");
+              })
+          }),
+         /* getAllSerialNumbers: jest.fn( () => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":[\"504394802433901126813236\", \"455324585319848551839771\"], \"status\":\"ok\"}");
+              })
+          }),*/
+          getAllSerialNumbers: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
               resolve("{\"message\":[\"504394802433901126813236\", \"455324585319848551839771\"], \"status\":\"ok\"}");
-            })
-        }),*/
-        getAllSerialNumbers: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-            resolve("{\"message\":[\"504394802433901126813236\", \"455324585319848551839771\"], \"status\":\"ok\"}");
-          }))
-          .mockReturnValue(new Promise((resolve, reject) => {
-            resolve("{\"message\":\"HMAC-SHA256 keys are not found.\", \"status\":\"ok\"}");
-          }))
-        
+            }))
+            .mockReturnValue(new Promise((resolve, reject) => {
+              resolve("{\"message\":\"HMAC-SHA256 keys are not found.\", \"status\":\"ok\"}");
+            }))
+        }   
       },
       Platform: {
         OS: "android"

@@ -8,66 +8,68 @@ import { NativeModules} from 'react-native'
 jest.mock('react-native', () => {
     return {
       NativeModules: {
-        isRecoveryDataSet: jest.fn( (recoveryData: string) => {
-          return new Promise((resolve, reject) => {
-            resolve("{\"message\":\"true\", \"status\":\"ok\"}");
-          })
-        }),
-        isRecoveryDataSetWithoutDialog: jest.fn( (recoveryData: string) => {
+        NfcCardModule: {
+          isRecoveryDataSet: jest.fn( (recoveryData: string) => {
             return new Promise((resolve, reject) => {
               resolve("{\"message\":\"true\", \"status\":\"ok\"}");
             })
-        }), 
-        resetRecoveryData: jest.fn( (recoveryData: string) => {
-          return new Promise((resolve, reject) => {
-            resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-          })
-        }),
-        resetRecoveryDataWithoutDialog: jest.fn( (recoveryData: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-            })
-        }), 
-        getRecoveryDataHash: jest.fn( (recoveryData: string) => {
-          return new Promise((resolve, reject) => {
-            resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
-          })
-        }),
-        getRecoveryDataHashWithoutDialog: jest.fn( (recoveryData: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
-            })
-        }), 
-        getRecoveryDataLen: jest.fn( (recoveryData: string) => {
-          return new Promise((resolve, reject) => {
-            resolve("{\"message\":\"7\", \"status\":\"ok\"}");
-          })
-        }),
-        getRecoveryDataLenWithoutDialog: jest.fn( (recoveryData: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"7\", \"status\":\"ok\"}");
-            })
-        }), 
-        addRecoveryData: jest.fn( (recoveryData: string) => {
+          }),
+          isRecoveryDataSetWithoutDialog: jest.fn( (recoveryData: string) => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"true\", \"status\":\"ok\"}");
+              })
+          }), 
+          resetRecoveryData: jest.fn( (recoveryData: string) => {
             return new Promise((resolve, reject) => {
               resolve("{\"message\":\"done\", \"status\":\"ok\"}");
             })
           }),
-        addRecoveryDataWithoutDialog: jest.fn( (recoveryData: string) => {
+          resetRecoveryDataWithoutDialog: jest.fn( (recoveryData: string) => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
-        }), 
-        getRecoveryData: jest.fn( () => {
+          }), 
+          getRecoveryDataHash: jest.fn( (recoveryData: string) => {
             return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"00112233445566\", \"status\":\"ok\"}");
+              resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
             })
           }),
-        getRecoveryDataWithoutDialog: jest.fn( () => {
+          getRecoveryDataHashWithoutDialog: jest.fn( (recoveryData: string) => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
+              })
+          }), 
+          getRecoveryDataLen: jest.fn( (recoveryData: string) => {
+            return new Promise((resolve, reject) => {
+              resolve("{\"message\":\"7\", \"status\":\"ok\"}");
+            })
+          }),
+          getRecoveryDataLenWithoutDialog: jest.fn( (recoveryData: string) => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"7\", \"status\":\"ok\"}");
+              })
+          }), 
+          addRecoveryData: jest.fn( (recoveryData: string) => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+              })
+            }),
+          addRecoveryDataWithoutDialog: jest.fn( (recoveryData: string) => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+                })
+          }), 
+          getRecoveryData: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"00112233445566\", \"status\":\"ok\"}");
               })
-        }),  
+            }),
+          getRecoveryDataWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"00112233445566\", \"status\":\"ok\"}");
+                })
+          }),  
+        }       
       },
       Platform: {
         OS: "android"

@@ -9,174 +9,174 @@ import { NativeModules} from 'react-native'
 jest.mock('react-native', () => {
     return {
       NativeModules: {
-        resetKeyChain: jest.fn( () => {
+        NfcCardModule: {
+          resetKeyChain: jest.fn( () => {
             return new Promise((resolve, reject) => {
               resolve("{\"message\":\"done\", \"status\":\"ok\"}");
             })
-        }),
-        resetKeyChainWithoutDialog: jest.fn( () => {
-              return new Promise((resolve, reject) => {
-                resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-              })
-        }), 
+          }),
+          resetKeyChainWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+                })
+          }), 
 
-        getOccupiedStorageSize: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"20\", \"status\":\"ok\"}");
-            })
-        }),
-        getOccupiedStorageSizeWithoutDialog: jest.fn( () => {
+          getOccupiedStorageSize: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"20\", \"status\":\"ok\"}");
               })
-        }), 
+          }),
+          getOccupiedStorageSizeWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"20\", \"status\":\"ok\"}");
+                })
+          }), 
 
-        getFreeStorageSize: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"20\", \"status\":\"ok\"}");
-            })
-        }),
-        getFreeStorageSizeWithoutDialog: jest.fn( () => {
+          getFreeStorageSize: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"20\", \"status\":\"ok\"}");
               })
-        }), 
+          }),
+          getFreeStorageSizeWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"20\", \"status\":\"ok\"}");
+                })
+          }), 
 
-        getKeyFromKeyChain: jest.fn( (keyHmac: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"1111\", \"status\":\"ok\"}");
-            })
-        }),
-        getKeyFromKeyChainWithoutDialog: jest.fn( (keyHmac: string) => {
+          getKeyFromKeyChain: jest.fn( (keyHmac: string) => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"1111\", \"status\":\"ok\"}");
               })
-        }), 
+          }),
+          getKeyFromKeyChainWithoutDialog: jest.fn( (keyHmac: string) => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"1111\", \"status\":\"ok\"}");
+                })
+          }), 
 
-        getKeyChainInfo: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"numberOfKeys\":1,\"occupiedSize\":1,\"freeSize\":32767,\"status\":\"ok\"}");
-            })
-        }),
-        getKeyChainInfoWithoutDialog: jest.fn( () => {
+          getKeyChainInfo: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"numberOfKeys\":1,\"occupiedSize\":1,\"freeSize\":32767,\"status\":\"ok\"}");
               })
-        }), 
+          }),
+          getKeyChainInfoWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"numberOfKeys\":1,\"occupiedSize\":1,\"freeSize\":32767,\"status\":\"ok\"}");
+                })
+          }), 
 
-        getNumberOfKeys: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"20\", \"status\":\"ok\"}");
-            })
-        }),
-        getNumberOfKeysWithoutDialog: jest.fn( () => {
+          getNumberOfKeys: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"20\", \"status\":\"ok\"}");
               })
-        }),
+          }),
+          getNumberOfKeysWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"20\", \"status\":\"ok\"}");
+                })
+          }),
 
-        addKeyIntoKeyChain: jest.fn( (newKey: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"D31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C\", \"status\":\"ok\"}");
-            })
-        }),
-        addKeyIntoKeyChainWithoutDialog: jest.fn( (newKey: string) => {
+          addKeyIntoKeyChain: jest.fn( (newKey: string) => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"D31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C\", \"status\":\"ok\"}");
               })
-        }),
-        
-        deleteKeyFromKeyChain: jest.fn( (keyHmac: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-            })
-        }),
-        deleteKeyFromKeyChainWithoutDialog: jest.fn( (keyHmac: string) => {
+          }),
+          addKeyIntoKeyChainWithoutDialog: jest.fn( (newKey: string) => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"D31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C\", \"status\":\"ok\"}");
+                })
+          }),
+          
+          deleteKeyFromKeyChain: jest.fn( (keyHmac: string) => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
-        }), 
+          }),
+          deleteKeyFromKeyChainWithoutDialog: jest.fn( (keyHmac: string) => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+                })
+          }), 
 
-        finishDeleteKeyFromKeyChainAfterInterruption: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-            })
-        }),
-        finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog: jest.fn( () => {
+          finishDeleteKeyFromKeyChainAfterInterruption: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
-        }), 
+          }),
+          finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+                })
+          }), 
 
-        changeKeyInKeyChain: jest.fn( (newKey: string,
-            oldKeyHmac: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"A31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C\", \"status\":\"ok\"}");
-            })
-        }),
-        changeKeyInKeyChainWithoutDialog: jest.fn( (newKey: string,
-            oldKeyHmac: string) => {
+          changeKeyInKeyChain: jest.fn( (newKey: string,
+              oldKeyHmac: string) => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"A31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C\", \"status\":\"ok\"}");
               })
-        }),
+          }),
+          changeKeyInKeyChainWithoutDialog: jest.fn( (newKey: string,
+              oldKeyHmac: string) => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"A31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C\", \"status\":\"ok\"}");
+                })
+          }),
 
-        checkAvailableVolForNewKey: jest.fn( (keySize: number) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-            })
-        }),
-        checkAvailableVolForNewKeyWithoutDialog: jest.fn( (keySize: number) => {
+          checkAvailableVolForNewKey: jest.fn( (keySize: number) => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
-        }),
+          }),
+          checkAvailableVolForNewKeyWithoutDialog: jest.fn( (keySize: number) => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+                })
+          }),
 
-        checkKeyHmacConsistency: jest.fn( (keyHmac: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"done\", \"status\":\"ok\"}");
-            })
-        }),
-        checkKeyHmacConsistencyWithoutDialog: jest.fn( (keyHmac: string) => {
+          checkKeyHmacConsistency: jest.fn( (keyHmac: string) => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
-        }), 
+          }),
+          checkKeyHmacConsistencyWithoutDialog: jest.fn( (keyHmac: string) => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"done\", \"status\":\"ok\"}");
+                })
+          }), 
 
-        getHmac: jest.fn( (index: string) => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"hmac\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\",\"length\":32,\"status\":\"ok\"}");
-            })
-        }),
-        getHmacWithoutDialog: jest.fn( (index: string) => {
+          getHmac: jest.fn( (index: string) => {
               return new Promise((resolve, reject) => {
                 resolve("{\"hmac\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\",\"length\":32,\"status\":\"ok\"}");
               })
-        }), 
+          }),
+          getHmacWithoutDialog: jest.fn( (index: string) => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"hmac\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\",\"length\":32,\"status\":\"ok\"}");
+                })
+          }), 
 
-        getDeleteKeyRecordNumOfPackets: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"2\", \"status\":\"ok\"}");
-            })
-        }),
-        getDeleteKeyRecordNumOfPacketsWithoutDialog: jest.fn( () => {
+          getDeleteKeyRecordNumOfPackets: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"2\", \"status\":\"ok\"}");
               })
-        }), 
+          }),
+          getDeleteKeyRecordNumOfPacketsWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"2\", \"status\":\"ok\"}");
+                })
+          }), 
 
-        getDeleteKeyChunkNumOfPackets: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"2\", \"status\":\"ok\"}");
-            })
-        }),
-        getDeleteKeyChunkNumOfPacketsWithoutDialog: jest.fn( () => {
+          getDeleteKeyChunkNumOfPackets: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"2\", \"status\":\"ok\"}");
               })
-        }), 
-
-
+          }),
+          getDeleteKeyChunkNumOfPacketsWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"2\", \"status\":\"ok\"}");
+                })
+          }), 
+        } 
       },
       Platform: {
         OS: "android"

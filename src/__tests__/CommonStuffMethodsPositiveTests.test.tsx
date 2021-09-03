@@ -8,38 +8,38 @@ import { NativeModules} from 'react-native'
 jest.mock('react-native', () => {
     return {
       NativeModules: {
-        getTonAppletState: jest.fn( () => {
+        NfcCardModule: {
+          getTonAppletState: jest.fn( () => {
             return new Promise((resolve, reject) => {
               resolve("{\"message\":\"TonWalletApplet waits two-factor authentication.\", \"status\":\"ok\"}");
             })
           }), 
-        getTonAppletStateWithoutDialog: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"TonWalletApplet waits two-factor authentication.\", \"status\":\"ok\"}");
-            })
-          }),    
-        getSerialNumber: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"504394802433901126813236\", \"status\":\"ok\"}");
-            })
-          }), 
-        getSerialNumberWithoutDialog: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"504394802433901126813236\", \"status\":\"ok\"}");
-            })
-          }),    
-        getSault: jest.fn( () => {
-            return new Promise((resolve, reject) => {
-              resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
-            })
-          }),
-        getSaultWithoutDialog: jest.fn( () => {
+          getTonAppletStateWithoutDialog: jest.fn( () => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"TonWalletApplet waits two-factor authentication.\", \"status\":\"ok\"}");
+              })
+            }),    
+          getSerialNumber: jest.fn( () => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"504394802433901126813236\", \"status\":\"ok\"}");
+              })
+            }), 
+          getSerialNumberWithoutDialog: jest.fn( () => {
+              return new Promise((resolve, reject) => {
+                resolve("{\"message\":\"504394802433901126813236\", \"status\":\"ok\"}");
+              })
+            }),    
+          getSault: jest.fn( () => {
               return new Promise((resolve, reject) => {
                 resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
-           })
-
-           
-        }),  
+              })
+            }),
+          getSaultWithoutDialog: jest.fn( () => {
+                return new Promise((resolve, reject) => {
+                  resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
+            }) 
+          }),  
+        }     
       },
       Platform: {
         OS: "android"

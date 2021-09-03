@@ -387,7 +387,6 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if input arg is n
  * Test prepareCardResponseFromGetHmac
  */
 
-
 test('Positive test prepareCardResponseFromGetHmac', () => {
   let json = "{\"hmac\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\",\"length\":32,\"status\":\"ok\"}";
   let nfcCardModuleWrapper = new NfcCardModuleWrapper();
@@ -622,5 +621,3 @@ test('Positive Test throwError throws error if errorTypeId > 0', () => {
     let cardRsponse = nfcCardModuleWrapper.throwError(json);
   }).toThrow(new NfcNativeModuleError("Pin must be a numeric string of length 4.", "fail", "30006", "3", "Native code fail: incorrect format of input data"));
 });
-
-

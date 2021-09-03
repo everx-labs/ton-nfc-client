@@ -8,7 +8,8 @@ import { NativeModules} from 'react-native'
 jest.mock('react-native', () => {
     return {
       NativeModules: {
-        turnOnWalletWithPin: jest.fn( (newPin: string,
+        NfcCardModule: {
+          turnOnWalletWithPin: jest.fn( (newPin: string,
             authenticationPassword: string,
             commonSecret: string,
             initialVector: string) => {
@@ -69,8 +70,8 @@ jest.mock('react-native', () => {
             return new Promise((resolve, reject) => {
               resolve("{\"ecsHash\":\"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3\",\"epHash\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\", \"serialNumber\":\"929526125066377952749605\", \"status\":\"ok\"}");
             })
-        }),
-        
+        }),        
+        }
       },
       Platform: {
         OS: "android"
