@@ -114,11 +114,13 @@ export default class NfcCardModuleWrapper {
 
     throwError(errorMessage: string) {
         let json: CardErrorResponse = {}
-        try {
+      /*  try {
             json = JSON.parse(errorMessage)
         } catch (e) {
             throw new Error(errorMessage)
-        }
+        }*/
+
+        json = JSON.parse(errorMessage)
 
         if (!json.message) {
             throw new Error('Json must have "' +  MESSAGE_FIELD + '" field!')
