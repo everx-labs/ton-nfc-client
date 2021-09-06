@@ -115,8 +115,8 @@ export default class NfcCardModuleWrapper {
     throwError(errorMessage: string) {
         let json: CardErrorResponse = {}
       /*  try {
-            json = JSON.parse(errorMessage)
-        } catch (e) {
+            
+        } catch (e: any) {
             throw new Error(errorMessage)
         }*/
 
@@ -178,7 +178,7 @@ export default class NfcCardModuleWrapper {
     setNfcNotificator() {
         try {
             NfcCardModule.setNfcNotificator()
-        } catch (e) {
+        } catch (e: any) {
             throw this.throwError(e.message)
         }
     }
@@ -189,7 +189,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.checkIfNfcSupported()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             throw this.throwError(e.message)
         }
     }
@@ -199,7 +199,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkIfNfcEnabled()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -211,7 +211,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.openNfcSettings()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -224,7 +224,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getMaxPinTries()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -235,7 +235,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getMaxPinTriesWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -246,7 +246,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getSeVersion()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -257,7 +257,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getSeVersionWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -269,7 +269,7 @@ export default class NfcCardModuleWrapper {
             const response = await NfcCardModule.getCsn()
             console.log("RESS:" + response)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             console.log("I am here: " +e.message)
             await this.makeDelay()
             throw this.throwError(e.message)
@@ -281,7 +281,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getCsnWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -292,7 +292,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getDeviceLabel()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -303,7 +303,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getDeviceLabelWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -314,7 +314,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.setDeviceLabel(label)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -325,7 +325,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.setDeviceLabelWithoutDialog(label)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -336,7 +336,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getRemainingPinTries()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -347,7 +347,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getRemainingPinTriesWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -358,7 +358,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getRootKeyStatus()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -369,7 +369,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getRootKeyStatusWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -380,7 +380,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getAvailableMemory()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -391,7 +391,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getAvailableMemoryWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -402,7 +402,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getAppsList()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -413,7 +413,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getAppsListWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -424,7 +424,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.generateSeed(pin)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -435,7 +435,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.generateSeedWithoutDialog(pin)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -446,7 +446,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.resetWallet()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -457,7 +457,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.resetWalletWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -468,7 +468,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.changePin(oldPin, newPin)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -479,7 +479,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.changePinWithoutDialog(oldPin, newPin)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -492,7 +492,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.selectKeyForHmac(serialNumber)
             return this.prepareCardResponseWithoutDelay(response)
-        } catch (e) {
+        } catch (e: any) {
             throw this.throwError(e.message)
         }
     }
@@ -509,7 +509,7 @@ export default class NfcCardModuleWrapper {
                 serialNumber,
             )
             return this.prepareCardResponseWithoutDelay(response)
-        } catch (e) {
+        } catch (e: any) {
             throw this.throwError(e.message)
         }
     }
@@ -518,7 +518,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getCurrentSerialNumber()
             return this.prepareCardResponseWithoutDelay(response)
-        } catch (e) {
+        } catch (e: any) {
             throw this.throwError(e.message)
         }
     }
@@ -527,7 +527,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getAllSerialNumbers()
             return this.prepareCardResponseFromGetAllSerialNumbers(response)
-        } catch (e) {
+        } catch (e: any) {
             throw this.throwError(e.message)
         }
     }
@@ -536,7 +536,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.isKeyForHmacExist(serialNumber)
             return this.prepareCardResponseWithoutDelay(response)
-        } catch (e) {
+        } catch (e: any) {
             throw this.throwError(e.message)
         }
     }
@@ -545,7 +545,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.deleteKeyForHmac(serialNumber)
             return this.prepareCardResponseWithoutDelay(response)
-        } catch (e) {
+        } catch (e: any) {
             throw this.throwError(e.message)
         }
     }
@@ -566,7 +566,7 @@ export default class NfcCardModuleWrapper {
                 initialVector,
             )
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -587,7 +587,7 @@ export default class NfcCardModuleWrapper {
                     initialVector
                 )
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -606,7 +606,7 @@ export default class NfcCardModuleWrapper {
                 initialVector,
             )
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -625,7 +625,7 @@ export default class NfcCardModuleWrapper {
                     initialVector,
                 )
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -636,7 +636,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getHashes()
             return this.prepareCardResponseFromGetHashes(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -647,7 +647,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getHashesWithoutDialog()
                 return this.prepareCardResponseFromGetHashes(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -658,7 +658,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getHashOfEncryptedPassword()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -669,7 +669,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getHashOfEncryptedPasswordWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -681,7 +681,7 @@ export default class NfcCardModuleWrapper {
             const response =
                 await NfcCardModule.getHashOfEncryptedCommonSecret()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -692,7 +692,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getHashOfEncryptedCommonSecretWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -705,7 +705,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getTonAppletState()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -716,7 +716,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getTonAppletStateWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -727,7 +727,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getSerialNumber()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -738,7 +738,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getSerialNumberWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -749,7 +749,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getSault()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -760,7 +760,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getSaultWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -774,7 +774,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.addRecoveryData(recoveryData)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -785,7 +785,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.addRecoveryDataWithoutDialog(recoveryData)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -796,7 +796,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getRecoveryData()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -807,7 +807,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getRecoveryDataWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -818,7 +818,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getRecoveryDataHash()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -829,7 +829,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getRecoveryDataHashWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -840,7 +840,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getRecoveryDataLen()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -851,7 +851,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getRecoveryDataLenWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -862,7 +862,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.isRecoveryDataSet()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -873,7 +873,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.isRecoveryDataSetWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -884,7 +884,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.resetRecoveryData()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -895,7 +895,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.resetRecoveryDataWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -908,7 +908,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.verifyPin(pin)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -919,7 +919,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.verifyPinWithoutDialog(pin)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -931,7 +931,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getPublicKey(hdIndex)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -942,7 +942,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getPublicKeyWithoutDialog(hdIndex)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -953,7 +953,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.checkSerialNumberAndGetPublicKey(serialNumber, hdIndex)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -964,7 +964,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyWithoutDialog(serialNumber, hdIndex)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -976,7 +976,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.signForDefaultHdPath(dataForSigning)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -987,7 +987,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.signForDefaultHdPathWithoutDialog(dataForSigning)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1001,7 +1001,7 @@ export default class NfcCardModuleWrapper {
                 dataForSigning 
             )
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1012,7 +1012,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkSerialNumberAndSignForDefaultHdPathWithoutDialog(serialNumber, dataForSigning)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1030,7 +1030,7 @@ export default class NfcCardModuleWrapper {
                     pin,
                 )
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1044,7 +1044,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.verifyPinAndSignForDefaultHdPathWithoutDialog(dataForSigning, pin)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1064,7 +1064,7 @@ export default class NfcCardModuleWrapper {
                     pin,
                 )
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1079,7 +1079,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkSerialNumberAndVerifyPinAndSignForDefaultHdPathWithoutDialog(serialNumber, dataForSigning, pin)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1090,7 +1090,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.sign(dataForSigning, hdIndex)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1104,7 +1104,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.signWithoutDialog(dataForSigning, hdIndex)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1115,7 +1115,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.checkSerialNumberAndSign(serialNumber, dataForSigning, hdIndex)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1130,7 +1130,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkSerialNumberAndSignWithoutDialog(serialNumber, dataForSigning, hdIndex)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1149,7 +1149,7 @@ export default class NfcCardModuleWrapper {
                 pin,
             )
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1164,7 +1164,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.verifyPinAndSignWithoutDialog(dataForSigning, hdIndex, pin)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1185,7 +1185,7 @@ export default class NfcCardModuleWrapper {
                 pin
             )
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1201,7 +1201,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkSerialNumberAndVerifyPinAndSignWithoutDialog(serialNumber, dataForSigning, hdIndex, pin)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1212,7 +1212,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getPublicKeyForDefaultPath()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1223,7 +1223,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getPublicKeyForDefaultPathWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1235,7 +1235,7 @@ export default class NfcCardModuleWrapper {
             
             const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1246,7 +1246,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkSerialNumberAndGetPublicKeyForDefaultPathWithoutDialog(serialNumber)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1259,7 +1259,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.resetKeyChain()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1270,7 +1270,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.resetKeyChainWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1281,7 +1281,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getKeyChainDataAboutAllKeys()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1292,7 +1292,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getKeyChainDataAboutAllKeysWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1303,7 +1303,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getKeyChainInfo()
             return this.prepareCardResponseFromGetKeyChainInfo(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1314,7 +1314,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getKeyChainInfoWithoutDialog()
                 return this.prepareCardResponseFromGetKeyChainInfo(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1325,7 +1325,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getNumberOfKeys()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1336,7 +1336,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getNumberOfKeysWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1347,7 +1347,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getOccupiedStorageSize()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1358,7 +1358,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getOccupiedStorageSizeWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1369,7 +1369,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getFreeStorageSize()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1380,7 +1380,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getFreeStorageSizeWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1391,7 +1391,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getKeyFromKeyChain(keyHmac)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1402,7 +1402,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getKeyFromKeyChainWithoutDialog(keyHmac)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1413,7 +1413,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.addKeyIntoKeyChain(newKey)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1424,7 +1424,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.addKeyIntoKeyChainWithoutDialog(newKey)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1435,7 +1435,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.deleteKeyFromKeyChain(keyHmac)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1446,7 +1446,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.deleteKeyFromKeyChainWithoutDialog(keyHmac)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1457,7 +1457,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruption()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1468,7 +1468,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1485,7 +1485,7 @@ export default class NfcCardModuleWrapper {
                 oldKeyHmac,
             )
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1499,7 +1499,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.changeKeyInKeyChainWithoutDialog(newKey, oldKeyHmac)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1512,7 +1512,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChain(keyHmac)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1523,7 +1523,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getIndexAndLenOfKeyInKeyChainWithoutDialog(keyHmac)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1534,7 +1534,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.checkAvailableVolForNewKey(keySize)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1545,7 +1545,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkAvailableVolForNewKeyWithoutDialog(keySize)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1556,7 +1556,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.checkKeyHmacConsistency(keyHmac)
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1567,7 +1567,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.checkKeyHmacConsistencyWithoutDialog(keyHmac)
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1578,7 +1578,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getHmac(index)
             return this.prepareCardResponseFromGetHmac(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1589,7 +1589,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getHmacWithoutDialog(index)
                 return this.prepareCardResponseFromGetHmac(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1600,7 +1600,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getDeleteKeyRecordNumOfPackets()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1611,7 +1611,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getDeleteKeyRecordNumOfPacketsWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
@@ -1622,7 +1622,7 @@ export default class NfcCardModuleWrapper {
         try {
             const response = await NfcCardModule.getDeleteKeyChunkNumOfPackets()
             return this.prepareCardResponse(response)
-        } catch (e) {
+        } catch (e: any) {
             await this.makeDelay()
             throw this.throwError(e.message)
         }
@@ -1633,7 +1633,7 @@ export default class NfcCardModuleWrapper {
             try {
                 const response = await NfcCardModule.getDeleteKeyChunkNumOfPacketsWithoutDialog()
                 return this.prepareCardResponse(response)
-            } catch (e) {
+            } catch (e: any) {
                 throw this.throwError(e.message)
             }
         }
