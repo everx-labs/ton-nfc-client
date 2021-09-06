@@ -9,7 +9,7 @@ jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            checkSerialNumberAndGetPublicKey: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
+            checkSerialNumberAndSignForDefaultHdPath: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("aaa"));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -53,7 +53,7 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"GET_PUBLIC_KEY\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH\", \"apdu\":\"B0 A2 00 00 44\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -61,15 +61,15 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"GET_PUBLIC_KEY\", \"apdu1\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH\", \"apdu1\":\"B0 A2 00 00 44\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"GET_PUBLIC_KEY\", \"apdu\":\"\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH\", \"apdu\":\"\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"GET_PUBLIC_KEY\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH\", \"apdu\":\"B0 A2 00 00 44\"}"
                 ));
               }))
               .mockReturnValue(new Promise((resolve, reject) => {
@@ -77,7 +77,7 @@ jest.mock('react-native', () => {
                 ));
               })),
 
-            checkSerialNumberAndGetPublicKeyWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
+            checkSerialNumberAndSignForDefaultHdPathWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("aaa"));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -121,7 +121,7 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"GET_PUBLIC_KEY\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH\", \"apdu\":\"B0 A2 00 00 44\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -129,15 +129,15 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"GET_PUBLIC_KEY\", \"apdu1\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH\", \"apdu1\":\"B0 A2 00 00 44\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"GET_PUBLIC_KEY\", \"apdu\":\"\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH\", \"apdu\":\"\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"GET_PUBLIC_KEY\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH\", \"apdu\":\"B0 A2 00 00 44\"}"
                 ));
               }))
               .mockReturnValue(new Promise((resolve, reject) => {
@@ -154,11 +154,11 @@ jest.mock('react-native', () => {
   });
 
   /*
-  checkSerialNumberAndGetPublicKey
+  checkSerialNumberAndSignForDefaultHdPath
   */
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if input arg is not json', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -168,8 +168,8 @@ jest.mock('react-native', () => {
     });  
   });
 
- test('Test checkSerialNumberAndGetPublicKey throws error if message field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+ test('Test checkSerialNumberAndSignForDefaultHdPath throws error if message field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -179,8 +179,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if message field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if message field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -190,8 +190,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if status field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if status field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -201,8 +201,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if status field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if status field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -212,8 +212,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if code field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if code field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -223,8 +223,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if code field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if code field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -234,8 +234,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if errorType field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if errorType field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -245,8 +245,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if errorType field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if errorType field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -256,8 +256,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if errorTypeId field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if errorTypeId field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -267,8 +267,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if errorTypeId field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if errorTypeId field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -278,8 +278,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if cardInstruction field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if cardInstruction field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -289,8 +289,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if cardInstruction field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if cardInstruction field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -300,8 +300,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if apdu field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if apdu field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -311,8 +311,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws error if apdu field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws error if apdu field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -322,8 +322,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws CardError if errorTypeId =  0', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws CardError if errorTypeId =  0', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -334,13 +334,13 @@ jest.mock('react-native', () => {
         expect(error.errorCode).toBe('6F00');
         expect(error.errorTypeId).toBe('0');
         expect(error.errorType).toBe('Applet fail: card operation error');
-        expect(error.cardInstruction).toBe('GET_PUBLIC_KEY');
+        expect(error.cardInstruction).toBe('SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH');
         expect(error.apdu).toBe('B0 A2 00 00 44');
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKey throws NfcNativeModuleError if errorTypeId >  0', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKey("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPath throws NfcNativeModuleError if errorTypeId >  0', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPath("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -356,11 +356,11 @@ jest.mock('react-native', () => {
 
 
   /*
-  checkSerialNumberAndGetPublicKeyWithoutDialog
+  checkSerialNumberAndSignForDefaultHdPathWithoutDialog
   */
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog: throws error if input arg is not json', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -370,8 +370,8 @@ jest.mock('react-native', () => {
     });  
   });
 
- test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if message field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+ test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if message field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -381,8 +381,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if message field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if message field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -392,8 +392,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if status field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if status field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -403,8 +403,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if status field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if status field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -414,8 +414,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if code field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if code field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -425,8 +425,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if code field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if code field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -436,8 +436,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if errorType field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if errorType field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -447,8 +447,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if errorType field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if errorType field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -458,8 +458,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if errorTypeId field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if errorTypeId field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -469,8 +469,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if errorTypeId field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if errorTypeId field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -480,8 +480,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if cardInstruction field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if cardInstruction field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -491,8 +491,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if cardInstruction field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if cardInstruction field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -502,8 +502,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if apdu field is empty', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if apdu field is empty', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -513,8 +513,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws error if apdu field is absent', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws error if apdu field is absent', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -524,8 +524,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws CardError if errorTypeId =  0', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws CardError if errorTypeId =  0', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -536,13 +536,13 @@ jest.mock('react-native', () => {
         expect(error.errorCode).toBe('6F00');
         expect(error.errorTypeId).toBe('0');
         expect(error.errorType).toBe('Applet fail: card operation error');
-        expect(error.cardInstruction).toBe('GET_PUBLIC_KEY');
+        expect(error.cardInstruction).toBe('SIGN_SHORT_MESSAGE_WITH_DEFAULT_HD_PATH');
         expect(error.apdu).toBe('B0 A2 00 00 44');
     });  
   });
 
-  test('Test checkSerialNumberAndGetPublicKeyWithoutDialog throws NfcNativeModuleError if errorTypeId >  0', () => {
-    return new NfcCardModuleWrapper().checkSerialNumberAndGetPublicKeyWithoutDialog("504394802433901126813236", "1")
+  test('Test checkSerialNumberAndSignForDefaultHdPathWithoutDialog throws NfcNativeModuleError if errorTypeId >  0', () => {
+    return new NfcCardModuleWrapper().checkSerialNumberAndSignForDefaultHdPathWithoutDialog("504394802433901126813236", "123456AF")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
