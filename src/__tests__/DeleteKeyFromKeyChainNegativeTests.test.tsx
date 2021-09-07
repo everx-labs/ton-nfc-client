@@ -53,15 +53,15 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"DELETE_KEY_CHUNK\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"DELETE_KEY_CHUNK\", \"apdu\":\"B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 \"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 \"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"DELETE_KEY_CHUNK\", \"apdu1\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"DELETE_KEY_CHUNK\", \"apdu1\":\"B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 \"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -69,11 +69,11 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"DELETE_KEY_CHUNK\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"DELETE_KEY_CHUNK\", \"apdu\":\"B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 \"}"
                 ));
               }))
               .mockReturnValue(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Pin must be a numeric string of length 4.\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                reject(new Error("{\"message\":\"Nfc connection establishing error.\", \"code\": \"220000\", \"status\":\"fail\", \"errorTypeId\": \"22\", \"errorType\": \"Android code fail: NFC error\"}"
                 ));
               })),
 
@@ -121,15 +121,15 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"DELETE_KEY_CHUNK\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"DELETE_KEY_CHUNK\", \"apdu\":\"B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 \"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 \"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"DELETE_KEY_CHUNK\", \"apdu1\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"DELETE_KEY_CHUNK\", \"apdu1\":\"B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 \"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -137,11 +137,11 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"DELETE_KEY_CHUNK\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"DELETE_KEY_CHUNK\", \"apdu\":\"B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 \"}"
                 ));
               }))
               .mockReturnValue(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Pin must be a numeric string of length 4.\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                reject(new Error("{\"message\":\"Nfc connection establishing error.\", \"code\": \"220000\", \"status\":\"fail\", \"errorTypeId\": \"22\", \"errorType\": \"Android code fail: NFC error\"}"
                 ));
               })),
             
@@ -335,7 +335,7 @@ jest.mock('react-native', () => {
         expect(error.errorTypeId).toBe('0');
         expect(error.errorType).toBe('Applet fail: card operation error');
         expect(error.cardInstruction).toBe('DELETE_KEY_CHUNK');
-        expect(error.apdu).toBe('B0 A2 00 00 44');
+        expect(error.apdu).toBe('B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 ');
     });  
   });
 
@@ -346,11 +346,11 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Pin must be a numeric string of length 4.');
+        expect(error.message).toBe('Nfc connection establishing error.');
         expect(error.status).toBe('fail');
-        expect(error.errorCode).toBe('30006');
-        expect(error.errorTypeId).toBe('3');
-        expect(error.errorType).toBe('Native code fail: incorrect format of input data');
+        expect(error.errorCode).toBe('220000');
+        expect(error.errorTypeId).toBe('22');
+        expect(error.errorType).toBe('Android code fail: NFC error');
     });  
   });
 
@@ -537,7 +537,7 @@ jest.mock('react-native', () => {
         expect(error.errorTypeId).toBe('0');
         expect(error.errorType).toBe('Applet fail: card operation error');
         expect(error.cardInstruction).toBe('DELETE_KEY_CHUNK');
-        expect(error.apdu).toBe('B0 A2 00 00 44');
+        expect(error.apdu).toBe('B0 BE 00 00 40 B2FD7D33E02AF3E4108682CDEE1AA1639EAC18D6FDE7ED7625A5EA16988D98C1835354C9CCB6CAAD88B99D5C03455F7C7317496545508A0BCA71999BDC1D5895 01 ');
     });  
   });
 
@@ -548,11 +548,11 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Pin must be a numeric string of length 4.');
+        expect(error.message).toBe('Nfc connection establishing error.');
         expect(error.status).toBe('fail');
-        expect(error.errorCode).toBe('30006');
-        expect(error.errorTypeId).toBe('3');
-        expect(error.errorType).toBe('Native code fail: incorrect format of input data');
+        expect(error.errorCode).toBe('220000');
+        expect(error.errorTypeId).toBe('22');
+        expect(error.errorType).toBe('Android code fail: NFC error');
     });  
   });
 

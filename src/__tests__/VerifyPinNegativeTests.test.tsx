@@ -53,15 +53,15 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu1\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu1\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -69,7 +69,7 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
                 ));
               }))
               .mockReturnValue(new Promise((resolve, reject) => {
@@ -121,15 +121,15 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu1\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu1\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -137,7 +137,7 @@ jest.mock('react-native', () => {
                 ));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44\"}"
+                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
                 ));
               }))
               .mockReturnValue(new Promise((resolve, reject) => {
@@ -335,7 +335,7 @@ jest.mock('react-native', () => {
         expect(error.errorTypeId).toBe('0');
         expect(error.errorType).toBe('Applet fail: card operation error');
         expect(error.cardInstruction).toBe('VERIFY_PIN');
-        expect(error.apdu).toBe('B0 A2 00 00 44');
+        expect(error.apdu).toBe('B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00');
     });  
   });
 
@@ -537,7 +537,7 @@ jest.mock('react-native', () => {
         expect(error.errorTypeId).toBe('0');
         expect(error.errorType).toBe('Applet fail: card operation error');
         expect(error.cardInstruction).toBe('VERIFY_PIN');
-        expect(error.apdu).toBe('B0 A2 00 00 44');
+        expect(error.apdu).toBe('B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00');
     });  
   });
 

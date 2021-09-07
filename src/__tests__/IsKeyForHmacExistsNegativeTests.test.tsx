@@ -9,7 +9,7 @@ jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            selectKeyForHmac: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
+            isKeyForHmacExist: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("aaa"));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
@@ -66,11 +66,11 @@ jest.mock('react-native', () => {
   });
 
   /*
-  selectKeyForHmac
+  isKeyForHmacExist
   */
 
-  test('Test selectKeyForHmac throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if input arg is not json', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -80,8 +80,8 @@ jest.mock('react-native', () => {
     });  
   });
 
- test('Test selectKeyForHmac throws error if message field is empty', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+ test('Test isKeyForHmacExist throws error if message field is empty', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -91,8 +91,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if message field is absent', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if message field is absent', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -102,8 +102,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if status field is empty', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if status field is empty', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -113,8 +113,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if status field is absent', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if status field is absent', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -124,8 +124,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if code field is empty', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if code field is empty', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -135,8 +135,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if code field is absent', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if code field is absent', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -146,8 +146,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if errorType field is empty', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if errorType field is empty', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -157,8 +157,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if errorType field is absent', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if errorType field is absent', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -168,8 +168,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if errorTypeId field is empty', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if errorTypeId field is empty', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -179,8 +179,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if errorTypeId field is absent', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws error if errorTypeId field is absent', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
@@ -190,8 +190,8 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws NfcNativeModuleError if errorTypeId >  0', () => {
-    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+  test('Test isKeyForHmacExist throws NfcNativeModuleError if errorTypeId >  0', () => {
+    return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
     })
