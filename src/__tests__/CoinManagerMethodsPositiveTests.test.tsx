@@ -6,7 +6,7 @@ import React from 'react';
 import { NativeModules} from 'react-native'
 
 /**
- * Test validity of CardResponses created by methods of NfcCardModuleWrapper
+ * Test the validity of CardResponses created by methods of NfcCardModuleWrapper
  * (part of methods related to CoinManager functionality)
  **/
 

@@ -5,6 +5,12 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ * Test the validity of CardResponses created by methods
+ * getTonAppletState, getSerialNumber, getSault of NfcCardModuleWrapper
+ **/
+
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
