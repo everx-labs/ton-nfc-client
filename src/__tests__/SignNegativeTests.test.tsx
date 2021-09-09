@@ -9,9 +9,7 @@ jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            sign: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            sign: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -77,9 +75,7 @@ jest.mock('react-native', () => {
                 ));
               })),
 
-            signWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            signWithoutDialog: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -156,17 +152,6 @@ jest.mock('react-native', () => {
   /*
   sign
   */
-
-  test('Test sign throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().sign("123456AF", "2")
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test sign throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().sign("123456AF", "2")
@@ -359,16 +344,6 @@ jest.mock('react-native', () => {
   signWithoutDialog
   */
 
-  test('Test signWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().signWithoutDialog("123456AF", "2")
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test signWithoutDialog throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().signWithoutDialog("123456AF", "2")

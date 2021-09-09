@@ -5,146 +5,144 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ * Tests for verifyPin method validating different cases when it can throw errors.
+ */
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            verifyPin: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-             .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message1\":\"22223\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-             .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"status\":\"\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"status1\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code1\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType1\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId1\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu1\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
-                ));
-              }))
-              .mockReturnValue(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Pin must be a numeric string of length 4.\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              })),
-
-            verifyPinWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-             .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message1\":\"22223\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-             .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"status\":\"\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"status1\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code1\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType1\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId1\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu1\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"\"}"
-                ));
-              }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
-                ));
-              }))
-              .mockReturnValue(new Promise((resolve, reject) => {
-                reject(new Error("{\"message\":\"Pin must be a numeric string of length 4.\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
-                ));
-              })),
-            
+            verifyPin: jest.fn()
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message1\":\"22223\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"status\":\"\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"status1\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code1\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType1\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId1\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu1\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
+                    ));
+                }))
+                .mockReturnValue(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Pin must be a numeric string of length 4.\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                })),
+            verifyPinWithoutDialog: jest.fn()
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message1\":\"22223\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"status\":\"\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"status1\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code1\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType1\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId1\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction1\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu1\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"\"}"
+                    ));
+                }))
+                .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Command aborted, No precise diagnosis.\", \"code\": \"6F00\", \"status\":\"fail\", \"errorTypeId\": \"0\", \"errorType\": \"Applet fail: card operation error\", \"cardInstruction\":\"VERIFY_PIN\", \"apdu\":\"B0 A2 00 00 44 35353535F8397292745708231253136AF625D3AAF4C2E5193B60E736928BA94542FC51C2E058722A0FAE325511EAFE04CDD2473B6994462E228083BEA6F02282E707623F 00\"}"
+                    ));
+                }))
+                .mockReturnValue(new Promise((resolve, reject) => {
+                    reject(new Error("{\"message\":\"Pin must be a numeric string of length 4.\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
+                    ));
+                }))
         }   
       },
       Platform: {
@@ -157,16 +155,6 @@ jest.mock('react-native', () => {
   verifyPin
   */
 
-  test('Test verifyPin throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().verifyPin("5555")
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test verifyPin throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().verifyPin("5555")
@@ -359,16 +347,6 @@ jest.mock('react-native', () => {
   verifyPinWithoutDialog
   */
 
-  test('Test verifyPinWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().verifyPinWithoutDialog("5555")
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test verifyPinWithoutDialog throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().verifyPinWithoutDialog("5555")
