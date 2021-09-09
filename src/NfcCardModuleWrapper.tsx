@@ -95,7 +95,7 @@ export default class NfcCardModuleWrapper {
     async prepareCardResponseFromGetKeyChainInfo(response: string): Promise<CardResponse> {
         await this.makeDelay()
         const json = JSON.parse(response)
-        if (!json.hasOwnProperty(OCCUPIED_SIZE_FIELD) || !json.hasOwnProperty(FREE_SIZE_FIELD) && !json.hasOwnProperty(NUMBER_OF_KEYS_FIELD))
+        if (!json.hasOwnProperty(OCCUPIED_SIZE_FIELD) || !json.hasOwnProperty(FREE_SIZE_FIELD)|| !json.hasOwnProperty(NUMBER_OF_KEYS_FIELD))
             throw new Error('Json must have "' + OCCUPIED_SIZE_FIELD + '", "' + FREE_SIZE_FIELD + '" and "' + NUMBER_OF_KEYS_FIELD + '" fields!')
         if (!json.status)
             throw new Error('Json must have "' + STATUS_FIELD + '" field!')

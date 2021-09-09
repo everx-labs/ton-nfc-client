@@ -431,7 +431,7 @@ test('Positive test prepareCardResponseFromGetKeyChainInfo', () => {
 })
 
 test('Test prepareCardResponseFromGetKeyChainInfo throws error if numberOfKeys field is absent', () => {
-    let json = '{"numberOfKeys1":0,"occupiedSize":0,"freeSize":32767,"status":"ok"}'
+    let json = '{"numberOfKeys":0,"occupiedSize1":0,"freeSize":32767,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetKeyChainInfo(json)
         .then(cardRsponse => {
@@ -447,17 +447,15 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if occupiedSize f
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetKeyChainInfo(json)
         .then(cardRsponse => {
-            console.log("11")
             expect(true).toBe(false)
         })
         .catch(error => {
-            console.log("22")
             expect(error.message).toBe('Json must have \"occupiedSize\", \"freeSize\" and \"numberOfKeys\" fields!')
         })
 })
 
 test('Test prepareCardResponseFromGetKeyChainInfo throws error if freeSize field is absent', () => {
-    let json = '{"numberOfKeys":0,"occupiedSize":0,"freeSize6":32767,"status":"ok"}'
+    let json = '{"occupiedSize":0,"numberOfKeys":0,"freeSize1":32767,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetKeyChainInfo(json)
         .then(cardRsponse => {

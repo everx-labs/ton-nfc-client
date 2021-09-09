@@ -5,6 +5,10 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ *
+ */
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
