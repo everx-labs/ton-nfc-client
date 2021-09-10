@@ -5,13 +5,15 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ * Tests for openNfcSettings method validating different cases when it can throw errors.
+ */
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            openNfcSettings: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            openNfcSettings: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -68,17 +70,6 @@ jest.mock('react-native', () => {
   /*
   openNfcSettings
   */
-
-  test('Test openNfcSettings throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().openNfcSettings()
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test openNfcSettings throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().openNfcSettings()

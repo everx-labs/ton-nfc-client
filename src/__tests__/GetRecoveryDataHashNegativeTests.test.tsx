@@ -5,13 +5,15 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ * Tests for getRecoveryDataHash method validating different cases when it can throw errors.
+ */
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            getRecoveryDataHash: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            getRecoveryDataHash: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -77,9 +79,7 @@ jest.mock('react-native', () => {
                 ));
               })),
 
-            getRecoveryDataHashWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            getRecoveryDataHashWithoutDialog: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -157,16 +157,6 @@ jest.mock('react-native', () => {
   getRecoveryDataHash
   */
 
-  test('Test getRecoveryDataHash throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().getRecoveryDataHash()
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test getRecoveryDataHash throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().getRecoveryDataHash()
@@ -359,18 +349,7 @@ jest.mock('react-native', () => {
   getRecoveryDataHashWithoutDialog
   */
 
-  test('Test getRecoveryDataHashWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().getRecoveryDataHashWithoutDialog()
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
-
- test('Test getRecoveryDataHashWithoutDialog throws error if message field is empty', () => {
+  test('Test getRecoveryDataHashWithoutDialog throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().getRecoveryDataHashWithoutDialog()
     .then(cardRsponse => {
         expect(true).toBe(false);

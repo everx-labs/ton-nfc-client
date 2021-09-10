@@ -5,13 +5,15 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ * Tests for verifyPinAndSign method validating different cases when it can throw errors.
+ */
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            verifyPinAndSign: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            verifyPinAndSign: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -77,9 +79,7 @@ jest.mock('react-native', () => {
                 ));
               })),
 
-            verifyPinAndSignWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            verifyPinAndSignWithoutDialog: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -156,17 +156,6 @@ jest.mock('react-native', () => {
   /*
   verifyPinAndSign
   */
-
-  test('Test verifyPinAndSign throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().verifyPinAndSign("123456AF", "2", "5555")
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test verifyPinAndSign throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().verifyPinAndSign("123456AF", "2", "5555")
@@ -359,16 +348,6 @@ jest.mock('react-native', () => {
   verifyPinAndSignWithoutDialog
   */
 
-  test('Test verifyPinAndSignWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().verifyPinAndSignWithoutDialog("123456AF", "2", "5555")
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test verifyPinAndSignWithoutDialog throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().verifyPinAndSignWithoutDialog("123456AF", "2", "5555")

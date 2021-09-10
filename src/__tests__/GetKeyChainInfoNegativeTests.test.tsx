@@ -5,13 +5,15 @@ import NfcNativeModuleError from '../NfcNativeModuleError'
 import React from 'react'
 import { NativeModules } from 'react-native'
 
+/**
+ * Tests for getKeyChainInfo method validating different cases when it can throw errors.
+ */
+
 jest.mock('react-native', () => {
     return {
         NativeModules: {
             NfcCardModule: {
-                getKeyChainInfo: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                    reject(new Error('aaa'))
-                }))
+                getKeyChainInfo: jest.fn()
                     .mockReturnValueOnce(new Promise((resolve, reject) => {
                         reject(new Error('{"message":"", "status":"fail", "code": "30006", "errorTypeId": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
@@ -91,9 +93,7 @@ jest.mock('react-native', () => {
 
                 //
 
-                getKeyChainInfoWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                    reject(new Error('aaa'))
-                }))
+                getKeyChainInfoWithoutDialog: jest.fn()
                     .mockReturnValueOnce(new Promise((resolve, reject) => {
                         reject(new Error('{"message":"", "status":"fail", "code": "30006", "errorTypeId": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
@@ -183,16 +183,6 @@ jest.mock('react-native', () => {
 getKeyChainInfo
 */
 
-test('Test getKeyChainInfo throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
-            expect(true).toBe(false)
-        })
-        .catch(error => {
-            console.log(error.message)
-            expect(error.message).toContain('Unexpected token')
-        })
-})
 
 test('Test getKeyChainInfo throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
@@ -417,17 +407,6 @@ test('Test getKeyChainInfo throws NfcNativeModuleError if errorTypeId >  0', () 
 /*
 getKeyChainInfoWithoutDialog
 */
-
-test('Test getKeyChainInfoWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().getKeyChainInfoWithoutDialog()
-        .then(cardRsponse => {
-            expect(true).toBe(false)
-        })
-        .catch(error => {
-            console.log(error.message)
-            expect(error.message).toContain('Unexpected token')
-        })
-})
 
 test('Test getKeyChainInfoWithoutDialog throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfoWithoutDialog()

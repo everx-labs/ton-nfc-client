@@ -5,13 +5,15 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ * Tests for resetWallet method validating different cases when it can throw errors.
+ */
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            resetWallet: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            resetWallet: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -77,9 +79,7 @@ jest.mock('react-native', () => {
                 ));
               })),
 
-            resetWalletWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            resetWalletWithoutDialog: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -156,17 +156,6 @@ jest.mock('react-native', () => {
   /*
   resetWallet
   */
-
-  test('Test resetWallet throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().resetWallet()
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test resetWallet throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().resetWallet()
@@ -359,16 +348,7 @@ jest.mock('react-native', () => {
   resetWalletWithoutDialog
   */
 
-  test('Test resetWalletWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().resetWalletWithoutDialog()
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
+
 
  test('Test resetWalletWithoutDialog throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().resetWalletWithoutDialog()

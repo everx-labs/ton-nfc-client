@@ -5,13 +5,16 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ * Tests for getHashOfEncryptedCommonSecret method validating different cases when it can throw errors.
+ */
+
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            getHashOfEncryptedCommonSecret: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            getHashOfEncryptedCommonSecret: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -77,9 +80,7 @@ jest.mock('react-native', () => {
                 ));
               })),
 
-            getHashOfEncryptedCommonSecretWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            getHashOfEncryptedCommonSecretWithoutDialog: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -157,16 +158,6 @@ jest.mock('react-native', () => {
   getHashOfEncryptedCommonSecret
   */
 
-  test('Test getHashOfEncryptedCommonSecret throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().getHashOfEncryptedCommonSecret()
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test getHashOfEncryptedCommonSecret throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().getHashOfEncryptedCommonSecret()
@@ -359,16 +350,7 @@ jest.mock('react-native', () => {
   getHashOfEncryptedCommonSecretWithoutDialog
   */
 
-  test('Test getHashOfEncryptedCommonSecretWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().getHashOfEncryptedCommonSecretWithoutDialog()
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
+
 
  test('Test getHashOfEncryptedCommonSecretWithoutDialog throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().getHashOfEncryptedCommonSecretWithoutDialog()

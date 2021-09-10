@@ -5,13 +5,15 @@ import NfcNativeModuleError from '../NfcNativeModuleError';
 import React from 'react';
 import { NativeModules} from 'react-native'
 
+/**
+ * Tests for signForDefaultHdPath method validating different cases when it can throw errors.
+ */
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-            signForDefaultHdPath: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            signForDefaultHdPath: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -77,9 +79,7 @@ jest.mock('react-native', () => {
                 ));
               })),
 
-            signForDefaultHdPathWithoutDialog: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
-                reject(new Error("aaa"));
-              }))
+            signForDefaultHdPathWithoutDialog: jest.fn()
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -156,17 +156,6 @@ jest.mock('react-native', () => {
   /*
   signForDefaultHdPath
   */
-
-  test('Test signForDefaultHdPath throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().signForDefaultHdPath("123456AF")
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test signForDefaultHdPath throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().signForDefaultHdPath("123456AF")
@@ -358,17 +347,6 @@ jest.mock('react-native', () => {
   /*
   signForDefaultHdPathWithoutDialog
   */
-
-  test('Test signForDefaultHdPathWithoutDialog: throws error if input arg is not json', () => {
-    return new NfcCardModuleWrapper().signForDefaultHdPathWithoutDialog("123456AF")
-    .then(cardRsponse => {
-        expect(true).toBe(false);
-    })
-    .catch(error => {
-        console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
-    });  
-  });
 
  test('Test signForDefaultHdPathWithoutDialog throws error if message field is empty', () => {
     return new NfcCardModuleWrapper().signForDefaultHdPathWithoutDialog("123456AF")
