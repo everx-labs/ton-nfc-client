@@ -1,9 +1,4 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import CardResponse from '../CardResponse';
-import CardError from '../CardError';
-import NfcNativeModuleError from '../NfcNativeModuleError';
-import React from 'react';
-import { NativeModules} from 'react-native'
 
 /**
  * Test the validity of CardResponses created by methods of NfcCardModuleWrapper

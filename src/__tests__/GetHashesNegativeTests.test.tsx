@@ -1,9 +1,13 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper'
-import CardResponse from '../CardResponse'
-import CardError from '../CardError'
-import NfcNativeModuleError from '../NfcNativeModuleError'
-import React from 'react'
-import { NativeModules } from 'react-native'
+import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
+    ERR_JSON_MUST_HAVE_STATUS_FIELD, 
+    ERR_JSON_MUST_HAVE_CODE_FIELD, 
+    ERR_JSON_MUST_HAVE_TYPE_FIELD, 
+    ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
+    ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL,
+    ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD,
+    ERR_JSON_MUST_HAVE_APDU_FIELD,
+    ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS} from '../NfcCardModuleWrapper'
 
 /**
  * Tests for getHashes method validating different cases when it can throw errors.
@@ -190,7 +194,7 @@ test('Test getHashes throws error if message field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"message\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD)
         })
 })
 
@@ -201,7 +205,7 @@ test('Test getHashes throws error if message field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"message\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD)
         })
 })
 
@@ -212,7 +216,7 @@ test('Test getHashes throws error if status field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -223,7 +227,7 @@ test('Test getHashes throws error if status field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -234,7 +238,7 @@ test('Test getHashes throws error if code field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"code\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD)
         })
 })
 
@@ -245,7 +249,7 @@ test('Test getHashes throws error if code field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"code\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD)
         })
 })
 
@@ -256,7 +260,7 @@ test('Test getHashes throws error if errorType field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"errorType\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD)
         })
 })
 
@@ -267,7 +271,7 @@ test('Test getHashes throws error if errorType field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"errorType\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD)
         })
 })
 
@@ -278,7 +282,7 @@ test('Test getHashes throws error if errorTypeId field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('\"errorTypeId\" must have value!')
+            expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL)
         })
 })
 
@@ -289,7 +293,7 @@ test('Test getHashes throws error if errorTypeId field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"errorTypeId\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD)
         })
 })
 
@@ -300,7 +304,7 @@ test('Test getHashes throws error if cardInstruction field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"cardInstruction\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
         })
 })
 
@@ -311,7 +315,7 @@ test('Test getHashes throws error if cardInstruction field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"cardInstruction\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
         })
 })
 
@@ -322,7 +326,7 @@ test('Test getHashes throws error if apdu field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"apdu\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD)
         })
 })
 
@@ -333,7 +337,7 @@ test('Test getHashes throws error if apdu field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"apdu\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD)
         })
 })
 
@@ -361,7 +365,7 @@ test('Test getHashes throws error if ecsHash field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"ecsHash\", \"epHash\" and \"serialNumber\" fields!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS)
         })
 })
 
@@ -372,7 +376,7 @@ test('Test getHashes throws error if epHash field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"ecsHash\", \"epHash\" and \"serialNumber\" fields!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS)
         })
 })
 
@@ -383,7 +387,7 @@ test('Test getHashes throws error if serialNumber field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"ecsHash\", \"epHash\" and \"serialNumber\" fields!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS)
         })
 })
 
@@ -415,7 +419,7 @@ test('Test getHashesWithoutDialog throws error if message field is empty', () =>
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"message\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD)
         })
 })
 
@@ -426,7 +430,7 @@ test('Test getHashesWithoutDialog throws error if message field is absent', () =
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"message\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD)
         })
 })
 
@@ -437,7 +441,7 @@ test('Test getHashesWithoutDialog throws error if status field is empty', () => 
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -448,7 +452,7 @@ test('Test getHashesWithoutDialog throws error if status field is absent', () =>
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -459,7 +463,7 @@ test('Test getHashesWithoutDialog throws error if code field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"code\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD)
         })
 })
 
@@ -470,7 +474,7 @@ test('Test getHashesWithoutDialog throws error if code field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"code\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD)
         })
 })
 
@@ -481,7 +485,7 @@ test('Test getHashesWithoutDialog throws error if errorType field is empty', () 
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"errorType\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD)
         })
 })
 
@@ -492,7 +496,7 @@ test('Test getHashesWithoutDialog throws error if errorType field is absent', ()
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"errorType\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD)
         })
 })
 
@@ -503,7 +507,7 @@ test('Test getHashesWithoutDialog throws error if errorTypeId field is empty', (
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('\"errorTypeId\" must have value!')
+            expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL)
         })
 })
 
@@ -514,7 +518,7 @@ test('Test getHashesWithoutDialog throws error if errorTypeId field is absent', 
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"errorTypeId\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD)
         })
 })
 
@@ -525,7 +529,7 @@ test('Test getHashesWithoutDialog throws error if cardInstruction field is empty
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"cardInstruction\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
         })
 })
 
@@ -536,7 +540,7 @@ test('Test getHashesWithoutDialog throws error if cardInstruction field is absen
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"cardInstruction\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
         })
 })
 
@@ -547,7 +551,7 @@ test('Test getHashesWithoutDialog throws error if apdu field is empty', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"apdu\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD)
         })
 })
 
@@ -558,7 +562,7 @@ test('Test getHashesWithoutDialog throws error if apdu field is absent', () => {
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"apdu\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD)
         })
 })
 
@@ -587,7 +591,7 @@ test('Test getHashesWithoutDialog  throws error if ecsHash field is absent', () 
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"ecsHash\", \"epHash\" and \"serialNumber\" fields!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS)
         })
 })
 
@@ -598,7 +602,7 @@ test('Test getHashesWithoutDialog  throws error if epHash field is absent', () =
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"ecsHash\", \"epHash\" and \"serialNumber\" fields!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS)
         })
 })
 
@@ -609,7 +613,7 @@ test('Test getHashesWithoutDialog  throws error if serialNumber field is absent'
         })
         .catch(error => {
             console.log(error.message)
-            expect(error.message).toBe('Json must have \"ecsHash\", \"epHash\" and \"serialNumber\" fields!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS)
         })
 })
 

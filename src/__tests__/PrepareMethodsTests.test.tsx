@@ -1,7 +1,14 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper'
 import CardError from '../CardError'
 import NfcNativeModuleError from '../NfcNativeModuleError'
-
+import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
+    ERR_JSON_MUST_HAVE_STATUS_FIELD, 
+    ERR_JSON_MUST_HAVE_CODE_FIELD, 
+    ERR_JSON_MUST_HAVE_TYPE_FIELD, 
+    ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
+    ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL,
+    ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD,
+    ERR_JSON_MUST_HAVE_APDU_FIELD} from '../NfcCardModuleWrapper'
 /*jest.mock('ton-nfc-client', () => ({
   addEventListener: jest.fn(),
   removeEventListener: jest.fn(),
@@ -37,7 +44,7 @@ test('Test prepareCardResponseWithoutDelay throws error if message field is abse
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
-    }).toThrow(new Error('Json must have \"message\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_MSG_FIELD))
 })
 
 test('Test prepareCardResponseWithoutDelay throws error if message field is empty', () => {
@@ -46,7 +53,7 @@ test('Test prepareCardResponseWithoutDelay throws error if message field is empt
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
-    }).toThrow(new Error('Json must have \"message\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_MSG_FIELD))
 })
 
 test('Test prepareCardResponseWithoutDelay throws error if status field is absent', () => {
@@ -55,7 +62,7 @@ test('Test prepareCardResponseWithoutDelay throws error if status field is absen
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
-    }).toThrow(new Error('Json must have \"status\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD))
 })
 
 test('Test prepareCardResponseWithoutDelay throws error if status field is empty', () => {
@@ -64,7 +71,7 @@ test('Test prepareCardResponseWithoutDelay throws error if status field is empty
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
-    }).toThrow(new Error('Json must have \"status\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD))
 })
 
 test('Test prepareCardResponseWithoutDelay throws error if input arg is not json', () => {
@@ -112,7 +119,7 @@ test('Test prepareCardResponse throws error if message field is absent', () => {
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"message\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD)
         })
 })
 
@@ -124,7 +131,7 @@ test('Test prepareCardResponse throws error if message field is empty', () => {
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"message\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD)
         })
 })
 
@@ -136,7 +143,7 @@ test('Test prepareCardResponse throws error if status field is absent', () => {
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -148,7 +155,7 @@ test('Test prepareCardResponse throws error if status field is empty', () => {
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -224,7 +231,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if message fi
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"message\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD)
         })
 })
 
@@ -236,7 +243,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if message fi
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"message\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD)
         })
 })
 
@@ -248,7 +255,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if status fie
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -260,7 +267,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if status fie
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -375,7 +382,7 @@ test('Test prepareCardResponseFromGetHashes throws error if status field is abse
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -387,7 +394,7 @@ test('Test prepareCardResponseFromGetHashes throws error if status field is abse
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -475,7 +482,7 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if status field i
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -574,7 +581,7 @@ test('Test prepareCardResponseFromGetHmac throws error if status field is absent
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -586,7 +593,7 @@ test('Test prepareCardResponseFromGetHmac throws error if status field is empty'
             expect(true).toBe(false)
         })
         .catch(error => {
-            expect(error.message).toBe('Json must have \"status\" field!')
+            expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         })
 })
 
@@ -622,7 +629,7 @@ test('Test throwError throws error if message field is empty', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"message\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_MSG_FIELD))
 })
 
 test('Test throwError throws error if message field is absent', () => {
@@ -631,7 +638,7 @@ test('Test throwError throws error if message field is absent', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"message\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_MSG_FIELD))
 })
 
 test('Test throwError throws error if status field is empty', () => {
@@ -640,7 +647,7 @@ test('Test throwError throws error if status field is empty', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"status\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD))
 })
 
 test('Test throwError throws error if status field is absent', () => {
@@ -649,7 +656,7 @@ test('Test throwError throws error if status field is absent', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"status\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD))
 })
 
 test('Test throwError throws error if code field is empty', () => {
@@ -658,7 +665,7 @@ test('Test throwError throws error if code field is empty', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"code\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_CODE_FIELD))
 })
 
 test('Test throwError throws error if code field is absent', () => {
@@ -667,7 +674,7 @@ test('Test throwError throws error if code field is absent', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"code\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_CODE_FIELD))
 })
 
 test('Test throwError throws error if errorType field is empty', () => {
@@ -676,7 +683,7 @@ test('Test throwError throws error if errorType field is empty', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"errorType\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_TYPE_FIELD))
 })
 
 
@@ -686,7 +693,7 @@ test('Test throwError throws error if errorType field is absent', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"errorType\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_TYPE_FIELD))
 })
 
 test('Test throwError throws error if errorTypeId field is absent', () => {
@@ -695,7 +702,7 @@ test('Test throwError throws error if errorTypeId field is absent', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"errorTypeId\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD))
 })
 
 test('Test throwError throws error if errorTypeId field is empty', () => {
@@ -704,7 +711,7 @@ test('Test throwError throws error if errorTypeId field is empty', () => {
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('\"errorTypeId\" must have value!'))
+    }).toThrow(new Error(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL))
 })
 
 
@@ -714,7 +721,7 @@ test('Test throwError throws error if errorTypeId =  0 and cardInstruction field
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"cardInstruction\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD))
 })
 
 test('Test throwError throws error if errorTypeId =  0 and cardInstruction field is empty', () => {
@@ -723,7 +730,7 @@ test('Test throwError throws error if errorTypeId =  0 and cardInstruction field
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"cardInstruction\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD))
 })
 
 test('Test throwError throws error if errorTypeId =  0 and apdu field is absent', () => {
@@ -732,7 +739,7 @@ test('Test throwError throws error if errorTypeId =  0 and apdu field is absent'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"apdu\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_APDU_FIELD))
 })
 
 test('Test throwError throws error if errorTypeId =  0 and apdu field is empty', () => {
@@ -741,7 +748,7 @@ test('Test throwError throws error if errorTypeId =  0 and apdu field is empty',
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
         let cardRsponse = nfcCardModuleWrapper.throwError(json)
-    }).toThrow(new Error('Json must have \"apdu\" field!'))
+    }).toThrow(new Error(ERR_JSON_MUST_HAVE_APDU_FIELD))
 })
 
 test('Positive Test throwError throws error if errorTypeId =  0', () => {

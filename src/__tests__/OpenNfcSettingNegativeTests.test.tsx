@@ -1,12 +1,13 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import CardResponse from '../CardResponse';
-import CardError from '../CardError';
-import NfcNativeModuleError from '../NfcNativeModuleError';
-import React from 'react';
-import { NativeModules} from 'react-native'
-
+import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
+  ERR_JSON_MUST_HAVE_STATUS_FIELD, 
+  ERR_JSON_MUST_HAVE_CODE_FIELD, 
+  ERR_JSON_MUST_HAVE_TYPE_FIELD, 
+  ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
+  ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL} from '../NfcCardModuleWrapper'
 /**
- * Tests for openNfcSettings method validating different cases when it can throw errors.
+ * Test openNfcSettings method behaviour if the function with the same title in NativeModule throwed a error. 
+ * We mock different incorrect error messages from NativeModule and also a correct error message, and check the behaviour.
  */
 
 jest.mock('react-native', () => {
@@ -78,7 +79,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"message\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
     });  
   });
 
@@ -89,7 +90,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"message\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
     });  
   });
 
@@ -100,7 +101,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"status\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
     });  
   });
 
@@ -111,7 +112,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"status\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
     });  
   });
 
@@ -122,7 +123,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"code\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD);
     });  
   });
 
@@ -133,7 +134,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"code\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD);
     });  
   });
 
@@ -144,7 +145,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorType\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD);
     });  
   });
 
@@ -155,7 +156,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorType\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD);
     });  
   });
 
@@ -166,7 +167,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('\"errorTypeId\" must have value!');
+        expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL);
     });  
   });
 
@@ -177,7 +178,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorTypeId\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD);
     });  
   });
 

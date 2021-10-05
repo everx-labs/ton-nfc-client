@@ -1,9 +1,10 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import CardResponse from '../CardResponse';
-import CardError from '../CardError';
-import NfcNativeModuleError from '../NfcNativeModuleError';
-import React from 'react';
-import { NativeModules} from 'react-native'
+import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
+  ERR_JSON_MUST_HAVE_STATUS_FIELD, 
+  ERR_JSON_MUST_HAVE_CODE_FIELD, 
+  ERR_JSON_MUST_HAVE_TYPE_FIELD, 
+  ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
+  ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL} from '../NfcCardModuleWrapper'
 
 /**
  * Test the validity of CardResponses created by methods of NfcCardModuleWrapper

@@ -1,9 +1,12 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import CardResponse from '../CardResponse';
-import CardError from '../CardError';
-import NfcNativeModuleError from '../NfcNativeModuleError';
-import React from 'react';
-import { NativeModules} from 'react-native'
+import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
+  ERR_JSON_MUST_HAVE_STATUS_FIELD, 
+  ERR_JSON_MUST_HAVE_CODE_FIELD, 
+  ERR_JSON_MUST_HAVE_TYPE_FIELD, 
+  ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
+  ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL,
+  ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD,
+  ERR_JSON_MUST_HAVE_APDU_FIELD} from '../NfcCardModuleWrapper'
 
 jest.mock('react-native', () => {
     return {
@@ -175,7 +178,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"message\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
     });  
   });
 
@@ -186,7 +189,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"message\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
     });  
   });
 
@@ -197,7 +200,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"status\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
     });  
   });
 
@@ -208,7 +211,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"status\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
     });  
   });
 
@@ -219,7 +222,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"code\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD);
     });  
   });
 
@@ -230,7 +233,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"code\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD);
     });  
   });
 
@@ -241,7 +244,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorType\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD);
     });  
   });
 
@@ -252,7 +255,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorType\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD);
     });  
   });
 
@@ -263,7 +266,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('\"errorTypeId\" must have value!');
+        expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL);
     });  
   });
 
@@ -274,7 +277,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorTypeId\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD);
     });  
   });
 
@@ -285,7 +288,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"cardInstruction\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD);
     });  
   });
 
@@ -296,7 +299,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"cardInstruction\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD);
     });  
   });
 
@@ -307,7 +310,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"apdu\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD);
     });  
   });
 
@@ -318,7 +321,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"apdu\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD);
     });  
   });
 
@@ -377,7 +380,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"message\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
     });  
   });
 
@@ -388,7 +391,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"message\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
     });  
   });
 
@@ -399,7 +402,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"status\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
     });  
   });
 
@@ -410,7 +413,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"status\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
     });  
   });
 
@@ -421,7 +424,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"code\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD);
     });  
   });
 
@@ -432,7 +435,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"code\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD);
     });  
   });
 
@@ -443,7 +446,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorType\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD);
     });  
   });
 
@@ -454,7 +457,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorType\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_FIELD);
     });  
   });
 
@@ -465,7 +468,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('\"errorTypeId\" must have value!');
+        expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL);
     });  
   });
 
@@ -476,7 +479,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"errorTypeId\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD);
     });  
   });
 
@@ -487,7 +490,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"cardInstruction\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD);
     });  
   });
 
@@ -498,7 +501,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"cardInstruction\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD);
     });  
   });
 
@@ -509,7 +512,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"apdu\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD);
     });  
   });
 
@@ -520,7 +523,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe('Json must have \"apdu\" field!');
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD);
     });  
   });
 
