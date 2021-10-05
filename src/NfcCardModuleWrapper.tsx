@@ -1,6 +1,5 @@
 import { NativeModules, Platform } from 'react-native'
 //import { CardError, CardResponse, NfcNativeModuleError } from 'ton-nfc-client'
-import React, { Component } from 'react'
 import CardResponse from './CardResponse'
 import NfcNativeModuleError from './NfcNativeModuleError'
 import CardError from './CardError'
@@ -29,7 +28,18 @@ const  IOS_PLATFORM = "ios";
 
 const IOS_TIMEOUT = 4000;
 
-const WRONG_PLATFORM_ERROR = "This function is available only for Android OS!";
+export const WRONG_PLATFORM_ERROR = "This function is available only for Android OS!";
+export const ERR_JSON_MUST_HAVE_MSG_FIELD = 'Json must have "' +  MESSAGE_FIELD + '" field!';
+export const ERR_JSON_MUST_HAVE_STATUS_FIELD = 'Json must have "' + STATUS_FIELD + '" field!';
+export const ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS = 'Json must have "' + ECS_HASH_FIELD + '", "' + EP_HASH_FIELD + '", "' + SN_FIELD + '" fields!';
+export const ERR_JSON_MUST_HAVE_OCCUPIED_FREE_SIZES_NUMBER_OF_KEYS_FIELDS = 'Json must have "' + OCCUPIED_SIZE_FIELD + '", "' + FREE_SIZE_FIELD + '" and "' + NUMBER_OF_KEYS_FIELD + '" fields!';
+export const ERR_JSON_MUST_HAVE_CODE_FIELD = 'Json must have "' + ERROR_CODE_FIELD + '" field!';
+export const ERR_JSON_MUST_HAVE_TYPE_FIELD =  'Json must have "' + ERROR_TYPE_FIELD + '" field!';
+export const ERR_JSON_MUST_HAVE_TYPE_ID_FIELD = 'Json must have "' + ERROR_TYPE_ID_FIELD + '" field!';
+export const ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD = 'Json must have "' + CARD_INSTRUCTION_FIELD + '" field!';
+export const ERR_JSON_MUST_HAVE_APDU_FIELD = 'Json must have "' + APDU_FIELD + '" field!';
+export const ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL = '"' + ERROR_TYPE_ID_FIELD + '" must have value!';
+export const ERR_JSON_MUST_HAVE_KEY_HMAC_AND_LEN_FIELD = 'Json must have "' + KEY_HMAC_FIELD + '" and "' + KEY_LENGTH_FIELD + '" fields!';
 
 export interface CardErrorResponse {
     message?: string
@@ -59,9 +69,9 @@ export default class NfcCardModuleWrapper {
     prepareCardResponseWithoutDelay(response: string): CardResponse {
         const json = JSON.parse(response)
         if (!json.message)
-            throw new Error('Json must have "' +  MESSAGE_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_MSG_FIELD)
         if (!json.status)
-            throw new Error('Json must have "' + STATUS_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         return new CardResponse(json.message, json.status, '', '', '', -1, -1, -1, '', -1, [])
     }
 
@@ -73,9 +83,9 @@ export default class NfcCardModuleWrapper {
     async prepareCardResponseFromGetAllSerialNumbers(response: string): Promise<CardResponse> {
         const json = JSON.parse(response)
         if (!json.message)
-            throw new Error('Json must have "' +  MESSAGE_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_MSG_FIELD)
         if (!json.status)
-            throw new Error('Json must have "' + STATUS_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         if (typeof json.message === "string") {
             return new CardResponse(json.message, json.status, '', '', '', -1, -1, -1, '', -1, [])
         }
@@ -86,9 +96,9 @@ export default class NfcCardModuleWrapper {
         await this.makeDelay()
         const json = JSON.parse(response)
         if (!json.ecsHash || !json.epHash || !json.serialNumber)
-            throw new Error('Json must have "' + ECS_HASH_FIELD + '", "' + EP_HASH_FIELD + '", "' + SN_FIELD + '" fields!')
+            throw new Error(ERR_JSON_MUST_HAVE_ECS_EP_SN_FIELDS)
         if (!json.status)
-            throw new Error('Json must have "' + STATUS_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         return new CardResponse('', json.status, json.ecsHash, json.epHash, json.serialNumber, -1, -1, -1, '', -1, [])
     }
 
@@ -96,9 +106,9 @@ export default class NfcCardModuleWrapper {
         await this.makeDelay()
         const json = JSON.parse(response)
         if (!json.hasOwnProperty(OCCUPIED_SIZE_FIELD) || !json.hasOwnProperty(FREE_SIZE_FIELD)|| !json.hasOwnProperty(NUMBER_OF_KEYS_FIELD))
-            throw new Error('Json must have "' + OCCUPIED_SIZE_FIELD + '", "' + FREE_SIZE_FIELD + '" and "' + NUMBER_OF_KEYS_FIELD + '" fields!')
+            throw new Error(ERR_JSON_MUST_HAVE_OCCUPIED_FREE_SIZES_NUMBER_OF_KEYS_FIELDS)
         if (!json.status)
-            throw new Error('Json must have "' + STATUS_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         return new CardResponse('', json.status, '', '', '', json.numberOfKeys, json.occupiedSize, json.freeSize, '', -1, [])
     }
 
@@ -106,9 +116,9 @@ export default class NfcCardModuleWrapper {
         await this.makeDelay()
         const json = JSON.parse(response)
         if (!json.hmac || !json.length)
-            throw new Error('Json must have "' + KEY_HMAC_FIELD + '" and "' + KEY_LENGTH_FIELD + '" fields!')
+            throw new Error(ERR_JSON_MUST_HAVE_KEY_HMAC_AND_LEN_FIELD)
         if (!json.status)
-            throw new Error('Json must have "' + STATUS_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         return new CardResponse('', json.status, '', '', '', -1, -1, -1, json.hmac, json.length, [])
     }
 
@@ -120,32 +130,32 @@ export default class NfcCardModuleWrapper {
             throw new Error(errorMessage)
         }
         if (!json.message) {
-            throw new Error('Json must have "' +  MESSAGE_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_MSG_FIELD)
         }
 
         if (!json.status) {
-            throw new Error('Json must have "' + STATUS_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD)
         }
 
         if (!json.code) {
-            throw new Error('Json must have "' + ERROR_CODE_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_CODE_FIELD)
         }
 
         if (!json.errorType) {
-            throw new Error('Json must have "' + ERROR_TYPE_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_TYPE_FIELD )
         }
 
         if (!json.hasOwnProperty(ERROR_TYPE_ID_FIELD)) {
-            throw new Error('Json must have "' + ERROR_TYPE_ID_FIELD + '" field!')
+            throw new Error(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD )
         }
 
         if (json.errorTypeId === CARD_ERROR_TYPE_ID) {
             if (!json.cardInstruction) {
-                throw new Error('Json must have "' + CARD_INSTRUCTION_FIELD + '" field!')
+                throw new Error(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
             }
 
             if (!json.apdu) {
-                throw new Error('Json must have "' + APDU_FIELD + '" field!')
+                throw new Error(ERR_JSON_MUST_HAVE_APDU_FIELD)
             }
 
             throw new CardError(
@@ -160,7 +170,7 @@ export default class NfcCardModuleWrapper {
         }
 
         if (!json.errorTypeId) {
-            throw new Error('"' + ERROR_TYPE_ID_FIELD + '" must have value!')
+            throw new Error(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL)
         }
 
         throw new NfcNativeModuleError(
