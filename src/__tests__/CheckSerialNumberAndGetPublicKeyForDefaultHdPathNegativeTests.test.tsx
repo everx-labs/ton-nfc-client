@@ -167,7 +167,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
+        expect(error.message).toBe("aaa");
     });  
   });
 
@@ -369,7 +369,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
+        expect(error.message).toBe("aaa");
     });  
   });
 

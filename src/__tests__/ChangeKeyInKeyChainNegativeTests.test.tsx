@@ -167,7 +167,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
+        expect(error.message).toBe("aaa");
     });  
   });
 
@@ -266,7 +266,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VALAL);
+        expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL);
     });  
   });
 
@@ -277,7 +277,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD)
     });  
   });
 
@@ -310,7 +310,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD)
     });  
   });
 
@@ -321,7 +321,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD)
     });  
   });
 
@@ -369,7 +369,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
+        expect(error.message).toBe("aaa");
     });  
   });
 
@@ -468,7 +468,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VALAL);
+        expect(error.message).toBe(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL);
     });  
   });
 
@@ -479,7 +479,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD)
     });  
   });
 
@@ -512,7 +512,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD)
     });  
   });
 
@@ -523,7 +523,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_APDU_FIELD)
     });  
   });
 

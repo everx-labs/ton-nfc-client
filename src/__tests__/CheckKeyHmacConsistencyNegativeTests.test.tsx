@@ -167,7 +167,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
+        expect(error.message).toBe("aaa");
     });  
   });
 
@@ -277,7 +277,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD)
     });  
   });
 
@@ -369,7 +369,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
+        expect(error.message).toBe("aaa");
     });  
   });
 
@@ -479,7 +479,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD)
     });  
   });
 

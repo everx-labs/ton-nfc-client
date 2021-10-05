@@ -166,7 +166,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
+        expect(error.message).toBe("aaa");
     });  
   });
 
@@ -199,7 +199,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
     });  
   });
 
@@ -210,7 +210,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
     });  
   });
 
@@ -221,7 +221,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD)
     });  
   });
 
@@ -232,7 +232,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD)
     });  
   });
 
@@ -287,7 +287,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
     });  
   });
 
@@ -298,7 +298,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
     });  
   });
 
@@ -368,7 +368,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toContain("Unexpected token");
+        expect(error.message).toBe("aaa");
     });  
   });
 
@@ -401,7 +401,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
     });  
   });
 
@@ -412,7 +412,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD)
     });  
   });
 
@@ -423,7 +423,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD)
     });  
   });
 
@@ -434,7 +434,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CODE_FIELD)
     });  
   });
 
@@ -489,7 +489,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
     });  
   });
 
@@ -500,7 +500,7 @@ jest.mock('react-native', () => {
     })
     .catch(error => {
         console.log(error.message)
-        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD)
     });  
   });
 
