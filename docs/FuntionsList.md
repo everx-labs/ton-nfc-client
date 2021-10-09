@@ -871,7 +871,7 @@ Here there are functions related to ed25519 signature.
 
     *Exemplary response:*
     
-    {"hmac":"2222222222222222222222222222222", "length":5, "status":"ok"}
+    	{"hmac":"2222222222222222222222222222222", "length":5, "status":"ok"}
 
 
 - **async getDeleteKeyRecordNumOfPackets(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
