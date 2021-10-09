@@ -1,6 +1,6 @@
 {
   "_from": "git+https://github.com/tonlabs/ton-nfc-client.git",
-  "_id": "ton-nfc-client@1.0.0",
+  "_id": "ton-nfc-client@2.0.0",
   "_inBundle": false,
   "_integrity": "",
   "_location": "/ton-nfc-client",
@@ -85,5 +85,5 @@
     ]
   },
   "title": "Ton Nfc Client",
-  "version": "1.0.0"
+  "version": "2.0.0"
 }
