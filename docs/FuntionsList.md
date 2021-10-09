@@ -279,7 +279,7 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
 ### Common functions
 
 - **async getTonAppletState(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-- 
+ 
     This function returns state of TON Labs wallet applet.
 
     *Exemplary responses:*
