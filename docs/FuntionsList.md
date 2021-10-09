@@ -111,8 +111,6 @@ export default class CardError extends NfcNativeModuleError {
 ```
 
 NfcNativeModuleError corresponds to error happened in Android/iOS code itself. Whereas CardError corresponds to error happened in applet. For more details see section _More about responses format_ in readmes [TonNfcClientAndroid](https://github.com/tonlabs/TonNfcClientAndroid), [TonNfcClientSwift](https://github.com/tonlabs/TonNfcClientSwift).
-
-For Android for the majority of card operations there is a pair of functions. The first function shows to user an invitation dialog to connect NFC card. For example, _getPublicKey_ will show you an invitation dialog. And the second function does the same work. But it does not show any dialog. Here an exemplary function is _getPublicKeyWithoutDialog_. So here the user must first establish the connection and then call the function. More details you may find in [readme](https://github.com/tonlabs/TonNfcClientAndroid) in section _Test work with the card_. For iOS the second function in pair (having ending "WithoutDialog" in title) does not work. Because for iOS we always have invitation dialogs by defaut. More details in [here](https://github.com/tonlabs/TonNfcClientSwift).
 	
 ## NFC related functions
 
@@ -150,7 +148,6 @@ Here there are functions to check/change the state of your NFC hardware.
 Here there are functions to call APDU commands of CoinManager. CoinManager is an additional software integrated into NFC TON Labs Security card. It is responsible for maintaining ed25519 seed, related PIN and it provides some auxiliary operations. 
 
 - **async setDeviceLabel(label: string): Promise< CardResponse >** _(available for Android and iOS)_<br/> 
-  **async setDeviceLabelWithoutDialog(label: string): Promise< CardResponse >** _(available for Android)_
 
     This function is used to set the device label. Now we do not use this device label stored in Coin Manager.
 
@@ -165,7 +162,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 
 - **async getDeviceLabel(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getDeviceLabelWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get device label. Now we do not use this device label stored in Coin Manager.
 
@@ -174,7 +170,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"005815A3942073A6ADC70C035780FDD09DF09AFEEA4173B92FE559C34DCA0550","status":"ok"}
 
 - **async getSeVersion(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getSeVersionWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get SE (secure element) version. 
 
@@ -184,7 +179,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 
 - **async getCsn(): Promise< CardResponse >**  _(available for Android and iOS)_<br/>
-  **async getCsnWithoutDialog(): Promise< CardResponse >**  _(available for Android)_
 
     This function is used to get CSN (SEID).
 
@@ -194,7 +188,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 
 - **async getMaxPinTries(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getMaxPinTriesWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get retry maximum times of PIN. 
 
@@ -203,7 +196,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
         {"message":"10","status":"ok"}
 
 - **async getRemainingPinTries(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getRemainingPinTriesWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get remaining retry times of PIN.
 
@@ -213,7 +205,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 
 - **async getRootKeyStatus(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getRootKeyStatusWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get the status of seed for ed25519: is it generated or not.
 
@@ -224,7 +215,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 
 - **async resetWallet(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async resetWalletWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to reset the wallet state to the initial state. After resetting the wallet, the default PIN value would be 5555. The remaining number of retry for PIN will be reset to MAX (default is 10). The seed for ed25519 will be erased. And after its calling any card operation (except of CoinManager stuff) will fail with 6F02 error. TON Labs wallet applet does not work without seed at all.
 
@@ -234,7 +224,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 
 - **async getAvailableMemory(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getAvailableMemoryWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to obtain the amount of memory of the specified type that is available to the applet. Note that implementation-dependent memory overhead structures may also use the same memory pool.
         
@@ -244,7 +233,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 
 - **async getAppsList(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getAppsListWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function is used to get application list. It returns list of applets AIDs that were installed onto card.
 
@@ -255,7 +243,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
     _Note:_ Here 313132323333343435353636 is AID of our TON Labs wallet applet
 
 - **async generateSeed(pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async generateSeedWithoutDialog(pin: string): Promise< CardResponse >** _(available for Android)_
 
     This function is used to generate the seed for ed25519 with RNG.
 
@@ -272,7 +259,6 @@ Here there are functions to call APDU commands of CoinManager. CoinManager is an
 
 
 - **async changePin(oldPin: string, newPin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async changePinWithoutDialog(oldPin: string, newPin: string): Promise< CardResponse >** _(available for Android)_
 
     This function is used to change PIN.
 
@@ -293,8 +279,7 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
 ### Common functions
 
 - **async getTonAppletState(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getTonAppletStateWithoutDialog(): Promise< CardResponse >** _(available for Android)_
-
+- 
     This function returns state of TON Labs wallet applet.
 
     *Exemplary responses:*
@@ -303,7 +288,6 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
         {"message":"TonWalletApplet is personalized.","status":"ok"}
 
 - **async getSerialNumber(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getSerialNumberWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function returns serial number (SN). It must be identical to SN printed on the card.
 
@@ -312,7 +296,6 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
         {"message":"504394802433901126813236","status":"ok"}
 
 - **async getSault(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getSaultWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     This function returns fresh 32 bytes sault generated by the card. 
 
@@ -398,7 +381,6 @@ TON Labs wallet applet is software developed by TON Labs team and integrated int
 When user gets NFC TON Labs security card  at the first time, the applet on the card is in a special state. It waits for user authentication. And the main functionality of applet is blocked for now. At this point you may call all functions from previous subsections. And also some special functions are available to complete card activation. 
 
 - **async turnOnWalletWithPin(newPin: string, authenticationPassword: string, commonSecret: string, initialVector: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async turnOnWalletWithPinWithoutDialog(newPin: string, authenticationPassword: string, commonSecret: string, initialVector: string): Promise< CardResponse >** _(available for Android)_
 
     This function makes TON Labs wallet applet activation. After its succesfull call applet will be in working personalized state (so getTonAppletState() will return {"message":"TonWalletApplet is personalized.","status":"ok"}). At the begining of its work it reset seed and pin and generate new seed.
 
@@ -420,7 +402,6 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
         {"message":"TonWalletApplet is personalized.","status":"ok"}
 	
 - **async turnOnWallet(authenticationPassword: string, commonSecret: string, initialVector: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async turnOnWalleWithoutDialog(authenticationPassword: string, commonSecret: string, initialVector: string): Promise< CardResponse >**  _(available for Android)_
 
     This function makes TON Labs wallet applet activation. After its succesfull call applet will be in working personalized state (so getTonAppletState() will return {"message":"TonWalletApplet is personalized.","status":"ok"}). It uses default PIN '5555'. At the begining of its work it reset seed and pin and generate new seed.
 
@@ -440,8 +421,7 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
         {"message":"TonWalletApplet is personalized.","status":"ok"}
 
 - **async getHashOfEncryptedCommonSecret(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getHashOfEncryptedCommonSecretWithoutDialog(): Promise< CardResponse >** _(available for Android)_
-
+- 
     Return SHA256 hash of encrypted common secret.
 
     *Exemplary response:*
@@ -449,7 +429,6 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
         {"message":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","status":"ok"}
 
 - **async getHashOfEncryptedPassword(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getHashOfEncryptedPasswordWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Return SHA256 hash of encrypted password.
 
@@ -458,7 +437,6 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
         {"message":"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3","status":"ok"}
 	
 - **async getHashes(): Promise< CardResponse >**  _(available for Android and iOS)_<br/>
-  **async getHashesWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Generate seed if it's absent and then return SHA256 hash of encrypted password, hash of encrypted common secret, serial number.
 
@@ -472,7 +450,6 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
 Here there are functions related to ed25519 signature.
 
 - **async getPublicKeyForDefaultPath(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getPublicKeyForDefaultPathWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Return public key for HD path m/44'/396'/0'/0'/0'.
 
@@ -481,7 +458,6 @@ Here there are functions related to ed25519 signature.
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 	
 - **async checkSerialNumberAndGetPublicKeyForDefaultPath(serialNumber: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async checkSerialNumberAndGetPublicKeyForDefaultPathWithoutDialog(serialNumber: string): Promise< CardResponse >** _(available for Android)_ 
 	
     Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then return public key for HD path m/44'/396'/0'/0'/0'. Else reject the card.
 	
@@ -494,7 +470,6 @@ Here there are functions related to ed25519 signature.
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
 - **async verifyPin(pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async verifyPinWithoutDialog(pin: string): Promise< CardResponse >** _(available for Android)_
 
     Make pin verification.
 
@@ -507,7 +482,6 @@ Here there are functions related to ed25519 signature.
         {"message":"done","status":"ok"}
 
 - **async signForDefaultHdPath(dataForSigning: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async signForDefaultHdPathWithoutDialog(dataForSigning: string): Promise< CardResponse >** _(available for Android)_
 
     Make data signing by key for HD path m/44'/396'/0'/0'/0'. Prior to call this function you must call verifyPin.
 
@@ -522,7 +496,6 @@ Here there are functions related to ed25519 signature.
           "status":"ok"
          }
 - **async checkSerialNumberAndSignForDefaultHdPath(serialNumber: string, dataForSigning: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async checkSerialNumberAndSignForDefaultHdPathWithoutDialog(serialNumber: string, dataForSigning: string): Promise< CardResponse >** _(available for Android)_ 
 	
     Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then make data signing by key for HD path m/44'/396'/0'/0'/0'. Else reject the card. Prior to call this function you must call verifyPin.
     
@@ -540,7 +513,6 @@ Here there are functions related to ed25519 signature.
          }
 
 - **async sign(dataForSigning: string, hdIndex: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async signWithoutDialog(dataForSigning: string, hdIndex: string): Promise< CardResponse >** _(available for Android)_
 
     Make data signing by key for HD path m/44'/396'/0'/0'/hdIndex'. Prior to call this function you must call verifyPin.
 
@@ -558,7 +530,6 @@ Here there are functions related to ed25519 signature.
         }
 
 - **async checkSerialNumberAndSign(serialNumber: string, dataForSigning: string, hdIndex: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async checkSerialNumberAndSignWithoutDialog(serialNumber: string, dataForSigning: string, hdIndex: string): Promise< CardResponse >** _(available for Android)_ 
 	
     Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then make data signing by key for HD path m/44'/396'/0'/0'/hdIndex'. Else reject the card. Prior to call this function you must call verifyPin.
     
@@ -579,7 +550,6 @@ Here there are functions related to ed25519 signature.
         }
 
 - **async getPublicKey(hdIndex: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getPublicKeyWithoutDialog(hdIndex: string): Promise< CardResponse >** _(available for Android)_
 
     Return public key for HD path m/44'/396'/0'/0'/hdIndex'.
 
@@ -592,7 +562,6 @@ Here there are functions related to ed25519 signature.
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 	
 - **async checkSerialNumberAndGetPublicKey(serialNumber: string, hdIndex: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async checkSerialNumberAndGetPublicKeyWithoutDialog(serialNumber: string, hdIndex: string): Promise< CardResponse >** _(available for Android)_ 
 	
     Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then return public key for HD path m/44'/396'/0'/0'/hdIndex'. Else reject the card.
 	
@@ -607,7 +576,6 @@ Here there are functions related to ed25519 signature.
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
 - **async verifyPinAndSignForDefaultHdPath(dataForSigning: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async verifyPinAndSignForDefaultHdPathWithoutDialog(dataForSigning: string, pin: string): Promise< CardResponse >** _(available for Android)_
 
     Make pin verification and data signing by key for HD path m/44'/396'/0'/0'/0'.
 
@@ -624,7 +592,6 @@ Here there are functions related to ed25519 signature.
          "status":"ok"
         }
 - **async checkSerialNumberAndVerifyPinAndSignForDefaultHdPath(serialNumber: string, dataForSigning: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async checkSerialNumberAndVerifyPinAndSignForDefaultHdPathWithoutDialog(serialNumber: string, dataForSigning: string, pin: string): Promise< CardResponse >** _(available for Android)_ 
 	
     Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then make pin verification and data signing by key for HD path m/44'/396'/0'/0'/0'. Else reject the card.
     
@@ -645,8 +612,7 @@ Here there are functions related to ed25519 signature.
 
 
 - **async verifyPinAndSign(dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async verifyPinAndSignWithoutDialog(dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android)_
-
+- 
     Make pin verification and data signing by key for HD path m/44'/396'/0'/0'/hdIndex'.
 
     *Arguments requirements:*
@@ -665,7 +631,6 @@ Here there are functions related to ed25519 signature.
         }
 	
 - **async checkSerialNumberAndVerifyPinAndSign(serialNumber: string, dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async checkSerialNumberAndVerifyPinAndSignWithoutDialog(serialNumber: string, dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android)_ 
   
    Read serial number of currently connected security card and compare it with serialNumber argument. If they are identical then make pin verification and data signing by key for HD path m/44'/396'/0'/0'/hdIndex'. Else reject the card.
    
@@ -689,7 +654,6 @@ Here there are functions related to ed25519 signature.
 ### Functions related to card recovery module
 
 - **async getRecoveryDataLen(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getRecoveryDataLenWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Read actual recovery data length.
 
@@ -698,7 +662,6 @@ Here there are functions related to ed25519 signature.
         {"message":"7","status":"ok"}
 
 - **async getRecoveryDataHash(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getRecoveryDataHashWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Read recovery data SHA256 hash.
 
@@ -707,7 +670,6 @@ Here there are functions related to ed25519 signature.
         {"message":"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A","status":"ok"}
 
 - **async getRecoveryData(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getRecoveryDataWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Read recovery data from TON Labs Wallet applet.
 
@@ -716,7 +678,6 @@ Here there are functions related to ed25519 signature.
         {"message":"00112233445566","status":"ok"}
 
 - **async addRecoveryData(recoveryData: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async addRecoveryDataWithoutDialog(recoveryData: string): Promise< CardResponse >** _(available for Android)_
 
     Save recovery data into TON Labs Wallet applet. 
 
@@ -729,7 +690,6 @@ Here there are functions related to ed25519 signature.
         {"message":"done","status":"ok"}
 
 - **async isRecoveryDataSet(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async isRecoveryDataSetWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Return 'true'/'false' if recovery data exists/does not exist.
 
@@ -739,7 +699,6 @@ Here there are functions related to ed25519 signature.
         2) If we did not add recovery data, then: {"message":"false","status":"ok"}
 
 - **async resetRecoveryData(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async resetRecoveryDataWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Clear recovery data.
 
@@ -750,7 +709,6 @@ Here there are functions related to ed25519 signature.
 ### Functions related to card keychain
 
 - **async resetKeyChain(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async resetKeyChainWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Clear keychain, i.e. remove all stored keys.
 
@@ -759,7 +717,6 @@ Here there are functions related to ed25519 signature.
         {"message":"done","status":"ok"}
 
 - **async getKeyChainDataAboutAllKeys(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getKeyChainDataAboutAllKeysWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Return list of pairs (keyHmac, keyLength)  in json format.
 
@@ -775,7 +732,6 @@ Here there are functions related to ed25519 signature.
          }
 
 - **async getKeyChainInfo(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getKeyChainInfoWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Return json characterizing the state of keychain. 
 
@@ -784,7 +740,6 @@ Here there are functions related to ed25519 signature.
         {"numberOfKeys":0,"occupiedSize":0,"freeSize":32767,"status":"ok"}
 
 - **async getNumberOfKeys(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getNumberOfKeysWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Return number of keys in card keychain.
 
@@ -802,7 +757,6 @@ Here there are functions related to ed25519 signature.
         {"message":"0","status":"ok"}
 
 - **async getFreeStorageSize(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getFreeStorageSizeWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Return the volume of free size in card keychain (in bytes).
 
@@ -811,7 +765,6 @@ Here there are functions related to ed25519 signature.
         {"message":"32767","status":"ok"}
 
 - **async getKeyFromKeyChain(keyHmac: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getKeyFromKeyChainWithoutDialog(keyHmac: string): Promise< CardResponse >** _(available for Android)_
 
     Read key from card keychain based on its hmac.
 
@@ -824,7 +777,6 @@ Here there are functions related to ed25519 signature.
         {"message":"001122334455","status":"ok"}
 
 - **async addKeyIntoKeyChain(newKey: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async addKeyIntoKeyChainWithoutDialog(newKey: string): Promise< CardResponse >** _(available for Android)_
 
     Save new key into card keychain.
 
@@ -839,7 +791,6 @@ Here there are functions related to ed25519 signature.
     where "message" contains hmac of newKey.
 
 - **async deleteKeyFromKeyChain(keyHmac: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async deleteKeyFromKeyChainWithoutDialog(keyHmac: string): Promise< CardResponse >** _(available for Android)_
 
     Delete key from card keychain based on its hmac.
 
@@ -854,7 +805,6 @@ Here there are functions related to ed25519 signature.
     where "message" field contains the number of remaining keys
 
 - **async finishDeleteKeyFromKeyChainAfterInterruption(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async finishDeleteKeyFromKeyChainAfterInterruptionWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Finish the process of deleting key from card keychain. It may be necessary if previous DELETE operation was occassionally interrupted (like card disconnection).
 
@@ -865,7 +815,6 @@ Here there are functions related to ed25519 signature.
     where "message" field contains the number of remaining keys
 
 - **async changeKeyInKeyChain(newKey: string, oldKeyHmac: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async changeKeyInKeyChainWithoutDialog(newKey: string, oldKeyHmac: string): Promise< CardResponse >** _(available for Android)_
 
     Replace existing key by new key. The length of new key must be equal to length of old key.
 
@@ -882,7 +831,6 @@ Here there are functions related to ed25519 signature.
     where "message" contains hmac of newKey.
 
 - **async getIndexAndLenOfKeyInKeyChain(keyHmac: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getIndexAndLenOfKeyInKeyChainWithoutDialog(keyHmac: string): Promise< CardResponse >** _(available for Android)_
 
     Read index (inside internal applet storage) and length of key by its hmac.
 
@@ -895,7 +843,6 @@ Here there are functions related to ed25519 signature.
         {"message":"{\"index\":1,\"length\":3}","status":"ok"}
 
 - **async checkAvailableVolForNewKey(keySize: number): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async checkAvailableVolForNewKeyWithoutDialog(keySize: number): Promise< CardResponse >** _(available for Android)_
 
     Check if there is enough free volume in card keychain to add new key of length = keySize. If there is no enough space then it throws an exception
 
@@ -908,7 +855,6 @@ Here there are functions related to ed25519 signature.
         {"message":"done","status":"ok"}
 
 - **async checkKeyHmacConsistency(keyHmac: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async checkKeyHmacConsistencyWithoutDialog(keyHmac: string): Promise< CardResponse >** _(available for Android)_
 
     Checks if card's keychain stores a key with such keyHmac and if this hmac really corresponds to the key.
 
@@ -917,7 +863,6 @@ Here there are functions related to ed25519 signature.
         {"message":"done","status":"ok"}
 
 - **async getHmac(index: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getHmacWithoutDialog(index: string): Promise< CardResponse >** _(available for Android)_
 
     Get hmac of key in card keychain by its index. 
 
@@ -930,7 +875,6 @@ Here there are functions related to ed25519 signature.
         {"message":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","status":"ok"}
 
 - **async getDeleteKeyRecordNumOfPackets(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getDeleteKeyRecordNumOfPacketsWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Returns the number of keys records packets that must be deleted to finish deleting of key.
 
@@ -939,7 +883,6 @@ Here there are functions related to ed25519 signature.
         {"message":"2","status":"ok"}
 
 - **async getDeleteKeyChunkNumOfPackets(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getDeleteKeyChunkNumOfPacketWithoutDialogs(): Promise< CardResponse >** _(available for Android)_
 
     Returns the number of keys chunks packets that must be deleted to finish deleting of key.
 
