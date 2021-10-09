@@ -612,7 +612,7 @@ Here there are functions related to ed25519 signature.
 
 
 - **async verifyPinAndSign(dataForSigning: string, hdIndex: string, pin: string): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-- 
+ 
     Make pin verification and data signing by key for HD path m/44'/396'/0'/0'/hdIndex'.
 
     *Arguments requirements:*
@@ -748,7 +748,6 @@ Here there are functions related to ed25519 signature.
         {"message":"1","status":"ok"}
 
 - **async getOccupiedStorageSize(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-  **async getOccupiedStorageSizeWithoutDialog(): Promise< CardResponse >** _(available for Android)_
 
     Return the volume of occupied size in card keychain (in bytes).
 
@@ -871,8 +870,9 @@ Here there are functions related to ed25519 signature.
         index — digital string storing an integer ≥ 0 and ≤1023.
 
     *Exemplary response:*
+    
+    {"hmac":"2222222222222222222222222222222", "length":5, "status":"ok"}
 
-        {"message":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","status":"ok"}
 
 - **async getDeleteKeyRecordNumOfPackets(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
 
