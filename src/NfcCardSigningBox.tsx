@@ -1,4 +1,4 @@
-import { AppSigningBox as SigningBox } from '@tonclient/core/dist';
+import type { AppSigningBox as SigningBox } from '@tonclient/core/dist';
 
 import { NfcCardModuleWrapper } from 'ton-nfc-client';
 

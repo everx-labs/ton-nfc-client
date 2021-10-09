@@ -5,6 +5,13 @@ import {ERR_JSON_MUST_HAVE_MSG_FIELD,
   ERR_JSON_MUST_HAVE_TYPE_FIELD, 
   ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
   ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL} from '../NfcCardModuleWrapper'
+
+  /**
+ * Test createKeyForHmac method behaviour if the function with the same title in NativeModule throwed a error or produced response of bad format. 
+ * We mock different incorrect error messages from NativeModule and also a correct error message, and check the behaviour.
+ */
+
+
 jest.mock('react-native', () => {
     return {
       NativeModules: {
@@ -13,12 +20,28 @@ jest.mock('react-native', () => {
                 reject(new Error("aaa"));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message\":\"\", \"status\":\"ok\"}"
+                )
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message1\":\"111\", \"status\":\"ok\"}"
+                )
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
              .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message1\":\"22223\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message\":\"111\", \"status\":\"\"}"
+                )
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message\":\"111\", \"status1\":\"ok\"}"
+                )
               }))
              .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"status\":\"\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
@@ -81,7 +104,7 @@ jest.mock('react-native', () => {
     });  
   });
 
- test('Test createKeyForHmac throws error if message field is empty', () => {
+ test('Test createKeyForHmac throws error if message field (in response) is empty', () => {
     return new NfcCardModuleWrapper().createKeyForHmac("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
     "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4", "504394802433901126813236")
     .then(cardRsponse => {
@@ -93,7 +116,7 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test createKeyForHmac throws error if message field is absent', () => {
+  test('Test createKeyForHmac throws error if message field (in response) is absent', () => {
     return new NfcCardModuleWrapper().createKeyForHmac("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
               "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4", "504394802433901126813236")
     .then(cardRsponse => {
@@ -105,7 +128,31 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test createKeyForHmac throws error if status field is empty', () => {
+  test('Test createKeyForHmac throws error if message field ()in error msg) is empty', () => {
+    return new NfcCardModuleWrapper().createKeyForHmac("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
+    "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4", "504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
+    });  
+  });
+
+  test('Test createKeyForHmac throws error if message field (in error msg) is absent', () => {
+    return new NfcCardModuleWrapper().createKeyForHmac("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
+              "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4", "504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
+    });  
+  });
+
+  test('Test createKeyForHmac throws error if status field (in response) is empty', () => {
     return new NfcCardModuleWrapper().createKeyForHmac("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
               "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4", "504394802433901126813236")
     .then(cardRsponse => {
@@ -117,7 +164,31 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test createKeyForHmac throws error if status field is absent', () => {
+  test('Test createKeyForHmac throws error if status field (in response) is absent', () => {
+    return new NfcCardModuleWrapper().createKeyForHmac("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
+              "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4", "504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
+    });  
+  });
+
+  test('Test createKeyForHmac throws error if status field (in error msg) is empty', () => {
+    return new NfcCardModuleWrapper().createKeyForHmac("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
+              "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4", "504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
+    });  
+  });
+
+  test('Test createKeyForHmac throws error if status field (in error msg) is absent', () => {
     return new NfcCardModuleWrapper().createKeyForHmac("F4B072E1DF2DB7CF6CD0CD681EC5CD2D071458D278E6546763CBB4860F8082FE14418C8A8A55E2106CBC6CB1174F4BA6D827A26A2D205F99B7E00401DA4C15ACC943274B92258114B5E11C16DA64484034F93771547FBE60DA70E273E6BD64F8A4201A9913B386BCA55B6678CFD7E7E68A646A7543E9E439DD5B60B9615079FE",
               "7256EFE7A77AFC7E9088266EF27A93CB01CD9432E0DB66D600745D506EE04AC4", "504394802433901126813236")
     .then(cardRsponse => {

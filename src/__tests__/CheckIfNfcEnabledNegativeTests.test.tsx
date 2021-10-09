@@ -20,12 +20,28 @@ jest.mock('react-native', () => {
                 reject(new Error("aaa"));
               }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message\":\"\", \"status\":\"ok\"}"
+                )
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message1\":\"111\", \"status\":\"ok\"}"
+                )
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
              .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message1\":\"22223\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message\":\"111\", \"status\":\"\"}"
+                )
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message\":\"111\", \"status1\":\"ok\"}"
+                )
               }))
              .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"status\":\"\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
@@ -87,7 +103,7 @@ jest.mock('react-native', () => {
     });  
   });
 
- test('Test checkIfNfcEnabled throws error if message field is empty', () => {
+  test('Test checkIfNfcEnabled throws error if message field (in response) is empty', () => {
     return new NfcCardModuleWrapper().checkIfNfcEnabled()
     .then(cardRsponse => {
         expect(true).toBe(false);
@@ -98,7 +114,18 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkIfNfcEnabled throws error if message field is absent', () => {
+  test('Test checkIfNfcEnabled throws error if message field (in response) is absent', () => {
+    return new NfcCardModuleWrapper().checkIfNfcEnabled()
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
+    });  
+  })
+
+ test('Test checkIfNfcEnabled throws error if message field (in error msg) is empty', () => {
     return new NfcCardModuleWrapper().checkIfNfcEnabled()
     .then(cardRsponse => {
         expect(true).toBe(false);
@@ -109,7 +136,18 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkIfNfcEnabled throws error if status field is empty', () => {
+  test('Test checkIfNfcEnabled throws error if message field (in error msg) is absent', () => {
+    return new NfcCardModuleWrapper().checkIfNfcEnabled()
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
+    });  
+  });
+
+  test('Test checkIfNfcEnabled throws error if status field (in response) is empty', () => {
     return new NfcCardModuleWrapper().checkIfNfcEnabled()
     .then(cardRsponse => {
         expect(true).toBe(false);
@@ -120,7 +158,29 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test checkIfNfcEnabled throws error if status field is absent', () => {
+  test('Test checkIfNfcEnabled throws error if status field (in response) is absent', () => {
+    return new NfcCardModuleWrapper().checkIfNfcEnabled()
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
+    });  
+  });
+
+  test('Test checkIfNfcEnabled throws error if status field (in error msg) is empty', () => {
+    return new NfcCardModuleWrapper().checkIfNfcEnabled()
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
+    });  
+  });
+
+  test('Test checkIfNfcEnabled throws error if status field (in error msg) is absent', () => {
     return new NfcCardModuleWrapper().checkIfNfcEnabled()
     .then(cardRsponse => {
         expect(true).toBe(false);

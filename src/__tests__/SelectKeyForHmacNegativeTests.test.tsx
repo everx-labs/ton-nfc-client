@@ -6,7 +6,8 @@ import {ERR_JSON_MUST_HAVE_MSG_FIELD,
   ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
   ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL} from '../NfcCardModuleWrapper'
 /**
- * Tests for selectKeyForHmac method validating different cases when it can throw errors.
+ * Test selectKeyForHmac method behaviour if the function with the same title in NativeModule throwed a error or produced response of bad format. 
+ * We mock different incorrect error messages from NativeModule and also a correct error message, and check the behaviour.
  */
 
 jest.mock('react-native', () => {
@@ -14,6 +15,17 @@ jest.mock('react-native', () => {
       NativeModules: {
         NfcCardModule: {
             selectKeyForHmac: jest.fn()
+            .mockReturnValueOnce(new Promise((resolve, reject) => {
+              reject(new Error("aaa"));
+            }))
+            .mockReturnValueOnce(new Promise((resolve, reject) => {
+              resolve("{\"message\":\"\", \"status\":\"ok\"}"
+              )
+            }))
+            .mockReturnValueOnce(new Promise((resolve, reject) => {
+              resolve("{\"message1\":\"111\", \"status\":\"ok\"}"
+              )
+            }))
               .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
@@ -21,6 +33,14 @@ jest.mock('react-native', () => {
              .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message1\":\"22223\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message\":\"111\", \"status\":\"\"}"
+                )
+              }))
+              .mockReturnValueOnce(new Promise((resolve, reject) => {
+                resolve("{\"message\":\"111\", \"status1\":\"ok\"}"
+                )
               }))
              .mockReturnValueOnce(new Promise((resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"status\":\"\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
@@ -71,7 +91,18 @@ jest.mock('react-native', () => {
   selectKeyForHmac
   */
 
- test('Test selectKeyForHmac throws error if message field is empty', () => {
+  test('Test selectKeyForHmac throws error if input arg is not json', () => {
+    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe("aaa");
+    });  
+  });
+
+  test('Test selectKeyForHmac throws error if message field (in response) is empty', () => {
     return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
@@ -82,7 +113,7 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if message field is absent', () => {
+  test('Test selectKeyForHmac throws error if message field (in response) is absent', () => {
     return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
@@ -93,7 +124,29 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if status field is empty', () => {
+ test('Test selectKeyForHmac throws error if message field (in error msg) is empty', () => {
+    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
+    });  
+  });
+
+  test('Test selectKeyForHmac throws error if message field (in error msg) is absent', () => {
+    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_MSG_FIELD);
+    });  
+  });
+
+  test('Test selectKeyForHmac throws error if status field (in response) is empty', () => {
     return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
@@ -104,7 +157,30 @@ jest.mock('react-native', () => {
     });  
   });
 
-  test('Test selectKeyForHmac throws error if status field is absent', () => {
+  test('Test selectKeyForHmac throws error if status field (in response) is absent', () => {
+    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
+    });  
+  });
+
+  
+  test('Test selectKeyForHmac throws error if status field (in error msg)  is empty', () => {
+    return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
+    .then(cardRsponse => {
+        expect(true).toBe(false);
+    })
+    .catch(error => {
+        console.log(error.message)
+        expect(error.message).toBe(ERR_JSON_MUST_HAVE_STATUS_FIELD);
+    });  
+  });
+
+  test('Test selectKeyForHmac throws error if status field (in error msg)  is absent', () => {
     return new NfcCardModuleWrapper().selectKeyForHmac("504394802433901126813236")
     .then(cardRsponse => {
         expect(true).toBe(false);
