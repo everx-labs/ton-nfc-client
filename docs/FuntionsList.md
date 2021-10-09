@@ -421,7 +421,7 @@ When user gets NFC TON Labs security card  at the first time, the applet on the 
         {"message":"TonWalletApplet is personalized.","status":"ok"}
 
 - **async getHashOfEncryptedCommonSecret(): Promise< CardResponse >** _(available for Android and iOS)_<br/>
-- 
+ 
     Return SHA256 hash of encrypted common secret.
 
     *Exemplary response:*
