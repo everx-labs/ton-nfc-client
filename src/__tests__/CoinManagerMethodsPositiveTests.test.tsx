@@ -9,75 +9,75 @@ jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-          setDeviceLabel: jest.fn( (label: string) => {
-            return new Promise((resolve, reject) => {
+          setDeviceLabel: jest.fn( (_label: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"done\", \"status\":\"ok\"}");
             })
           }),
       
   
           getDeviceLabel: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"2222\", \"status\":\"ok\"}");
               })
             }),
 
           getCsn: jest.fn( () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"222236565555777888\", \"status\":\"ok\"}");
             })
           }),
 
           getMaxPinTries: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"10\", \"status\":\"ok\"}");
               })
           }),
 
           getSeVersion: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"1008\", \"status\":\"ok\"}");
               })
           }),
 
           getRemainingPinTries: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"10\", \"status\":\"ok\"}");
               })
           }),
 
           getRootKeyStatus: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"generated\", \"status\":\"ok\"}");
               })
           }),
 
           getAppsList: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"313132323333343435353636\", \"status\":\"ok\"}");
               })
           }),
 
-          generateSeed: jest.fn( (pin: string) => {
-              return new Promise((resolve, reject) => {
+          generateSeed: jest.fn( (_pin: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
           }),
 
-          resetWallet: jest.fn( (pin: string) => {
-              return new Promise((resolve, reject) => {
+          resetWallet: jest.fn( (_pin: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
           }),
 
-          changePin: jest.fn( (oldPin: string, newPin: string) => {
-              return new Promise((resolve, reject) => {
+          changePin: jest.fn( (_oldPin: string, _newPin: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
           }),
 
           getAvailableMemory: jest.fn( () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"ffff0000\", \"status\":\"ok\"}");
             })
           }),

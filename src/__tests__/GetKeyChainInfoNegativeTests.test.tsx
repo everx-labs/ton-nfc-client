@@ -19,82 +19,82 @@ jest.mock('react-native', () => {
         NativeModules: {
             NfcCardModule: {
                 getKeyChainInfo: jest.fn()
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error("aaa"));
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"", "status":"fail", "code": "30006", "errorTypeId": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message1":"22223", "status":"fail", "code": "30006", "errorTypeId": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"22223", "status":"", "code": "30006", "errorTypeId": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"22223", "status1":"fail", "code": "30006", "errorTypeId": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"22223", "code": "", "status":"fail", "errorTypeId": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"22223", "code1": "30006", "status":"fail", "errorTypeId": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"22223", "code": "30006", "status":"fail", "errorTypeId": "3", "errorType": ""}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"22223", "code": "30006", "status":"fail", "errorTypeId": "3", "errorType1": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"22223", "code": "30006", "status":"fail", "errorTypeId": "", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"22223", "code": "30006", "status":"fail", "errorTypeId1": "3", "errorType": "Native code fail: incorrect format of input data"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"Command aborted, No precise diagnosis.", "code": "6F00", "status":"fail", "errorTypeId": "0", "errorType": "Applet fail: card operation error", "cardInstruction1":"GET_NUMBER_OF_KEYS", "apdu":"B0 B8 00 00 40 9D7D35526332B85A16C99F21A2111B2CF25BAA1882615EAC07F4B575268C852C3CF637B20E1FAA47BF8E282ADE3E1D30D33112863DFFF2304CB4351F05BCB9E1 02"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"Command aborted, No precise diagnosis.", "code": "6F00", "status":"fail", "errorTypeId": "0", "errorType": "Applet fail: card operation error", "cardInstruction":"", "apdu":"B0 B8 00 00 40 9D7D35526332B85A16C99F21A2111B2CF25BAA1882615EAC07F4B575268C852C3CF637B20E1FAA47BF8E282ADE3E1D30D33112863DFFF2304CB4351F05BCB9E1 02"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"Command aborted, No precise diagnosis.", "code": "6F00", "status":"fail", "errorTypeId": "0", "errorType": "Applet fail: card operation error", "cardInstruction":"GET_NUMBER_OF_KEYS", "apdu1":"B0 B8 00 00 40 9D7D35526332B85A16C99F21A2111B2CF25BAA1882615EAC07F4B575268C852C3CF637B20E1FAA47BF8E282ADE3E1D30D33112863DFFF2304CB4351F05BCB9E1 02"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"Command aborted, No precise diagnosis.", "code": "6F00", "status":"fail", "errorTypeId": "0", "errorType": "Applet fail: card operation error", "cardInstruction":"GET_NUMBER_OF_KEYS", "apdu":""}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"Command aborted, No precise diagnosis.", "code": "6F00", "status":"fail", "errorTypeId": "0", "errorType": "Applet fail: card operation error", "cardInstruction":"GET_NUMBER_OF_KEYS", "apdu":"B0 B8 00 00 40 9D7D35526332B85A16C99F21A2111B2CF25BAA1882615EAC07F4B575268C852C3CF637B20E1FAA47BF8E282ADE3E1D30D33112863DFFF2304CB4351F05BCB9E1 02"}',
                         ))
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((resolve, _reject) => {
                         resolve('{"numberOfKeys1":1,"occupiedSize":1,"freeSize":32767,"status":"ok"}'
                         )
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((resolve, _reject) => {
                         resolve('{"numberOfKeys":1,"occupiedSize2":1,"freeSize":32767,"status":"ok"}'
                         )
                     }))
-                    .mockReturnValueOnce(new Promise((resolve, reject) => {
+                    .mockReturnValueOnce(new Promise((resolve, _reject) => {
                         resolve('{"numberOfKeys":1,"occupiedSize":1,"freeSize3":32767,"status":"ok"}'
                         )
                     }))
-                    .mockReturnValue(new Promise((resolve, reject) => {
+                    .mockReturnValue(new Promise((_resolve, reject) => {
                         reject(new Error('{"message":"Nfc connection establishing error.", "code": "220000", "status":"fail", "errorTypeId": "22", "errorType": "Android code fail: NFC error"}',
                         ))
                     })),
@@ -114,7 +114,7 @@ getKeyChainInfo
 
 test('Test getKeyChainInfo throws error if input arg is not json', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -126,7 +126,7 @@ test('Test getKeyChainInfo throws error if input arg is not json', () => {
 
 test('Test getKeyChainInfo throws error if message field (in error msg) is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -137,7 +137,7 @@ test('Test getKeyChainInfo throws error if message field (in error msg) is empty
 
 test('Test getKeyChainInfo throws error if message field (in error msg) is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -149,7 +149,7 @@ test('Test getKeyChainInfo throws error if message field (in error msg) is absen
 
 test('Test getKeyChainInfo throws error if status field (in error msg) is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -160,7 +160,7 @@ test('Test getKeyChainInfo throws error if status field (in error msg) is empty'
 
 test('Test getKeyChainInfo throws error if status field (in error msg) is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -171,7 +171,7 @@ test('Test getKeyChainInfo throws error if status field (in error msg) is absent
 
 test('Test getKeyChainInfo throws error if code field is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -182,7 +182,7 @@ test('Test getKeyChainInfo throws error if code field is empty', () => {
 
 test('Test getKeyChainInfo throws error if code field is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -193,7 +193,7 @@ test('Test getKeyChainInfo throws error if code field is absent', () => {
 
 test('Test getKeyChainInfo throws error if errorType field is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -204,7 +204,7 @@ test('Test getKeyChainInfo throws error if errorType field is empty', () => {
 
 test('Test getKeyChainInfo throws error if errorType field is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -215,7 +215,7 @@ test('Test getKeyChainInfo throws error if errorType field is absent', () => {
 
 test('Test getKeyChainInfo throws error if errorTypeId field is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -226,7 +226,7 @@ test('Test getKeyChainInfo throws error if errorTypeId field is empty', () => {
 
 test('Test getKeyChainInfo throws error if errorTypeId field is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -237,7 +237,7 @@ test('Test getKeyChainInfo throws error if errorTypeId field is absent', () => {
 
 test('Test getKeyChainInfo throws error if cardInstruction field is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -248,7 +248,7 @@ test('Test getKeyChainInfo throws error if cardInstruction field is empty', () =
 
 test('Test getKeyChainInfo throws error if cardInstruction field is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -259,7 +259,7 @@ test('Test getKeyChainInfo throws error if cardInstruction field is absent', () 
 
 test('Test getKeyChainInfo throws error if apdu field is empty', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -270,7 +270,7 @@ test('Test getKeyChainInfo throws error if apdu field is empty', () => {
 
 test('Test getKeyChainInfo throws error if apdu field is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -281,7 +281,7 @@ test('Test getKeyChainInfo throws error if apdu field is absent', () => {
 
 test('Test getKeyChainInfo throws CardError if errorTypeId =  0', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -298,7 +298,7 @@ test('Test getKeyChainInfo throws CardError if errorTypeId =  0', () => {
 
 test('Test getKeyChainInfo throws error if numberOfKeys field is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -309,7 +309,7 @@ test('Test getKeyChainInfo throws error if numberOfKeys field is absent', () => 
 
 test('Test getKeyChainInfo throws error if occupiedSize field is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -320,7 +320,7 @@ test('Test getKeyChainInfo throws error if occupiedSize field is absent', () => 
 
 test('Test getKeyChainInfo throws error if freeSize field is absent', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -331,7 +331,7 @@ test('Test getKeyChainInfo throws error if freeSize field is absent', () => {
 
 test('Test getKeyChainInfo throws NfcNativeModuleError if errorTypeId >  0', () => {
     return new NfcCardModuleWrapper().getKeyChainInfo()
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {

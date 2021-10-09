@@ -9,33 +9,33 @@ jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-          isRecoveryDataSet: jest.fn( (recoveryData: string) => {
-            return new Promise((resolve, reject) => {
+          isRecoveryDataSet: jest.fn( (_recoveryData: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"true\", \"status\":\"ok\"}");
             })
           }),
-          resetRecoveryData: jest.fn( (recoveryData: string) => {
-            return new Promise((resolve, reject) => {
+          resetRecoveryData: jest.fn( (_recoveryData: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"done\", \"status\":\"ok\"}");
             })
           }),
-          getRecoveryDataHash: jest.fn( (recoveryData: string) => {
-            return new Promise((resolve, reject) => {
+          getRecoveryDataHash: jest.fn( (_recoveryData: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
             })
           }),
-          getRecoveryDataLen: jest.fn( (recoveryData: string) => {
-            return new Promise((resolve, reject) => {
+          getRecoveryDataLen: jest.fn( (_recoveryData: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"7\", \"status\":\"ok\"}");
             })
           }),
-          addRecoveryData: jest.fn( (recoveryData: string) => {
-              return new Promise((resolve, reject) => {
+          addRecoveryData: jest.fn( (_recoveryData: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
             }),
           getRecoveryData: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"00112233445566\", \"status\":\"ok\"}");
               })
             }),

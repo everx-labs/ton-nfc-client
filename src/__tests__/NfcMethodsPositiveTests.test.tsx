@@ -10,17 +10,17 @@ jest.mock('react-native', () => {
         NativeModules: {
             NfcCardModule: {
                 checkIfNfcSupported: jest.fn( () => {
-                    return new Promise((resolve, reject) => {
+                    return new Promise((resolve, _reject) => {
                         resolve("{\"message\":\"true\", \"status\":\"ok\"}");
                     })
                 }),
                 checkIfNfcEnabled: jest.fn( () => {
-                    return new Promise((resolve, reject) => {
+                    return new Promise((resolve, _reject) => {
                         resolve("{\"message\":\"true\", \"status\":\"ok\"}");
                     })
                 }),
                 openNfcSettings: jest.fn( () => {
-                    return new Promise((resolve, reject) => {
+                    return new Promise((resolve, _reject) => {
                         resolve("{\"message\":\"done\", \"status\":\"ok\"}");
                     })
                 })

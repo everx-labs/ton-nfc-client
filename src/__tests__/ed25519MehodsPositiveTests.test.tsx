@@ -1,12 +1,6 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
-  ERR_JSON_MUST_HAVE_STATUS_FIELD, 
-  ERR_JSON_MUST_HAVE_CODE_FIELD, 
-  ERR_JSON_MUST_HAVE_TYPE_FIELD, 
-  ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
-  ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL} from '../NfcCardModuleWrapper'
-/**
- * Test the validity of CardResponses created by methods of NfcCardModuleWrapper
+
+ /* Test the validity of CardResponses created by methods of NfcCardModuleWrapper
  * (part of methods related to ed25519 functionality)
  **/
 
@@ -16,87 +10,87 @@ import {ERR_JSON_MUST_HAVE_MSG_FIELD,
       NativeModules: {
 
         NfcCardModule: {
-          verifyPin: jest.fn( (pin: string) => {
-            return new Promise((resolve, reject) => {
+          verifyPin: jest.fn( (_pin: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"done\", \"status\":\"ok\"}");
             })
           }),
 
         getPublicKeyForDefaultPath: jest.fn( () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
             })
           }), 
 
-        getPublicKey: jest.fn( (hdIndex: string) => {
-            return new Promise((resolve, reject) => {
+        getPublicKey: jest.fn( (_hdIndex: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
             })
           }), 
 
-        checkSerialNumberAndGetPublicKey: jest.fn( (serialNumber: string, hdIndex: string) => {
-            return new Promise((resolve, reject) => {
+        checkSerialNumberAndGetPublicKey: jest.fn( (_serialNumber: string, _hdIndex: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
             })
         }),
 
-        checkSerialNumberAndGetPublicKeyForDefaultPath: jest.fn( (serialNumber: string) => {
-            return new Promise((resolve, reject) => {
+        checkSerialNumberAndGetPublicKeyForDefaultPath: jest.fn( (_serialNumber: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
             })
         }),
 
-        signForDefaultHdPath: jest.fn( (dataForSigning: string) => {
-            return new Promise((resolve, reject) => {
+        signForDefaultHdPath: jest.fn( (_dataForSigning: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605\", \"status\":\"ok\"}");
             })
           }), 
 
-        sign: jest.fn( (dataForSigning: string, hdIndex: string) => {
-            return new Promise((resolve, reject) => {
+        sign: jest.fn( (_dataForSigning: string, _hdIndex: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605\", \"status\":\"ok\"}");
             })
           }), 
         
-        verifyPinAndSignForDefaultHdPath: jest.fn( ( dataForSigning: string, pin: string) => {
-            return new Promise((resolve, reject) => {
+        verifyPinAndSignForDefaultHdPath: jest.fn( ( _dataForSigning: string, _pin: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605\", \"status\":\"ok\"}");
             })
         }),
 
-        verifyPinAndSign: jest.fn( ( dataForSigning: string,
-            hdIndex: string,
-            pin: string) => {
-            return new Promise((resolve, reject) => {
+        verifyPinAndSign: jest.fn( ( _dataForSigning: string,
+            _hdIndex: string,
+            _pin: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605\", \"status\":\"ok\"}");
             })
         }),
 
-        checkSerialNumberAndSignForDefaultHdPath: jest.fn( (serialNumber: string, dataForSigning: string) => {
-            return new Promise((resolve, reject) => {
+        checkSerialNumberAndSignForDefaultHdPath: jest.fn( (_serialNumber: string, _dataForSigning: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605\", \"status\":\"ok\"}");
             })
         }),
 
-        checkSerialNumberAndSign: jest.fn( (serialNumber: string, dataForSigning: string, hdIndex: string) => {
-            return new Promise((resolve, reject) => {
+        checkSerialNumberAndSign: jest.fn( (_serialNumber: string, _dataForSigning: string, _hdIndex: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605\", \"status\":\"ok\"}");
             })
         }),
 
-        checkSerialNumberAndVerifyPinAndSignForDefaultHdPath: jest.fn( (serialNumber: string,
-            dataForSigning: string,
-            pin: string) => {
-            return new Promise((resolve, reject) => {
+        checkSerialNumberAndVerifyPinAndSignForDefaultHdPath: jest.fn( (_serialNumber: string,
+            _dataForSigning: string,
+            _pin: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605\", \"status\":\"ok\"}");
             })
         }),
 
-        checkSerialNumberAndVerifyPinAndSign: jest.fn( (serialNumber: string,
-            dataForSigning: string,
-            hdIndex: string,
-            pin: string) => {
-            return new Promise((resolve, reject) => {
+        checkSerialNumberAndVerifyPinAndSign: jest.fn( (_serialNumber: string,
+            _dataForSigning: string,
+            _hdIndex: string,
+            _pin: string) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"2D6A2749DD5AF5BB356220BFA06A0C624D5814438F37983322BBAD762EFB4759CFA927E6735B7CD556196894F3CE077ADDD6B49447B8B325ADC494B82DC8B605\", \"status\":\"ok\"}");
             })
         }),

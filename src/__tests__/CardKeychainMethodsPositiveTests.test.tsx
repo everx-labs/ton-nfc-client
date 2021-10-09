@@ -1,10 +1,4 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
-  ERR_JSON_MUST_HAVE_STATUS_FIELD, 
-  ERR_JSON_MUST_HAVE_CODE_FIELD, 
-  ERR_JSON_MUST_HAVE_TYPE_FIELD, 
-  ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
-  ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL} from '../NfcCardModuleWrapper'
 
 
 /**
@@ -17,94 +11,94 @@ jest.mock('react-native', () => {
       NativeModules: {
         NfcCardModule: {
           resetKeyChain: jest.fn( () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"done\", \"status\":\"ok\"}");
             })
           }),
 
 
           getOccupiedStorageSize: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"20\", \"status\":\"ok\"}");
               })
           }),
 
           getFreeStorageSize: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"20\", \"status\":\"ok\"}");
               })
           }),
 
-          getKeyFromKeyChain: jest.fn( (keyHmac: string) => {
-              return new Promise((resolve, reject) => {
+          getKeyFromKeyChain: jest.fn( (_keyHmac: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"1111\", \"status\":\"ok\"}");
               })
           }),
 
           getKeyChainInfo: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"numberOfKeys\":1,\"occupiedSize\":1,\"freeSize\":32767,\"status\":\"ok\"}");
               })
           }),
 
           getNumberOfKeys: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"20\", \"status\":\"ok\"}");
               })
           }),
 
 
-          addKeyIntoKeyChain: jest.fn( (newKey: string) => {
-              return new Promise((resolve, reject) => {
+          addKeyIntoKeyChain: jest.fn( (_newKey: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"D31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C\", \"status\":\"ok\"}");
               })
           }),
           
-          deleteKeyFromKeyChain: jest.fn( (keyHmac: string) => {
-              return new Promise((resolve, reject) => {
+          deleteKeyFromKeyChain: jest.fn( (_keyHmac: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
           }),
 
           finishDeleteKeyFromKeyChainAfterInterruption: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
           }), 
 
-          changeKeyInKeyChain: jest.fn( (newKey: string,
-              oldKeyHmac: string) => {
-              return new Promise((resolve, reject) => {
+          changeKeyInKeyChain: jest.fn( (_newKey: string,
+              _oldKeyHmac: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"A31D1D600F8E5B5951275B9C6DED079011FD852ABB62C14A2EECA2E6924452C\", \"status\":\"ok\"}");
               })
           }),
 
-          checkAvailableVolForNewKey: jest.fn( (keySize: number) => {
-              return new Promise((resolve, reject) => {
+          checkAvailableVolForNewKey: jest.fn( (_keySize: number) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
           }),
 
-          checkKeyHmacConsistency: jest.fn( (keyHmac: string) => {
-              return new Promise((resolve, reject) => {
+          checkKeyHmacConsistency: jest.fn( (_keyHmac: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"done\", \"status\":\"ok\"}");
               })
           }),
 
-          getHmac: jest.fn( (index: string) => {
-              return new Promise((resolve, reject) => {
+          getHmac: jest.fn( (_index: string) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"hmac\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\",\"length\":32,\"status\":\"ok\"}");
               })
           }),
 
           getDeleteKeyRecordNumOfPackets: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"2\", \"status\":\"ok\"}");
               })
           }),
 
           getDeleteKeyChunkNumOfPackets: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"2\", \"status\":\"ok\"}");
               })
           }),

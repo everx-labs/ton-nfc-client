@@ -43,7 +43,7 @@ test('Test prepareCardResponseWithoutDelay throws error if message field is abse
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
+         nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_MSG_FIELD))
 })
 
@@ -52,7 +52,7 @@ test('Test prepareCardResponseWithoutDelay throws error if message field is empt
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
+         nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_MSG_FIELD))
 })
 
@@ -61,7 +61,7 @@ test('Test prepareCardResponseWithoutDelay throws error if status field is absen
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
+         nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD))
 })
 
@@ -70,7 +70,7 @@ test('Test prepareCardResponseWithoutDelay throws error if status field is empty
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
+         nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD))
 })
 
@@ -79,7 +79,7 @@ test('Test prepareCardResponseWithoutDelay throws error if input arg is not json
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
+         nfcCardModuleWrapper.prepareCardResponseWithoutDelay(json)
     }).toThrow()
 })
 
@@ -105,7 +105,7 @@ test('Positive test prepareCardResponse', () => {
             expect(cardRsponse.sn).toBe('')
             expect(cardRsponse.serialNumbers.length).toBe(0)
         })
-        .catch(error => {
+        .catch(_error => {
             expect(true).toBe(false)
         })
 })
@@ -115,7 +115,7 @@ test('Test prepareCardResponse throws error if message field is absent', () => {
     let json = '{"message1":"22221", "status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponse(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -127,7 +127,7 @@ test('Test prepareCardResponse throws error if message field is empty', () => {
     let json = '{"message":"", "status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponse(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -139,7 +139,7 @@ test('Test prepareCardResponse throws error if status field is absent', () => {
     let json = '{"message":"22221", "status1":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponse(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -151,7 +151,7 @@ test('Test prepareCardResponse throws error if status field is empty', () => {
     let json = '{"message":"22221", "status":""}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponse(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -163,7 +163,7 @@ test('Test prepareCardResponse throws error if input arg is not json', () => {
     let json = 'bbb'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponse(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -193,7 +193,7 @@ test('Positive test prepareCardResponseFromGetAllSerialNumbers', () => {
             expect(cardRsponse.sn).toBe('')
             expect(cardRsponse.serialNumbers.length).toBe(0)
         })
-        .catch(error => {
+        .catch(_error => {
             expect(true).toBe(false)
         })
 })
@@ -218,7 +218,7 @@ test('Positive test2 prepareCardResponseFromGetAllSerialNumbers', () => {
             expect(cardRsponse.serialNumbers[0]).toBe('504394802433901126813236')
             expect(cardRsponse.serialNumbers[1]).toBe('455324585319848551839771')
         })
-        .catch(error => {
+        .catch(_error => {
             expect(true).toBe(false)
         })
 })
@@ -227,7 +227,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if message fi
     let json = '{"message1":"22221", "status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetAllSerialNumbers(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -239,7 +239,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if message fi
     let json = '{"message":"", "status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetAllSerialNumbers(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -251,7 +251,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if status fie
     let json = '{"message":"22221", "status1":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetAllSerialNumbers(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -263,7 +263,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if status fie
     let json = '{"message":"22221", "status":""}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetAllSerialNumbers(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -275,7 +275,7 @@ test('Test prepareCardResponseFromGetAllSerialNumbers throws error if input arg 
     let json = 'bbb'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetAllSerialNumbers(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -305,7 +305,7 @@ test('Positive test prepareCardResponseFromGetHashes', () => {
             expect(cardRsponse.sn).toBe('929526125066377952749605')
             expect(cardRsponse.serialNumbers.length).toBe(0)
         })
-        .catch(error => {
+        .catch(_error => {
             expect(true).toBe(false)
         })
 })
@@ -314,7 +314,7 @@ test('Test prepareCardResponseFromGetHashes throws error if ecsHash field is abs
     let json = '{"ecsHash1":"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3","epHash":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF", "serialNumber":"929526125066377952749605", "status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHashes(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -326,7 +326,7 @@ test('Test prepareCardResponseFromGetHashes throws error if ecsHash field is emp
     let json = '{"ecsHash":"","epHash":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF", "serialNumber":"929526125066377952749605", "status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHashes(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -338,7 +338,7 @@ test('Test prepareCardResponseFromGetHashes throws error if epHash field is abse
     let json = '{"ecsHash":"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3","epHash1":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF", "serialNumber":"929526125066377952749605", "status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHashes(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -358,7 +358,7 @@ test('Test prepareCardResponseFromGetHashes throws error if serialNumber field i
     let json = '{"ecsHash":"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3","epHash":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF", "serialNumber2":"929526125066377952749605", "status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHashes(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -378,7 +378,7 @@ test('Test prepareCardResponseFromGetHashes throws error if status field is abse
     let json = '{"ecsHash":"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3","epHash":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF", "serialNumber":"929526125066377952749605", "status3":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHashes(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -390,7 +390,7 @@ test('Test prepareCardResponseFromGetHashes throws error if status field is abse
     let json = '{"ecsHash":"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3","epHash":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF", "serialNumber":"929526125066377952749605", "status":""}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHashes(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -402,7 +402,7 @@ test('Test prepareCardResponseFromGetHashes throws error if input arg is not jso
     let json = 'bbb'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHashes(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -432,7 +432,7 @@ test('Positive test prepareCardResponseFromGetKeyChainInfo', () => {
             expect(cardRsponse.sn).toBe('')
             expect(cardRsponse.serialNumbers.length).toBe(0)
         })
-        .catch(error => {
+        .catch(_error => {
             expect(true).toBe(false)
         })
 })
@@ -441,7 +441,7 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if numberOfKeys f
     let json = '{"numberOfKeys":0,"occupiedSize1":0,"freeSize":32767,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetKeyChainInfo(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -453,7 +453,7 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if occupiedSize f
     let json = '{"numberOfKeys":0,"occupiedSize1":0,"freeSize":32767,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetKeyChainInfo(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -465,7 +465,7 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if freeSize field
     let json = '{"occupiedSize":0,"numberOfKeys":0,"freeSize1":32767,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetKeyChainInfo(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -478,7 +478,7 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if status field i
     let json = '{"numberOfKeys":0,"occupiedSize":0,"freeSize":32767,"status8":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetKeyChainInfo(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -490,7 +490,7 @@ test('Test prepareCardResponseFromGetKeyChainInfo throws error if input arg is n
     let json = 'bbb'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetKeyChainInfo(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -520,7 +520,7 @@ test('Positive test prepareCardResponseFromGetHmac', () => {
             expect(cardRsponse.sn).toBe('')
             expect(cardRsponse.serialNumbers.length).toBe(0)
         })
-        .catch(error => {
+        .catch(_error => {
             expect(true).toBe(false)
         })
 })
@@ -529,7 +529,7 @@ test('Test prepareCardResponseFromGetHmac throws error if hmac field is absent',
     let json = '{"hmac1":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","length":32,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHmac(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -541,7 +541,7 @@ test('Test prepareCardResponseFromGetHmac throws error if hmac field is empty', 
     let json = '{"hmac":"","length":32,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHmac(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -553,7 +553,7 @@ test('Test prepareCardResponseFromGetHmac throws error if length field is absent
     let json = '{"hmac":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","length1":32,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHmac(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -565,7 +565,7 @@ test('Test prepareCardResponseFromGetHmac throws error if length field is empty'
     let json = '{"hmac":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","length":0,"status":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHmac(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -577,7 +577,7 @@ test('Test prepareCardResponseFromGetHmac throws error if status field is absent
     let json = '{"hmac":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","length":32,"status8":"ok"}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHmac(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -589,7 +589,7 @@ test('Test prepareCardResponseFromGetHmac throws error if status field is empty'
     let json = '{"hmac":"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF","length":32,"status":""}'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHmac(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -602,7 +602,7 @@ test('Test prepareCardResponseFromGetHmac throws error if input arg is not json'
     let json = 'bbb'
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     return nfcCardModuleWrapper.prepareCardResponseFromGetHmac(json)
-        .then(cardRsponse => {
+        .then(_cardRsponse => {
             expect(true).toBe(false)
         })
         .catch(error => {
@@ -619,7 +619,7 @@ test('Test throwError throws error if input arg is not json', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow()
 })
 
@@ -628,7 +628,7 @@ test('Test throwError throws error if message field is empty', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_MSG_FIELD))
 })
 
@@ -637,7 +637,7 @@ test('Test throwError throws error if message field is absent', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_MSG_FIELD))
 })
 
@@ -646,7 +646,7 @@ test('Test throwError throws error if status field is empty', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD))
 })
 
@@ -655,7 +655,7 @@ test('Test throwError throws error if status field is absent', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_STATUS_FIELD))
 })
 
@@ -664,7 +664,7 @@ test('Test throwError throws error if code field is empty', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_CODE_FIELD))
 })
 
@@ -673,7 +673,7 @@ test('Test throwError throws error if code field is absent', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_CODE_FIELD))
 })
 
@@ -682,7 +682,7 @@ test('Test throwError throws error if errorType field is empty', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+        nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_TYPE_FIELD))
 })
 
@@ -692,7 +692,7 @@ test('Test throwError throws error if errorType field is absent', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_TYPE_FIELD))
 })
 
@@ -701,7 +701,7 @@ test('Test throwError throws error if errorTypeId field is absent', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+        nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_TYPE_ID_FIELD))
 })
 
@@ -710,7 +710,7 @@ test('Test throwError throws error if errorTypeId field is empty', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL))
 })
 
@@ -720,7 +720,7 @@ test('Test throwError throws error if errorTypeId =  0 and cardInstruction field
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+        nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD))
 })
 
@@ -729,7 +729,7 @@ test('Test throwError throws error if errorTypeId =  0 and cardInstruction field
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+        nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_CARD_INSTRUCTION_FIELD))
 })
 
@@ -738,7 +738,7 @@ test('Test throwError throws error if errorTypeId =  0 and apdu field is absent'
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+        nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_APDU_FIELD))
 })
 
@@ -747,7 +747,7 @@ test('Test throwError throws error if errorTypeId =  0 and apdu field is empty',
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+        nfcCardModuleWrapper.throwError(json)
     }).toThrow(new Error(ERR_JSON_MUST_HAVE_APDU_FIELD))
 })
 
@@ -756,7 +756,7 @@ test('Positive Test throwError throws error if errorTypeId =  0', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+        nfcCardModuleWrapper.throwError(json)
     }).toThrow(new CardError('Command aborted, No precise diagnosis.', 'fail', '6F00', '0', 'Applet fail: card operation error', 'VERIFY_PIN', 'B0 A2 00 00 44'))
 })
 
@@ -765,6 +765,6 @@ test('Positive Test throwError throws error if errorTypeId > 0', () => {
     console.log(json)
     let nfcCardModuleWrapper = new NfcCardModuleWrapper()
     expect(() => {
-        let cardRsponse = nfcCardModuleWrapper.throwError(json)
+         nfcCardModuleWrapper.throwError(json)
     }).toThrow(new NfcNativeModuleError('Pin must be a numeric string of length 4.', 'fail', '30006', '3', 'Native code fail: incorrect format of input data'))
 })

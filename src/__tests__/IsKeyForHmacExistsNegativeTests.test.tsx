@@ -14,66 +14,66 @@ jest.mock('react-native', () => {
       NativeModules: {
         NfcCardModule: {
             isKeyForHmacExist: jest.fn()
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("aaa"));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"\", \"status\":\"ok\"}"
                 )
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((resolve, _reject) => {
                 resolve("{\"message1\":\"111\", \"status\":\"ok\"}"
                 )
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-             .mockReturnValueOnce(new Promise((resolve, reject) => {
+             .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message1\":\"22223\", \"status\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"111\", \"status\":\"\"}"
                 )
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"111\", \"status1\":\"ok\"}"
                 )
               })) 
-             .mockReturnValueOnce(new Promise((resolve, reject) => {
+             .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"status\":\"\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"status1\":\"fail\", \"code\": \"30006\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"code\": \"\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"code1\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType\": \"\"}"
                 ));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"3\", \"errorType1\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId\": \"\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-              .mockReturnValueOnce(new Promise((resolve, reject) => {
+              .mockReturnValueOnce(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"22223\", \"code\": \"30006\", \"status\":\"fail\", \"errorTypeId1\": \"3\", \"errorType\": \"Native code fail: incorrect format of input data\"}"
                 ));
               }))
-              .mockReturnValue(new Promise((resolve, reject) => {
+              .mockReturnValue(new Promise((_resolve, reject) => {
                 reject(new Error("{\"message\":\"Key for hmac signing for specified serial number does not exist.\", \"code\": \"80000\", \"status\":\"fail\", \"errorTypeId\": \"8\", \"errorType\": \"Native code (Android) fail: hmac key issue\"}"
                 ));
               })),
@@ -93,7 +93,7 @@ jest.mock('react-native', () => {
   
   test('Test isKeyForHmacExist throws error if input arg is not json', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -104,7 +104,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if message field (in response) is empty', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -115,7 +115,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if message field (in response) is absent', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -126,7 +126,7 @@ jest.mock('react-native', () => {
 
  test('Test isKeyForHmacExist throws error if message field (in error msg) is empty', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -137,7 +137,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if message field (in error msg)  is absent', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -148,7 +148,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if status field  (in response) is empty', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -159,7 +159,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if status field (in response) is absent', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -170,7 +170,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if status field (in error msg) is empty', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -181,7 +181,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if status field (in error msg) is absent', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -192,7 +192,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if code field is empty', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -203,7 +203,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if code field is absent', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -214,7 +214,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if errorType field is empty', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -225,7 +225,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if errorType field is absent', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -236,7 +236,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if errorTypeId field is empty', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -247,7 +247,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws error if errorTypeId field is absent', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {
@@ -258,7 +258,7 @@ jest.mock('react-native', () => {
 
   test('Test isKeyForHmacExist throws NfcNativeModuleError if errorTypeId >  0', () => {
     return new NfcCardModuleWrapper().isKeyForHmacExist("504394802433901126813236")
-    .then(cardRsponse => {
+    .then(_cardRsponse => {
         expect(true).toBe(false);
     })
     .catch(error => {

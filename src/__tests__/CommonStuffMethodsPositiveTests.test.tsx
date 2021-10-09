@@ -1,10 +1,5 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
-  ERR_JSON_MUST_HAVE_STATUS_FIELD, 
-  ERR_JSON_MUST_HAVE_CODE_FIELD, 
-  ERR_JSON_MUST_HAVE_TYPE_FIELD, 
-  ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
-  ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL} from '../NfcCardModuleWrapper'
+
 /**
  * Test the validity of CardResponses created by methods
  * getTonAppletState, getSerialNumber, getSault of NfcCardModuleWrapper
@@ -16,17 +11,17 @@ jest.mock('react-native', () => {
       NativeModules: {
         NfcCardModule: {
           getTonAppletState: jest.fn( () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"TonWalletApplet waits two-factor authentication.\", \"status\":\"ok\"}");
             })
           }),     
           getSerialNumber: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"504394802433901126813236\", \"status\":\"ok\"}");
               })
             }),  
           getSault: jest.fn( () => {
-              return new Promise((resolve, reject) => {
+              return new Promise((resolve, _reject) => {
                 resolve("{\"message\":\"B81F0E0E07316DAB6C320ECC6BF3DBA48A70101C5251CC31B1D8F831B36E9F2A\", \"status\":\"ok\"}");
               })
             }),

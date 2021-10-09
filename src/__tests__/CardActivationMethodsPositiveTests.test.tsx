@@ -1,10 +1,4 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import {ERR_JSON_MUST_HAVE_MSG_FIELD, 
-  ERR_JSON_MUST_HAVE_STATUS_FIELD, 
-  ERR_JSON_MUST_HAVE_CODE_FIELD, 
-  ERR_JSON_MUST_HAVE_TYPE_FIELD, 
-  ERR_JSON_MUST_HAVE_TYPE_ID_FIELD,
-  ERR_JSON_TYPE_ID_FIELD_MUST_HAVE_VAL} from '../NfcCardModuleWrapper'
 
 /**
  * Test the validity of CardResponses created by methods of NfcCardModuleWrapper
@@ -15,34 +9,34 @@ jest.mock('react-native', () => {
     return {
       NativeModules: {
         NfcCardModule: {
-          turnOnWalletWithPin: jest.fn( (newPin: string,
-            authenticationPassword: string,
-            commonSecret: string,
-            initialVector: string) => {
-          return new Promise((resolve, reject) => {
+          turnOnWalletWithPin: jest.fn( (_newPin: string,
+            _authenticationPassword: string,
+            _commonSecret: string,
+            _initialVector: string) => {
+          return new Promise((resolve, _reject) => {
             resolve("{\"message\":\"done\", \"status\":\"ok\"}");
           })
         }),
         turnOnWallet: jest.fn( (
-            authenticationPassword: string,
-            commonSecret: string,
-            initialVector: string) => {
-          return new Promise((resolve, reject) => {
+            _authenticationPassword: string,
+            _commonSecret: string,
+            _initialVector: string) => {
+          return new Promise((resolve, _reject) => {
             resolve("{\"message\":\"done\", \"status\":\"ok\"}");
           })
         }),
         getHashOfEncryptedCommonSecret: jest.fn( () => {
-          return new Promise((resolve, reject) => {
+          return new Promise((resolve, _reject) => {
             resolve("{\"message\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\", \"status\":\"ok\"}");
           })
         }),
         getHashOfEncryptedPassword: jest.fn( () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"message\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\", \"status\":\"ok\"}");
             })
           }),
         getHashes: jest.fn( () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve, _reject) => {
               resolve("{\"ecsHash\":\"26D4B03C0C0E168DC33E48BBCEB457C21364658C9D487341827BBFFB4D8B38F3\",\"epHash\":\"EFBF24AC1563B34ADB0FFE0B0A53659E72E26765704C109C95346EEAA1D4BEAF\", \"serialNumber\":\"929526125066377952749605\", \"status\":\"ok\"}");
             })
           }),    
