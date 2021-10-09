@@ -1,9 +1,9 @@
 import NfcCardModuleWrapper from '../NfcCardModuleWrapper';
-import CardResponse from '../CardResponse';
-import CardError from '../CardError';
-import NfcNativeModuleError from '../NfcNativeModuleError';
-import React from 'react';
-import { NativeModules} from 'react-native'
+
+/**
+ * Test the validity of CardResponses created by methods of NfcCardModuleWrapper
+ * (part of methods related to HMAC-SHA256 keys maintaining functionality)
+ **/
 
 jest.mock('react-native', () => {
     return {
@@ -36,11 +36,6 @@ jest.mock('react-native', () => {
                 resolve("{\"message\":\"true\", \"status\":\"ok\"}");
               })
           }),
-         /* getAllSerialNumbers: jest.fn( () => {
-              return new Promise((resolve, reject) => {
-                resolve("{\"message\":[\"504394802433901126813236\", \"455324585319848551839771\"], \"status\":\"ok\"}");
-              })
-          }),*/
           getAllSerialNumbers: jest.fn().mockReturnValueOnce(new Promise((resolve, reject) => {
               resolve("{\"message\":[\"504394802433901126813236\", \"455324585319848551839771\"], \"status\":\"ok\"}");
             }))

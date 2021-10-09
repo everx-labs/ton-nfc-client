@@ -106,7 +106,7 @@ enum CardErrorCodes {
     
     CoinManagerIncorrectPin = "9B01",
     CoinManagerUpdatePinError = "9B02",
-    IncorrectPin = "6F07",
+    IncorrectPin = "6F00",
     PinTriesExpired = "6F08",
     
     LoadSeedError = "9F03",
